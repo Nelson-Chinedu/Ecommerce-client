@@ -1,7 +1,7 @@
 ![All Contributors](https://img.shields.io/badge/licence-MIT-brightgreen)
 ![All Contributors](https://img.shields.io/badge/PRs-welcome-brightgreen)
 
-# Medium Clone (WIP)
+# Ecommerce web app (WIP)
 Ecommerce web application
 
 ## Technologies Used
