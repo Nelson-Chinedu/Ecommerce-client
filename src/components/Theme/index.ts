@@ -76,7 +76,7 @@ const customTheme: Palette = {
     },
     secondary: {
       main: '#1F1F20',
-      light: '',
+      light: '#F6F8FA',
       dark: '',
       contrastText: '#FFF'
     }
