@@ -1,9 +1,19 @@
-import Index from "src/components/index";
+import dynamic from 'next/dynamic';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 
-const IndexPage = () => {
+import theme from 'src/components/Theme';
+
+const Landing = dynamic(() => import('src/components/MainLayout/Landing'), {
+  loading: () => <p>loading...</p>,
+  ssr: false,
+});
+
+const Index = () => {
   return (
-    <Index />
-  )
+    <MuiThemeProvider theme={theme}>
+      <Landing />
+    </MuiThemeProvider>
+  );
 };
 
-export default IndexPage;
+export default Index;
