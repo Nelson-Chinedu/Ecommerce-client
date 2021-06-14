@@ -5,6 +5,11 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import menus from 'src/components/constant/menus';
 
+type Props = {
+  id: number;
+  name: string;
+}
+
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
   nav: {
@@ -19,8 +24,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     '& > *': {
       display: 'flex',
       alignItems: 'center',
+      fontFamily: "'Montserrat', sans-serif"
     },
   },
+  icon: {
+    '& > *':{
+      color: theme.palette.primary.main
+    }
+  }
 }));
 
 const Navbar: FunctionComponent<{}> = () => {
@@ -28,10 +39,10 @@ const Navbar: FunctionComponent<{}> = () => {
   return (
     <Box className={classes.root}>
       <ul className={classes.nav}>
-        {menus.map((menu) => (
-          <li>
+        {menus.map((menu: Props, index: number) => (
+          <li key={index}>
             {menu.name}
-            <KeyboardArrowDownIcon />
+            <KeyboardArrowDownIcon className={classes.icon} fontSize="small" />
           </li>
         ))}
       </ul>

@@ -12,11 +12,11 @@
     "no-consecutive-blank-lines": false,
     "object-literal-sort-keys": false,
     "variable-name": false,
-    "no-unused-variable": false,
+    "no-unused-variable": true,
     "jsx-wrap-multiline": false,
     "jsx-no-multiline-js": false,
     "jsx-boolean-value": false,
-    "jsx-no-lambda":false,
+    "jsx-no-lambda":true,
     "quotemark": [true, "single", "jsx-double"],
     "member-access": false,
     "no-console": {
