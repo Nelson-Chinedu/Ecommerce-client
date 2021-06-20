@@ -1,18 +1,20 @@
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent } from 'react';
 import Image from 'next/image';
+import { observer } from 'mobx-react-lite';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import FavouriteIconOutlined from '@material-ui/icons/FavoriteBorderOutlined';
 import FavouriteIcon from '@material-ui/icons/Favorite';
-import { makeStyles, Theme } from '@material-ui/core/styles';
 
-import productItems from 'src/components/constant/productItems';
+import { useStore } from 'src/store';
 
 type Props = {
   id: number;
   imagePath: string;
   productName: string;
   productPrice: string;
+  favourite: boolean;
 };
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -35,20 +37,19 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const Product: FunctionComponent<{}> = () => {
   const classes = useStyles();
-  const [isFavourite, setIsFavourite] = useState([]);
+  const { userStore } = useStore();
 
-  const handleAddFavourite = (index: any) => {
-    setIsFavourite((prev) => [...prev, index]);
+  const handleAddFavourite = (index: number) => {
+    userStore.toggleFavouriteProduct(index);
   };
 
-  const handleRemoveFavourite = (index: any) => {
-    const newArr = isFavourite.filter((arr) => arr !== index);
-    setIsFavourite(newArr);
+  const handleRemoveFavourite = (index: number) => {
+    userStore.toggleFavouriteProduct(index);
   };
 
   return (
     <Grid container spacing={3}>
-      {productItems.map((productItem: Props, index: number) => (
+      {userStore.productItems.map((productItem: Props, index: number) => (
         <Grid item sm={3} style={{ margin: '0px' }} key={index}>
           <Grid container className={classes.productContainer}>
             <Image src={productItem.imagePath} width={300} height={250} />
@@ -63,7 +64,7 @@ const Product: FunctionComponent<{}> = () => {
                 <Typography>$152.00</Typography>
               </Grid>
               <Grid item>
-                {isFavourite.includes(index) ? (
+                {productItem.favourite ? (
                   <FavouriteIcon
                     className={classes.favouriteIcon}
                     onClick={() => handleRemoveFavourite(index)}
@@ -82,4 +83,4 @@ const Product: FunctionComponent<{}> = () => {
   );
 };
 
-export default Product;
+export default observer(Product);

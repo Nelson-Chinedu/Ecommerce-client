@@ -11,6 +11,7 @@
     "preserveConstEnums": true,
     "sourceMap": true,
     "strictNullChecks": false,
+    "experimentalDecorators" : true,
     "lib": ["dom", "es2017"],
     "module": "esnext",
     "moduleResolution": "node",
