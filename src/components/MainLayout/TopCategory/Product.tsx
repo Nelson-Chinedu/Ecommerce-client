@@ -37,19 +37,19 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const Product: FunctionComponent<{}> = () => {
   const classes = useStyles();
-  const { userStore } = useStore();
+  const { uiStore } = useStore();
 
   const handleAddFavourite = (index: number) => {
-    userStore.toggleFavouriteProduct(index);
+    uiStore.toggleFavouriteProduct(index);
   };
 
   const handleRemoveFavourite = (index: number) => {
-    userStore.toggleFavouriteProduct(index);
+    uiStore.toggleFavouriteProduct(index);
   };
 
   return (
     <Grid container spacing={3}>
-      {userStore.productItems.map((productItem: Props, index: number) => (
+      {uiStore.productItems.map((productItem: Props, index: number) => (
         <Grid item sm={3} style={{ margin: '0px' }} key={index}>
           <Grid container className={classes.productContainer}>
             <Image src={productItem.imagePath} width={300} height={250} />
