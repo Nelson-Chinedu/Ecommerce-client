@@ -4,18 +4,25 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
+import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 
 import Button from 'src/components/SharedLayout/Button';
 
 const useStyles = makeStyles({
   root: {
     position: 'relative',
-    backgroundColor: 'black',
+    '& .MuiSvgIcon-root': {
+      '& > *': {
+        color: '#FFF',
+        marginLeft: '4em',
+      },
+    },
   },
   imgWrapper: {
-    opacity: '.3',
     height: '500px',
     overflow: 'hidden',
+    margin: '0px',
+    padding: '0px',
   },
   textWrapper: {
     position: 'absolute',
@@ -23,13 +30,18 @@ const useStyles = makeStyles({
     left: '50%',
     transform: 'translate(-50%, -50%)',
     '& > *': {
-      color: 'white',
+      color: '#000',
       textAlign: 'center',
     },
   },
   btnAction: {
     width: '50%',
     margin: '5% auto',
+  },
+  btnForHim: {
+    '& > *': {
+      color: '#FFF',
+    },
   },
 });
 
@@ -41,20 +53,21 @@ const AvailableTrend: FunctionComponent<{}> = () => {
       <Grid container style={{ background: '' }}>
         <Grid item sm={6} className={classes.imgWrapper}>
           <Image
-            src="/image/ct-5.jpg"
+            src="/image/woman.jpeg"
             width={1000}
-            height={800}
+            height={700}
             objectFit="cover"
             objectPosition="top"
+            loading="lazy"
           />
         </Grid>
         <Grid item sm={6} className={classes.imgWrapper}>
           <Image
-            src="/image/ct-2.jpg"
+            src="/image/man.jpeg"
             width={1000}
-            height={800}
+            height={700}
             objectFit="cover"
-            objectPosition="center"
+            objectPosition="top"
           />
         </Grid>
       </Grid>
@@ -63,13 +76,22 @@ const AvailableTrend: FunctionComponent<{}> = () => {
         <Typography variant="h5">Now in new colors</Typography>
         <Grid container justify="space-around" className={classes.btnAction}>
           <Grid item>
-            <Button variant="outlined" color="secondary" className="">
+            <Button
+              variant="outlined"
+              color="secondary"
+              disableElevation={true}
+            >
               FOR HER
             </Button>
           </Grid>
           <Grid item>
-            <Button variant="contained" color="primary" className="">
-              FOR HIM
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.btnForHim}
+              disableElevation={true}
+            >
+              FOR HIM <ArrowRightAltIcon />
             </Button>
           </Grid>
         </Grid>

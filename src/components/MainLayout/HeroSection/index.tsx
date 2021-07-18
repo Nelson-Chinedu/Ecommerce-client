@@ -48,6 +48,7 @@ const HeroSection: FunctionComponent<{}> = () => {
             variant="outlined"
             color="secondary"
             className={classes.btnShop}
+            disableElevation={true}
           >
             Shop Now
           </Button>

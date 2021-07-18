@@ -4,9 +4,10 @@ import Button from '@material-ui/core/Button';
 type Props = {
   variant: 'text' | 'outlined' | 'contained';
   color: 'inherit' | 'primary' | 'secondary' | 'default';
-  className: string;
+  className?: string;
   children: ReactNode;
   endIcon?: ReactNode;
+  disableElevation: boolean;
 };
 
 const Index: FunctionComponent<Props> = ({
@@ -14,10 +15,11 @@ const Index: FunctionComponent<Props> = ({
   color,
   className,
   children,
-  endIcon
+  endIcon,
+  disableElevation
 }) => {
   return (
-    <Button color={color} className={className} variant={variant} endIcon={endIcon}>
+    <Button color={color} className={className} variant={variant} endIcon={endIcon} disableElevation={disableElevation}>
       {children}
     </Button>
   );
