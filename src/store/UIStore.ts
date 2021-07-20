@@ -6,6 +6,7 @@ type ProductItems = typeof productItems[number];
 export class UIStore {
   productItems: ProductItems[] = productItems;
   sidenav: boolean = false;
+  accordion = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -33,5 +34,11 @@ export class UIStore {
   toggleSideNav() {
     this.sidenav = !this.sidenav;
     return this.sidenav;
+  }
+
+  @action
+  toggleAccordion() {
+    this.accordion = !this.accordion;
+    return this.accordion;
   }
 }

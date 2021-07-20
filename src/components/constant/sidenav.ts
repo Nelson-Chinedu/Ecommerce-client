@@ -1,10 +1,34 @@
-export const sidenavLinks: Array<string> = [
-  'Home',
-  'New Arrival',
-  'Limited Edition',
-  'Featured',
-  'Our Blogs',
-  'FAQ',
-  'About Us',
-  'Contact Us',
+export const sidenavLinks = [
+  {
+    menu: 'Home',
+    link: '/'
+  },
+  {
+    menu: 'New Arrival',
+    link: '/'
+  },
+  {
+    menu: 'Limited Edition',
+    link: '/'
+  },
+  {
+    menu: 'Featured',
+    link: '/'
+  },
+  {
+    menu: 'Our Blogs',
+    link: '/'
+  },
+  {
+    menu: 'FAQ',
+    link: '/'
+  },
+  {
+    menu: 'About Us',
+    link: '/'
+  },
+  {
+    menu: 'Contact Us',
+    link: '/'
+  }
 ];

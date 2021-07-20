@@ -1,11 +1,9 @@
+import React from 'react';
 import dynamic from 'next/dynamic';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import { MuiThemeProvider } from '@material-ui/core/styles';
 
-import theme from 'src/components/Theme';
-
-const Landing = dynamic(() => import('src/components/MainLayout/Landing'), {
+const Product = dynamic(() => import('src/components/MainLayout/ProductDetail'),{
   loading: () => (
     <Box
       style={{
@@ -21,12 +19,8 @@ const Landing = dynamic(() => import('src/components/MainLayout/Landing'), {
   ssr: false,
 });
 
-const Index = () => {
-  return (
-    // <MuiThemeProvider theme={theme}>
-      <Landing />
-    // </MuiThemeProvider>
-  );
+const ProductPage = () => {
+  return <Product />
 };
 
-export default Index;
+export default ProductPage;

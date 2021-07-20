@@ -3,7 +3,9 @@ import Image from 'next/image';
 import Carousel from 'react-elastic-carousel';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+// import { makeStyles } from '@material-ui/core/styles';
+
+import { useStyles } from 'src/components/MainLayout/TopCategory/styled.topCategory';
 
 import slides from 'src/components/constant/slides'
 
@@ -12,15 +14,11 @@ type Props = {
   title: string;
 }
 
-const useStyles = makeStyles({
-  root: {
-    '& .MuiTypography-h4': {
-      textAlign: 'center',
-      padding: '20px 0px',
-      fontWeight: 500,
-    },
-  },
-});
+// const useStyles = makeStyles({
+//   root: {
+    
+//   },
+// });
 
 const Slider: FunctionComponent<{}> = () => {
   const classes = useStyles();

@@ -16,10 +16,16 @@ const Index: FunctionComponent<Props> = ({
   className,
   children,
   endIcon,
-  disableElevation
+  disableElevation,
 }) => {
   return (
-    <Button color={color} className={className} variant={variant} endIcon={endIcon} disableElevation={disableElevation}>
+    <Button
+      color={color}
+      className={className}
+      variant={variant}
+      endIcon={endIcon}
+      disableElevation={disableElevation}
+    >
       {children}
     </Button>
   );

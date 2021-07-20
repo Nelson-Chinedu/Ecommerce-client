@@ -3,47 +3,11 @@ import Image from 'next/image';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 
 import Button from 'src/components/SharedLayout/Button';
 
-const useStyles = makeStyles({
-  root: {
-    position: 'relative',
-    '& .MuiSvgIcon-root': {
-      '& > *': {
-        color: '#FFF',
-        marginLeft: '4em',
-      },
-    },
-  },
-  imgWrapper: {
-    height: '500px',
-    overflow: 'hidden',
-    margin: '0px',
-    padding: '0px',
-  },
-  textWrapper: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    '& > *': {
-      color: '#000',
-      textAlign: 'center',
-    },
-  },
-  btnAction: {
-    width: '50%',
-    margin: '5% auto',
-  },
-  btnForHim: {
-    '& > *': {
-      color: '#FFF',
-    },
-  },
-});
+import { useStyles } from 'src/components/MainLayout/AvailableTrend/styled.availableTrend';
 
 const AvailableTrend: FunctionComponent<{}> = () => {
   const classes = useStyles();
