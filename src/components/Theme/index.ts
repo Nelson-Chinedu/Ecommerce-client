@@ -63,7 +63,8 @@ interface Palette {
       fontWeight: number;
       fontSize: string;
     },
-  }
+    button: any
+  },
 }
 
 const customTheme: Palette = {
@@ -132,7 +133,12 @@ const customTheme: Palette = {
       fontWeight: 500,
       fontSize: '0.875rem',
     },
-  }
+    button:{
+      textTransform: 'titleCase',
+      letterSpacing: '0.15%',
+      fontWeight: 500,
+    }
+  },
 };
 
 const theme = createMuiTheme(customTheme)

@@ -1,21 +1,11 @@
 import { FunctionComponent } from 'react';
 import Box from '@material-ui/core/Box';
-import { makeStyles } from '@material-ui/core/styles';
 
 import Slider from 'src/components/MainLayout/TopCategory/Slider';
 import Navbar from 'src/components/MainLayout/TopCategory/Navbar';
 import Product from 'src/components/MainLayout/TopCategory/Product';
+import { useStyles } from 'src/components/MainLayout/TopCategory/styled.topCategory';
 
-const useStyles = makeStyles({
-  root: {
-    width: '95%',
-    margin: 'auto',
-  },
-  wrapper: {
-    width: '87%',
-    margin: '20px auto',
-  },
-});
 const TopCategory: FunctionComponent<{}> = () => {
   const classes = useStyles();
   return (

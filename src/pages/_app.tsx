@@ -4,6 +4,9 @@ import Router from 'next/router';
 import Head from 'next/head';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
+import { MuiThemeProvider } from '@material-ui/core/styles';
+
+import theme from 'src/components/Theme';
 
 import '../styles/pages.scss';
 
@@ -21,7 +24,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           key="viewport"
         />
       </Head>
-      <Component {...pageProps} />
+      <MuiThemeProvider theme={theme}>
+        <Component {...pageProps} />
+      </MuiThemeProvider>
     </>
   );
 }

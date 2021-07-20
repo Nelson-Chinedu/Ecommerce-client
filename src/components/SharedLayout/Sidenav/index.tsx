@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { observer } from 'mobx-react-lite';
+import Link from 'next/link';
 import Drawer from '@material-ui/core/Drawer';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -69,10 +70,12 @@ const Sidenav: FunctionComponent<{}> = () => {
         alignItems="center"
         className={classes.linkWrapper}
       >
-        {sidenavLinks.map((sideNav, index) => (
-          <Grid item key={index}>
-            <Typography variant="subtitle1">{sideNav}</Typography>
-          </Grid>
+        {sidenavLinks.map((sideNav, index: number) => (
+          <Link href={sideNav.link} key={index}>
+            <Grid item key={index}>
+              <Typography variant="subtitle1">{sideNav.menu}</Typography>
+            </Grid>
+          </Link>
         ))}
       </Grid>
     </Drawer>
