@@ -180,6 +180,7 @@ const Sidenav: FunctionComponent<{}> = () => {
                   color="secondary"
                   disableElevation={true}
                   className={classes.btnViewCart}
+                  href="/view-cart"
                 >
                   View Cart
                 </Button>

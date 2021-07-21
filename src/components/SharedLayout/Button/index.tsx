@@ -9,6 +9,7 @@ type Props = {
   endIcon?: ReactNode;
   disableElevation: boolean;
   fullWidth: boolean;
+  href?: string;
 };
 
 const Index: FunctionComponent<Props> = ({
@@ -18,7 +19,8 @@ const Index: FunctionComponent<Props> = ({
   children,
   endIcon,
   disableElevation,
-  fullWidth
+  fullWidth,
+  href
 }) => {
   return (
     <Button
@@ -28,6 +30,7 @@ const Index: FunctionComponent<Props> = ({
       endIcon={endIcon}
       disableElevation={disableElevation}
       fullWidth={fullWidth}
+      href={href}
     >
       {children}
     </Button>
