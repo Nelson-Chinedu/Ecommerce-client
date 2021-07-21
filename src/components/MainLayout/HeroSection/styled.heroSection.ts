@@ -15,6 +15,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
     paddingRight: '10px',
   },
   btnShop: {
+    width: 'auto',
     '& > *': {
       color: theme.palette.secondary.main,
       textTransform: 'capitalize',

@@ -44,6 +44,7 @@ const AvailableTrend: FunctionComponent<{}> = () => {
               variant="outlined"
               color="secondary"
               disableElevation={true}
+              fullWidth={true}
             >
               FOR HER
             </Button>
@@ -54,6 +55,7 @@ const AvailableTrend: FunctionComponent<{}> = () => {
               color="primary"
               className={classes.btnForHim}
               disableElevation={true}
+              fullWidth={true}
             >
               FOR HIM <ArrowRightAltIcon />
             </Button>

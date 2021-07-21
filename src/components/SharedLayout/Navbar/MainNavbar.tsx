@@ -9,15 +9,16 @@ import PersonOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import ShoppingBasketOutlinedIcon from '@material-ui/icons/ShoppingBasketOutlined';
 
-import { useStore } from 'src/store';
-
 import Sidenav from 'src/components/SharedLayout/Sidenav';
+
+import { useStore } from 'src/store';
 
 const Index: FunctionComponent<{}> = () => {
   const { uiStore } = useStore();
 
-  const _handleOpenSideNav = () => {
+  const _handleOpenSideNav = (position: string) => {
     uiStore.toggleSideNav();
+    uiStore.anchorPosition = position;
   };
 
   return (
@@ -30,11 +31,11 @@ const Index: FunctionComponent<{}> = () => {
         style={{ padding: '10px 20px' }}
       >
         <Grid item style={{ cursor: 'pointer', zIndex: 999999 }}>
-          <IconButton onClick={_handleOpenSideNav}>
+          <IconButton onClick={() => _handleOpenSideNav('left')}>
             <MenuOutlinedIcon color="action" fontSize="small" />
           </IconButton>
         </Grid>
-        <Grid item>
+        <Grid item style={{ zIndex: 999999 }}>
           <Grid container>
             <Grid item>
               <IconButton aria-label="search">
@@ -54,7 +55,10 @@ const Index: FunctionComponent<{}> = () => {
               </IconButton>
             </Grid>
             <Grid item>
-              <IconButton aria-label="search">
+              <IconButton
+                aria-label="search"
+                onClick={() => _handleOpenSideNav('right')}
+              >
                 <Badge badgeContent={3} color="primary">
                   <ShoppingBasketOutlinedIcon fontSize="small" />
                 </Badge>

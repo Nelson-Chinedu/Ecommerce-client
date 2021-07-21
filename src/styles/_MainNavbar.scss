@@ -1,11 +1,7 @@
-// .drawerWrapper{
-//   border: 10px solid green;
-//   .MuiDrawer-paper {
-//     border: 2px solid blue;
-//   }
-// }
-
 .MuiDrawer-paper {
-  width: 15%;
   padding: 10px;
+}
+.MuiPopover-paper {
+  z-index: 9999999;
+  background-color: white;
 }

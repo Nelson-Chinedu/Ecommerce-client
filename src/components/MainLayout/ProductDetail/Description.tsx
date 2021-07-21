@@ -97,6 +97,7 @@ const Description = () => {
                   disableElevation={true}
                   color="secondary"
                   key={index}
+                  fullWidth={true}
                 >
                   {size}
                 </Button>
@@ -179,6 +180,7 @@ const Description = () => {
               color="secondary"
               disableElevation={true}
               className={classes.btnAdd}
+              fullWidth={true}
             >
               Add to cart
             </Button>
@@ -186,7 +188,6 @@ const Description = () => {
           <Grid item>
             <FavouriteIconOutlined
               fontSize="default"
-              onClick={() => console.log('logged')}
             />
           </Grid>
         </Grid>

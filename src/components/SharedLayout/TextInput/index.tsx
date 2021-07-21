@@ -13,6 +13,7 @@ type Props = {
   select?: boolean;
   color: Color;
   children?: ReactNode;
+  disabled?: boolean;
 };
 
 const TextInput: FunctionComponent<Props> = ({ ...props }) => {
