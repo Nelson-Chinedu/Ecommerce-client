@@ -15,7 +15,7 @@ const HeroSection: FunctionComponent<{}> = () => {
       <MainNavbar />
       <Box className="banner-wrapper">
         <Box className="banner" />
-        <Box className="banner-quick-action">
+        <Box className="banner-quick-action" style={{zIndex: 999999}}>
           <Typography variant="h4">Leather Handbag</Typography>
           <Typography variant="body2">
             Nautica Sandy Jr. Top Handel Satchel with Removable crossbody Strap
@@ -28,6 +28,7 @@ const HeroSection: FunctionComponent<{}> = () => {
             color="secondary"
             className={classes.btnShop}
             disableElevation={true}
+            fullWidth={true}
           >
             Shop Now
           </Button>

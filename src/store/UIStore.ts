@@ -6,7 +6,8 @@ type ProductItems = typeof productItems[number];
 export class UIStore {
   productItems: ProductItems[] = productItems;
   sidenav: boolean = false;
-  accordion = false;
+  accordion: boolean = false;
+  anchorPosition: string = undefined;
 
   constructor() {
     makeAutoObservable(this);
