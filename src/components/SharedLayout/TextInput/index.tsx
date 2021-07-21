@@ -14,6 +14,8 @@ type Props = {
   color: Color;
   children?: ReactNode;
   disabled?: boolean;
+  placeholder?: string;
+  label?: string;
 };
 
 const TextInput: FunctionComponent<Props> = ({ ...props }) => {
