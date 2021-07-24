@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 
-import MainNavbar from 'src/components/SharedLayout/Navbar/MainNavbar';
+import Navigation from 'src/components/SharedLayout/Navbar/MainNavbar';
 import Button from 'src/components/SharedLayout/Button';
 
 import { useStyles } from 'src/components/MainLayout/HeroSection/styled.heroSection';
@@ -12,7 +12,7 @@ const HeroSection: FunctionComponent<{}> = () => {
 
   return (
     <Box className={classes.root}>
-      <MainNavbar />
+      <Navigation />
       <Box className="banner-wrapper">
         <Box className="banner" />
         <Box className="banner-quick-action" style={{zIndex: 999999}}>

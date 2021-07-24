@@ -26,6 +26,7 @@ const CartPayment: FunctionComponent<{}> = () => {
               fullWidth={true}
               color="secondary"
               placeholder="Coupon code"
+              type="text"
             />
           </Grid>
           <Grid item>
@@ -70,6 +71,7 @@ const CartPayment: FunctionComponent<{}> = () => {
               color="secondary"
               fullWidth={true}
               disableElevation={true}
+              href="/checkout"
             >
               Proceed to checkout
             </Button>
