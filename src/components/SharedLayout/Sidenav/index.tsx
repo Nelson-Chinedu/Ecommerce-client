@@ -93,6 +93,7 @@ const Sidenav: FunctionComponent<{}> = () => {
                       size="small"
                       variant="outlined"
                       color="secondary"
+                      type="text"
                     >
                       <MenuItem value="Qty1">Qty 1</MenuItem>
                     </TextInput>
@@ -143,6 +144,58 @@ const Sidenav: FunctionComponent<{}> = () => {
                       size="small"
                       variant="outlined"
                       color="secondary"
+                      type="text"
+                    >
+                      <MenuItem value="Qty1">Qty 1</MenuItem>
+                    </TextInput>
+                  </Grid>
+                  <Grid item sm={2}>
+                    <HighlightOffIcon />
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid container style={{ margin: '1em 0px' }}>
+            <Grid item sm={12}>
+              <Divider />
+            </Grid>
+          </Grid>
+          <Grid container direction="row" spacing={2}>
+            <Grid item xs={5}>
+              <Image
+                src="/image/ct-3.jpg"
+                width={250}
+                height={250}
+                alt="product image"
+              />
+            </Grid>
+            <Grid item xs={7}>
+              <Grid container>
+                <Grid item>
+                  <Typography variant="body2">
+                    Easy and Comfort Sweater
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Typography variant="body2">1 x $100.00</Typography>
+                </Grid>
+                <Grid
+                  container
+                  item
+                  justify="space-between"
+                  alignItems="center"
+                >
+                  <Grid item sm={8}>
+                    <TextInput
+                      disabled={true}
+                      defaultValue="Qty1"
+                      select
+                      fullWidth={true}
+                      size="small"
+                      variant="outlined"
+                      color="secondary"
+                      type="text"
                     >
                       <MenuItem value="Qty1">Qty 1</MenuItem>
                     </TextInput>
@@ -180,7 +233,7 @@ const Sidenav: FunctionComponent<{}> = () => {
                   color="secondary"
                   disableElevation={true}
                   className={classes.btnViewCart}
-                  href="/view-cart"
+                  href="/cart"
                 >
                   View Cart
                 </Button>
@@ -192,6 +245,7 @@ const Sidenav: FunctionComponent<{}> = () => {
                   color="secondary"
                   disableElevation={true}
                   className={classes.btnCheckout}
+                  href="/checkout"
                 >
                   Checkout
                 </Button>

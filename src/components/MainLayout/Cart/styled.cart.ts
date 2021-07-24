@@ -12,7 +12,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
       borderRadius: '0px',
       '& > *': {
         color: 'white',
-        padding: '2px 12px',
+        padding: '2px 0px',
       },
     },
   },

@@ -13,10 +13,31 @@
     z-index: -999999;
     top: 0;
   }
+  .banner-checkout {
+    background-image: url('/image/checkout.jpeg');
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: contain;
+    height: 500px;
+    width: 100%;
+    z-index: -999999;
+    top: 0;
+  }
   .banner-quick-action {
     position: relative;
     border: 6px solid black;
     padding: 5em 0px;
+    text-align: center;
+    width: auto;
+    right: 30px;
+  }
+  .banner-checkout-desc {
+    position: relative;
+    clip-path: polygon(0 0, 100% 27%, 100% 71%, 0% 100%);
+    background-color:#307a7e;
+    color: white;
+    padding: 6em 2em;
     text-align: center;
     width: auto;
     right: 30px;

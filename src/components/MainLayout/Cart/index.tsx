@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 
@@ -8,7 +8,7 @@ import CartTable from 'src/components/MainLayout/Cart/CartTable';
 import CartPayment from 'src/components/MainLayout/Cart/CartPayment';
 import { useStyles } from 'src/components/MainLayout/Cart/styled.cart';
 
-const Cart = () => {
+const Cart: FunctionComponent<{}> = () => {
   const classes = useStyles();
   return (
     <Box>
