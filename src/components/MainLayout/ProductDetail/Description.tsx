@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import Image from 'next/image';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -17,7 +17,7 @@ import { useStyles } from 'src/components/MainLayout/ProductDetail/styled.produc
 const colors: Array<string> = ['red', 'yellow', 'cyan', 'pink', 'purple'];
 const sizes: Array<string> = ['S', 'M', 'L', 'XL'];
 
-const Description = () => {
+const Description: FunctionComponent<{}> = () => {
   const classes = useStyles();
 
   return (
@@ -134,6 +134,7 @@ const Description = () => {
               defaultValue="qty1"
               size="small"
               color="secondary"
+              type="text"
             >
               <MenuItem value="qty1">QNT: 1</MenuItem>
               <MenuItem value="qty2">QNT: 2</MenuItem>
