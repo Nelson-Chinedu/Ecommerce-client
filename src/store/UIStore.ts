@@ -8,6 +8,8 @@ export class UIStore {
   sidenav: boolean = false;
   accordion: boolean = false;
   anchorPosition: string = undefined;
+  collapseShipping: boolean = true;
+  collapsePayment: boolean = true;
 
   constructor() {
     makeAutoObservable(this);
@@ -41,5 +43,16 @@ export class UIStore {
   toggleAccordion() {
     this.accordion = !this.accordion;
     return this.accordion;
+  }
+
+  @action
+  toggleCollapse(arg : string) {
+    if (arg === 'shipping'){
+      this.collapseShipping = !this.collapseShipping;
+      return this.collapseShipping;
+    } else if (arg === 'payment'){
+      this.collapsePayment = !this.collapsePayment;
+      return this.collapsePayment;
+    }
   }
 }
