@@ -8,7 +8,6 @@ import Collapse from '@material-ui/core/Collapse';
 import Checkbox from '@material-ui/core/Checkbox';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
-import { makeStyles } from '@material-ui/core/styles';
 
 import CheckoutForm from 'src/components/MainLayout/Checkout/CheckoutForm';
 import OrderPreview from 'src/components/MainLayout/Checkout/OrderPreview';
