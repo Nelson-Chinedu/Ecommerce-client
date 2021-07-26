@@ -11,6 +11,7 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 
 import Navigation from 'src/components/SharedLayout/Navbar/MainNavbar';
+import Footer from 'src/components/SharedLayout/Footer';
 
 import { productDetails } from 'src/components/constant/productDetails';
 
@@ -73,6 +74,7 @@ const ProductDetail: FunctionComponent<{}> = () => {
           </Grid>
         ))}
       </Box>
+      <Footer />
     </>
   );
 };

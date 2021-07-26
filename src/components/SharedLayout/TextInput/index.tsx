@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 type Variant = 'filled' | 'outlined' | 'standard';
 type Size = 'medium' | 'small';
 type Color = 'primary' | 'secondary';
-type Type = 'text' | 'email' | 'password' | 'tel';
+type Type = 'text' | 'email' | 'password' | 'tel' | 'date';
 
 type Props = {
   fullWidth: boolean;
