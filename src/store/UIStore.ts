@@ -10,6 +10,7 @@ export class UIStore {
   anchorPosition: string = undefined;
   collapseShipping: boolean = true;
   collapsePayment: boolean = true;
+  passwordVisibilty: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -54,5 +55,11 @@ export class UIStore {
       this.collapsePayment = !this.collapsePayment;
       return this.collapsePayment;
     }
+  }
+
+  @action
+  togglePasswordVisibilty() {
+    this.passwordVisibilty = !this.passwordVisibilty;
+    return this.passwordVisibilty;
   }
 }

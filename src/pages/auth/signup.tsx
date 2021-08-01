@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 
-const Checkout = dynamic(() => import('src/components/MainLayout/Checkout'),{
+const Signup = dynamic(() => import('src/components/AuthLayout/Signup'),{
   loading: () => (
     <Box
       style={{
@@ -19,8 +19,10 @@ const Checkout = dynamic(() => import('src/components/MainLayout/Checkout'),{
   ssr: false,
 });
 
-const CheckoutPage = () => {
-  return <Checkout />;
+const SignupPage = () => {
+  return (
+    <Signup />
+  )
 };
 
-export default CheckoutPage;
+export default SignupPage;
