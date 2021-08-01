@@ -21,7 +21,7 @@ export const sidenavLinks = [
   },
   {
     menu: 'FAQ',
-    link: '/'
+    link: '/faq'
   },
   {
     menu: 'About Us',

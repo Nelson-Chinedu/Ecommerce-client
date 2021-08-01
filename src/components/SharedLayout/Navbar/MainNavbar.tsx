@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { useRouter } from 'next/router';
 import { observer } from 'mobx-react-lite';
 import Grid from '@material-ui/core/Grid';
 import SearchIcon from '@material-ui/icons/SearchOutlined';
@@ -8,6 +9,7 @@ import MenuOutlinedIcon from '@material-ui/icons/MenuOutlined';
 import PersonOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import ShoppingBasketOutlinedIcon from '@material-ui/icons/ShoppingBasketOutlined';
+import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 
 import Sidenav from 'src/components/SharedLayout/Sidenav';
 
@@ -15,11 +17,20 @@ import { useStore } from 'src/store';
 
 const Index: FunctionComponent<{}> = () => {
   const { uiStore } = useStore();
+  const router = useRouter();
 
   const _handleOpenSideNav = (position: string) => {
     uiStore.toggleSideNav();
     uiStore.anchorPosition = position;
   };
+
+  const handleAuthLogin = () => {
+    router.push('/auth/login')
+  };
+
+  const handleHome = () => {
+    router.push('/')
+  }
 
   return (
     <>
@@ -37,6 +48,11 @@ const Index: FunctionComponent<{}> = () => {
         </Grid>
         <Grid item style={{ zIndex: 999999 }}>
           <Grid container>
+          <Grid item>
+              <IconButton aria-label="home" onClick={handleHome}>
+                <HomeOutlinedIcon fontSize="small" />
+              </IconButton>
+            </Grid>
             <Grid item>
               <IconButton aria-label="search">
                 <SearchIcon fontSize="small" />
@@ -50,7 +66,7 @@ const Index: FunctionComponent<{}> = () => {
               </IconButton>
             </Grid>
             <Grid item>
-              <IconButton aria-label="search">
+              <IconButton aria-label="search" onClick={handleAuthLogin}>
                 <PersonOutlinedIcon fontSize="small" />
               </IconButton>
             </Grid>
