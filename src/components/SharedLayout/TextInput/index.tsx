@@ -23,6 +23,7 @@ type Props = {
   multiline?: boolean;
   InputProps?: any;
   autoFocus?: any;
+  className?: string;
 };
 
 const TextInput: FunctionComponent<Props> = ({
