@@ -1,9 +1,10 @@
 import React from 'react';
+import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 
-const Signup = dynamic(() => import('src/components/AuthLayout/Signup'),{
+const Signup = dynamic(() => import('src/components/AuthLayout/Signup'), {
   loading: () => (
     <Box
       style={{
@@ -21,8 +22,13 @@ const Signup = dynamic(() => import('src/components/AuthLayout/Signup'),{
 
 const SignupPage = () => {
   return (
-    <Signup />
-  )
+    <>
+      <Head>
+        <title>Multibuy | Signup</title>
+      </Head>
+      <Signup />
+    </>
+  );
 };
 
 export default SignupPage;

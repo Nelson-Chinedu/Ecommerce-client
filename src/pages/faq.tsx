@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -20,7 +21,14 @@ const FAQ = dynamic(() => import('src/components/MainLayout/FAQ'), {
 });
 
 const FAQPage = () => {
-  return <FAQ />;
+  return (
+    <>
+      <Head>
+        <title>Multibuy | FAQ</title>
+      </Head>
+      <FAQ />
+    </>
+  );
 };
 
 export default FAQPage;
