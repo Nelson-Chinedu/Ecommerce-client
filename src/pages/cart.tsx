@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from 'react';
+import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 
-const Cart = dynamic(() => import('src/components/MainLayout/Cart'),{
+const Cart = dynamic(() => import('src/components/MainLayout/Cart'), {
   loading: () => (
     <Box
       style={{
@@ -21,8 +22,13 @@ const Cart = dynamic(() => import('src/components/MainLayout/Cart'),{
 
 const CartPage: FunctionComponent<{}> = () => {
   return (
-    <Cart />
-  )
+    <>
+      <Head>
+        <title>Multibuy | Cart</title>
+      </Head>
+      <Cart />
+    </>
+  );
 };
 
 export default CartPage;

@@ -1,9 +1,10 @@
 import React from 'react';
+import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 
-const Checkout = dynamic(() => import('src/components/MainLayout/Checkout'),{
+const Checkout = dynamic(() => import('src/components/MainLayout/Checkout'), {
   loading: () => (
     <Box
       style={{
@@ -20,7 +21,14 @@ const Checkout = dynamic(() => import('src/components/MainLayout/Checkout'),{
 });
 
 const CheckoutPage = () => {
-  return <Checkout />;
+  return (
+    <>
+      <Head>
+        <title>Multibuy | Checkout</title>
+      </Head>
+      <Checkout />
+    </>
+  );
 };
 
 export default CheckoutPage;
