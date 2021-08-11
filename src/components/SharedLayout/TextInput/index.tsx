@@ -19,7 +19,7 @@ type Props = {
   label?: string;
   rows?: number;
   cols?: number;
-  type: Type;
+  type?: Type;
   multiline?: boolean;
   InputProps?: any;
   autoFocus?: any;
