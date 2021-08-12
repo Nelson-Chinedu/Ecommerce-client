@@ -24,13 +24,14 @@ export const useStyles = makeStyles({
   account: {
     background: '#FFF',
     boxShadow: '0px 1px 0px 1px rgba(0,0,0,0.1)',
-    padding: '2px 12px !important',
+    padding: '6px 12px !important',
     borderRadius: '5px',
   },
   user: {
     '& .MuiTypography-subtitle1': {
       fontSize: '16px',
       color: '#666767',
+      lineHeight: '1.3em'
     },
     '& .MuiTypography-subtitle2': {
       fontSize: '12px',
