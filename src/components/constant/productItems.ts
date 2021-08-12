@@ -1,3 +1,87 @@
+
+export const productLists = [
+  {
+    productName: 'Navy Blue Smart Watch',
+    category: 'Men, watch',
+    price: '$230',
+    stock: '500',
+    sold: '65',
+    revenue: '$14.530'
+  },
+  {
+    productName: 'Navy Blue Smart Watch',
+    category: 'Men, watch',
+    price: '$230',
+    stock: '500',
+    sold: '65',
+    revenue: '$14.530'
+  },
+  {
+    productName: 'Navy Blue Smart Watch',
+    category: 'Men, watch',
+    price: '$230',
+    stock: '500',
+    sold: '65',
+    revenue: '$14.530'
+  },
+  {
+    productName: 'Navy Blue Smart Watch',
+    category: 'Men, watch',
+    price: '$230',
+    stock: '500',
+    sold: '65',
+    revenue: '$14.530'
+  },
+  {
+    productName: 'Navy Blue Smart Watch',
+    category: 'Men, watch',
+    price: '$230',
+    stock: '500',
+    sold: '65',
+    revenue: '$14.530'
+  },
+  {
+    productName: 'Navy Blue Smart Watch',
+    category: 'Men, watch',
+    price: '$230',
+    stock: '500',
+    sold: '65',
+    revenue: '$14.530'
+  },
+  {
+    productName: 'Navy Blue Smart Watch',
+    category: 'Men, watch',
+    price: '$230',
+    stock: '500',
+    sold: '65',
+    revenue: '$14.530'
+  },
+  {
+    productName: 'Navy Blue Smart Watch',
+    category: 'Men, watch',
+    price: '$230',
+    stock: '500',
+    sold: '65',
+    revenue: '$14.530'
+  },
+  {
+    productName: 'Navy Blue Smart Watch',
+    category: 'Men, watch',
+    price: '$230',
+    stock: '500',
+    sold: '65',
+    revenue: '$14.530'
+  },
+  {
+    productName: 'Navy Blue Smart Watch',
+    category: 'Men, watch',
+    price: '$230',
+    stock: '500',
+    sold: '65',
+    revenue: '$14.530'
+  },
+]
+
 const productItems = [
   {
     id: 0,
