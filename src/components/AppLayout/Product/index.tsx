@@ -1,4 +1,5 @@
 import React from 'react';
+import { observer } from 'mobx-react-lite';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -7,11 +8,14 @@ import Typography from '@material-ui/core/Typography';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import { makeStyles } from '@material-ui/core/styles';
 
+import { useStore } from 'src/store';
+
 import ProductTable from 'src/components/AppLayout/Product/ProductTable';
 
 import Layout from 'src/components/SharedLayout/Layout';
 import TextInput from 'src/components/SharedLayout/TextInput';
 import Button from 'src/components/SharedLayout/Button';
+import AddProduct from 'src/components/SharedLayout/AddProduct';
 
 const useStyles = makeStyles({
   root: {
@@ -39,12 +43,18 @@ const useStyles = makeStyles({
 
 const Product = () => {
   const classes = useStyles();
+  const { uiStore } = useStore();
+
+  const handleOpen = () => {
+    uiStore.toggleModalVisibility();
+  };
+
   return (
     <Layout>
       <Box className={classes.root}>
         <Paper className={classes.filter}>
           <Grid container justify="space-between" alignItems="center">
-            <Grid item sm={6}>
+            <Grid item sm={7}>
               <Grid container spacing={2}>
                 <Grid item sm={3}>
                   <TextInput
@@ -102,6 +112,7 @@ const Product = () => {
                 color="secondary"
                 fullWidth
                 disableElevation={true}
+                onClick={handleOpen}
               >
                 <AddCircleOutlineOutlinedIcon fontSize="small" /> Add Product
               </Button>
@@ -117,8 +128,9 @@ const Product = () => {
           <ProductTable />
         </Paper>
       </Box>
+      <AddProduct />
     </Layout>
   );
 };
 
-export default Product;
+export default observer(Product);

@@ -6,6 +6,9 @@ export const useStyles = makeStyles({
     justifyContent: 'space-between',
     height: '100%',
     backgroundColor: '#F4F6FA',
+    '& .MuiOutlinedInput-input':{
+      background: '#FFF'
+    },
     '& .MuiAvatar-img': {
       objectFit: 'fill',
     },
