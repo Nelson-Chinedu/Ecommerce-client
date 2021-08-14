@@ -11,6 +11,7 @@ export class UIStore {
   collapseShipping: boolean = true;
   collapsePayment: boolean = true;
   passwordVisibilty: boolean = false;
+  modalVisibility: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -61,5 +62,11 @@ export class UIStore {
   togglePasswordVisibilty() {
     this.passwordVisibilty = !this.passwordVisibilty;
     return this.passwordVisibilty;
+  }
+
+  @action
+  toggleModalVisibility() {
+    this.modalVisibility = !this.modalVisibility;
+    return this.modalVisibility;
   }
 }

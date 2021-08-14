@@ -7,43 +7,10 @@ import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
-import { makeStyles } from '@material-ui/core/styles';
+
+import { useStyles } from 'src/components/AppLayout/Order/styled.order';
 
 import { orderList } from 'src/components/constant/orders';
-
-const useStyles = makeStyles({
-  root: {
-    '& .MuiTableRow-head': {
-      background: '#007AFF',
-      '& .MuiTableCell-head': {
-        '& > *': {
-          color: 'white',
-        },
-      },
-    },
-    '& .pending': {
-      background: '#FFF1E0',
-      color: '#FEB54B',
-      padding: '.5em .8em',
-      borderRadius: '5px',
-      textAlign: 'center',
-    },
-    '& .delivered': {
-      background: '#E5F8F7',
-      color: '#74DDD0',
-      padding: '.5em .8em',
-      borderRadius: '5px',
-      textAlign: 'center',
-    },
-    '& .canceled': {
-      background: '#FFECEC',
-      color: '#FF8791',
-      padding: '.5em .8em',
-      borderRadius: '5px',
-      textAlign: 'center',
-    },
-  },
-});
 
 const OrderTable = () => {
   const classes = useStyles();
