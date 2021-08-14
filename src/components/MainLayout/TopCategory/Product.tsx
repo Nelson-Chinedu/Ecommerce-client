@@ -23,12 +23,12 @@ const Product: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const { uiStore } = useStore();
 
-  const handleAddFavourite = (e, index: number) => {
+  const handleAddFavourite = (e: Event, index: number) => {
     e.stopPropagation()
     uiStore.toggleFavouriteProduct(index);
   };
 
-  const handleRemoveFavourite = (e, index: number) => {
+  const handleRemoveFavourite = (e: Event, index: number) => {
     e.stopPropagation()
     uiStore.toggleFavouriteProduct(index);
   };
