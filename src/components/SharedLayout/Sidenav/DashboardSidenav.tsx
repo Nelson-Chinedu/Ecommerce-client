@@ -6,7 +6,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 import LibraryBooksOutlinedIcon from '@material-ui/icons/LibraryBooksOutlined';
-import WhatsAppIcon from '@material-ui/icons/WhatsApp';
+// import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { makeStyles } from '@material-ui/core/styles';
 
