@@ -23,11 +23,13 @@ const Product: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const { uiStore } = useStore();
 
-  const handleAddFavourite = (index: number) => {
+  const handleAddFavourite = (e: any, index: number) => {
+    e.stopPropagation()
     uiStore.toggleFavouriteProduct(index);
   };
 
-  const handleRemoveFavourite = (index: number) => {
+  const handleRemoveFavourite = (e: any, index: number) => {
+    e.stopPropagation()
     uiStore.toggleFavouriteProduct(index);
   };
 
@@ -52,11 +54,11 @@ const Product: FunctionComponent<{}> = () => {
                   {productItem.favourite ? (
                     <FavouriteIcon
                       className={classes.favouriteIcon}
-                      onClick={() => handleRemoveFavourite(index)}
+                      onClick={(e) => handleRemoveFavourite(e, index)}
                     />
                   ) : (
                     <FavouriteIconOutlined
-                      onClick={() => handleAddFavourite(index)}
+                      onClick={(e) => handleAddFavourite(e, index)}
                     />
                   )}
                 </Grid>
