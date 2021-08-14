@@ -95,13 +95,13 @@ const DashboardSidenav = () => {
             </a>
           </Link>
         </li>
-        <li>
+        {/* <li>
           <Link href="/app/message">
             <a className={router.pathname === '/app/message' ? 'active' : ''}>
               <WhatsAppIcon fontSize="small" /> Messages
             </a>
           </Link>
-        </li>
+        </li> */}
         <li>
           <Link href="/app/setting">
             <a className={router.pathname === '/app/setting' ? 'active' : ''}>
