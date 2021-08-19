@@ -4,6 +4,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
+import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 
 import Button from 'src/components/SharedLayout/Button';
 
@@ -37,16 +38,17 @@ const AvailableTrend: FunctionComponent<{}> = () => {
       </Grid>
       <Box className={classes.textWrapper}>
         <Typography variant="h4">Gucci now available in new trends</Typography>
-        <Typography variant="h5">Now in new colors</Typography>
+        {/* <Typography variant="h5">Now in new colors</Typography> */}
         <Grid container justify="space-around" className={classes.btnAction}>
           <Grid item>
             <Button
               variant="outlined"
-              color="secondary"
+              color="primary"
               disableElevation={true}
               fullWidth={true}
+              className={classes.btnForHer}
             >
-              FOR HER
+              <KeyboardBackspaceIcon /> {' '} FOR HER
             </Button>
           </Grid>
           <Grid item>
@@ -57,7 +59,7 @@ const AvailableTrend: FunctionComponent<{}> = () => {
               disableElevation={true}
               fullWidth={true}
             >
-              FOR HIM <ArrowRightAltIcon />
+              FOR HIM {' '} <ArrowRightAltIcon />
             </Button>
           </Grid>
         </Grid>

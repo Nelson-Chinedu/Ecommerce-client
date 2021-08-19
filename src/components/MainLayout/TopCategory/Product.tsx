@@ -34,12 +34,12 @@ const Product: FunctionComponent<{}> = () => {
   };
 
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={3} style={{margin: '2em 0px'}}>
       {uiStore.productItems.map((productItem: Props, index: number) => (
         <Link href="/product-detail" key={index}>
           <Grid item sm={3} style={{ margin: '0px' }} key={index}>
             <Grid container className={classes.productContainer}>
-              <Image src={productItem.imagePath} width={300} height={250} />
+              <Image src={productItem.imagePath} objectFit='cover' loading="lazy" width={300} height={250} />
               <Grid
                 container
                 justify="space-between"

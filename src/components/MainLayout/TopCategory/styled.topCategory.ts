@@ -2,7 +2,7 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    width: '95%',
+    width: '100%',
     margin: 'auto',
     '& .MuiTypography-h4': {
       textAlign: 'center',
@@ -23,6 +23,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: theme.palette.secondary.light,
     margin: '20px auto',
     listStyle: 'none',
+    cursor: 'pointer',
     '& > *': {
       display: 'flex',
       alignItems: 'center',
