@@ -1,9 +1,12 @@
 import React, { FunctionComponent, ReactNode } from 'react';
+import Link from 'next/link';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Badge from '@material-ui/core/Badge';
+import Popover from '@material-ui/core/Popover';
 import NotificationsOutlinedIcon from '@material-ui/icons/NotificationsOutlined';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 
@@ -17,6 +20,20 @@ type Props = {
 
 const Layout: FunctionComponent<Props> = ({ children }) => {
   const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+    null
+  );
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+
+  const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <Box className={classes.root}>
       <Box>
@@ -61,10 +78,14 @@ const Layout: FunctionComponent<Props> = ({ children }) => {
                   </Grid>
                   <Grid item className={classes.user}>
                     <Typography variant="subtitle1">John Doe</Typography>
-                    <Typography variant="subtitle2">Seller Account</Typography>
+                    <Typography variant="subtitle2">
+                      Merchant Account
+                    </Typography>
                   </Grid>
                   <Grid item>
-                    <KeyboardArrowDownIcon />
+                    <IconButton onClick={handleOpen} disableRipple size="small">
+                      <KeyboardArrowDownIcon style={{ cursor: 'pointer' }} />
+                    </IconButton>
                   </Grid>
                 </Grid>
               </Grid>
@@ -73,6 +94,25 @@ const Layout: FunctionComponent<Props> = ({ children }) => {
         </Grid>
         {children}
       </Box>
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        classes={{ root: classes.popoverContainer }}
+      >
+        <Typography variant="subtitle2" className={classes.popoverLink}>
+          <Link href="/">Logout</Link>
+        </Typography>
+      </Popover>
     </Box>
   );
 };
