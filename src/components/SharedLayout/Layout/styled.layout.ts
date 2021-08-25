@@ -6,11 +6,27 @@ export const useStyles = makeStyles({
     justifyContent: 'space-between',
     height: '100%',
     backgroundColor: '#F4F6FA',
-    '& .MuiOutlinedInput-input':{
-      background: '#FFF'
+    '& .MuiOutlinedInput-input': {
+      background: '#FFF',
     },
     '& .MuiAvatar-img': {
       objectFit: 'fill',
+    },
+  },
+  popoverContainer: {
+    '& .MuiPaper-root': {
+      width: '200px',
+      marginTop: '1em',
+      textAlign: 'right',
+      padding: '1em',
+    },
+  },
+  popoverLink: {
+    '& a': {
+      textDecoration: 'none',
+      '&:hover': {
+        textDecoration: 'underline',
+      },
     },
   },
   mainWrapper: {
@@ -34,7 +50,7 @@ export const useStyles = makeStyles({
     '& .MuiTypography-subtitle1': {
       fontSize: '16px',
       color: '#666767',
-      lineHeight: '1.3em'
+      lineHeight: '1.3em',
     },
     '& .MuiTypography-subtitle2': {
       fontSize: '12px',

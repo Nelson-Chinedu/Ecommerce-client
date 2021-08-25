@@ -30,10 +30,4 @@ export const miniProducts: Array<Props> = [
     productCategory: 'Men, Watch',
     price: '$230'
   },
-  {
-    imagePath: '/image/ct-5.jpg',
-    productName: 'Navy Blue Smart Watch',
-    productCategory: 'Men, Watch',
-    price: '$230'
-  }
 ]

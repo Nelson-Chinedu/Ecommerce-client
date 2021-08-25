@@ -1,7 +1,7 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, MutableRefObject } from 'react';
 
 const useElementOnScreen = (options: IntersectionObserverInit) => {
-  const containerRef = useRef<any>(null);
+  const containerRef: MutableRefObject<any> = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
   const callbackFn = (entries: any) => {
