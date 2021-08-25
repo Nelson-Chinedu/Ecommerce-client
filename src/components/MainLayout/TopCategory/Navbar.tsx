@@ -4,8 +4,6 @@ import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import AppBar from '@material-ui/core/AppBar';
 
-import { useStyles } from 'src/components/MainLayout/TopCategory/styled.topCategory';
-
 import useElementOnScreen from 'src/components/hooks/useElementOnScreen';
 interface LinkTabProps {
   label?: string;
@@ -37,13 +35,12 @@ function a11yProps(index: any) {
 }
 
 const Navbar: FunctionComponent<Props> = ({ handleChange, value }) => {
-  const classes = useStyles();
   const [containerRef, isVisble] = useElementOnScreen({
     root: null,
     rootMargin: '0px',
     threshold: 1.0,
   });
-  console.log(isVisble, '??');
+
   return (
     <>
       {!isVisble ? (
@@ -62,8 +59,6 @@ const Navbar: FunctionComponent<Props> = ({ handleChange, value }) => {
             <LinkTab label="Brand shop" {...a11yProps(6)} />
             <LinkTab label="Baby" {...a11yProps(7)} />
             <LinkTab label="Watches" {...a11yProps(8)} />
-            <LinkTab label="Clothes" {...a11yProps(9)} />
-            <LinkTab label="Shoes" {...a11yProps(10)} />
           </Tabs>
         </AppBar>
       ) : (
@@ -81,8 +76,6 @@ const Navbar: FunctionComponent<Props> = ({ handleChange, value }) => {
           <LinkTab label="Brand shop" {...a11yProps(6)} />
           <LinkTab label="Baby" {...a11yProps(7)} />
           <LinkTab label="Watches" {...a11yProps(8)} />
-          <LinkTab label="Clothes" {...a11yProps(9)} />
-          <LinkTab label="Shoes" {...a11yProps(10)} />
         </Tabs>
       )}
       <Box ref={containerRef} />

@@ -82,7 +82,7 @@ export const productLists = [
   },
 ]
 
-const productItems = [
+export const productItemsMen = [
   {
     id: 0,
     imagePath: '/image/man1.jpg',
@@ -155,7 +155,107 @@ export const productItemWomen = [
     productName: 'Boutique black solution',
     productPrice: '$152.00',
     favourite: false
-  }
+  },
+  {
+    id: 2,
+    imagePath: '/image/woman3.jpeg',
+    productName: 'Boutique black solution',
+    productPrice: '$152.00',
+    favourite: false
+  },
+  {
+    id: 3,
+    imagePath: '/image/woman4.jpeg',
+    productName: 'Boutique black solution',
+    productPrice: '$152.00',
+    favourite: false
+  },
+  {
+    id: 4,
+    imagePath: '/image/woman5.jpeg',
+    productName: 'Boutique black solution',
+    productPrice: '$152.00',
+    favourite: false
+  },
+  {
+    id: 5,
+    imagePath: '/image/woman6.jpeg',
+    productName: 'Boutique black solution',
+    productPrice: '$152.00',
+    favourite: false
+  },
+  {
+    id: 6,
+    imagePath: '/image/woman7.jpeg',
+    productName: 'Boutique black solution',
+    productPrice: '$152.00',
+    favourite: false
+  },
+  {
+    id: 7,
+    imagePath: '/image/woman8.jpeg',
+    productName: 'Boutique black solution',
+    productPrice: '$152.00',
+    favourite: false
+  },
+];
+
+export const productItemMakeup = [
+  {
+    id: 0,
+    imagePath: '/image/makeup1.jpeg',
+    productName: 'Boutique black solution',
+    productPrice: '$152.00',
+    favourite: false
+  },
+  {
+    id: 1,
+    imagePath: '/image/makeup2.jpeg',
+    productName: 'Boutique black solution',
+    productPrice: '$152.00',
+    favourite: false
+  },
+  {
+    id: 2,
+    imagePath: '/image/makeup3.jpeg',
+    productName: 'Boutique black solution',
+    productPrice: '$152.00',
+    favourite: false
+  },
+  {
+    id: 3,
+    imagePath: '/image/makeup4.jpeg',
+    productName: 'Boutique black solution',
+    productPrice: '$152.00',
+    favourite: false
+  },
+  {
+    id: 4,
+    imagePath: '/image/makeup5.jpeg',
+    productName: 'Boutique black solution',
+    productPrice: '$152.00',
+    favourite: false
+  },
+  {
+    id: 5,
+    imagePath: '/image/makeup6.jpeg',
+    productName: 'Boutique black solution',
+    productPrice: '$152.00',
+    favourite: false
+  },
+  {
+    id: 6,
+    imagePath: '/image/makeup7.jpeg',
+    productName: 'Boutique black solution',
+    productPrice: '$152.00',
+    favourite: false
+  },
+  {
+    id: 7,
+    imagePath: '/image/makeup8.jpeg',
+    productName: 'Boutique black solution',
+    productPrice: '$152.00',
+    favourite: false
+  },
 ]
 
-export default productItems;

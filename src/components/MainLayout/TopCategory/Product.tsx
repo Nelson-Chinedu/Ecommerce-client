@@ -72,8 +72,12 @@ const Product: FunctionComponent<{}> = () => {
     <>
       <Navbar handleChange={handleChange} value={value} />
       <TabPanel value={value} index={0}>
-        <Grid container spacing={3} style={{ margin: '2em auto', width: '90%' }}>
-          {uiStore.productItems.map((productItem: Props, index: number) => (
+        <Grid
+          container
+          spacing={3}
+          style={{ margin: '2em auto', width: '90%' }}
+        >
+          {uiStore.productItemsMen.map((productItem: Props, index: number) => (
             <Link href="/product-detail" key={index}>
               <Grid item sm={3} style={{ margin: '0px' }} key={index}>
                 <Grid container className={classes.productContainer}>
@@ -133,8 +137,12 @@ const Product: FunctionComponent<{}> = () => {
         </Grid>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Grid container spacing={3} style={{ margin: '2em auto', width: '90%' }}>
-          {uiStore.productItemsWoman.map(
+        <Grid
+          container
+          spacing={3}
+          style={{ margin: '2em auto', width: '90%' }}
+        >
+          {uiStore.productItemsWomen.map(
             (productItem: Props, index: number) => (
               <Link href="/product-detail" key={index}>
                 <Grid item sm={3} style={{ margin: '0px' }} key={index}>
@@ -196,8 +204,12 @@ const Product: FunctionComponent<{}> = () => {
         </Grid>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <Grid container spacing={3} style={{ margin: '2em auto', width: '90%' }}>
-          {uiStore.productItemsWoman.map(
+        <Grid
+          container
+          spacing={3}
+          style={{ margin: '2em auto', width: '90%' }}
+        >
+          {uiStore.productItemsMakeup.map(
             (productItem: Props, index: number) => (
               <Link href="/product-detail" key={index}>
                 <Grid item sm={3} style={{ margin: '0px' }} key={index}>
@@ -259,8 +271,12 @@ const Product: FunctionComponent<{}> = () => {
         </Grid>
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <Grid container spacing={3} style={{ margin: '2em auto', width: '90%' }}>
-          {uiStore.productItemsWoman.map(
+        <Grid
+          container
+          spacing={3}
+          style={{ margin: '2em auto', width: '90%' }}
+        >
+          {uiStore.productItemsWomen.map(
             (productItem: Props, index: number) => (
               <Link href="/product-detail" key={index}>
                 <Grid item sm={3} style={{ margin: '0px' }} key={index}>
@@ -322,8 +338,12 @@ const Product: FunctionComponent<{}> = () => {
         </Grid>
       </TabPanel>
       <TabPanel value={value} index={4}>
-        <Grid container spacing={3} style={{ margin: '2em auto', width: '90%' }}>
-          {uiStore.productItemsWoman.map(
+        <Grid
+          container
+          spacing={3}
+          style={{ margin: '2em auto', width: '90%' }}
+        >
+          {uiStore.productItemsWomen.map(
             (productItem: Props, index: number) => (
               <Link href="/product-detail" key={index}>
                 <Grid item sm={3} style={{ margin: '0px' }} key={index}>
@@ -385,8 +405,12 @@ const Product: FunctionComponent<{}> = () => {
         </Grid>
       </TabPanel>
       <TabPanel value={value} index={5}>
-        <Grid container spacing={3} style={{ margin: '2em auto', width: '90%' }}>
-          {uiStore.productItemsWoman.map(
+        <Grid
+          container
+          spacing={3}
+          style={{ margin: '2em auto', width: '90%' }}
+        >
+          {uiStore.productItemsWomen.map(
             (productItem: Props, index: number) => (
               <Link href="/product-detail" key={index}>
                 <Grid item sm={3} style={{ margin: '0px' }} key={index}>
@@ -448,8 +472,12 @@ const Product: FunctionComponent<{}> = () => {
         </Grid>
       </TabPanel>
       <TabPanel value={value} index={6}>
-        <Grid container spacing={3} style={{ margin: '2em auto', width: '90%' }}>
-          {uiStore.productItemsWoman.map(
+        <Grid
+          container
+          spacing={3}
+          style={{ margin: '2em auto', width: '90%' }}
+        >
+          {uiStore.productItemsWomen.map(
             (productItem: Props, index: number) => (
               <Link href="/product-detail" key={index}>
                 <Grid item sm={3} style={{ margin: '0px' }} key={index}>
@@ -511,8 +539,12 @@ const Product: FunctionComponent<{}> = () => {
         </Grid>
       </TabPanel>
       <TabPanel value={value} index={7}>
-        <Grid container spacing={3} style={{ margin: '2em auto', width: '90%' }}>
-          {uiStore.productItemsWoman.map(
+        <Grid
+          container
+          spacing={3}
+          style={{ margin: '2em auto', width: '90%' }}
+        >
+          {uiStore.productItemsWomen.map(
             (productItem: Props, index: number) => (
               <Link href="/product-detail" key={index}>
                 <Grid item sm={3} style={{ margin: '0px' }} key={index}>

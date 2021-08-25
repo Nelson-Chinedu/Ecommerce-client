@@ -1,4 +1,5 @@
 import React from 'react';
+import { observer } from 'mobx-react-lite';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import TableContainer from '@material-ui/core/TableContainer';
@@ -11,7 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { productLists } from 'src/components/constant/productItems';
+import { useStore } from 'src/store';
 
 const useStyles = makeStyles({
   root: {
@@ -49,6 +50,7 @@ const useStyles = makeStyles({
 
 const ProductTable = () => {
   const classes = useStyles();
+  const { uiStore } = useStore();
   return (
     <Box className={classes.root}>
       <TableContainer>
@@ -79,7 +81,7 @@ const ProductTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {productLists.map((product, index: number) => (
+            {uiStore.productLists.map((product, index: number) => (
               <TableRow key={index}>
                 <TableCell>
                   <Typography variant="body2">{product.productName}</Typography>
@@ -113,4 +115,4 @@ const ProductTable = () => {
   );
 };
 
-export default ProductTable;
+export default observer(ProductTable);

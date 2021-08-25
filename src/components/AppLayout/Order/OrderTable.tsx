@@ -1,4 +1,5 @@
 import React from 'react';
+import { observer } from 'mobx-react-lite';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import TableContainer from '@material-ui/core/TableContainer';
@@ -8,12 +9,13 @@ import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 
-import { useStyles } from 'src/components/AppLayout/Order/styled.order';
+import { useStore } from 'src/store';
 
-import { orderList } from 'src/components/constant/orders';
+import { useStyles } from 'src/components/AppLayout/Order/styled.order';
 
 const OrderTable = () => {
   const classes = useStyles();
+  const { uiStore } = useStore();
   return (
     <Box className={classes.root}>
       <TableContainer>
@@ -41,7 +43,7 @@ const OrderTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {orderList.map((order, index: number) => (
+            {uiStore.orderLists.map((order, index: number) => (
               <TableRow key={index}>
                 <TableCell>
                   <Typography variant="body2">{order.orderNo}</Typography>
@@ -82,4 +84,4 @@ const OrderTable = () => {
   );
 };
 
-export default OrderTable;
+export default observer(OrderTable);
