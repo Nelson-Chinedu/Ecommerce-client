@@ -141,4 +141,21 @@ const productItems = [
   }
 ];
 
+export const productItemWomen = [
+  {
+    id: 0,
+    imagePath: '/image/woman1.jpeg',
+    productName: 'Boutique black solution',
+    productPrice: '$152.00',
+    favourite: false
+  },
+  {
+    id: 1,
+    imagePath: '/image/woman2.jpeg',
+    productName: 'Boutique black solution',
+    productPrice: '$152.00',
+    favourite: false
+  }
+]
+
 export default productItems;

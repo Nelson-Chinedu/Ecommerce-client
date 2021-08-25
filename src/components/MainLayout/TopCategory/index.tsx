@@ -11,7 +11,7 @@ const TopCategory: FunctionComponent<{}> = () => {
   return (
     <Box className={classes.root}>
       {/* <Slider /> */}
-        <Navbar />
+        {/* <Navbar /> */}
       <Box className={classes.wrapper}>
         <Product />
       </Box>

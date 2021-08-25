@@ -1,10 +1,11 @@
 import { action, makeAutoObservable } from 'mobx';
-import productItems from 'src/components/constant/productItems';
+import productItems, { productItemWomen } from 'src/components/constant/productItems';
 
 type ProductItems = typeof productItems[number];
 
 export class UIStore {
   productItems: ProductItems[] = productItems;
+  productItemsWoman: ProductItems[] = productItemWomen;
   sidenav: boolean = false;
   accordion: boolean = false;
   anchorPosition: string = undefined;
