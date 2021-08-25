@@ -1,10 +1,25 @@
 import { action, makeAutoObservable } from 'mobx';
-import productItems from 'src/components/constant/productItems';
+import {
+  productItemsMen,
+  productItemWomen,
+  productItemMakeup,
+  productLists
+} from 'src/components/constant/productItems';
 
-type ProductItems = typeof productItems[number];
+import { orderList } from 'src/components/constant/orders';
+
+type ProductItemsMen = typeof productItemsMen[number];
+type ProductItemsWomen = typeof productItemsMen[number];
+type ProductItemsMakeup = typeof productItemsMen[number];
+type ProductLists = typeof productLists[number];
+type OrderLists = typeof orderList[number];
 
 export class UIStore {
-  productItems: ProductItems[] = productItems;
+  productItemsMen: ProductItemsMen[] = productItemsMen;
+  productItemsWomen: ProductItemsWomen[] = productItemWomen;
+  productItemsMakeup: ProductItemsMakeup[] = productItemMakeup;
+  productLists: ProductLists[] = productLists;
+  orderLists: OrderLists[] = orderList;
   sidenav: boolean = false;
   accordion: boolean = false;
   anchorPosition: string = undefined;
@@ -18,20 +33,20 @@ export class UIStore {
   }
 
   get favouriteCount() {
-    return this.productItems.reduce((result, productItem) => {
+    return this.productItemsMen.reduce((result, productItem) => {
       return productItem.favourite ? result + 1 : result;
     }, 0);
   }
 
   @action
   toggleFavouriteProduct(index: number) {
-    this.productItems = [
-      ...this.productItems.slice(0, index),
+    this.productItemsMen = [
+      ...this.productItemsMen.slice(0, index),
       {
-        ...this.productItems[index],
-        favourite: !this.productItems[index].favourite,
+        ...this.productItemsMen[index],
+        favourite: !this.productItemsMen[index].favourite,
       },
-      ...this.productItems.slice(index + 1),
+      ...this.productItemsMen.slice(index + 1),
     ];
   }
 
@@ -48,11 +63,11 @@ export class UIStore {
   }
 
   @action
-  toggleCollapse(arg : string) {
-    if (arg === 'shipping'){
+  toggleCollapse(arg: string) {
+    if (arg === 'shipping') {
       this.collapseShipping = !this.collapseShipping;
       return this.collapseShipping;
-    } else if (arg === 'payment'){
+    } else if (arg === 'payment') {
       this.collapsePayment = !this.collapsePayment;
       return this.collapsePayment;
     }

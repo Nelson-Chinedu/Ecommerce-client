@@ -1,6 +1,6 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles({
+export const useStyles = makeStyles((theme: Theme) => ({
   root: {
     position: 'relative',
     '& .MuiSvgIcon-root': {
@@ -9,6 +9,9 @@ export const useStyles = makeStyles({
         marginLeft: '4em',
       },
     },
+    '& .MuiTypography-h4':{
+      fontWeight: 600
+    }
   },
   imgWrapper: {
     height: '500px',
@@ -20,6 +23,7 @@ export const useStyles = makeStyles({
     position: 'absolute',
     top: '50%',
     left: '50%',
+    width: '35%',
     transform: 'translate(-50%, -50%)',
     '& > *': {
       color: '#000',
@@ -27,7 +31,7 @@ export const useStyles = makeStyles({
     },
   },
   btnAction: {
-    width: '50%',
+    width: '60%',
     margin: '5% auto',
   },
   btnForHim: {
@@ -35,4 +39,14 @@ export const useStyles = makeStyles({
       color: '#FFF',
     },
   },
-});
+  btnForHer:{
+    '& > *': {
+      color: theme.palette.primary.main
+    },
+    '& .MuiSvgIcon-root':{
+      '& > *':{
+        color: 'red'
+      }
+    }
+  }
+}));
