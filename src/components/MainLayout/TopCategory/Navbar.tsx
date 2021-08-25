@@ -1,5 +1,4 @@
-import { FunctionComponent, ChangeEvent, MutableRefObject, LegacyRef, ClassAttributes } from 'react';
-import Box from '@material-ui/core/Box';
+import { FunctionComponent, ChangeEvent } from 'react';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import AppBar from '@material-ui/core/AppBar';

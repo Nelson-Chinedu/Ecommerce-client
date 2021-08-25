@@ -1,8 +1,4 @@
-import React, { useRef, useState, useEffect, MutableRefObject, LegacyRef, HTMLAttributes } from 'react';
-
-interface RefObject<T> {
-  readonly current: T | null
-}
+import { useRef, useState, useEffect } from 'react';
 
 const useElementOnScreen = (options: IntersectionObserverInit) => {
   const containerRef = useRef<any>(null);
