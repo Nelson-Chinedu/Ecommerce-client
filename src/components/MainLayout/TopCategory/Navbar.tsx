@@ -1,4 +1,4 @@
-import { FunctionComponent, ChangeEvent } from 'react';
+import { FunctionComponent, ChangeEvent, MutableRefObject, LegacyRef, ClassAttributes } from 'react';
 import Box from '@material-ui/core/Box';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
@@ -35,7 +35,7 @@ function a11yProps(index: any) {
 }
 
 const Navbar: FunctionComponent<Props> = ({ handleChange, value }) => {
-  const [containerRef, isVisble] = useElementOnScreen({
+  const [containerRef, isVisble]: (boolean | any)[] = useElementOnScreen({
     root: null,
     rootMargin: '0px',
     threshold: 1.0,
@@ -78,7 +78,7 @@ const Navbar: FunctionComponent<Props> = ({ handleChange, value }) => {
           <LinkTab label="Watches" {...a11yProps(8)} />
         </Tabs>
       )}
-      <Box ref={containerRef} />
+      <div ref={containerRef} />
     </>
   );
 };
