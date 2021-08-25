@@ -11,7 +11,7 @@ interface LinkTabProps {
 }
 
 type Props = {
-  handleChange: (_event: ChangeEvent, newValue: number) => void;
+  handleChange: (_event: ChangeEvent<{}>, value: number) => void;
   value: number;
 };
 
