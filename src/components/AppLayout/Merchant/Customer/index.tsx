@@ -1,34 +1,58 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
-import MenuItem from '@material-ui/core/MenuItem';
 import Grid from '@material-ui/core/Grid';
+import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
+import { makeStyles } from '@material-ui/core/styles';
 
 import { useStore } from 'src/store';
 
-import OrderTable from 'src/components/AppLayout/Order/OrderTable';
+import CustomerTable from 'src/components/AppLayout/Merchant/Customer/CustomerTable';
 
-import Layout from 'src/components/SharedLayout/Layout';
-import Button from 'src/components/SharedLayout/Button';
 import TextInput from 'src/components/SharedLayout/TextInput';
+import Button from 'src/components/SharedLayout/Button';
 import AddProduct from 'src/components/SharedLayout/AddProduct';
-import { useStyles } from 'src/components/AppLayout/Order/styled.order';
+import Layout from 'src/components/SharedLayout/Layout';
 
-const Order: FunctionComponent<{}> = () => {
+const useStyles = makeStyles({
+  root: {
+    '& .MuiPaper-root': {
+      margin: '2em 0px',
+      boxShadow:
+        '0px 2px 1px -1px rgb(0 0 0 / 0%), 0px 1px 1px 0px rgb(0 0 0 / 0%), 0px 1px 3px 0px rgb(0 0 0 / 4%)',
+    },
+    '& .MuiButton-contained': {
+      '& .MuiButton-label': {
+        color: '#FFF',
+      },
+      '& .MuiSvgIcon-root': {
+        marginRight: '.3em',
+        '& > *': {
+          color: '#FFF',
+        },
+      },
+    },
+  },
+  filter: {
+    padding: '.4em 2em',
+  },
+});
+
+const Customer = () => {
   const classes = useStyles();
   const { uiStore } = useStore();
 
   const handleOpen = () => {
     uiStore.toggleModalVisibility();
-  }
+  };
 
   return (
     <Layout>
       <Box className={classes.root}>
-        <Paper className={classes.filter}>
+      <Paper className={classes.filter}>
           <Grid container justify="space-between" alignItems="center">
             <Grid item sm={7}>
               <Grid container spacing={2}>
@@ -98,15 +122,15 @@ const Order: FunctionComponent<{}> = () => {
         <Paper style={{ padding: '1em' }}>
           <Grid container style={{ padding: '1em 0px' }}>
             <Grid item sm={12}>
-              <Typography variant="subtitle1">All Orders</Typography>
+              <Typography variant="subtitle1">Customers</Typography>
             </Grid>
           </Grid>
-          <OrderTable />
+          <CustomerTable />
         </Paper>
       </Box>
       <AddProduct />
     </Layout>
-  );
+  )
 };
 
-export default observer(Order);
+export default observer(Customer);

@@ -3,6 +3,7 @@
   align-items: center;
   position: relative;
   top: -80px;
+  z-index: 999;
   .banner {
     background-image: url('/image/banner.jpg');
     background-position: center;

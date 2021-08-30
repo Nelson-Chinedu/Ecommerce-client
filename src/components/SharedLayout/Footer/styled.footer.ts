@@ -11,6 +11,13 @@ export const useStyles = makeStyles({
       paddingBottom: '1em',
       display: 'flex',
       alignItems: 'center',
+      textDecoration: 'none',
+      '& a': {
+        textDecoration: 'none',
+        '&:hover': {
+          textDecoration: 'underline',
+        },
+      },
     },
   },
 });
