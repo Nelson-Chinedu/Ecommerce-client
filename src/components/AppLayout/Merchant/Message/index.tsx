@@ -6,11 +6,9 @@ import Layout from 'src/components/SharedLayout/Layout';
 const Message = () => {
   return (
     <Layout>
-      <Box>
-
-      </Box>
+      <Box></Box>
     </Layout>
-  )
+  );
 };
 
 export default Message;

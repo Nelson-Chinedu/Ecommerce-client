@@ -10,12 +10,12 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { useStore } from 'src/store';
 
-import CustomerTable from 'src/components/AppLayout/Customer/CustomerTable';
+import ProductTable from 'src/components/AppLayout/Merchant/Product/ProductTable';
 
+import Layout from 'src/components/SharedLayout/Layout';
 import TextInput from 'src/components/SharedLayout/TextInput';
 import Button from 'src/components/SharedLayout/Button';
 import AddProduct from 'src/components/SharedLayout/AddProduct';
-import Layout from 'src/components/SharedLayout/Layout';
 
 const useStyles = makeStyles({
   root: {
@@ -41,7 +41,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Customer = () => {
+const Product = () => {
   const classes = useStyles();
   const { uiStore } = useStore();
 
@@ -52,7 +52,7 @@ const Customer = () => {
   return (
     <Layout>
       <Box className={classes.root}>
-      <Paper className={classes.filter}>
+        <Paper className={classes.filter}>
           <Grid container justify="space-between" alignItems="center">
             <Grid item sm={7}>
               <Grid container spacing={2}>
@@ -122,15 +122,15 @@ const Customer = () => {
         <Paper style={{ padding: '1em' }}>
           <Grid container style={{ padding: '1em 0px' }}>
             <Grid item sm={12}>
-              <Typography variant="subtitle1">Customers</Typography>
+              <Typography variant="subtitle1">Products</Typography>
             </Grid>
           </Grid>
-          <CustomerTable />
+          <ProductTable />
         </Paper>
       </Box>
       <AddProduct />
     </Layout>
-  )
+  );
 };
 
-export default observer(Customer);
+export default observer(Product);

@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -91,12 +92,14 @@ const Footer: FunctionComponent<{}> = () => {
               </Box>
             </Grid>
             <Grid item>
-              <Typography variant="h6">Top Categories</Typography>
+              <Typography variant="h6">Make Money With Multibuy</Typography>
               <Box>
-                <Typography variant="body2">Men</Typography>
-                <Typography variant="body2">skin Care</Typography>
-                <Typography variant="body2">Women</Typography>
-                <Typography variant="body2">Watches</Typography>
+                <Typography variant="body2">
+                  <Link href="/auth/signup?t=m">Sell on Multibuy</Link>
+                </Typography>
+                <Typography variant="body2">
+                  Become a Logistics Service Partner
+                </Typography>
               </Box>
             </Grid>
           </Grid>
@@ -105,15 +108,27 @@ const Footer: FunctionComponent<{}> = () => {
       <Container>
         <Grid container alignItems="center" justify="space-between">
           <Grid item>
-            <Typography variant="body2">Copyright &copy; 2021. All rights reserved</Typography>
+            <Typography variant="body2">
+              Copyright &copy; 2021. All rights reserved
+            </Typography>
           </Grid>
           <Grid item>
             <Grid container alignItems="center" justify="center">
               <Grid item>
-                <Image src="/image/icons-mastercard.svg" width={100} height={50} alt="" />
+                <Image
+                  src="/image/icons-mastercard.svg"
+                  width={100}
+                  height={50}
+                  alt=""
+                />
               </Grid>
               <Grid item>
-                <Image src="/image/icons-visa.svg" width={100} height={40} alt="" />
+                <Image
+                  src="/image/icons-visa.svg"
+                  width={100}
+                  height={40}
+                  alt=""
+                />
               </Grid>
             </Grid>
           </Grid>

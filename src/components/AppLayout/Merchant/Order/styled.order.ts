@@ -51,4 +51,4 @@ export const useStyles = makeStyles({
   filter: {
     padding: '.4em 2em',
   },
-})
+});

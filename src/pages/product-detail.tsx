@@ -1,8 +1,8 @@
 import React from 'react';
 import Head from 'next/head';
+import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
 
 const Product = dynamic(
   () => import('src/components/MainLayout/ProductDetail'),
@@ -16,7 +16,14 @@ const Product = dynamic(
           flexDirection: 'column',
         }}
       >
-        <Typography>page loading...</Typography>
+        <Box style={{ width: '50%', margin: '10em auto', textAlign: 'center' }}>
+          <Image
+            src="/image/loading.svg"
+            alt="loading"
+            width={50}
+            height={50}
+          />
+        </Box>
       </Box>
     ),
     ssr: false,

@@ -35,7 +35,8 @@ const Socials: FunctionComponent<{}> = () => {
         <Grid container>
           <Grid item sm={12}>
             <Typography>
-              Don't have an account? <Link href="/auth/signup">Sign up</Link>
+              Don't have an account?{' '}
+              <Link href="/auth/signup?t=c">Sign up</Link>
             </Typography>
           </Grid>
         </Grid>

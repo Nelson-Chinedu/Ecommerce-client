@@ -1,9 +1,9 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import Box from '@material-ui/core/Box';
 
-const Landing = dynamic(() => import('src/components/MainLayout/Landing'), {
+const Landing = dynamic(() => import('src/components/AppLayout/Customer/Landing'), {
   loading: () => (
     <Box
       style={{
@@ -13,8 +13,8 @@ const Landing = dynamic(() => import('src/components/MainLayout/Landing'), {
         flexDirection: 'column',
       }}
     >
-      <Box style={{ width: '50%', margin: '10em auto', textAlign: 'center' }}>
-        <Image src="/image/loading.svg" alt="loading" width={50} height={50} />
+      <Box style={{width: '50%', margin: '10em auto', textAlign: 'center'}}>
+        <Image src='/image/loading.svg' alt="loading" width={50} height={50} />
       </Box>
     </Box>
   ),
@@ -29,7 +29,7 @@ const Index = () => {
       </Head>
       <Landing />
     </>
-  );
+  )
 };
 
 export default Index;

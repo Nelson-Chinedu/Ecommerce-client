@@ -4,9 +4,9 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 
-import Notification from 'src/components/AppLayout/Setting/Notification';
-import Profile from 'src/components/AppLayout/Setting/Profile';
-import ChangePassword from 'src/components/AppLayout/Setting/ChangePassword';
+import Notification from 'src/components/AppLayout/Merchant/Setting/Notification';
+import Profile from 'src/components/AppLayout/Merchant/Setting/Profile';
+import ChangePassword from 'src/components/AppLayout/Merchant/Setting/ChangePassword';
 
 import Layout from 'src/components/SharedLayout/Layout';
 import Button from 'src/components/SharedLayout/Button';

@@ -68,29 +68,33 @@ const DashboardSidenav = () => {
     <Box className={classes.root}>
       <ul>
         <li>
-          <Link href="/app/dashboard">
-            <a className={router.pathname === '/app/dashboard' ? 'active' : ''}>
+          <Link href="/app/m/dashboard">
+            <a
+              className={router.pathname === '/app/m/dashboard' ? 'active' : ''}
+            >
               <HomeIcon fontSize="small" /> Dashboard
             </a>
           </Link>
         </li>
         <li>
-          <Link href="/app/order">
-            <a className={router.pathname === '/app/order' ? 'active' : ''}>
+          <Link href="/app/m/order">
+            <a className={router.pathname === '/app/m/order' ? 'active' : ''}>
               <LibraryBooksOutlinedIcon fontSize="small" /> Orders
             </a>
           </Link>
         </li>
         <li>
-          <Link href="/app/product">
-            <a className={router.pathname === '/app/product' ? 'active' : ''}>
+          <Link href="/app/m/product">
+            <a className={router.pathname === '/app/m/product' ? 'active' : ''}>
               <ShoppingBasketIcon fontSize="small" /> Products
             </a>
           </Link>
         </li>
         <li>
-          <Link href="/app/customer">
-            <a className={router.pathname === '/app/customer' ? 'active' : ''}>
+          <Link href="/app/m/customer">
+            <a
+              className={router.pathname === '/app/m/customer' ? 'active' : ''}
+            >
               <AccountCircleOutlinedIcon fontSize="small" /> Customers
             </a>
           </Link>
@@ -103,8 +107,8 @@ const DashboardSidenav = () => {
           </Link>
         </li> */}
         <li>
-          <Link href="/app/setting">
-            <a className={router.pathname === '/app/setting' ? 'active' : ''}>
+          <Link href="/app/m/setting">
+            <a className={router.pathname === '/app/m/setting' ? 'active' : ''}>
               <SettingsIcon fontSize="small" /> Settings
             </a>
           </Link>

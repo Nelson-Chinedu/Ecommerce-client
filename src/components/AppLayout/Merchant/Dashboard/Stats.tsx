@@ -1,4 +1,4 @@
-import React, { FunctionComponent} from 'react';
+import React, { FunctionComponent } from 'react';
 import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';

@@ -3,11 +3,11 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 
-import Revenue from 'src/components/AppLayout/Dashboard/Revenue';
-import TopChart from 'src/components/AppLayout/Dashboard/TopChart';
-import MiniProduct from 'src/components/AppLayout/Dashboard/MiniProduct';
-import Stats from 'src/components/AppLayout/Dashboard/Stats';
-import RecentOrders from 'src/components/AppLayout/Dashboard/RecentOrders';
+import Revenue from 'src/components/AppLayout/Merchant/Dashboard/Revenue';
+import TopChart from 'src/components/AppLayout/Merchant/Dashboard/TopChart';
+import MiniProduct from 'src/components/AppLayout/Merchant/Dashboard/MiniProduct';
+import Stats from 'src/components/AppLayout/Merchant/Dashboard/Stats';
+import RecentOrders from 'src/components/AppLayout/Merchant/Dashboard/RecentOrders';
 
 import Layout from 'src/components/SharedLayout/Layout';
 

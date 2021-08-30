@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 
-const Product = dynamic(() => import('src/components/AppLayout/Product'), {
+const Dashboard = dynamic(() => import('src/components/AppLayout/Merchant/Dashboard'), {
   loading: () => (
     <Grid container justify="space-between" spacing={4}>
       <Grid item sm={3}>
@@ -13,14 +13,15 @@ const Product = dynamic(() => import('src/components/AppLayout/Product'), {
         <Box style={{background: '#9e9e9e4f', width: '98%', height: '100vh'}} />
       </Grid>
     </Grid>
-  ),
+  )
+  ,
   ssr: false,
-})
+});
 
-const ProductPage = () => {
-  return(
-    <Product />
+const DashboardPage = () => {
+  return (
+    <Dashboard />
   )
 };
 
-export default ProductPage;
+export default DashboardPage;

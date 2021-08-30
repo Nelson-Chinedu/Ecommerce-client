@@ -5,12 +5,20 @@ export const useStyles = makeStyles({
     backgroundColor: '#f6f8fa',
     padding: '3em 0em',
     '& .MuiTypography-h6': {
+      fontSize: '1em',
       marginBottom: '1em',
     },
     '& .MuiTypography-body2': {
       paddingBottom: '1em',
       display: 'flex',
       alignItems: 'center',
+      textDecoration: 'none',
+      '& a': {
+        textDecoration: 'none',
+        '&:hover': {
+          textDecoration: 'underline',
+        },
+      },
     },
   },
 });

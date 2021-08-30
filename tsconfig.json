@@ -26,6 +26,6 @@
     "target": "esnext"
   },
   "exclude": ["node_modules"],
-  "include": ["next-env.d.ts","**/*.ts", "**/*.tsx", "src/components/AppLayout/Dashboard/test.tst"]
+  "include": ["next-env.d.ts","**/*.ts", "**/*.tsx", "src/components/AppLayout/Merchant/Dashboard/test.tst"]
 }
 

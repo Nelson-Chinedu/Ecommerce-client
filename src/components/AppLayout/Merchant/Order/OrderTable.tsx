@@ -11,7 +11,7 @@ import TableCell from '@material-ui/core/TableCell';
 
 import { useStore } from 'src/store';
 
-import { useStyles } from 'src/components/AppLayout/Order/styled.order';
+import { useStyles } from 'src/components/AppLayout/Merchant/Order/styled.order';
 
 const OrderTable = () => {
   const classes = useStyles();
