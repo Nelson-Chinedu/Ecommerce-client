@@ -5,6 +5,7 @@ export const useStyles = makeStyles({
     backgroundColor: '#f6f8fa',
     padding: '3em 0em',
     '& .MuiTypography-h6': {
+      fontSize: '1em',
       marginBottom: '1em',
     },
     '& .MuiTypography-body2': {
