@@ -40,6 +40,9 @@ const useStyles = makeStyles({
       },
     },
   },
+  user: {
+    marginLeft: '1em',
+  },
 });
 
 const Index: FunctionComponent<{}> = () => {
@@ -48,13 +51,12 @@ const Index: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
-  const loggedIn = false;
+  const loggedIn = true;
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 
   const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
-    console.log(event, '>>>');
     setAnchorEl(event.currentTarget);
   };
 
@@ -120,14 +122,15 @@ const Index: FunctionComponent<{}> = () => {
             </Grid>
             <Grid item>
               <Grid container alignItems="center" justify="center" spacing={1}>
-                <Grid item>
-                  <IconButton onClick={handleAuthLogin}>
-                    <PersonOutlinedIcon fontSize="small" />
-                  </IconButton>
-                </Grid>
-                {loggedIn && (
+                {!loggedIn ? (
+                  <Grid item>
+                    <IconButton onClick={handleAuthLogin}>
+                      <PersonOutlinedIcon fontSize="small" />
+                    </IconButton>
+                  </Grid>
+                ) : (
                   <>
-                    <Grid item>
+                    <Grid item className={classes.user}>
                       <Typography variant="subtitle2">Hi, Nelson</Typography>
                     </Grid>
                     <Grid item>
