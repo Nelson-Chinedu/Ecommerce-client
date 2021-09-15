@@ -6,10 +6,6 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import Avatar from '@material-ui/core/Avatar';
-import MenuItem from '@material-ui/core/MenuItem';
-import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
-import IconButton from '@material-ui/core/IconButton';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import {
@@ -109,7 +105,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const Account: FunctionComponent<{}> = () => {
+const ChangePassword: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const router = useRouter();
 
@@ -151,120 +147,43 @@ const Account: FunctionComponent<{}> = () => {
           </Grid>
           <Grid item sm={8}>
             <Paper className={classes.main}>
-              <Typography variant="h6">Account Overview</Typography>
+              <Typography variant="h6">Change Password</Typography>
               <Divider />
               <Box className={classes.accountContainer}>
-                <Box
-                  style={{
-                    position: 'relative',
-                    width: '20%',
-                    margin: 'auto',
-                  }}
-                >
-                  <Avatar
-                    src="/image/man6.jpg"
-                    alt="profile picture"
-                    className={classes.large}
-                  />
-                  <Box className={classes.upload}>
-                    <input
-                      accept="image/*"
-                      className={classes.input}
-                      id="icon-button-file"
-                      type="file"
-                    />
-                    <label htmlFor="icon-button-file">
-                      <IconButton
-                        disableRipple={true}
-                        aria-label="upload picture"
-                        component="span"
-                      >
-                        <PhotoCameraIcon fontSize="small" />
-                      </IconButton>
-                    </label>
-                  </Box>
-                </Box>
                 <Box className={classes.accountDetails}>
                   <Grid container spacing={2}>
-                    <Grid item sm={6}>
+                    <Grid item sm={12}>
                       <TextInput
                         variant="outlined"
                         fullWidth
-                        type="text"
+                        type="password"
                         color="secondary"
                         size="small"
-                        label="Firstname"
-                      />
-                    </Grid>
-                    <Grid item sm={6}>
-                      <TextInput
-                        variant="outlined"
-                        fullWidth
-                        type="text"
-                        color="secondary"
-                        size="small"
-                        label="Lastname"
-                      />
-                    </Grid>
-                  </Grid>
-                  <Grid container spacing={2}>
-                    <Grid item sm={6}>
-                      <TextInput
-                        variant="outlined"
-                        fullWidth
-                        type="email"
-                        color="secondary"
-                        size="small"
-                        label="Email Address"
-                      />
-                    </Grid>
-                    <Grid item sm={6}>
-                      <TextInput
-                        variant="outlined"
-                        fullWidth
-                        type="tel"
-                        color="secondary"
-                        size="small"
-                        label="Phone Number"
-                      />
-                    </Grid>
-                  </Grid>
-                  <Grid container spacing={2}>
-                    <Grid item sm={6}>
-                      <TextInput
-                        select
-                        variant="outlined"
-                        fullWidth
-                        type="text"
-                        color="secondary"
-                        size="small"
-                        label="Gender"
-                      >
-                        <MenuItem value="male">Male</MenuItem>
-                        <MenuItem value="female">Female</MenuItem>
-                      </TextInput>
-                    </Grid>
-                    <Grid item sm={6}>
-                      <TextInput
-                        variant="outlined"
-                        fullWidth
-                        type="date"
-                        color="secondary"
-                        size="small"
+                        label="Current Password"
                       />
                     </Grid>
                   </Grid>
                   <Grid container spacing={2}>
                     <Grid item sm={12}>
                       <TextInput
-                        multiline
                         variant="outlined"
                         fullWidth
-                        type="text"
+                        type="password"
                         color="secondary"
                         size="small"
-                        rows={5}
-                        label="Address"
+                        label="New Password"
+                      />
+                    </Grid>
+                  </Grid>
+                  <Grid container spacing={2}>
+                    <Grid item sm={12}>
+                      <TextInput
+                        variant="outlined"
+                        fullWidth
+                        type="password"
+                        color="secondary"
+                        size="small"
+                        label="Retype Password"
                       />
                     </Grid>
                   </Grid>
@@ -274,7 +193,7 @@ const Account: FunctionComponent<{}> = () => {
                     disableElevation
                     fullWidth
                   >
-                    Save
+                    Change Password
                   </Button>
                 </Box>
               </Box>
@@ -287,4 +206,4 @@ const Account: FunctionComponent<{}> = () => {
   );
 };
 
-export default Account;
+export default ChangePassword;

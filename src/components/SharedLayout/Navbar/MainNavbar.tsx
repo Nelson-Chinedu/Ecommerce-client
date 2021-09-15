@@ -2,6 +2,7 @@ import { useState, FunctionComponent } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { observer } from 'mobx-react-lite';
+import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 import Popover from '@material-ui/core/Popover';
 import SearchIcon from '@material-ui/icons/SearchOutlined';
@@ -121,7 +122,7 @@ const Index: FunctionComponent<{}> = () => {
               </IconButton>
             </Grid>
             <Grid item>
-              <Grid container alignItems="center" justify="center" spacing={1}>
+              <Grid container alignItems="center" justify="center" spacing={0}>
                 {!loggedIn ? (
                   <Grid item>
                     <IconButton onClick={handleAuthLogin}>
@@ -131,7 +132,7 @@ const Index: FunctionComponent<{}> = () => {
                 ) : (
                   <>
                     <Grid item className={classes.user}>
-                      <Typography variant="subtitle2">Hi, Nelson</Typography>
+                      <Avatar src="/image/man6.jpg" />
                     </Grid>
                     <Grid item>
                       <IconButton
@@ -165,20 +166,20 @@ const Index: FunctionComponent<{}> = () => {
         classes={{ root: classes.popoverContainer }}
       >
         <Typography variant="subtitle2" className={classes.popoverLink}>
-          <Link href="/">My Account</Link>
+          <Link href="/app/c/account">My Account</Link>
         </Typography>
         <Typography variant="subtitle2" className={classes.popoverLink}>
-          <Link href="/">Orders</Link>
+          <Link href="/app/c/orders">Orders</Link>
         </Typography>
         <Typography variant="subtitle2" className={classes.popoverLink}>
-          <Link href="/">Inbox</Link>
+          <Link href="/app/c/inbox">Inbox</Link>
         </Typography>
-        <Typography variant="subtitle2" className={classes.popoverLink}>
+        {/* <Typography variant="subtitle2" className={classes.popoverLink}>
           <Link href="/">Saved Items</Link>
-        </Typography>
-        <Typography variant="subtitle2" className={classes.popoverLink}>
+        </Typography> */}
+        {/* <Typography variant="subtitle2" className={classes.popoverLink}>
           <Link href="/">Coupon Code</Link>
-        </Typography>
+        </Typography> */}
         <Typography variant="subtitle2" className={classes.popoverLink}>
           <Link href="/">Logout</Link>
         </Typography>

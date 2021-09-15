@@ -82,3 +82,54 @@ export const orderList = [
     status: 'Canceled',
   },
 ];
+
+export const customerOrders = [
+  {
+    productImage: '/image/glass.jpeg',
+    productDescription:
+      'Anti Blue Rays&Light, Anti Eyestrain, Computer Glasses-Black',
+    OrderNumber: 'Order 338171155',
+    status: 'DELIVERED',
+    OrderDate: 'On 17-02-2021',
+  },
+  {
+    productImage: '/image/glass.jpeg',
+    productDescription:
+      'Anti Blue Rays&Light, Anti Eyestrain, Computer Glasses-Black',
+    OrderNumber: 'Order 338171155',
+    status: 'DELIVERED',
+    OrderDate: 'On 17-02-2021',
+  },
+  {
+    productImage: '/image/glass.jpeg',
+    productDescription:
+      'Anti Blue Rays&Light, Anti Eyestrain, Computer Glasses-Black',
+    OrderNumber: 'Order 338171155',
+    status: 'DELIVERED',
+    OrderDate: 'On 17-02-2021',
+  },
+  {
+    productImage: '/image/glass.jpeg',
+    productDescription:
+      'Anti Blue Rays&Light, Anti Eyestrain, Computer Glasses-Black',
+    OrderNumber: 'Order 338171155',
+    status: 'DELIVERED',
+    OrderDate: 'On 17-02-2021',
+  },
+  {
+    productImage: '/image/glass.jpeg',
+    productDescription:
+      'Anti Blue Rays&Light, Anti Eyestrain, Computer Glasses-Black',
+    OrderNumber: 'Order 338171155',
+    status: 'DELIVERED',
+    OrderDate: 'On 17-02-2021',
+  },
+  {
+    productImage: '/image/glass.jpeg',
+    productDescription:
+      'Anti Blue Rays&Light, Anti Eyestrain, Computer Glasses-Black',
+    OrderNumber: 'Order 338171155',
+    status: 'DELIVERED',
+    OrderDate: 'On 17-02-2021',
+  },
+];
