@@ -64,6 +64,7 @@ const Account: FunctionComponent<{}> = () => {
                   color="secondary"
                   size="small"
                   label="Firstname"
+                  name="firstname"
                 />
               </Grid>
               <Grid item sm={6}>

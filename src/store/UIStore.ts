@@ -3,7 +3,7 @@ import {
   productItemsMen,
   productItemWomen,
   productItemMakeup,
-  productLists
+  productLists,
 } from 'src/components/constant/productItems';
 
 import { orderList } from 'src/components/constant/orders';
@@ -27,6 +27,7 @@ export class UIStore {
   collapsePayment: boolean = true;
   passwordVisibilty: boolean = false;
   modalVisibility: boolean = false;
+  privacyButton: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -83,5 +84,11 @@ export class UIStore {
   toggleModalVisibility() {
     this.modalVisibility = !this.modalVisibility;
     return this.modalVisibility;
+  }
+
+  @action
+  togglePrivacyButton() {
+    this.privacyButton = !this.privacyButton;
+    return this.privacyButton;
   }
 }

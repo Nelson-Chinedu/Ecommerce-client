@@ -8,9 +8,12 @@ type Props = {
   children: ReactNode;
   endIcon?: ReactNode;
   disableElevation: boolean;
+  disabled?: boolean;
   fullWidth: boolean;
   href?: string;
+  type?: 'button' | 'submit';
   onClick?: () => void;
+  onSubmit?: () => void;
 };
 
 const Index: FunctionComponent<Props> = ({

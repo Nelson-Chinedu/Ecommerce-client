@@ -13,6 +13,10 @@ type Props = {
   variant: Variant;
   select?: boolean;
   color: Color;
+  name?: string;
+  onChange?: any;
+  onBlur?: any;
+  value?: string;
   children?: ReactNode;
   disabled?: boolean;
   placeholder?: string;
@@ -24,6 +28,8 @@ type Props = {
   InputProps?: any;
   autoFocus?: any;
   className?: string;
+  helperText?: string;
+  error?: boolean;
 };
 
 const TextInput: FunctionComponent<Props> = ({
