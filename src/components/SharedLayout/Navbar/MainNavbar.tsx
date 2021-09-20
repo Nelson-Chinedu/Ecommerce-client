@@ -1,4 +1,4 @@
-import { useState, FunctionComponent } from 'react';
+import { useState, FunctionComponent, useContext } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { observer } from 'mobx-react-lite';
@@ -20,6 +20,7 @@ import Sidenav from 'src/components/SharedLayout/Sidenav';
 
 import { useStore } from 'src/store';
 import { Typography } from '@material-ui/core';
+import { UserContext } from 'src/components/context/userContext';
 
 const useStyles = makeStyles({
   root: {},
@@ -49,10 +50,12 @@ const useStyles = makeStyles({
 const Index: FunctionComponent<{}> = () => {
   const { uiStore } = useStore();
   const router = useRouter();
+  const token = useContext(UserContext);
+  console.log(token);
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
-  const loggedIn = true;
+  const loggedIn = false;
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;

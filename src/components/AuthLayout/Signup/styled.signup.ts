@@ -8,18 +8,23 @@ export const useStyles = makeStyles({
     '& .MuiTypography-h5': {
       fontWeight: 500,
     },
-    '& .MuiTypography-subtitle2':{
-      fontWeight: 300
-    }
+    '& .MuiTypography-subtitle2': {
+      fontWeight: 300,
+    },
+    '& .MuiCircularProgress-svg': {
+      '& > *': {
+        color: 'white',
+      },
+    },
   },
-  inActive:{
-    color: '#3e3e3e8c'
+  inActive: {
+    color: '#3e3e3e8c',
   },
-  caption:{
-    color: 'red'
+  caption: {
+    color: 'red',
   },
-  inputWrapper:{
-    marginTop: '1em'
+  inputWrapper: {
+    marginTop: '1em',
   },
   btnLogin: {
     margin: '.5em 0px',
