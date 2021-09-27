@@ -20,3 +20,17 @@ export const SIGNUP = gql`
     }
   }
 `;
+
+export const SIGNIN = gql`
+  mutation ($signinEmail: String!, $signinPassword: String!) {
+    public {
+      signin(email: $signinEmail, password: $signinPassword) {
+        message
+        token
+        accountType
+        status
+        isLoggedin
+      }
+    }
+  }
+`;

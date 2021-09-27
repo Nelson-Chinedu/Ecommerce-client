@@ -11,6 +11,11 @@ export const useStyles = makeStyles({
     '& .MuiTypography-subtitle2': {
       fontWeight: 300,
     },
+    '& .MuiCircularProgress-svg': {
+      '& > *': {
+        color: 'white',
+      },
+    },
   },
   inActive: {
     color: '#3e3e3e8c',
@@ -30,6 +35,16 @@ export const useStyles = makeStyles({
       '& > *': {
         color: 'white',
       },
+    },
+  },
+  serverError: {
+    background: '#FFEBE9',
+    borderRadius: '3px',
+    '& > *': {
+      color: '#ff7372',
+      fontSize: '12px',
+      padding: '.9em 0px',
+      margin: '.8em 0px 1.5em',
     },
   },
 });

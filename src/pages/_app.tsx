@@ -18,17 +18,25 @@ import { MuiThemeProvider } from '@material-ui/core/styles';
 import theme from 'src/components/Theme';
 
 import '../styles/pages.scss';
+
 import { UserContext } from 'src/components/context/userContext';
+
+import Snackbar from 'src/components/SharedLayout/Snackbar';
+
+import { useStore } from 'src/store';
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const { uiStore } = useStore();
+  const [open, setOpen] = React.useState(true);
   const httpLink = new HttpLink({
     uri: `${process.env.NEXT_PUBLIC_BASE_URI}/graphql`,
   });
   const token = store.get('__cnt');
+  const isLoggedIn = store.get('__clu');
 
   const authMiddleware = new ApolloLink((operation, forward) => {
     operation.setContext(({ headers = {} }) => ({
@@ -45,8 +53,16 @@ function MyApp({ Component, pageProps }: AppProps) {
     uri: `${process.env.NEXT_PUBLIC_BASE_URI}/graphql`,
     cache: new InMemoryCache(),
     link: concat(authMiddleware, httpLink),
+    credentials: 'include',
   });
-  console.log(process.env.NEXT_PUBLIC_BASE_URI);
+
+  const handleClose = (_event: unknown, reason: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
+
   return (
     <>
       <Head>
@@ -57,12 +73,21 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
       </Head>
       <MuiThemeProvider theme={theme}>
-        <UserContext.Provider value={token}>
+        <UserContext.Provider value={{ isLoggedIn }}>
           <ApolloProvider client={client}>
             <Component {...pageProps} />
           </ApolloProvider>
         </UserContext.Provider>
       </MuiThemeProvider>
+      {uiStore.isLoggedIn ? (
+        <Snackbar
+          open={open}
+          handleClose={handleClose}
+          message={uiStore.loggedMessage}
+        />
+      ) : (
+        ''
+      )}
     </>
   );
 }

@@ -1,4 +1,4 @@
-import React, {FunctionComponent } from 'react';
+import React, { FunctionComponent, useContext } from 'react';
 import classnames from 'classnames';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
@@ -12,9 +12,16 @@ import Divider from 'src/components/SharedLayout/Divider';
 import LoginForm from 'src/components/AuthLayout/Login/LoginForm';
 import Socials from 'src/components/AuthLayout/Login/Socials';
 import { useStyles } from 'src/components/AuthLayout/Login/styled.login';
+import { UserContext } from 'src/components/context/userContext';
 
 const Login: FunctionComponent<{}> = () => {
   const classes = useStyles();
+  const { isLoggedIn } = useContext(UserContext);
+
+  if (isLoggedIn) {
+    // TODO: route user if logged in is true
+    // router.push('/app/c');
+  }
 
   return (
     <>

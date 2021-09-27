@@ -66,7 +66,6 @@ const SignupForm: FunctionComponent<{}> = () => {
         }
       }
     } catch (error: any) {
-      console.log(error);
       if (error.message === '"email" must be a valid email') {
         const stripError = error.message.replace(/"|'/g, '');
         formik.setFieldError('email', stripError);
