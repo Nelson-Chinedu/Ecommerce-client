@@ -49,13 +49,12 @@ const useStyles = makeStyles({
 
 const Index: FunctionComponent<{}> = () => {
   const { uiStore } = useStore();
+  const { isLoggedIn } = useContext(UserContext);
   const router = useRouter();
-  const token = useContext(UserContext);
-  console.log(token);
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-
-  const loggedIn = false;
+  console.log(isLoggedIn, '**');
+  const withoutUserProfile = ['/', '/auth/login', '/auth/signup'];
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
@@ -78,7 +77,8 @@ const Index: FunctionComponent<{}> = () => {
   };
 
   const handleHome = () => {
-    router.push('/');
+    const path = isLoggedIn ? '/app/c' : '/';
+    router.push(path);
   };
 
   return (
@@ -126,7 +126,7 @@ const Index: FunctionComponent<{}> = () => {
             </Grid>
             <Grid item>
               <Grid container alignItems="center" justify="center" spacing={0}>
-                {!loggedIn ? (
+                {withoutUserProfile.includes(router.pathname) ? (
                   <Grid item>
                     <IconButton onClick={handleAuthLogin}>
                       <PersonOutlinedIcon fontSize="small" />

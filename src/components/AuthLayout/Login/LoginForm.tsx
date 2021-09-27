@@ -1,6 +1,12 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
+import { useMutation } from '@apollo/client';
+import store from 'store';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { observer } from 'mobx-react-lite';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -8,7 +14,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Checkbox from '@material-ui/core/Checkbox';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import RightArrow from '@material-ui/icons/ArrowForwardOutlined';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { useStore } from 'src/store';
 
@@ -16,96 +22,184 @@ import TextInput from 'src/components/SharedLayout/TextInput';
 import Button from 'src/components/SharedLayout/Button';
 
 import { useStyles } from 'src/components/AuthLayout/Login/styled.login';
+import { SIGNIN } from 'src/queries';
+
+const validationSchema = yup.object().shape({
+  email: yup.string().email('Invalid email address').required('Required'),
+  password: yup.string().required('Required'),
+});
 
 const LoginForm: FunctionComponent<{}> = () => {
   const { uiStore } = useStore();
   const classes = useStyles();
+  const router = useRouter();
+  const [serverError, setServerError] = useState('');
+  const [signin, { loading }] = useMutation(SIGNIN);
 
   const handleTogglePassword = () => {
     uiStore.togglePasswordVisibilty();
   };
 
+  const _handleFormSubmit = async () => {
+    try {
+      const user = await signin({
+        variables: {
+          signinEmail: formik.values.email,
+          signinPassword: formik.values.password,
+        },
+      });
+      if (user) {
+        const {
+          data: {
+            public: {
+              signin: { status, message, token, accountType, isLoggedin },
+            },
+          },
+        } = user;
+        uiStore.toggleNotification(message);
+        uiStore.loggedIn();
+        const path =
+          accountType === 'c' && status === '200'
+            ? '/app/c'
+            : accountType === 'm' && status === '200'
+            ? '/app/m/dashboard'
+            : '/';
+        store.set('__cnt', token);
+        store.set('__clu', isLoggedin);
+        router.push(path);
+      }
+    } catch (error: any) {
+      setServerError(error.message);
+      console.log(error.message);
+    }
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    onSubmit: _handleFormSubmit,
+    validationSchema,
+  });
+
+  const {
+    handleSubmit,
+    handleBlur,
+    errors,
+    isSubmitting,
+    touched,
+    values: { email, password },
+  } = formik;
+
   return (
     <>
-      <Grid container className={classes.inputWrapper}>
-        <Grid item sm={12}>
-          <TextInput
-            label="Email address"
-            variant="outlined"
-            color="secondary"
-            fullWidth
-            size="small"
-            type="email"
-            autoFocus={true}
-          />
-        </Grid>
-      </Grid>
-      <Grid container className={classes.inputWrapper}>
-        <Grid item sm={12}>
-          <TextInput
-            label="Password"
-            variant="outlined"
-            color="secondary"
-            fullWidth
-            size="small"
-            type={uiStore.passwordVisibilty ? 'text' : 'password'}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end" disableTypography={true}>
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleTogglePassword}
-                    size="small"
-                  >
-                    {uiStore.passwordVisibilty ? (
-                      <Visibility />
-                    ) : (
-                      <VisibilityOff />
-                    )}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Grid>
-      </Grid>
-      <Grid
-        container
-        alignItems="center"
-        justify="space-between"
-        style={{ margin: '.8em 0px' }}
-      >
-        <Grid item sm={6}>
-          <Grid container alignItems="center">
-            <Grid item>
-              <Checkbox id="remember" />
-            </Grid>
-            <Grid item>
-              <Typography
-                component="label"
-                htmlFor="remember"
-                variant="subtitle2"
-              >
-                Remember Me
-              </Typography>
-            </Grid>
+      <form onSubmit={handleSubmit}>
+        {serverError && (
+          <Box className={classes.serverError}>
+            <Typography>{serverError}</Typography>
+          </Box>
+        )}
+        <Grid container className={classes.inputWrapper}>
+          <Grid item sm={12}>
+            <TextInput
+              label="Email address"
+              variant="outlined"
+              color="secondary"
+              fullWidth
+              size="small"
+              type="email"
+              autoFocus={true}
+              name="email"
+              value={email}
+              onChange={(e: { target: { value: string } }) => {
+                formik.setFieldValue('email', e.target.value);
+                setServerError('');
+              }}
+              onBlur={handleBlur}
+              helperText={touched.email && errors.email}
+              error={touched.email && Boolean(errors.email)}
+            />
           </Grid>
         </Grid>
-        <Grid item sm={6}>
-          <Link href="/">
-            <Typography variant="subtitle2">Forgot your password?</Typography>
-          </Link>
+        <Grid container className={classes.inputWrapper}>
+          <Grid item sm={12}>
+            <TextInput
+              label="Password"
+              variant="outlined"
+              color="secondary"
+              fullWidth
+              size="small"
+              type={uiStore.passwordVisibilty ? 'text' : 'password'}
+              name="password"
+              value={password}
+              onChange={(e: { target: { value: string } }) => {
+                formik.setFieldValue('password', e.target.value);
+                setServerError('');
+              }}
+              onBlur={handleBlur}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end" disableTypography={true}>
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleTogglePassword}
+                      size="small"
+                    >
+                      {uiStore.passwordVisibilty ? (
+                        <Visibility />
+                      ) : (
+                        <VisibilityOff />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              helperText={touched.password && errors.password}
+              error={touched.password && Boolean(errors.password)}
+            />
+          </Grid>
         </Grid>
-      </Grid>
-      <Button
-        variant="contained"
-        color="secondary"
-        className={classes.btnLogin}
-        disableElevation={true}
-        fullWidth={true}
-      >
-        LOG IN <RightArrow fontSize="small" />
-      </Button>
+        <Grid
+          container
+          alignItems="center"
+          justify="space-between"
+          style={{ margin: '.8em 0px' }}
+        >
+          <Grid item sm={6}>
+            <Grid container alignItems="center">
+              <Grid item>
+                <Checkbox id="remember" />
+              </Grid>
+              <Grid item>
+                <Typography
+                  component="label"
+                  htmlFor="remember"
+                  variant="subtitle2"
+                >
+                  Remember Me
+                </Typography>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item sm={6}>
+            <Link href="/">
+              <Typography variant="subtitle2">Forgot your password?</Typography>
+            </Link>
+          </Grid>
+        </Grid>
+        <Button
+          variant="contained"
+          color="secondary"
+          className={classes.btnLogin}
+          disableElevation={true}
+          fullWidth={true}
+          type="button"
+          onClick={handleSubmit}
+        >
+          {isSubmitting && loading ? <CircularProgress size={20} /> : 'Login'}
+        </Button>
+      </form>
     </>
   );
 };

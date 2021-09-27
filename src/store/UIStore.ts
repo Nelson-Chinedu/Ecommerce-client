@@ -28,6 +28,9 @@ export class UIStore {
   passwordVisibilty: boolean = false;
   modalVisibility: boolean = false;
   privacyButton: boolean = false;
+  isLoggedIn: boolean = false;
+  loggedMessage: string = '';
+  notification: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -90,5 +93,18 @@ export class UIStore {
   togglePrivacyButton() {
     this.privacyButton = !this.privacyButton;
     return this.privacyButton;
+  }
+
+  @action
+  toggleNotification(message: string) {
+    this.notification = !this.notification;
+    this.loggedMessage = message;
+    return this.notification;
+  }
+
+  @action
+  loggedIn() {
+    this.isLoggedIn = !this.isLoggedIn;
+    return this.isLoggedIn;
   }
 }
