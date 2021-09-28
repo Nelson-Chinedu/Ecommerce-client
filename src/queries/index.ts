@@ -34,3 +34,52 @@ export const SIGNIN = gql`
     }
   }
 `;
+
+export const GET_PROFILE = gql`
+  query ClientQuery {
+    client {
+      getProfile {
+        email
+        profile {
+          firstname
+          lastname
+          phoneNumber
+          gender
+          country
+          region
+          address
+          city
+        }
+      }
+    }
+  }
+`;
+
+export const UPDATE_PROFILE = gql`
+  mutation (
+    $firstname: String!
+    $lastname: String!
+    $phoneNumber: String!
+    $region: String!
+    $city: String!
+    $country: String!
+    $address: String!
+    $gender: String
+  ) {
+    client {
+      updateProfile(
+        firstname: $firstname
+        lastname: $lastname
+        phoneNumber: $phoneNumber
+        region: $region
+        city: $city
+        country: $country
+        address: $address
+        gender: $gender
+      ) {
+        message
+        status
+      }
+    }
+  }
+`;
