@@ -22,13 +22,12 @@ import { useStyles } from 'src/components/AppLayout/Customer/Account/styled.acco
 
 import { GET_PROFILE, UPDATE_PROFILE } from 'src/queries';
 
+import { useStore } from 'src/store';
+
 const validationSchema = yup.object().shape({
   firstname: yup.string().required('Required'),
   lastname: yup.string().required('Required'),
-  emailAddress: yup
-    .string()
-    .email('Invalid email address')
-    .required('Required'),
+  emailAddress: yup.string().email('Invalid email address'),
   phoneNumber: yup
     .number()
     .required('Required')
@@ -42,6 +41,7 @@ const validationSchema = yup.object().shape({
 
 const Account: FunctionComponent<{}> = () => {
   const classes = useStyles();
+  const { uiStore } = useStore();
   const [state, setState] = useState({
     firstname: '',
     lastname: '',
@@ -53,27 +53,30 @@ const Account: FunctionComponent<{}> = () => {
     country: '',
     address: '',
   });
-  const [open, setOpen] = useState(true);
-  const [serverMessage, setServerMessage] = useState('');
   const { loading, data: userProfile } = useQuery(GET_PROFILE);
   const [updateProfile, { loading: isLoading }] = useMutation(UPDATE_PROFILE, {
     refetchQueries: [{ query: GET_PROFILE }],
   });
-
   useEffect(() => {
-    if (userProfile) {
-      const { getProfile } = userProfile.client;
-      setState({
-        firstname: getProfile.profile.firstname,
-        lastname: getProfile.profile.lastname,
-        email: getProfile.email,
-        phoneNumber: getProfile.profile.phoneNumber,
-        gender: getProfile.profile.gender,
-        region: getProfile.profile.region,
-        city: getProfile.profile.city,
-        country: getProfile.profile.country,
-        address: getProfile.profile.address,
-      });
+    try {
+      if (userProfile) {
+        const { getProfile } = userProfile.client;
+        setState({
+          firstname: getProfile.profile.firstname,
+          lastname: getProfile.profile.lastname,
+          email: getProfile.email,
+          phoneNumber: getProfile.profile.phoneNumber,
+          gender: getProfile.profile.gender,
+          region: getProfile.profile.region,
+          city: getProfile.profile.city,
+          country: getProfile.profile.country,
+          address: getProfile.profile.address,
+        });
+      }
+    } catch (error) {
+      uiStore.serverMessage = 'Server error';
+      uiStore.snackbarSeverity = 'error';
+      uiStore.showSnackbar = true;
     }
   }, [userProfile]);
 
@@ -102,7 +105,8 @@ const Account: FunctionComponent<{}> = () => {
             },
           },
         } = profile;
-        setServerMessage(message);
+        uiStore.serverMessage = message;
+        uiStore.snackbarSeverity = 'success';
       }
     } catch (error) {
       console.log(error);
@@ -149,8 +153,8 @@ const Account: FunctionComponent<{}> = () => {
     if (reason === 'clickaway') {
       return;
     }
-    setOpen(false);
-    setServerMessage('');
+    uiStore.serverMessage = '';
+    uiStore.showSnackbar = false;
   };
 
   return (
@@ -361,8 +365,7 @@ const Account: FunctionComponent<{}> = () => {
                   !city ||
                   !country ||
                   !address ||
-                  !region ||
-                  !emailAddress
+                  !region
                 }
                 onClick={handleSubmit}
               >
@@ -376,11 +379,12 @@ const Account: FunctionComponent<{}> = () => {
           </Box>
         </Paper>
       </CustomerLayout>
-      {serverMessage.length > 1 && (
+      {uiStore.serverMessage.length > 1 && (
         <Snackbar
-          open={open}
+          open={uiStore.serverMessage.length > 1 ? true : false}
           handleClose={handleClose}
-          message={serverMessage}
+          message={uiStore.serverMessage}
+          severity="success"
         />
       )}
     </React.Fragment>
