@@ -1,12 +1,13 @@
 import React, { FunctionComponent } from 'react';
-import Snackbar, { SnackbarCloseReason } from '@material-ui/core/Snackbar';
+import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 
 type Props = {
-  handleClose: (_event: unknown, reason: SnackbarCloseReason) => void;
+  handleClose: any;
   open: boolean;
   message: string;
+  severity: 'success' | 'error';
 };
 
 const useStyles = makeStyles({
@@ -14,13 +15,21 @@ const useStyles = makeStyles({
     '& .MuiAlert-standardSuccess': {
       background: '#4CAF50 !important',
     },
+    '& .MuiAlert-standardError': {
+      background: '#ff1c01 !important',
+    },
     '& .MuiAlert-message': {
       color: '#FFF !important',
     },
   },
 });
 
-const Index: FunctionComponent<Props> = ({ handleClose, open, message }) => {
+const Index: FunctionComponent<Props> = ({
+  handleClose,
+  open,
+  message,
+  severity,
+}) => {
   const classes = useStyles();
   return (
     <Snackbar
@@ -28,9 +37,9 @@ const Index: FunctionComponent<Props> = ({ handleClose, open, message }) => {
       anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
       open={open}
       onClose={handleClose}
-      autoHideDuration={6000}
+      autoHideDuration={4000}
     >
-      <MuiAlert severity="success">{message}</MuiAlert>
+      <MuiAlert severity={severity}>{message}</MuiAlert>
     </Snackbar>
   );
 };

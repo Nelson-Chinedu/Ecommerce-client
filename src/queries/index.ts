@@ -83,3 +83,21 @@ export const UPDATE_PROFILE = gql`
     }
   }
 `;
+
+export const CHANGE_PASSWORD = gql`
+  mutation (
+    $currentPassword: String!
+    $newPassword: String!
+    $confirmPassword: String!
+  ) {
+    client {
+      changePassword(
+        currentPassword: $currentPassword
+        newPassword: $newPassword
+        confirmPassword: $confirmPassword
+      ) {
+        message
+      }
+    }
+  }
+`;

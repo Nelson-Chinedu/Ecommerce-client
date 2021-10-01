@@ -56,8 +56,9 @@ const LoginForm: FunctionComponent<{}> = () => {
             },
           },
         } = user;
-        uiStore.toggleNotification(message);
-        uiStore.loggedIn();
+        uiStore.serverMessage = message;
+        uiStore.snackbarSeverity = 'success';
+        uiStore.showSnackbar = true;
         const path =
           accountType === 'c' && status === '200'
             ? '/app/c'
@@ -70,7 +71,6 @@ const LoginForm: FunctionComponent<{}> = () => {
       }
     } catch (error: any) {
       setServerError(error.message);
-      console.log(error.message);
     }
   };
 

@@ -31,7 +31,6 @@ Router.events.on('routeChangeError', () => NProgress.done());
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { uiStore } = useStore();
-  const [open, setOpen] = React.useState(true);
   const httpLink = new HttpLink({
     uri: `${process.env.NEXT_PUBLIC_BASE_URI}/graphql`,
   });
@@ -60,9 +59,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     if (reason === 'clickaway') {
       return;
     }
-    setOpen(false);
+    uiStore.showSnackbar = false;
+    uiStore.serverMessage = '';
   };
-
+  console.log(uiStore.serverMessage.length, '##@');
   return (
     <>
       <Head>
@@ -79,11 +79,12 @@ function MyApp({ Component, pageProps }: AppProps) {
           </ApolloProvider>
         </UserContext.Provider>
       </MuiThemeProvider>
-      {uiStore.isLoggedIn ? (
+      {uiStore.serverMessage.length > 1 ? (
         <Snackbar
-          open={open}
+          open={uiStore.showSnackbar}
           handleClose={handleClose}
-          message={uiStore.loggedMessage}
+          message={uiStore.serverMessage}
+          severity={uiStore.snackbarSeverity}
         />
       ) : (
         ''

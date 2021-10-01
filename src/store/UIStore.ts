@@ -31,6 +31,9 @@ export class UIStore {
   isLoggedIn: boolean = false;
   loggedMessage: string = '';
   notification: boolean = false;
+  serverMessage: string = '';
+  snackbarSeverity: 'success' | 'error' = undefined;
+  showSnackbar: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
