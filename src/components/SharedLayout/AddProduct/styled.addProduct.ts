@@ -4,12 +4,14 @@ export const useStyles = makeStyles((theme: Theme) => ({
   root: {
     background: 'white',
     width: '70%',
-    padding: '3em 2em',
+    padding: '2em 2em 3em',
     transform: 'translate(-50%, -50%)',
     top: '50%',
     left: '50%',
     position: 'relative',
-    height: 'auto',
+    maxHeight: '750px',
+    // height: 'auto',
+    overflowY: 'scroll',
     '& .MuiButton-contained': {
       '& .MuiButton-label': {
         color: '#FFF',
@@ -20,9 +22,28 @@ export const useStyles = makeStyles((theme: Theme) => ({
     },
     '& .MuiTypography-subtitle2': {
       marginBottom: '.6em',
+      fontWeight: 600,
     },
     '& .MuiTypography-body2': {
       marginBottom: '.6em',
+    },
+    '& .my-custom-react-select1__menu': {
+      zIndex: 2,
+    },
+    '& .my-custom-react-select2__menu': {
+      zIndex: 2,
+    },
+    '& .my-custom-react-select3__menu': {
+      zIndex: 2,
+    },
+    '& .my-custom-react-select4__menu': {
+      zIndex: 2,
+    },
+    '& .my-custom-react-select5__menu': {
+      zIndex: 2,
+    },
+    '& .MuiCircularProgress-circle': {
+      color: '#FFF',
     },
   },
   tag: {
@@ -51,5 +72,16 @@ export const useStyles = makeStyles((theme: Theme) => ({
   },
   btnAction: {
     marginTop: '1em',
+  },
+  error: {
+    color: '#f44336',
+    marginLeft: '14px',
+    marginRight: '14px',
+    marginTop: '4px',
+    fontSize: '12px',
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontWeight: 400,
+    lineHeight: 1.66,
+    letterSpacing: '0.03333em',
   },
 }));

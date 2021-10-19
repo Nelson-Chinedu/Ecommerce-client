@@ -53,7 +53,6 @@ const Index: FunctionComponent<{}> = () => {
   const router = useRouter();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-  console.log(isLoggedIn, '**');
   const withoutUserProfile = ['/', '/auth/login', '/auth/signup'];
 
   const open = Boolean(anchorEl);
