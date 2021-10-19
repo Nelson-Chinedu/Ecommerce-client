@@ -62,7 +62,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     uiStore.showSnackbar = false;
     uiStore.serverMessage = '';
   };
-  console.log(uiStore.serverMessage.length, '##@');
+
   return (
     <>
       <Head>

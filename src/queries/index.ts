@@ -101,3 +101,35 @@ export const CHANGE_PASSWORD = gql`
     }
   }
 `;
+
+export const ADD_PRODUCT = gql`
+  mutation (
+    $productName: String!
+    $productDescription: String!
+    $productSizes: [String!]!
+    $colors: [String!]!
+    $category: String!
+    $stock: String!
+    $tags: [String!]!
+    $sold: String
+    $oldPrice: String!
+    $newPrice: String!
+  ) {
+    client {
+      addProduct(
+        productName: $productName
+        productDescription: $productDescription
+        productSizes: $productSizes
+        colors: $colors
+        category: $category
+        stock: $stock
+        tags: $tags
+        sold: $sold
+        oldPrice: $oldPrice
+        newPrice: $newPrice
+      ) {
+        message
+      }
+    }
+  }
+`;
