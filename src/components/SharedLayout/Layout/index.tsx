@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode } from 'react';
+import React, { FunctionComponent, ReactNode, useContext } from 'react';
 import Link from 'next/link';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -13,6 +13,7 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import DashboardSidenav from 'src/components/SharedLayout/Sidenav/DashboardSidenav';
 import TextInput from 'src/components/SharedLayout/TextInput';
 import { useStyles } from 'src/components/SharedLayout/Layout/styled.layout';
+import { SettingContext } from 'src/components/context/merchantSetting-context';
 
 type Props = {
   children: ReactNode;
@@ -20,6 +21,7 @@ type Props = {
 
 const Layout: FunctionComponent<Props> = ({ children }) => {
   const classes = useStyles();
+  const { firstname, lastname } = useContext(SettingContext);
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );
@@ -77,7 +79,7 @@ const Layout: FunctionComponent<Props> = ({ children }) => {
                     />
                   </Grid>
                   <Grid item className={classes.user}>
-                    <Typography variant="subtitle1">John Doe</Typography>
+                    <Typography variant="subtitle1">{`${firstname} ${lastname}`}</Typography>
                     <Typography variant="subtitle2">
                       Merchant Account
                     </Typography>

@@ -124,9 +124,9 @@ const AddProduct: FunctionComponent<{}> = () => {
       const payload = {
         colors,
         tags,
-        productSizes,
-        productName: formik.values.productName,
-        productDescription: formik.values.productDescription,
+        sizes: productSizes,
+        name: formik.values.productName,
+        description: formik.values.productDescription,
         oldPrice: formik.values.oldPrice,
         newPrice: formik.values.newPrice,
         category: selectedProduct.value,
@@ -135,9 +135,9 @@ const AddProduct: FunctionComponent<{}> = () => {
       const newProduct = await addProduct({
         variables: {
           ...payload,
-          sold: '0.00',
         },
       });
+
       if (newProduct) {
         const {
           data: {
@@ -157,7 +157,9 @@ const AddProduct: FunctionComponent<{}> = () => {
         resetForm();
       }
     } catch (error) {
-      console.log(error, 'ERROR');
+      uiStore.serverMessage = 'An error occured';
+      uiStore.snackbarSeverity = 'error';
+      uiStore.showSnackbar = true;
     }
   };
 

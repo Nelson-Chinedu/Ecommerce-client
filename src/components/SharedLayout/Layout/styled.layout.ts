@@ -33,6 +33,8 @@ export const useStyles = makeStyles({
     width: '80%',
     marginLeft: '20%',
     padding: '2em',
+    height: '100vh',
+    overflow: 'hidden',
   },
   notification: {
     marginRight: '1em',
@@ -51,6 +53,7 @@ export const useStyles = makeStyles({
       fontSize: '16px',
       color: '#666767',
       lineHeight: '1.3em',
+      textTransform: 'capitalize',
     },
     '& .MuiTypography-subtitle2': {
       fontSize: '12px',

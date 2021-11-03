@@ -16,7 +16,7 @@ type Props = {
   name?: string;
   onChange?: any;
   onBlur?: any;
-  value?: string;
+  value?: string | number;
   children?: ReactNode;
   disabled?: boolean;
   placeholder?: string;

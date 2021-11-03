@@ -1,11 +1,13 @@
 import React from 'react';
-import dynamic from 'next/dynamic';
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
+import { SettingProvider } from 'src/components/context/merchantSetting-context';
+// import AccountEdit from 'src/components/AppLayout/Merchant/Setting/AccountEdit';
 
-const Dashboard = dynamic(
-  () => import('src/components/AppLayout/Merchant/Dashboard'),
+const ChangePassword = dynamic(
+  () => import('src/components/AppLayout/Merchant/Setting/PasswordEdit'),
   {
     loading: () => (
       <Grid container justify="space-between" spacing={4}>
@@ -25,15 +27,17 @@ const Dashboard = dynamic(
   }
 );
 
-const DashboardPage = () => {
+const ChangePasswordPage = () => {
   return (
     <>
       <Head>
-        <title>Multibuy | Home</title>
+        <title>Multibuy | Change Password</title>
       </Head>
-      <Dashboard />
+      <SettingProvider>
+        <ChangePassword />
+      </SettingProvider>
     </>
   );
 };
 
-export default DashboardPage;
+export default ChangePasswordPage;

@@ -27,7 +27,7 @@ export const PRODUCT_TAGS: Product[] = [
 ];
 
 export const PRODUCT_STOCK: Product[] = [
-  { value: 'In-Stock', label: 'In-Stock', color: '#00B8D9' },
+  { value: 'In-stock', label: 'In-Stock', color: '#00B8D9' },
   { value: 'Out-of-Stock', label: 'Out-of-Stock', color: '#0052CC' },
 ];
 

@@ -1,9 +1,14 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles({
-  main: {
+  root: {
     marginRight: '2em',
     paddingBottom: '2em',
+    '& .MuiCircularProgress-svg': {
+      '& > *': {
+        color: 'white',
+      },
+    },
   },
   accountContainer: {
     width: '50%',

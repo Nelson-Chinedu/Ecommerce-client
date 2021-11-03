@@ -15,7 +15,12 @@ const Inbox = dynamic(() => import('src/components/AppLayout/Customer/Inbox'), {
       }}
     >
       <Box style={{ width: '50%', margin: '10em auto', textAlign: 'center' }}>
-        <Image src="/image/loading.svg" alt="loading" width={50} height={50} />
+        <Image
+          src="/image/loading.svg"
+          alt="loading spinner"
+          width={50}
+          height={50}
+        />
       </Box>
     </Box>
   ),
