@@ -2,6 +2,7 @@ import React from 'react';
 import { AppProps } from 'next/app';
 import Router from 'next/router';
 import Head from 'next/head';
+import { observer } from 'mobx-react-lite';
 import {
   ApolloClient,
   ApolloProvider,
@@ -93,4 +94,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default MyApp;
+export default observer(MyApp);

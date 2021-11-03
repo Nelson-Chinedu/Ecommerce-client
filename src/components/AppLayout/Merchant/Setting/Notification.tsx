@@ -59,7 +59,6 @@ const Notification: FunctionComponent<{}> = () => {
 
   return (
     <Box style={{ margin: '1em 0px' }}>
-      <Typography variant="subtitle2">Notifications</Typography>
       <Box
         style={{
           margin: '1em 0px',

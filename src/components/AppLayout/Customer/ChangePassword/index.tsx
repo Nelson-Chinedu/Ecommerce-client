@@ -14,13 +14,18 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from 'src/components/SharedLayout/Button';
 import TextInput from 'src/components/SharedLayout/TextInput';
 import CustomerLayout from 'src/components/SharedLayout/CustomerLayout';
-import Snackbar from 'src/components/SharedLayout/Snackbar';
 
 import { useStyles } from 'src/components/AppLayout/Customer/ChangePassword/styled.changePassword';
 
 import { CHANGE_PASSWORD } from 'src/queries';
 
 import { useStore } from 'src/store';
+
+interface IValues {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}
 
 const validationSchema = yup.object().shape({
   currentPassword: yup.string().required('Required'),
@@ -43,13 +48,13 @@ const ChangePassword: FunctionComponent<{}> = () => {
   const { uiStore } = useStore();
   const [changePassword, { loading }] = useMutation(CHANGE_PASSWORD);
 
-  const _handleChangePassword = async () => {
+  const _handleChangePassword = async (values: IValues) => {
     try {
       const account = await changePassword({
         variables: {
-          currentPassword: formik.values.currentPassword,
-          newPassword: formik.values.newPassword,
-          confirmPassword: formik.values.confirmPassword,
+          currentPassword: values.currentPassword,
+          newPassword: values.newPassword,
+          confirmPassword: values.confirmPassword,
         },
       });
       if (account) {
@@ -96,111 +101,94 @@ const ChangePassword: FunctionComponent<{}> = () => {
     values: { currentPassword, newPassword, confirmPassword },
   } = formik;
 
-  const handleClose = (_event: unknown, reason: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    uiStore.serverMessage = '';
-    uiStore.showSnackbar = false;
-  };
-
   return (
-    <React.Fragment>
-      <CustomerLayout>
-        <Paper className={classes.main}>
-          <Typography variant="h6">Change Password</Typography>
-          <Divider />
-          <Box className={classes.accountContainer}>
-            <Box className={classes.accountDetails}>
-              <Grid container spacing={2}>
-                <Grid item sm={12}>
-                  <TextInput
-                    variant="outlined"
-                    fullWidth
-                    type="password"
-                    color="secondary"
-                    size="small"
-                    label="Current Password"
-                    name="currentPassword"
-                    value={currentPassword}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    helperText={
-                      touched.currentPassword && errors.currentPassword
-                    }
-                    error={
-                      touched.currentPassword && Boolean(errors.currentPassword)
-                    }
-                  />
-                </Grid>
+    <CustomerLayout>
+      <Paper className={classes.root}>
+        <Typography variant="h6">Change Password</Typography>
+        <Divider />
+        <Box className={classes.accountContainer}>
+          <Box className={classes.accountDetails}>
+            <Grid container spacing={2}>
+              <Grid item sm={12}>
+                <TextInput
+                  variant="outlined"
+                  fullWidth
+                  type="password"
+                  color="secondary"
+                  size="small"
+                  label="Current Password"
+                  name="currentPassword"
+                  value={currentPassword}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  helperText={touched.currentPassword && errors.currentPassword}
+                  error={
+                    touched.currentPassword && Boolean(errors.currentPassword)
+                  }
+                />
               </Grid>
-              <Grid container spacing={2}>
-                <Grid item sm={12}>
-                  <TextInput
-                    variant="outlined"
-                    fullWidth
-                    type="password"
-                    color="secondary"
-                    size="small"
-                    label="New Password"
-                    name="newPassword"
-                    value={newPassword}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    helperText={touched.newPassword && errors.newPassword}
-                    error={touched.newPassword && Boolean(errors.newPassword)}
-                  />
-                </Grid>
+            </Grid>
+            <Grid container spacing={2}>
+              <Grid item sm={12}>
+                <TextInput
+                  variant="outlined"
+                  fullWidth
+                  type="password"
+                  color="secondary"
+                  size="small"
+                  label="New Password"
+                  name="newPassword"
+                  value={newPassword}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  helperText={touched.newPassword && errors.newPassword}
+                  error={touched.newPassword && Boolean(errors.newPassword)}
+                />
               </Grid>
-              <Grid container spacing={2}>
-                <Grid item sm={12}>
-                  <TextInput
-                    variant="outlined"
-                    fullWidth
-                    type="password"
-                    color="secondary"
-                    size="small"
-                    label="Confirm Password"
-                    name="confirmPassword"
-                    value={confirmPassword}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    helperText={
-                      touched.confirmPassword && errors.confirmPassword
-                    }
-                    error={
-                      touched.confirmPassword && Boolean(errors.confirmPassword)
-                    }
-                  />
-                </Grid>
+            </Grid>
+            <Grid container spacing={2}>
+              <Grid item sm={12}>
+                <TextInput
+                  variant="outlined"
+                  fullWidth
+                  type="password"
+                  color="secondary"
+                  size="small"
+                  label="Confirm Password"
+                  name="confirmPassword"
+                  value={confirmPassword}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  helperText={touched.confirmPassword && errors.confirmPassword}
+                  error={
+                    touched.confirmPassword && Boolean(errors.confirmPassword)
+                  }
+                />
               </Grid>
-              <Button
-                variant="contained"
-                color="secondary"
-                disableElevation
-                fullWidth
-                onClick={handleSubmit}
-              >
-                {isSubmitting && loading ? (
-                  <CircularProgress size={20} />
-                ) : (
-                  'Change Password'
-                )}
-              </Button>
-            </Box>
+            </Grid>
+            <Button
+              variant="contained"
+              color="secondary"
+              disableElevation
+              fullWidth
+              disabled={
+                !currentPassword ||
+                !newPassword ||
+                !confirmPassword ||
+                isSubmitting
+              }
+              onClick={handleSubmit}
+            >
+              {isSubmitting && loading ? (
+                <CircularProgress size={20} />
+              ) : (
+                'Change Password'
+              )}
+            </Button>
           </Box>
-        </Paper>
-      </CustomerLayout>
-      {uiStore.serverMessage.length > 1 &&
-        uiStore.snackbarSeverity === 'success' && (
-          <Snackbar
-            open={uiStore.serverMessage.length > 1 ? true : false}
-            handleClose={handleClose}
-            message={uiStore.serverMessage}
-            severity="success"
-          />
-        )}
-    </React.Fragment>
+        </Box>
+      </Paper>
+    </CustomerLayout>
   );
 };
 

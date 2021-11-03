@@ -39,16 +39,22 @@ export const GET_PROFILE = gql`
   query ClientQuery {
     client {
       getProfile {
-        email
-        profile {
-          firstname
-          lastname
-          phoneNumber
-          gender
-          country
-          region
-          address
+        firstname
+        lastname
+        phoneNumber
+        imageUrl
+        gender
+        store {
+          name
+          currency
+        }
+        location {
           city
+          address
+          country
+        }
+        account {
+          email
         }
       }
     }
@@ -60,7 +66,6 @@ export const UPDATE_PROFILE = gql`
     $firstname: String!
     $lastname: String!
     $phoneNumber: String!
-    $region: String!
     $city: String!
     $country: String!
     $address: String!
@@ -71,7 +76,6 @@ export const UPDATE_PROFILE = gql`
         firstname: $firstname
         lastname: $lastname
         phoneNumber: $phoneNumber
-        region: $region
         city: $city
         country: $country
         address: $address
@@ -79,6 +83,16 @@ export const UPDATE_PROFILE = gql`
       ) {
         message
         status
+      }
+    }
+  }
+`;
+
+export const UPDATE_STORE = gql`
+  mutation ($storeName: String!, $currency: String!) {
+    client {
+      updateStore(storeName: $storeName, currency: $currency) {
+        message
       }
     }
   }
@@ -104,27 +118,25 @@ export const CHANGE_PASSWORD = gql`
 
 export const ADD_PRODUCT = gql`
   mutation (
-    $productName: String!
-    $productDescription: String!
-    $productSizes: [String!]!
+    $name: String!
+    $description: String!
+    $sizes: [String!]!
     $colors: [String!]!
     $category: String!
     $stock: String!
     $tags: [String!]!
-    $sold: String
     $oldPrice: String!
     $newPrice: String!
   ) {
     client {
       addProduct(
-        productName: $productName
-        productDescription: $productDescription
-        productSizes: $productSizes
+        name: $name
+        description: $description
+        sizes: $sizes
         colors: $colors
         category: $category
         stock: $stock
         tags: $tags
-        sold: $sold
         oldPrice: $oldPrice
         newPrice: $newPrice
       ) {

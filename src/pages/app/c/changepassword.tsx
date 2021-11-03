@@ -19,7 +19,7 @@ const ChangePassword = dynamic(
         <Box style={{ width: '50%', margin: '10em auto', textAlign: 'center' }}>
           <Image
             src="/image/loading.svg"
-            alt="loading"
+            alt="loading spinner"
             width={50}
             height={50}
           />

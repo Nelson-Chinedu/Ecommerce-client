@@ -70,6 +70,10 @@ const LoginForm: FunctionComponent<{}> = () => {
         router.push(path);
       }
     } catch (error: any) {
+      // TODO: Checkout how to check/write a custom graphQL error
+      if (error.message === 'Failed to fetch') {
+        return setServerError('Server Error');
+      }
       setServerError(error.message);
     }
   };

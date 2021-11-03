@@ -108,7 +108,11 @@ const DashboardSidenav = () => {
         </li> */}
         <li>
           <Link href="/app/m/setting">
-            <a className={router.pathname === '/app/m/setting' ? 'active' : ''}>
+            <a
+              className={
+                router.pathname.includes('/app/m/setting') ? 'active' : ''
+              }
+            >
               <SettingsIcon fontSize="small" /> Settings
             </a>
           </Link>

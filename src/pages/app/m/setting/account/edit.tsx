@@ -4,8 +4,10 @@ import Head from 'next/head';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 
-const Dashboard = dynamic(
-  () => import('src/components/AppLayout/Merchant/Dashboard'),
+import { SettingProvider } from 'src/components/context/merchantSetting-context';
+
+const AccountEdit = dynamic(
+  () => import('src/components/AppLayout/Merchant/Setting/AccountEdit'),
   {
     loading: () => (
       <Grid container justify="space-between" spacing={4}>
@@ -25,15 +27,17 @@ const Dashboard = dynamic(
   }
 );
 
-const DashboardPage = () => {
+const AccountEditPage = () => {
   return (
     <>
       <Head>
-        <title>Multibuy | Home</title>
+        <title>Multibuy | Account</title>
       </Head>
-      <Dashboard />
+      <SettingProvider>
+        <AccountEdit />
+      </SettingProvider>
     </>
   );
 };
 
-export default DashboardPage;
+export default AccountEditPage;
