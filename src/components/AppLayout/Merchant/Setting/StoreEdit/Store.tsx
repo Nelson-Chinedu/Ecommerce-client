@@ -48,13 +48,6 @@ interface IProfile {
   gender: string;
 }
 
-interface IProps extends IProfile {
-  handleChange: () => void;
-  handleBlur: () => void;
-  touched: IProfile;
-  errors: IProfile;
-}
-
 const Store: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const router = useRouter();
