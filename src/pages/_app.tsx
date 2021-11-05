@@ -26,8 +26,6 @@ import Snackbar from 'src/components/SharedLayout/Snackbar';
 
 import { useStore } from 'src/store';
 
-import { SettingProvider } from 'src/components/context/merchantSetting-context';
-
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
@@ -78,9 +76,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <MuiThemeProvider theme={theme}>
         <UserContext.Provider value={{ isLoggedIn }}>
           <ApolloProvider client={client}>
-            <SettingProvider>
-              <Component {...pageProps} />
-            </SettingProvider>
+            <Component {...pageProps} />
           </ApolloProvider>
         </UserContext.Provider>
       </MuiThemeProvider>

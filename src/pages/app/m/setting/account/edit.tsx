@@ -4,6 +4,8 @@ import Head from 'next/head';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 
+import { SettingProvider } from 'src/components/context/merchantSetting-context';
+
 const AccountEdit = dynamic(
   () => import('src/components/AppLayout/Merchant/Setting/AccountEdit'),
   {
@@ -31,7 +33,9 @@ const AccountEditPage = () => {
       <Head>
         <title>Multibuy | Account</title>
       </Head>
-      <AccountEdit />
+      <SettingProvider>
+        <AccountEdit />
+      </SettingProvider>
     </>
   );
 };
