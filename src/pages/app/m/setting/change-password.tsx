@@ -3,8 +3,6 @@ import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import { SettingProvider } from 'src/components/context/merchantSetting-context';
-// import AccountEdit from 'src/components/AppLayout/Merchant/Setting/AccountEdit';
 
 const ChangePassword = dynamic(
   () => import('src/components/AppLayout/Merchant/Setting/PasswordEdit'),
@@ -33,9 +31,7 @@ const ChangePasswordPage = () => {
       <Head>
         <title>Multibuy | Change Password</title>
       </Head>
-      <SettingProvider>
-        <ChangePassword />
-      </SettingProvider>
+      <ChangePassword />
     </>
   );
 };

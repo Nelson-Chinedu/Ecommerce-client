@@ -1,5 +1,5 @@
-import React from 'react';
-import { observer } from 'mobx-react-lite';
+import React, { useState } from 'react';
+import { useQuery } from '@apollo/client';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import TableContainer from '@material-ui/core/TableContainer';
@@ -10,47 +10,33 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { makeStyles } from '@material-ui/core/styles';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
-import { useStore } from 'src/store';
+import { GET_PRODUCT } from 'src/queries';
 
-const useStyles = makeStyles({
-  root: {
-    '& .MuiTableRow-head': {
-      background: '#007AFF',
-      '& .MuiTableCell-head': {
-        '& > *': {
-          color: 'white',
-        },
-      },
-    },
-    '& .pending': {
-      background: '#FFF1E0',
-      color: '#FEB54B',
-      padding: '.5em .8em',
-      borderRadius: '5px',
-      textAlign: 'center',
-    },
-    '& .delivered': {
-      background: '#E5F8F7',
-      color: '#74DDD0',
-      padding: '.5em .8em',
-      borderRadius: '5px',
-      textAlign: 'center',
-    },
-    '& .canceled': {
-      background: '#FFECEC',
-      color: '#FF8791',
-      padding: '.5em .8em',
-      borderRadius: '5px',
-      textAlign: 'center',
-    },
-  },
-});
+import { useStyles } from 'src/components/AppLayout/Merchant/Product/styled.product';
 
 const ProductTable = () => {
   const classes = useStyles();
-  const { uiStore } = useStore();
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const { loading, data } = useQuery(GET_PRODUCT, {
+    variables: {
+      take: 10,
+      skip: 0,
+    },
+  });
+
+  if (loading) return <Typography>Loading...</Typography>;
+
+  const handleOpenPopover = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClosePopover = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <Box className={classes.root}>
       <TableContainer>
@@ -81,33 +67,51 @@ const ProductTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {uiStore.productLists.map((product, index: number) => (
-              <TableRow key={index}>
-                <TableCell>
-                  <Typography variant="body2">{product.productName}</Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography variant="body2">{product.category}</Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography variant="body2">{product.price}</Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography variant="body2">{product.stock}</Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography variant="body2">{product.sold}</Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography variant="body2">{product.revenue}</Typography>
-                </TableCell>
-                <TableCell>
-                  <IconButton>
-                    <MoreVertIcon />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-            ))}
+            {data &&
+              data.client.getProduct.products.map(
+                (product: any, index: number) => (
+                  <React.Fragment key={index}>
+                    <TableRow>
+                      <TableCell>
+                        <Typography variant="body2">{product.name}</Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography variant="body2">
+                          {product.category}
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography variant="body2">
+                          -N-{product.newPrice}
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography variant="body2">{product.stock}</Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography variant="body2">N/A</Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography variant="body2">N/A</Typography>
+                      </TableCell>
+                      <TableCell>
+                        <IconButton onClick={handleOpenPopover}>
+                          <MoreVertIcon />
+                        </IconButton>
+                      </TableCell>
+                    </TableRow>
+                    <Menu
+                      anchorEl={anchorEl}
+                      keepMounted
+                      open={Boolean(anchorEl)}
+                      onClose={handleClosePopover}
+                    >
+                      <MenuItem>Edit</MenuItem>
+                      <MenuItem>Delete</MenuItem>
+                    </Menu>
+                  </React.Fragment>
+                )
+              )}
           </TableBody>
         </Table>
       </TableContainer>
@@ -115,4 +119,4 @@ const ProductTable = () => {
   );
 };
 
-export default observer(ProductTable);
+export default ProductTable;
