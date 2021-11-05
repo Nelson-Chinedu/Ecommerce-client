@@ -4,6 +4,8 @@ import Head from 'next/head';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 
+import { SettingProvider } from 'src/components/context/merchantSetting-context';
+
 const Order = dynamic(() => import('src/components/AppLayout/Merchant/Order'), {
   loading: () => (
     <Grid container justify="space-between" spacing={4}>
@@ -28,7 +30,9 @@ const OrderPage = () => {
       <Head>
         <title>Multibuy | Order</title>
       </Head>
-      <Order />
+      <SettingProvider>
+        <Order />
+      </SettingProvider>
     </>
   );
 };
