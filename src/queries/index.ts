@@ -145,3 +145,24 @@ export const ADD_PRODUCT = gql`
     }
   }
 `;
+
+export const GET_PRODUCT = gql`
+  query ($take: Int!, $skip: Int!) {
+    client {
+      getProduct(take: $take, skip: $skip) {
+        products {
+          name
+          description
+          sizes
+          colors
+          category
+          stock
+          tags
+          oldPrice
+          newPrice
+          number
+        }
+      }
+    }
+  }
+`;
