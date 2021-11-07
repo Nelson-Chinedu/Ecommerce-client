@@ -51,4 +51,15 @@ export const useStyles = makeStyles({
   filter: {
     padding: '.4em 2em',
   },
+  emptyProduct: {
+    width: '50%',
+    margin: '5em auto',
+    textAlign: 'center',
+    '& .MuiTypography-subtitle2': {
+      fontSize: '18px',
+    },
+    '& .MuiGrid-container': {
+      marginTop: '.8em',
+    },
+  },
 });
