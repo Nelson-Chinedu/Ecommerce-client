@@ -8,9 +8,9 @@ import {
   ApolloProvider,
   ApolloLink,
   concat,
-  HttpLink,
   InMemoryCache,
 } from '@apollo/client';
+import { createUploadLink } from 'apollo-upload-client';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import store from 'store';
@@ -32,9 +32,7 @@ Router.events.on('routeChangeError', () => NProgress.done());
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { uiStore } = useStore();
-  const httpLink = new HttpLink({
-    uri: `${process.env.NEXT_PUBLIC_BASE_URI}/graphql`,
-  });
+
   const token = store.get('__cnt');
   const isLoggedIn = store.get('__clu');
 
@@ -49,10 +47,15 @@ function MyApp({ Component, pageProps }: AppProps) {
     return forward(operation);
   });
 
+  //@ts-ignore
+  const CreateUploadLink = new createUploadLink({
+    uri: `${process.env.NEXT_PUBLIC_BASE_URI}/graphql`,
+  });
+
   const client = new ApolloClient({
     uri: `${process.env.NEXT_PUBLIC_BASE_URI}/graphql`,
     cache: new InMemoryCache(),
-    link: concat(authMiddleware, httpLink),
+    link: concat(authMiddleware, CreateUploadLink),
     credentials: 'include',
   });
 

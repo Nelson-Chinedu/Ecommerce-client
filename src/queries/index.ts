@@ -127,6 +127,7 @@ export const ADD_PRODUCT = gql`
     $tags: [String!]!
     $oldPrice: String!
     $newPrice: String!
+    $imageUrl: String
   ) {
     client {
       addProduct(
@@ -139,6 +140,7 @@ export const ADD_PRODUCT = gql`
         tags: $tags
         oldPrice: $oldPrice
         newPrice: $newPrice
+        imageUrl: $imageUrl
       ) {
         message
       }
@@ -162,6 +164,16 @@ export const GET_PRODUCT = gql`
           newPrice
           number
         }
+      }
+    }
+  }
+`;
+
+export const FILE_UPLOAD = gql`
+  mutation ($file: Upload) {
+    client {
+      fileUpload(file: $file) {
+        url
       }
     }
   }

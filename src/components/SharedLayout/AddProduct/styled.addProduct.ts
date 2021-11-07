@@ -45,6 +45,16 @@ export const useStyles = makeStyles((theme: Theme) => ({
     '& .MuiCircularProgress-circle': {
       color: '#FFF',
     },
+    '& .MuiLinearProgress-barColorPrimary': {
+      background: theme.palette.secondary.main,
+    },
+    '& .MuiLinearProgress-dashedColorPrimary': {
+      backgroundImage:
+        'radial-gradient(#7b98a9 0%, #1172a9 16%, transparent 42%)',
+    },
+    '& .MuiLinearProgress-colorPrimary': {
+      background: '#7cc3eb',
+    },
   },
   tag: {
     border: '1px solid #e5e5ea',

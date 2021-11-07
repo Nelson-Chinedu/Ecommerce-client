@@ -3,6 +3,7 @@ import NumberFormat from 'react-number-format';
 import { useMutation } from '@apollo/client';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import fileSize from 'filesize';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import Image from 'next/image';
@@ -17,12 +18,13 @@ import Grid from '@material-ui/core/Grid';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 
 import { useStore } from 'src/store';
-import { ADD_PRODUCT } from 'src/queries';
+import { ADD_PRODUCT, FILE_UPLOAD } from 'src/queries';
 
 import Snackbar from 'src/components/SharedLayout/Snackbar';
 import Modal from 'src/components/SharedLayout/Modal';
 import TextInput from 'src/components/SharedLayout/TextInput';
 import Button from 'src/components/SharedLayout/Button';
+import LinearProgress from 'src/components/SharedLayout/LinearProgress';
 import { useStyles } from 'src/components/SharedLayout/AddProduct/styled.addProduct';
 
 import {
@@ -70,15 +72,31 @@ function NumberFormatCustom(props: any) {
 const AddProduct: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const { uiStore } = useStore();
-  const [selectedProduct, setSelectedProduct] = useState({
+  const [selectedProduct, setSelectedProduct] = useState<{
+    value: string;
+    label: string;
+  }>({
     value: '',
     label: '',
   });
   const [selectedSize, setSelectedSize] = useState([]);
   const [selectedColor, setSelectedColor] = useState([]);
   const [selectedTag, setSelectedTag] = useState([]);
-  const [selectedStock, setSelectedStock] = useState({ value: '', label: '' });
-  const [isError, setIsError] = useState({
+  const [imageUrl, setImageUrl] = useState<string>('');
+  const [imageName, setImageName] = useState<string>('');
+  const [imageSize, setImageSize] = useState<string>('');
+  const [isImage, setIsImage] = useState<boolean>(false);
+  const [selectedStock, setSelectedStock] = useState<{
+    value: string;
+    label: string;
+  }>({ value: '', label: '' });
+  const [isError, setIsError] = useState<{
+    productError: boolean;
+    sizeError: boolean;
+    colorError: boolean;
+    tagError: boolean;
+    stockError: boolean;
+  }>({
     productError: false,
     sizeError: false,
     colorError: false,
@@ -87,6 +105,17 @@ const AddProduct: FunctionComponent<{}> = () => {
   });
 
   const [addProduct, { loading }] = useMutation(ADD_PRODUCT);
+  const [fileUpload] = useMutation(FILE_UPLOAD, {
+    onCompleted: (data) => {
+      if (data) {
+        const {
+          fileUpload: { url },
+        } = data.client;
+        setImageUrl(url);
+        setIsImage(false);
+      }
+    },
+  });
 
   const handleCloseModal = () => {
     uiStore.toggleModalVisibility();
@@ -124,6 +153,7 @@ const AddProduct: FunctionComponent<{}> = () => {
       const payload = {
         colors,
         tags,
+        imageUrl,
         sizes: productSizes,
         name: formik.values.productName,
         description: formik.values.productDescription,
@@ -184,6 +214,23 @@ const AddProduct: FunctionComponent<{}> = () => {
     values: { productName, productDescription, oldPrice, newPrice },
   } = formik;
 
+  function removeImageExtension(filename: string) {
+    let lastDotPosition = filename.lastIndexOf('.');
+    if (lastDotPosition === -1) return filename;
+    else return filename.substr(0, lastDotPosition);
+  }
+
+  const handleFileUpload = (e: any) => {
+    setIsImage(true);
+    if (!e.target.files) return;
+    console.log(e.target.files[0]);
+    const trimmedImage = removeImageExtension(e.target.files[0].name);
+    setImageName(trimmedImage);
+    const size = fileSize(e.target.files[0].size);
+    setImageSize(size);
+    fileUpload({ variables: { file: e.target.files[0] } });
+  };
+  console.log(imageUrl);
   return (
     <React.Fragment>
       <Modal>
@@ -220,60 +267,59 @@ const AddProduct: FunctionComponent<{}> = () => {
                     alt="file upload"
                   />
                   <Typography>Drop your files or Browse</Typography>
-                  <input type="file" />
+                  <input
+                    type="file"
+                    accept="image/jpg, image/jpeg, image/png"
+                    onChange={handleFileUpload}
+                  />
                 </label>
-                <Grid
-                  className={classes.filePreview}
-                  container
-                  justify="space-between"
-                  alignItems="flex-start"
-                >
-                  <Grid item sm={10}>
-                    <Grid container spacing={1}>
-                      <Grid item>
-                        <Image
-                          src="/image/ct-2.jpg"
-                          width={40}
-                          height={50}
-                          alt=""
-                        />
-                      </Grid>
-                      <Grid item>
-                        <Typography>Navy Blue Shoe</Typography>
-                        <Typography>420 kb</Typography>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                  <Grid item sm={2} style={{ textAlign: 'right' }}>
-                    <DeleteOutlinedIcon fontSize="small" />
-                  </Grid>
-                </Grid>
-                <Grid
-                  className={classes.filePreview}
-                  container
-                  justify="space-between"
-                  alignItems="flex-start"
-                >
-                  <Grid item sm={10}>
-                    <Grid container spacing={1}>
-                      <Grid item>
-                        <Image
-                          src="/image/ct-2.jpg"
-                          width={40}
-                          height={50}
-                          alt=""
-                        />
-                      </Grid>
-                      <Grid item>
-                        <Typography>Navy Blue Shoe</Typography>
-                        <Typography>420 kb</Typography>
+                {isImage ? (
+                  <>
+                    <Typography variant="subtitle2">
+                      uploading image...
+                    </Typography>
+                    <LinearProgress />
+                  </>
+                ) : isImage === false && imageUrl === '' ? (
+                  <Typography variant="body2">No image Uploaded</Typography>
+                ) : (
+                  <Grid
+                    className={classes.filePreview}
+                    container
+                    justify="space-between"
+                    alignItems="flex-start"
+                  >
+                    <Grid item sm={10}>
+                      <Grid container spacing={1}>
+                        <Grid item>
+                          <Image
+                            src={`${
+                              imageUrl
+                                ? imageUrl
+                                : 'https://via.placeholder.com/40x50'
+                            }`}
+                            width={40}
+                            height={50}
+                            quality={100}
+                            loading="eager"
+                            alt="product preview"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <Typography>
+                            {imageName.length > 20
+                              ? imageName.substring(0, 15) + '...'
+                              : imageName}
+                          </Typography>
+                          <Typography>{imageSize}</Typography>
+                        </Grid>
                       </Grid>
                     </Grid>
+                    <Grid item sm={2} style={{ textAlign: 'right' }}>
+                      <DeleteOutlinedIcon fontSize="small" />
+                    </Grid>
                   </Grid>
-                  <Grid item sm={2} style={{ textAlign: 'right' }}>
-                    <DeleteOutlinedIcon fontSize="small" />
-                  </Grid>
-                </Grid>
+                )}
               </Box>
             </Grid>
             <Grid item sm={6}>
