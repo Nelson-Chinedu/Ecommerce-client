@@ -21,6 +21,7 @@ import theme from 'src/components/Theme';
 import '../styles/pages.scss';
 
 import { UserContext } from 'src/components/context/userContext';
+import { ProductListProvider } from 'src/components/context/userProductList-context';
 
 import Snackbar from 'src/components/SharedLayout/Snackbar';
 
@@ -79,7 +80,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <MuiThemeProvider theme={theme}>
         <UserContext.Provider value={{ isLoggedIn }}>
           <ApolloProvider client={client}>
-            <Component {...pageProps} />
+            <ProductListProvider>
+              <Component {...pageProps} />
+            </ProductListProvider>
           </ApolloProvider>
         </UserContext.Provider>
       </MuiThemeProvider>

@@ -55,7 +55,7 @@ const Navbar: FunctionComponent<Props> = ({ handleChange, value }) => {
             <LinkTab label="Makeup" {...a11yProps(3)} />
             <LinkTab label="Hair Care" {...a11yProps(4)} />
             <LinkTab label="Skin care" {...a11yProps(5)} />
-            <LinkTab label="Brand shop" {...a11yProps(6)} />
+            <LinkTab label="Bags" {...a11yProps(6)} />
             <LinkTab label="Baby" {...a11yProps(7)} />
             <LinkTab label="Watches" {...a11yProps(8)} />
           </Tabs>
@@ -72,7 +72,7 @@ const Navbar: FunctionComponent<Props> = ({ handleChange, value }) => {
           <LinkTab label="Makeup" {...a11yProps(3)} />
           <LinkTab label="Hair Care" {...a11yProps(4)} />
           <LinkTab label="Skin care" {...a11yProps(5)} />
-          <LinkTab label="Brand shop" {...a11yProps(6)} />
+          <LinkTab label="Bags" {...a11yProps(6)} />
           <LinkTab label="Baby" {...a11yProps(7)} />
           <LinkTab label="Watches" {...a11yProps(8)} />
         </Tabs>

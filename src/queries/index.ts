@@ -178,3 +178,26 @@ export const FILE_UPLOAD = gql`
     }
   }
 `;
+
+export const GET_ALL_PRODUCTS = gql`
+  query ($take: Int, $skip: Int) {
+    public {
+      getProducts(take: $take, skip: $skip) {
+        products {
+          id
+          name
+          number
+          imageUrl
+          description
+          sizes
+          oldPrice
+          newPrice
+          colors
+          category
+          stock
+          tags
+        }
+      }
+    }
+  }
+`;

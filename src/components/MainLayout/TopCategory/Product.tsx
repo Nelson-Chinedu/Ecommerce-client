@@ -1,4 +1,4 @@
-import { FunctionComponent, useState, ChangeEvent } from 'react';
+import { FunctionComponent, useState, ChangeEvent, useContext } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { observer } from 'mobx-react-lite';
@@ -6,7 +6,7 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import FavouriteIconOutlined from '@material-ui/icons/FavoriteBorderOutlined';
-import FavouriteIcon from '@material-ui/icons/Favorite';
+// import FavouriteIcon from '@material-ui/icons/Favorite';
 
 import Navbar from 'src/components/MainLayout/TopCategory/Navbar';
 import { useStyles } from 'src/components/MainLayout/TopCategory/styled.topCategory';
@@ -14,14 +14,15 @@ import { useStyles } from 'src/components/MainLayout/TopCategory/styled.topCateg
 import Button from 'src/components/SharedLayout/Button';
 
 import { useStore } from 'src/store';
+import { ProductListContext } from 'src/components/context/userProductList-context';
 
-type Props = {
-  id: number;
-  imagePath: string;
-  productName: string;
-  productPrice: string;
-  favourite: boolean;
-};
+// type Props = {
+//   id: number;
+//   imagePath: string;
+//   productName: string;
+//   productPrice: string;
+//   favourite: boolean;
+// };
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -52,6 +53,7 @@ function TabPanel(props: TabPanelProps) {
 const Product: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const { uiStore } = useStore();
+  const { data } = useContext(ProductListContext);
   const [value, setValue] = useState(0);
 
   const handleAddFavourite = (e: any, index: number) => {
@@ -59,10 +61,10 @@ const Product: FunctionComponent<{}> = () => {
     uiStore.toggleFavouriteProduct(index);
   };
 
-  const handleRemoveFavourite = (e: any, index: number) => {
-    e.stopPropagation();
-    uiStore.toggleFavouriteProduct(index);
-  };
+  // const handleRemoveFavourite = (e: any, index: number) => {
+  //   e.stopPropagation();
+  //   uiStore.toggleFavouriteProduct(index);
+  // };
 
   const handleChange = (_event: ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
@@ -77,46 +79,47 @@ const Product: FunctionComponent<{}> = () => {
           spacing={3}
           style={{ margin: '2em auto', width: '90%' }}
         >
-          {uiStore.productItemsMen.map((productItem: Props, index: number) => (
-            <Link href="/product-detail" key={index}>
-              <Grid item sm={3} style={{ margin: '0px' }} key={index}>
-                <Grid container className={classes.productContainer}>
-                  <Box>
-                    <Image
-                      src={productItem.imagePath}
-                      objectFit="cover"
-                      loading="lazy"
-                      width={300}
-                      height={250}
-                    />
-                  </Box>
-                  <Grid
-                    container
-                    justify="space-between"
-                    style={{ padding: '10px 10px' }}
-                    alignItems="center"
-                  >
-                    <Grid item>
-                      <Typography>Boutique black solution</Typography>
-                      <Typography>$152.00</Typography>
-                    </Grid>
-                    <Grid item>
-                      {productItem.favourite ? (
-                        <FavouriteIcon
-                          className={classes.favouriteIcon}
-                          onClick={(e) => handleRemoveFavourite(e, index)}
-                        />
-                      ) : (
+          {data
+            .filter((product: any) => product.category.toLowerCase() === 'men')
+            .map((product: any, index: number) => (
+              <Link href={`/product-detail?q=${product.id}`} key={index}>
+                <Grid item sm={3} style={{ margin: '0px' }} key={index}>
+                  <Grid container className={classes.productContainer}>
+                    <Box>
+                      <Image
+                        src={`${
+                          product.imageUrl === null
+                            ? 'https://via.placeholder.com/40x50'
+                            : product.imageUrl
+                            ? product.imageUrl
+                            : 'https://via.placeholder.com/40x50'
+                        }`}
+                        objectFit="cover"
+                        loading="eager"
+                        width={300}
+                        height={250}
+                      />
+                    </Box>
+                    <Grid
+                      container
+                      justify="space-between"
+                      style={{ padding: '10px 10px' }}
+                      alignItems="center"
+                    >
+                      <Grid item>
+                        <Typography>{product.name}</Typography>
+                        <Typography>${product.newPrice}</Typography>
+                      </Grid>
+                      <Grid item>
                         <FavouriteIconOutlined
                           onClick={(e) => handleAddFavourite(e, index)}
                         />
-                      )}
+                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
-              </Grid>
-            </Link>
-          ))}
+              </Link>
+            ))}
           <Grid
             container
             alignItems="center"
@@ -142,16 +145,25 @@ const Product: FunctionComponent<{}> = () => {
           spacing={3}
           style={{ margin: '2em auto', width: '90%' }}
         >
-          {uiStore.productItemsWomen.map(
-            (productItem: Props, index: number) => (
+          {data
+            .filter(
+              (product: any) => product.category.toLowerCase() === 'women'
+            )
+            .map((product: any, index: number) => (
               <Link href="/product-detail" key={index}>
                 <Grid item sm={3} style={{ margin: '0px' }} key={index}>
                   <Grid container className={classes.productContainer}>
                     <Box>
                       <Image
-                        src={productItem.imagePath}
+                        src={`${
+                          product.imageUrl === null
+                            ? 'https://via.placeholder.com/40x50'
+                            : product.imageUrl
+                            ? product.imageUrl
+                            : 'https://via.placeholder.com/40x50'
+                        }`}
                         objectFit="cover"
-                        loading="lazy"
+                        loading="eager"
                         width={300}
                         height={250}
                       />
@@ -163,27 +175,19 @@ const Product: FunctionComponent<{}> = () => {
                       alignItems="center"
                     >
                       <Grid item>
-                        <Typography>Boutique black solution</Typography>
-                        <Typography>$152.00</Typography>
+                        <Typography>{product.name}</Typography>
+                        <Typography>${product.newPrice}</Typography>
                       </Grid>
                       <Grid item>
-                        {productItem.favourite ? (
-                          <FavouriteIcon
-                            className={classes.favouriteIcon}
-                            onClick={(e) => handleRemoveFavourite(e, index)}
-                          />
-                        ) : (
-                          <FavouriteIconOutlined
-                            onClick={(e) => handleAddFavourite(e, index)}
-                          />
-                        )}
+                        <FavouriteIconOutlined
+                          onClick={(e) => handleAddFavourite(e, index)}
+                        />
                       </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
               </Link>
-            )
-          )}
+            ))}
           <Grid
             container
             alignItems="center"
@@ -209,16 +213,25 @@ const Product: FunctionComponent<{}> = () => {
           spacing={3}
           style={{ margin: '2em auto', width: '90%' }}
         >
-          {uiStore.productItemsMakeup.map(
-            (productItem: Props, index: number) => (
+          {data
+            .filter(
+              (product: any) => product.category.toLowerCase() === 'makeup'
+            )
+            .map((product: any, index: number) => (
               <Link href="/product-detail" key={index}>
                 <Grid item sm={3} style={{ margin: '0px' }} key={index}>
                   <Grid container className={classes.productContainer}>
                     <Box>
                       <Image
-                        src={productItem.imagePath}
+                        src={`${
+                          product.imageUrl === null
+                            ? 'https://via.placeholder.com/40x50'
+                            : product.imageUrl
+                            ? product.imageUrl
+                            : 'https://via.placeholder.com/40x50'
+                        }`}
                         objectFit="cover"
-                        loading="lazy"
+                        loading="eager"
                         width={300}
                         height={250}
                       />
@@ -230,27 +243,19 @@ const Product: FunctionComponent<{}> = () => {
                       alignItems="center"
                     >
                       <Grid item>
-                        <Typography>Boutique black solution</Typography>
-                        <Typography>$152.00</Typography>
+                        <Typography>{product.name}</Typography>
+                        <Typography>${product.newPrice}</Typography>
                       </Grid>
                       <Grid item>
-                        {productItem.favourite ? (
-                          <FavouriteIcon
-                            className={classes.favouriteIcon}
-                            onClick={(e) => handleRemoveFavourite(e, index)}
-                          />
-                        ) : (
-                          <FavouriteIconOutlined
-                            onClick={(e) => handleAddFavourite(e, index)}
-                          />
-                        )}
+                        <FavouriteIconOutlined
+                          onClick={(e) => handleAddFavourite(e, index)}
+                        />
                       </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
               </Link>
-            )
-          )}
+            ))}
           <Grid
             container
             alignItems="center"
@@ -276,16 +281,25 @@ const Product: FunctionComponent<{}> = () => {
           spacing={3}
           style={{ margin: '2em auto', width: '90%' }}
         >
-          {uiStore.productItemsWomen.map(
-            (productItem: Props, index: number) => (
+          {data
+            .filter(
+              (product: any) => product.category.toLowerCase() === 'hair-care'
+            )
+            .map((product: any, index: number) => (
               <Link href="/product-detail" key={index}>
                 <Grid item sm={3} style={{ margin: '0px' }} key={index}>
                   <Grid container className={classes.productContainer}>
                     <Box>
                       <Image
-                        src={productItem.imagePath}
+                        src={`${
+                          product.imageUrl === null
+                            ? 'https://via.placeholder.com/40x50'
+                            : product.imageUrl
+                            ? product.imageUrl
+                            : 'https://via.placeholder.com/40x50'
+                        }`}
                         objectFit="cover"
-                        loading="lazy"
+                        loading="eager"
                         width={300}
                         height={250}
                       />
@@ -297,27 +311,19 @@ const Product: FunctionComponent<{}> = () => {
                       alignItems="center"
                     >
                       <Grid item>
-                        <Typography>Boutique black solution</Typography>
-                        <Typography>$152.00</Typography>
+                        <Typography>{product.name}</Typography>
+                        <Typography>${product.newPrice}</Typography>
                       </Grid>
                       <Grid item>
-                        {productItem.favourite ? (
-                          <FavouriteIcon
-                            className={classes.favouriteIcon}
-                            onClick={(e) => handleRemoveFavourite(e, index)}
-                          />
-                        ) : (
-                          <FavouriteIconOutlined
-                            onClick={(e) => handleAddFavourite(e, index)}
-                          />
-                        )}
+                        <FavouriteIconOutlined
+                          onClick={(e) => handleAddFavourite(e, index)}
+                        />
                       </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
               </Link>
-            )
-          )}
+            ))}
           <Grid
             container
             alignItems="center"
@@ -343,16 +349,25 @@ const Product: FunctionComponent<{}> = () => {
           spacing={3}
           style={{ margin: '2em auto', width: '90%' }}
         >
-          {uiStore.productItemsWomen.map(
-            (productItem: Props, index: number) => (
+          {data
+            .filter(
+              (product: any) => product.category.toLowerCase() === 'skin-care'
+            )
+            .map((product: any, index: number) => (
               <Link href="/product-detail" key={index}>
                 <Grid item sm={3} style={{ margin: '0px' }} key={index}>
                   <Grid container className={classes.productContainer}>
                     <Box>
                       <Image
-                        src={productItem.imagePath}
+                        src={`${
+                          product.imageUrl === null
+                            ? 'https://via.placeholder.com/40x50'
+                            : product.imageUrl
+                            ? product.imageUrl
+                            : 'https://via.placeholder.com/40x50'
+                        }`}
                         objectFit="cover"
-                        loading="lazy"
+                        loading="eager"
                         width={300}
                         height={250}
                       />
@@ -364,27 +379,19 @@ const Product: FunctionComponent<{}> = () => {
                       alignItems="center"
                     >
                       <Grid item>
-                        <Typography>Boutique black solution</Typography>
-                        <Typography>$152.00</Typography>
+                        <Typography>{product.name}</Typography>
+                        <Typography>${product.newPrice}</Typography>
                       </Grid>
                       <Grid item>
-                        {productItem.favourite ? (
-                          <FavouriteIcon
-                            className={classes.favouriteIcon}
-                            onClick={(e) => handleRemoveFavourite(e, index)}
-                          />
-                        ) : (
-                          <FavouriteIconOutlined
-                            onClick={(e) => handleAddFavourite(e, index)}
-                          />
-                        )}
+                        <FavouriteIconOutlined
+                          onClick={(e) => handleAddFavourite(e, index)}
+                        />
                       </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
               </Link>
-            )
-          )}
+            ))}
           <Grid
             container
             alignItems="center"
@@ -410,16 +417,23 @@ const Product: FunctionComponent<{}> = () => {
           spacing={3}
           style={{ margin: '2em auto', width: '90%' }}
         >
-          {uiStore.productItemsWomen.map(
-            (productItem: Props, index: number) => (
+          {data
+            .filter((product: any) => product.category.toLowerCase() === 'bags')
+            .map((product: any, index: number) => (
               <Link href="/product-detail" key={index}>
                 <Grid item sm={3} style={{ margin: '0px' }} key={index}>
                   <Grid container className={classes.productContainer}>
                     <Box>
                       <Image
-                        src={productItem.imagePath}
+                        src={`${
+                          product.imageUrl === null
+                            ? 'https://via.placeholder.com/40x50'
+                            : product.imageUrl
+                            ? product.imageUrl
+                            : 'https://via.placeholder.com/40x50'
+                        }`}
                         objectFit="cover"
-                        loading="lazy"
+                        loading="eager"
                         width={300}
                         height={250}
                       />
@@ -431,27 +445,19 @@ const Product: FunctionComponent<{}> = () => {
                       alignItems="center"
                     >
                       <Grid item>
-                        <Typography>Boutique black solution</Typography>
-                        <Typography>$152.00</Typography>
+                        <Typography>{product.name}</Typography>
+                        <Typography>${product.newPrice}</Typography>
                       </Grid>
                       <Grid item>
-                        {productItem.favourite ? (
-                          <FavouriteIcon
-                            className={classes.favouriteIcon}
-                            onClick={(e) => handleRemoveFavourite(e, index)}
-                          />
-                        ) : (
-                          <FavouriteIconOutlined
-                            onClick={(e) => handleAddFavourite(e, index)}
-                          />
-                        )}
+                        <FavouriteIconOutlined
+                          onClick={(e) => handleAddFavourite(e, index)}
+                        />
                       </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
               </Link>
-            )
-          )}
+            ))}
           <Grid
             container
             alignItems="center"
@@ -477,16 +483,23 @@ const Product: FunctionComponent<{}> = () => {
           spacing={3}
           style={{ margin: '2em auto', width: '90%' }}
         >
-          {uiStore.productItemsWomen.map(
-            (productItem: Props, index: number) => (
+          {data
+            .filter((product: any) => product.category.toLowerCase() === 'baby')
+            .map((product: any, index: number) => (
               <Link href="/product-detail" key={index}>
                 <Grid item sm={3} style={{ margin: '0px' }} key={index}>
                   <Grid container className={classes.productContainer}>
                     <Box>
                       <Image
-                        src={productItem.imagePath}
+                        src={`${
+                          product.imageUrl === null
+                            ? 'https://via.placeholder.com/40x50'
+                            : product.imageUrl
+                            ? product.imageUrl
+                            : 'https://via.placeholder.com/40x50'
+                        }`}
                         objectFit="cover"
-                        loading="lazy"
+                        loading="eager"
                         width={300}
                         height={250}
                       />
@@ -498,27 +511,19 @@ const Product: FunctionComponent<{}> = () => {
                       alignItems="center"
                     >
                       <Grid item>
-                        <Typography>Boutique black solution</Typography>
-                        <Typography>$152.00</Typography>
+                        <Typography>{product.name}</Typography>
+                        <Typography>${product.newPrice}</Typography>
                       </Grid>
                       <Grid item>
-                        {productItem.favourite ? (
-                          <FavouriteIcon
-                            className={classes.favouriteIcon}
-                            onClick={(e) => handleRemoveFavourite(e, index)}
-                          />
-                        ) : (
-                          <FavouriteIconOutlined
-                            onClick={(e) => handleAddFavourite(e, index)}
-                          />
-                        )}
+                        <FavouriteIconOutlined
+                          onClick={(e) => handleAddFavourite(e, index)}
+                        />
                       </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
               </Link>
-            )
-          )}
+            ))}
           <Grid
             container
             alignItems="center"
@@ -544,16 +549,25 @@ const Product: FunctionComponent<{}> = () => {
           spacing={3}
           style={{ margin: '2em auto', width: '90%' }}
         >
-          {uiStore.productItemsWomen.map(
-            (productItem: Props, index: number) => (
+          {data
+            .filter(
+              (product: any) => product.category.toLowerCase() === 'watches'
+            )
+            .map((product: any, index: number) => (
               <Link href="/product-detail" key={index}>
                 <Grid item sm={3} style={{ margin: '0px' }} key={index}>
                   <Grid container className={classes.productContainer}>
                     <Box>
                       <Image
-                        src={productItem.imagePath}
+                        src={`${
+                          product.imageUrl === null
+                            ? 'https://via.placeholder.com/40x50'
+                            : product.imageUrl
+                            ? product.imageUrl
+                            : 'https://via.placeholder.com/40x50'
+                        }`}
                         objectFit="cover"
-                        loading="lazy"
+                        loading="eager"
                         width={300}
                         height={250}
                       />
@@ -565,27 +579,19 @@ const Product: FunctionComponent<{}> = () => {
                       alignItems="center"
                     >
                       <Grid item>
-                        <Typography>Boutique black solution</Typography>
-                        <Typography>$152.00</Typography>
+                        <Typography>{product.name}</Typography>
+                        <Typography>${product.newPrice}</Typography>
                       </Grid>
                       <Grid item>
-                        {productItem.favourite ? (
-                          <FavouriteIcon
-                            className={classes.favouriteIcon}
-                            onClick={(e) => handleRemoveFavourite(e, index)}
-                          />
-                        ) : (
-                          <FavouriteIconOutlined
-                            onClick={(e) => handleAddFavourite(e, index)}
-                          />
-                        )}
+                        <FavouriteIconOutlined
+                          onClick={(e) => handleAddFavourite(e, index)}
+                        />
                       </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
               </Link>
-            )
-          )}
+            ))}
           <Grid
             container
             alignItems="center"
