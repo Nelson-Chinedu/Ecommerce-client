@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useState } from 'react';
 import { observer } from 'mobx-react-lite';
+// import { useRouter } from 'next/router';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -25,6 +26,7 @@ const ProductDetail: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const { uiStore } = useStore();
   const [active, setActive] = useState(null);
+  // const router = useRouter();
 
   const handleToggle = (id: number) => {
     setActive(id);
