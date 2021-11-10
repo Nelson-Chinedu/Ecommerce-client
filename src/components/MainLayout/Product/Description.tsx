@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useContext } from 'react';
 import Image from 'next/image';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -12,31 +12,45 @@ import Rating from 'src/components/SharedLayout/Rating';
 import Button from 'src/components/SharedLayout/Button';
 import TextInput from 'src/components/SharedLayout/TextInput';
 
-import { useStyles } from 'src/components/MainLayout/ProductDetail/styled.productDetail';
+import { useStyles } from 'src/components/MainLayout/Product/styled.productDetail';
 
-const colors: Array<string> = ['red', 'yellow', 'cyan', 'pink', 'purple'];
-const sizes: Array<string> = ['S', 'M', 'L', 'XL'];
+import { ProductPreviewContext } from 'src/components/context/productPreview-context';
 
 const Description: FunctionComponent<{}> = () => {
   const classes = useStyles();
+  const { data, loading } = useContext(ProductPreviewContext);
+
+  if (loading) return <Typography>loading...</Typography>;
+
+  const {
+    name,
+    description,
+    oldPrice,
+    newPrice,
+    imageUrl,
+    category,
+    colors,
+    sizes,
+  } = data;
 
   return (
     <Grid container direction="row" spacing={2} className={classes.root}>
       <Grid item sm={6}>
         <Image
-          src="/image/img.jpeg"
-          width="750px"
-          height="700px"
+          src={imageUrl ? imageUrl : '/image/img.jpeg'}
+          width="550px"
+          height="550px"
           quality={100}
           loading="eager"
-          alt="A girl holding a bag"
+          objectFit="cover"
+          alt="Product preview"
         />
       </Grid>
       <Grid container justify="space-between" item sm={6}>
         <Grid container alignItems="flex-start" justify="space-between">
           <Grid item>
             <Typography variant="h5">
-              <strong>Sweater &amp; Bag</strong>
+              <strong>{name}</strong>
             </Typography>
           </Grid>
           <Grid item>
@@ -54,12 +68,7 @@ const Description: FunctionComponent<{}> = () => {
         </Grid>
         <Grid container>
           <Grid item sm={12}>
-            <Typography variant="body2">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus
-              asperiores vero similique itaque quaerat beatae nemo, molestias
-              expedita nihil hic qui. Explicabo sapiente sint minima quisquam
-              voluptatibus molestiae? Consequatur, esse.
-            </Typography>
+            <Typography variant="body2">{description}</Typography>
           </Grid>
         </Grid>
         <Grid container>
@@ -68,17 +77,17 @@ const Description: FunctionComponent<{}> = () => {
               variant="subtitle1"
               component="span"
               color="primary"
-              className={classes.newPrice}
+              className={classes.oldPrice}
             >
-              $1800
+              {`$ ${oldPrice}`}
             </Typography>
             <Typography
               variant="subtitle1"
               component="span"
               color="secondary"
-              className={classes.oldPrice}
+              className={classes.newPrice}
             >
-              $2000
+              {`$ ${newPrice}`}
             </Typography>
           </Grid>
         </Grid>
@@ -145,22 +154,12 @@ const Description: FunctionComponent<{}> = () => {
           </Grid>
         </Grid>
         <Grid container className={classes.info}>
-          <Grid item sm={12}>
-            <Typography component="span" variant="body1">
-              Brand:
-            </Typography>
-            <Typography component="span" variant="body2">
-              Gucci
-            </Typography>
-          </Grid>
-        </Grid>
-        <Grid container className={classes.info}>
           <Grid item>
             <Typography component="span" variant="body1">
               Category:
             </Typography>
             <Typography component="span" variant="body2">
-              Young
+              {category}
             </Typography>
           </Grid>
         </Grid>
@@ -169,8 +168,8 @@ const Description: FunctionComponent<{}> = () => {
             <Typography component="span" variant="body1">
               Subtotal:
             </Typography>
-            <Typography component="span" color="primary" variant="body2">
-              $1800
+            <Typography component="span" color="secondary" variant="body2">
+              {`$ ${newPrice}`}
             </Typography>
           </Grid>
         </Grid>
@@ -187,9 +186,7 @@ const Description: FunctionComponent<{}> = () => {
             </Button>
           </Grid>
           <Grid item>
-            <FavouriteIconOutlined
-              fontSize="default"
-            />
+            <FavouriteIconOutlined fontSize="default" />
           </Grid>
         </Grid>
       </Grid>

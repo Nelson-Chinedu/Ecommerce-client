@@ -201,3 +201,23 @@ export const GET_ALL_PRODUCTS = gql`
     }
   }
 `;
+
+export const GET_PRODUCT_USER = gql`
+  query ($id: String!) {
+    public {
+      getProduct(id: $id) {
+        number
+        name
+        description
+        sizes
+        colors
+        category
+        stock
+        tags
+        oldPrice
+        newPrice
+        imageUrl
+      }
+    }
+  }
+`;

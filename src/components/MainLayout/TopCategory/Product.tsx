@@ -82,7 +82,13 @@ const Product: FunctionComponent<{}> = () => {
           {data
             .filter((product: any) => product.category.toLowerCase() === 'men')
             .map((product: any, index: number) => (
-              <Link href={`/product-detail?q=${product.id}`} key={index}>
+              <Link
+                href={`/product/${product.name
+                  .toLowerCase()
+                  .split(' ')
+                  .join('-')}-${product.number}`}
+                key={index}
+              >
                 <Grid item sm={3} style={{ margin: '0px' }} key={index}>
                   <Grid container className={classes.productContainer}>
                     <Box>
@@ -150,7 +156,13 @@ const Product: FunctionComponent<{}> = () => {
               (product: any) => product.category.toLowerCase() === 'women'
             )
             .map((product: any, index: number) => (
-              <Link href="/product-detail" key={index}>
+              <Link
+                href={`/product/${product.name
+                  .toLowerCase()
+                  .split(' ')
+                  .join('-')}-${product.number}`}
+                key={index}
+              >
                 <Grid item sm={3} style={{ margin: '0px' }} key={index}>
                   <Grid container className={classes.productContainer}>
                     <Box>
@@ -218,7 +230,13 @@ const Product: FunctionComponent<{}> = () => {
               (product: any) => product.category.toLowerCase() === 'makeup'
             )
             .map((product: any, index: number) => (
-              <Link href="/product-detail" key={index}>
+              <Link
+                href={`/product/${product.name
+                  .toLowerCase()
+                  .split(' ')
+                  .join('-')}-${product.number}`}
+                key={index}
+              >
                 <Grid item sm={3} style={{ margin: '0px' }} key={index}>
                   <Grid container className={classes.productContainer}>
                     <Box>
@@ -286,7 +304,13 @@ const Product: FunctionComponent<{}> = () => {
               (product: any) => product.category.toLowerCase() === 'hair-care'
             )
             .map((product: any, index: number) => (
-              <Link href="/product-detail" key={index}>
+              <Link
+                href={`/product/${product.name
+                  .toLowerCase()
+                  .split(' ')
+                  .join('-')}-${product.number}`}
+                key={index}
+              >
                 <Grid item sm={3} style={{ margin: '0px' }} key={index}>
                   <Grid container className={classes.productContainer}>
                     <Box>
@@ -354,7 +378,13 @@ const Product: FunctionComponent<{}> = () => {
               (product: any) => product.category.toLowerCase() === 'skin-care'
             )
             .map((product: any, index: number) => (
-              <Link href="/product-detail" key={index}>
+              <Link
+                href={`/product/${product.name
+                  .toLowerCase()
+                  .split(' ')
+                  .join('-')}-${product.number}`}
+                key={index}
+              >
                 <Grid item sm={3} style={{ margin: '0px' }} key={index}>
                   <Grid container className={classes.productContainer}>
                     <Box>
@@ -420,7 +450,13 @@ const Product: FunctionComponent<{}> = () => {
           {data
             .filter((product: any) => product.category.toLowerCase() === 'bags')
             .map((product: any, index: number) => (
-              <Link href="/product-detail" key={index}>
+              <Link
+                href={`/product/${product.name
+                  .toLowerCase()
+                  .split(' ')
+                  .join('-')}-${product.number}`}
+                key={index}
+              >
                 <Grid item sm={3} style={{ margin: '0px' }} key={index}>
                   <Grid container className={classes.productContainer}>
                     <Box>
@@ -486,7 +522,13 @@ const Product: FunctionComponent<{}> = () => {
           {data
             .filter((product: any) => product.category.toLowerCase() === 'baby')
             .map((product: any, index: number) => (
-              <Link href="/product-detail" key={index}>
+              <Link
+                href={`/product/${product.name
+                  .toLowerCase()
+                  .split(' ')
+                  .join('-')}-${product.number}`}
+                key={index}
+              >
                 <Grid item sm={3} style={{ margin: '0px' }} key={index}>
                   <Grid container className={classes.productContainer}>
                     <Box>
@@ -554,7 +596,13 @@ const Product: FunctionComponent<{}> = () => {
               (product: any) => product.category.toLowerCase() === 'watches'
             )
             .map((product: any, index: number) => (
-              <Link href="/product-detail" key={index}>
+              <Link
+                href={`/product/${product.name
+                  .toLowerCase()
+                  .split(' ')
+                  .join('-')}-${product.number}`}
+                key={index}
+              >
                 <Grid item sm={3} style={{ margin: '0px' }} key={index}>
                   <Grid container className={classes.productContainer}>
                     <Box>
