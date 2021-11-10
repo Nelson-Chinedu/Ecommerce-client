@@ -1,6 +1,5 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useState, useContext } from 'react';
 import { observer } from 'mobx-react-lite';
-// import { useRouter } from 'next/router';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -16,9 +15,11 @@ import Footer from 'src/components/SharedLayout/Footer';
 
 import { productDetails } from 'src/components/constant/productDetails';
 
-import Description from 'src/components/MainLayout/ProductDetail/Description';
-import { useStyles } from 'src/components/MainLayout/ProductDetail/styled.productDetail';
+import Description from 'src/components/MainLayout/Product/Description';
+import { useStyles } from 'src/components/MainLayout/Product/styled.productDetail';
 import { Props } from 'src/components/constant/productDetails';
+
+import { ProductPreviewContext } from 'src/components/context/productPreview-context';
 
 import { useStore } from 'src/store';
 
@@ -26,12 +27,13 @@ const ProductDetail: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const { uiStore } = useStore();
   const [active, setActive] = useState(null);
-  // const router = useRouter();
+  const { data } = useContext(ProductPreviewContext);
 
   const handleToggle = (id: number) => {
     setActive(id);
     uiStore.toggleAccordion();
   };
+  if (data === null) return <Typography>You seem to be lost</Typography>;
   return (
     <>
       <Navigation />

@@ -7,12 +7,15 @@ export const useStyles = makeStyles((theme: Theme) => ({
     '& .MuiAccordionDetails-root': {
       padding: '8px 0px',
     },
+    '& .MuiTypography-h5': {
+      textTransform: 'capitalize',
+    },
   },
   newPrice: {
-    marginRight: '.5em',
     fontWeight: 600,
   },
   oldPrice: {
+    marginRight: '.5em',
     textDecoration: 'line-through',
   },
   preference: {
