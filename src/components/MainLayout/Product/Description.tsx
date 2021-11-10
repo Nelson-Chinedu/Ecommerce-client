@@ -16,9 +16,6 @@ import { useStyles } from 'src/components/MainLayout/Product/styled.productDetai
 
 import { ProductPreviewContext } from 'src/components/context/productPreview-context';
 
-const colors: Array<string> = ['red', 'yellow', 'cyan', 'pink', 'purple'];
-const sizes: Array<string> = ['S', 'M', 'L', 'XL'];
-
 const Description: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const { data, loading } = useContext(ProductPreviewContext);
