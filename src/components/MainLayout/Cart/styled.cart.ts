@@ -15,6 +15,15 @@ export const useStyles = makeStyles((theme: Theme) => ({
         padding: '2px 0px',
       },
     },
+    '& .MuiButton-outlined': {
+      borderRadius: '0px',
+      '& > *': {
+        padding: '2px 0px',
+      },
+    },
+    '& .MuiTypography-subtitle1': {
+      fontWeight: 500,
+    },
   },
   wrapper: {
     border: `1px solid ${theme.palette.secondary.main}`,
@@ -25,10 +34,16 @@ export const useStyles = makeStyles((theme: Theme) => ({
   },
   action: {
     color: theme.palette.primary.main,
+    cursor: 'pointer',
   },
   container: {
     marginTop: '1em',
     marginBottom: '1em',
     padding: '0px 2em',
+  },
+  emptyCart: {
+    width: '50%',
+    margin: '5em auto',
+    textAlign: 'center',
   },
 }));

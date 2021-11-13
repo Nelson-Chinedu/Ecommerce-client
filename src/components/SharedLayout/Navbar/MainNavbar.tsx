@@ -81,7 +81,8 @@ const Index: FunctionComponent<{}> = () => {
   };
 
   const handleLogout = () => {
-    localStorage.clear();
+    localStorage.removeItem('__clu');
+    localStorage.removeItem('__cnt');
     router.push('/');
   };
 
