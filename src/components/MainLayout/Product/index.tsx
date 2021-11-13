@@ -23,11 +23,26 @@ import { ProductPreviewContext } from 'src/components/context/productPreview-con
 
 import { useStore } from 'src/store';
 
+interface IContext {
+  data: {
+    name: string;
+    number: number;
+    description: string;
+    oldPrice: string;
+    newPrice: string;
+    imageUrl: string;
+    category: string;
+    colors: string[];
+    sizes: string[];
+  };
+  loading: boolean;
+}
+
 const ProductDetail: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const { uiStore } = useStore();
-  const [active, setActive] = useState(null);
-  const { data } = useContext(ProductPreviewContext);
+  const [active, setActive] = useState<number>(null);
+  const { data } = useContext<IContext>(ProductPreviewContext);
 
   const handleToggle = (id: number) => {
     setActive(id);

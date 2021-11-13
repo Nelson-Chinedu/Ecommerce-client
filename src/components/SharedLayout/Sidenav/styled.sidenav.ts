@@ -25,6 +25,11 @@ export const useStyles = makeStyles((theme: Theme) => ({
       border: `2px solid ${theme.palette.secondary.main}`,
     },
   },
+  item: {
+    '& > *': {
+      padding: '.2em 0px',
+    },
+  },
   btnCheckout: {
     '& .MuiButton-label': {
       color: 'white',

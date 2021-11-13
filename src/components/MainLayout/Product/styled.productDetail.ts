@@ -10,6 +10,12 @@ export const useStyles = makeStyles((theme: Theme) => ({
     '& .MuiTypography-h5': {
       textTransform: 'capitalize',
     },
+    '& .selectedSize': {
+      background: 'red',
+    },
+    '& .selectedColor': {
+      border: `2px solid ${theme.palette.secondary.main}`,
+    },
   },
   newPrice: {
     fontWeight: 600,
@@ -47,6 +53,10 @@ export const useStyles = makeStyles((theme: Theme) => ({
     '&:hover': {
       border: `2px solid ${theme.palette.secondary.main}`,
       padding: '10px 40px',
+      background: theme.palette.secondary.main,
+      '& > *': {
+        color: 'white',
+      },
     },
   },
   divider: {
