@@ -1,4 +1,5 @@
-import { action, makeAutoObservable } from 'mobx';
+import { action, makeAutoObservable, toJS } from 'mobx';
+import store from 'store';
 import {
   productItemsMen,
   productItemWomen,
@@ -13,6 +14,16 @@ type ProductItemsWomen = typeof productItemsMen[number];
 type ProductItemsMakeup = typeof productItemsMen[number];
 type ProductLists = typeof productLists[number];
 type OrderLists = typeof orderList[number];
+
+interface IProduct {
+  itemId: number;
+  itemName: string;
+  itemPrice: string | number;
+  itemImage: string;
+  itemQty: string;
+  itemSize: string;
+  itemColor: string;
+}
 
 export class UIStore {
   productItemsMen: ProductItemsMen[] = productItemsMen;
@@ -34,6 +45,8 @@ export class UIStore {
   serverMessage: string = '';
   snackbarSeverity: 'success' | 'error' = undefined;
   showSnackbar: boolean = false;
+  carts: object[] = [];
+  cartItems: any = store.get('cart') || [];
 
   constructor() {
     makeAutoObservable(this);
@@ -109,5 +122,22 @@ export class UIStore {
   loggedIn() {
     this.isLoggedIn = !this.isLoggedIn;
     return this.isLoggedIn;
+  }
+
+  @action
+  addToCart(product: IProduct) {
+    this.carts = this.cartItems;
+    const newProduct = [product];
+    this.carts.push(newProduct);
+    store.set('cart', this.carts);
+  }
+
+  @action
+  handleRemoveFromCart(id: number) {
+    this.cartItems = this.cartItems;
+    const carts = toJS(this.cartItems).flat();
+    const cart = carts.filter((cart: { itemId: number }) => cart.itemId !== id);
+    store.set('cart', cart);
+    this.cartItems = cart;
   }
 }

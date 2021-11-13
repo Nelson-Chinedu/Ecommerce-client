@@ -11,15 +11,21 @@ export const ProductPreviewContext = createContext({
 });
 
 export const ProductPreviewProvider = ({ children }: any) => {
-  const [productID, setProductID] = useState('');
+  const [productID, setProductID] = useState<string>('');
   const {
     query: { index: product },
   }: any = useRouter();
 
   useEffect(() => {
-    const splitProduct = product?.split('-');
-    const id = splitProduct[splitProduct?.length - 1];
-    setProductID(id);
+    let isMounted = true;
+    if (isMounted) {
+      const splitProduct = product?.split('-');
+      const id: string | undefined = splitProduct[splitProduct?.length - 1];
+      setProductID(id);
+    }
+    return () => {
+      isMounted = false;
+    };
   }, [product]);
 
   const { data, loading } = useQuery(GET_PRODUCT_USER, {

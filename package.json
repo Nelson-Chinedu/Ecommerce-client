@@ -22,6 +22,7 @@
     "dotenv-webpack": "^7.0.3",
     "filesize": "^8.0.6",
     "formik": "^2.2.9",
+    "framer-motion": "^5.2.1",
     "graphql": "^15.5.3",
     "mobx": "^6.3.2",
     "mobx-react-lite": "^3.2.0",

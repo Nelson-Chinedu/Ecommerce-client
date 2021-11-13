@@ -35,6 +35,7 @@ const useStyles = makeStyles({
   },
   popoverLink: {
     padding: '.8em 0px',
+    cursor: 'pointer',
     '& a': {
       textDecoration: 'none',
       '&:hover': {
@@ -49,11 +50,10 @@ const useStyles = makeStyles({
 
 const Index: FunctionComponent<{}> = () => {
   const { uiStore } = useStore();
-  const { isLoggedIn } = useContext(UserContext);
+  const { isLoggedIn } = useContext<any>(UserContext);
   const router = useRouter();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-  const withoutUserProfile = ['/', '/auth/login', '/auth/signup'];
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
@@ -78,6 +78,11 @@ const Index: FunctionComponent<{}> = () => {
   const handleHome = () => {
     const path = isLoggedIn ? '/app/c' : '/';
     router.push(path);
+  };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    router.push('/');
   };
 
   return (
@@ -118,14 +123,14 @@ const Index: FunctionComponent<{}> = () => {
                 aria-label="search"
                 onClick={() => _handleOpenSideNav('right')}
               >
-                <Badge badgeContent={3} color="primary">
+                <Badge badgeContent={uiStore.cartItems.length} color="primary">
                   <ShoppingBasketOutlinedIcon fontSize="small" />
                 </Badge>
               </IconButton>
             </Grid>
             <Grid item>
               <Grid container alignItems="center" justify="center" spacing={0}>
-                {withoutUserProfile.includes(router.pathname) ? (
+                {!isLoggedIn ? (
                   <Grid item>
                     <IconButton onClick={handleAuthLogin}>
                       <PersonOutlinedIcon fontSize="small" />
@@ -182,8 +187,12 @@ const Index: FunctionComponent<{}> = () => {
         {/* <Typography variant="subtitle2" className={classes.popoverLink}>
           <Link href="/">Coupon Code</Link>
         </Typography> */}
-        <Typography variant="subtitle2" className={classes.popoverLink}>
-          <Link href="/">Logout</Link>
+        <Typography
+          variant="subtitle2"
+          className={classes.popoverLink}
+          onClick={handleLogout}
+        >
+          Logout
         </Typography>
       </Popover>
     </>

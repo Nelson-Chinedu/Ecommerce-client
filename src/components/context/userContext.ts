@@ -1,3 +1,7 @@
 import { createContext } from 'react';
 
-export const UserContext = createContext({ isLoggedIn: null });
+interface IContext {
+  isLoggedIn: boolean;
+}
+
+export const UserContext = createContext<IContext>({ isLoggedIn: null });

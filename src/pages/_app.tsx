@@ -35,7 +35,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const { uiStore } = useStore();
 
   const token = store.get('__cnt');
-  const isLoggedIn = store.get('__clu');
+  const isLoggedIn: boolean = store.get('__clu');
 
   const authMiddleware = new ApolloLink((operation, forward) => {
     operation.setContext(({ headers = {} }) => ({

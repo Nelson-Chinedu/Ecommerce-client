@@ -1,4 +1,6 @@
-import React, { FunctionComponent, useContext } from 'react';
+import React, { FunctionComponent, useContext, useState } from 'react';
+import { toJS } from 'mobx';
+import { observer } from 'mobx-react-lite';
 import Image from 'next/image';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -8,6 +10,8 @@ import Divider from '@material-ui/core/Divider';
 import MenuItem from '@material-ui/core/MenuItem';
 import FavouriteIconOutlined from '@material-ui/icons/FavoriteBorderOutlined';
 
+import { useStore } from 'src/store';
+
 import Rating from 'src/components/SharedLayout/Rating';
 import Button from 'src/components/SharedLayout/Button';
 import TextInput from 'src/components/SharedLayout/TextInput';
@@ -16,14 +20,34 @@ import { useStyles } from 'src/components/MainLayout/Product/styled.productDetai
 
 import { ProductPreviewContext } from 'src/components/context/productPreview-context';
 
+interface IContext {
+  data: {
+    name: string;
+    number: number;
+    description: string;
+    oldPrice: string | number;
+    newPrice: string | number;
+    imageUrl: string;
+    category: string;
+    colors: string[];
+    sizes: string[];
+  };
+  loading: boolean;
+}
+
 const Description: FunctionComponent<{}> = () => {
   const classes = useStyles();
-  const { data, loading } = useContext(ProductPreviewContext);
+  const { uiStore } = useStore();
+  const { data, loading } = useContext<IContext>(ProductPreviewContext);
+  const [isSelectedSize, setIsSelectedSize] = useState<string>('');
+  const [isSelectedColor, setIsSelectedColor] = useState<string>('');
+  const [isSelectedQty, setIsSelectedQty] = useState<string>('');
 
   if (loading) return <Typography>loading...</Typography>;
 
   const {
     name,
+    number,
     description,
     oldPrice,
     newPrice,
@@ -32,6 +56,53 @@ const Description: FunctionComponent<{}> = () => {
     colors,
     sizes,
   } = data;
+
+  const cartItems = toJS(uiStore.cartItems).flat();
+  const filteredItem = cartItems.filter(
+    (item: { itemId: number }) => item.itemId === number
+  );
+
+  const handleSize = (size: string) => {
+    setIsSelectedSize(size);
+  };
+
+  const handleColor = (color: string) => {
+    setIsSelectedColor(color);
+  };
+
+  const handleQuantity = (e: { target: { value: string } }) => {
+    setIsSelectedQty(e.target.value);
+  };
+  const handleAddToCart = () => {
+    if (filteredItem.length) return;
+
+    if (!isSelectedSize || !isSelectedQty || !isSelectedColor) {
+      uiStore.serverMessage = 'Product Size, Quantity and Color is required';
+      uiStore.snackbarSeverity = 'error';
+      uiStore.showSnackbar = true;
+    } else {
+      const product = {
+        itemId: number,
+        itemName: name,
+        itemPrice: newPrice,
+        itemImage: imageUrl,
+        itemQty: isSelectedQty,
+        itemSize: isSelectedSize,
+        itemColor: isSelectedColor,
+      };
+      uiStore.addToCart(product);
+      uiStore.serverMessage = 'Product added to cart';
+      uiStore.snackbarSeverity = 'success';
+      uiStore.showSnackbar = true;
+    }
+  };
+
+  const handleRemoveFromCart = () => {
+    uiStore.handleRemoveFromCart(number);
+    uiStore.serverMessage = 'Product removed from cart';
+    uiStore.snackbarSeverity = 'success';
+    uiStore.showSnackbar = true;
+  };
 
   return (
     <Grid container direction="row" spacing={2} className={classes.root}>
@@ -107,6 +178,8 @@ const Description: FunctionComponent<{}> = () => {
                   color="secondary"
                   key={index}
                   fullWidth={true}
+                  onClick={() => handleSize(size)}
+                  className={isSelectedSize === size ? 'selectedSize' : ''}
                 >
                   {size}
                 </Button>
@@ -120,13 +193,16 @@ const Description: FunctionComponent<{}> = () => {
             {colors.map((color: string, index: number) => (
               <Box
                 key={index}
+                className={isSelectedColor === color ? 'selectedColor' : ''}
                 style={{
                   backgroundColor: `${color}`,
                   width: '25px',
                   height: '25px',
                   display: 'inline-block',
                   marginRight: '10px',
+                  cursor: 'pointer',
                 }}
+                onClick={() => handleColor(color)}
               />
             ))}
           </Grid>
@@ -140,16 +216,18 @@ const Description: FunctionComponent<{}> = () => {
               select
               variant="outlined"
               fullWidth={false}
-              defaultValue="qty1"
+              defaultValue="choose"
               size="small"
               color="secondary"
               type="text"
+              onChange={(e: { target: { value: string } }) => handleQuantity(e)}
             >
-              <MenuItem value="qty1">QNT: 1</MenuItem>
-              <MenuItem value="qty2">QNT: 2</MenuItem>
-              <MenuItem value="qty3">QNT: 3</MenuItem>
-              <MenuItem value="qty4">QNT: 4</MenuItem>
-              <MenuItem value="qty5">QNT: 5</MenuItem>
+              <MenuItem value="choose">Choose QTY</MenuItem>
+              <MenuItem value="1">QNT: 1</MenuItem>
+              <MenuItem value="2">QNT: 2</MenuItem>
+              <MenuItem value="3">QNT: 3</MenuItem>
+              <MenuItem value="4">QNT: 4</MenuItem>
+              <MenuItem value="5">QNT: 5</MenuItem>
             </TextInput>
           </Grid>
         </Grid>
@@ -181,8 +259,11 @@ const Description: FunctionComponent<{}> = () => {
               disableElevation={true}
               className={classes.btnAdd}
               fullWidth={true}
+              onClick={
+                filteredItem.length ? handleRemoveFromCart : handleAddToCart
+              }
             >
-              Add to cart
+              {filteredItem.length ? 'Remove from cart' : 'Add to cart'}
             </Button>
           </Grid>
           <Grid item>
@@ -194,4 +275,4 @@ const Description: FunctionComponent<{}> = () => {
   );
 };
 
-export default Description;
+export default observer(Description);
