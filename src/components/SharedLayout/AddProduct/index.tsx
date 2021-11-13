@@ -223,14 +223,13 @@ const AddProduct: FunctionComponent<{}> = () => {
   const handleFileUpload = (e: any) => {
     setIsImage(true);
     if (!e.target.files) return;
-    console.log(e.target.files[0]);
     const trimmedImage = removeImageExtension(e.target.files[0].name);
     setImageName(trimmedImage);
     const size = fileSize(e.target.files[0].size);
     setImageSize(size);
     fileUpload({ variables: { file: e.target.files[0] } });
   };
-  console.log(imageUrl);
+
   return (
     <React.Fragment>
       <Modal>

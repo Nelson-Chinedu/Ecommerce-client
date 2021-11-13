@@ -135,7 +135,6 @@ export class UIStore {
   @action
   handleRemoveFromCart(id: number) {
     this.cartItems = this.cartItems;
-    console.log(this.cartItems);
     const carts = toJS(this.cartItems).flat();
     const cart = carts.filter((cart: { itemId: number }) => cart.itemId !== id);
     store.set('cart', cart);
