@@ -1,6 +1,8 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useContext } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { toJS } from 'mobx';
+import NumberFormat from 'react-number-format';
 import { observer } from 'mobx-react-lite';
 import Link from 'next/link';
 import Divider from '@material-ui/core/Divider';
@@ -15,9 +17,12 @@ import { useStore } from 'src/store';
 
 import TextInput from 'src/components/SharedLayout/TextInput';
 import Drawer from 'src/components/SharedLayout/Drawer';
+import Button from 'src/components/SharedLayout/Button';
 import { useStyles } from 'src/components/SharedLayout/Sidenav/styled.sidenav';
 
 import { sidenavLinks } from 'src/components/constant/sidenav';
+
+import { UserContext } from 'src/components/context/userContext';
 
 interface IProps {
   imageUrl: string;
@@ -30,6 +35,8 @@ interface IProps {
 const Sidenav: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const { uiStore } = useStore();
+  const router = useRouter();
+  const { isLoggedIn } = useContext(UserContext);
 
   const cartItems: Array<IProps> = toJS(uiStore.cartItems).flat();
 
@@ -38,6 +45,15 @@ const Sidenav: FunctionComponent<{}> = () => {
     uiStore.serverMessage = 'Product removed from cart';
     uiStore.snackbarSeverity = 'success';
     uiStore.showSnackbar = true;
+  };
+
+  const handleProceed = () => {
+    if (isLoggedIn) {
+      router.push('/checkout');
+    } else {
+      uiStore.toggleSideNav();
+      router.push('/auth/login?return_url=%2fcheckout');
+    }
   };
 
   if (uiStore.anchorPosition === 'left') {
@@ -78,7 +94,15 @@ const Sidenav: FunctionComponent<{}> = () => {
       <Box className={classes.root}>
         <Drawer anchorPosition={uiStore.anchorPosition}>
           {uiStore.cartItems.length === 0 ? (
-            <Typography>No item added to cart</Typography>
+            <Box className={classes.emptyCart}>
+              <Image
+                src="/image/shopping-cart.png"
+                width={80}
+                height={80}
+                alt="empty cart"
+              />
+              <Typography variant="subtitle2">No item added to cart</Typography>
+            </Box>
           ) : (
             cartItems.map((item: IProps, index: number) => (
               <React.Fragment key={index}>
@@ -102,7 +126,7 @@ const Sidenav: FunctionComponent<{}> = () => {
                       <Grid item className={classes.item}>
                         <Typography variant="body2">{item.itemName}</Typography>
                         <Typography variant="body2">
-                          {item.itemQty} x {`N ${item.itemPrice}`}
+                          {item.itemQty} x &#8358;{`${item.itemPrice}`}
                         </Typography>
                         <TextInput
                           disabled={true}
@@ -134,6 +158,55 @@ const Sidenav: FunctionComponent<{}> = () => {
                 </Grid>
               </React.Fragment>
             ))
+          )}
+          {uiStore.cartItems.length !== 0 && (
+            <Grid container>
+              <Grid
+                container
+                alignItems="center"
+                justify="center"
+                style={{ margin: '.5em 0px' }}
+              >
+                <Grid item>
+                  <Typography variant="subtitle2">
+                    <strong>
+                      Subtotal &#8358;
+                      <NumberFormat
+                        value={uiStore.productPrice.toFixed(2)}
+                        displayType="text"
+                        thousandSeparator={true}
+                      />
+                    </strong>
+                  </Typography>
+                </Grid>
+              </Grid>
+              <Grid container spacing={2} alignItems="center" justify="center">
+                <Grid item sm={6}>
+                  <Button
+                    variant="outlined"
+                    fullWidth={true}
+                    color="secondary"
+                    disableElevation={true}
+                    className={classes.btnViewCart}
+                    href="/cart/overview"
+                  >
+                    View Cart
+                  </Button>
+                </Grid>
+                <Grid item sm={6}>
+                  <Button
+                    variant="contained"
+                    fullWidth={true}
+                    color="secondary"
+                    disableElevation={true}
+                    className={classes.btnCheckout}
+                    onClick={handleProceed}
+                  >
+                    Checkout
+                  </Button>
+                </Grid>
+              </Grid>
+            </Grid>
           )}
         </Drawer>
       </Box>

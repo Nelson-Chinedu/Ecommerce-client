@@ -35,4 +35,11 @@ export const useStyles = makeStyles((theme: Theme) => ({
       color: 'white',
     },
   },
+  emptyCart: {
+    textAlign: 'center',
+    margin: '5em 0px',
+    '& .MuiTypography-subtitle2': {
+      margin: '1.5em 0px',
+    },
+  },
 }));

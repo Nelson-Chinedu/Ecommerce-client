@@ -39,7 +39,7 @@
     background-position: bottom;
     background-repeat: no-repeat;
     background-size: cover;
-    object-fit: contain;
+    object-fit: cover;
     height: 500px;
     width: 100%;
     z-index: -999999;
@@ -80,7 +80,7 @@
   .banner-checkout-desc {
     position: relative;
     clip-path: polygon(0 0, 100% 27%, 100% 71%, 0% 100%);
-    background-color: #307a7e;
+    background-color: #2d66a5;
     color: white;
     padding: 6em 2em;
     text-align: center;

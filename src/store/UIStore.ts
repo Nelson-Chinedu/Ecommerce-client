@@ -58,6 +58,16 @@ export class UIStore {
     }, 0);
   }
 
+  get productPrice() {
+    const products = toJS(this.cartItems).flat();
+    return products.reduce(
+      (prev: number, curr: { itemPrice: number; itemQty: number }) => {
+        return Number(prev) + Number(curr.itemPrice) * Number(curr.itemQty);
+      },
+      0
+    );
+  }
+
   @action
   toggleFavouriteProduct(index: number) {
     this.productItemsMen = [
