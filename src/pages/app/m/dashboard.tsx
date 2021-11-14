@@ -23,7 +23,7 @@ const Dashboard = dynamic(
         </Grid>
       </Grid>
     ),
-    ssr: false,
+    // ssr: false,
   }
 );
 

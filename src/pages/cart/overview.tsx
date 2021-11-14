@@ -19,7 +19,7 @@ const Cart = dynamic(() => import('src/components/MainLayout/Cart'), {
       </Box>
     </Box>
   ),
-  ssr: false,
+  // ssr: false,
 });
 
 const CartPage: FunctionComponent<{}> = () => {

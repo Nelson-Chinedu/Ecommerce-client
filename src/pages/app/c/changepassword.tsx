@@ -26,7 +26,7 @@ const ChangePassword = dynamic(
         </Box>
       </Box>
     ),
-    ssr: false,
+    // ssr: false,
   }
 );
 

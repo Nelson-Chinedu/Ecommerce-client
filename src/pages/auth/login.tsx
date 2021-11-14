@@ -17,7 +17,7 @@ const Login = dynamic(() => import('src/components/AuthLayout/Login'), {
       <Typography>page loading...</Typography>
     </Box>
   ),
-  ssr: false,
+  // ssr: false,
 });
 
 const LoginPage = () => {

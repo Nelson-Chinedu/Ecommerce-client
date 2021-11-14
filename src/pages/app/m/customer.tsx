@@ -23,7 +23,7 @@ const Customer = dynamic(
         </Grid>
       </Grid>
     ),
-    ssr: false,
+    // ssr: false,
   }
 );
 

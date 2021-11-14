@@ -21,7 +21,7 @@ const Order = dynamic(() => import('src/components/AppLayout/Merchant/Order'), {
       </Grid>
     </Grid>
   ),
-  ssr: false,
+  // ssr: false,
 });
 
 const OrderPage = () => {

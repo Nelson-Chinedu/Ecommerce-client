@@ -32,7 +32,7 @@ const Cart: FunctionComponent<{}> = () => {
         ) : (
           <>
             <Typography variant="h4">
-              <strong>Your Cart</strong>
+              <strong>Shopping Cart</strong>
             </Typography>
             <Box className={classes.wrapper}>
               <CartTable />

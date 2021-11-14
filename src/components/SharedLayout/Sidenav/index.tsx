@@ -25,7 +25,7 @@ import { sidenavLinks } from 'src/components/constant/sidenav';
 import { UserContext } from 'src/components/context/userContext';
 
 interface IProps {
-  imageUrl: string;
+  itemImage: string;
   itemId: number;
   itemQty: string;
   itemName: string;
@@ -49,6 +49,7 @@ const Sidenav: FunctionComponent<{}> = () => {
 
   const handleProceed = () => {
     if (isLoggedIn) {
+      uiStore.toggleSideNav();
       router.push('/checkout');
     } else {
       uiStore.toggleSideNav();
@@ -109,7 +110,7 @@ const Sidenav: FunctionComponent<{}> = () => {
                 <Grid container direction="row" spacing={2}>
                   <Grid item xs={5}>
                     <Image
-                      src={item.imageUrl ? item.imageUrl : '/image/img.jpeg'}
+                      src={item.itemImage ? item.itemImage : '/image/img.jpeg'}
                       width={250}
                       height={250}
                       objectFit="cover"

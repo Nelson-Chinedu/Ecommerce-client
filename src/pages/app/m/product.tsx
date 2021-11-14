@@ -24,7 +24,7 @@ const Product = dynamic(
         </Grid>
       </Grid>
     ),
-    ssr: false,
+    // ssr: false,
   }
 );
 
