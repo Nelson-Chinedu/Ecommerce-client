@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { observer } from 'mobx-react-lite';
 import Avatar from '@material-ui/core/Avatar';
+import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Popover from '@material-ui/core/Popover';
 import SearchIcon from '@material-ui/icons/SearchOutlined';
@@ -139,18 +140,19 @@ const Index: FunctionComponent<{}> = () => {
                   </Grid>
                 ) : (
                   <>
-                    <Grid item className={classes.user}>
-                      <Avatar src="/image/man6.jpg" />
-                    </Grid>
-                    <Grid item>
-                      <IconButton
-                        onClick={handleOpen}
-                        disableRipple
-                        size="small"
-                      >
-                        <ExpandMoreIcon style={{ cursor: 'pointer' }} />
-                      </IconButton>
-                    </Grid>
+                    <Box
+                      onClick={handleOpen}
+                      style={{ display: 'flex', cursor: 'pointer' }}
+                    >
+                      <Grid item className={classes.user}>
+                        <Avatar src="/image/man6.jpg" />
+                      </Grid>
+                      <Grid item>
+                        <IconButton disableRipple size="small">
+                          <ExpandMoreIcon />
+                        </IconButton>
+                      </Grid>
+                    </Box>
                   </>
                 )}
               </Grid>

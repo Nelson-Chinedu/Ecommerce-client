@@ -26,7 +26,7 @@ const Account = dynamic(
         </Box>
       </Box>
     ),
-    ssr: false,
+    // ssr: false,
   }
 );
 

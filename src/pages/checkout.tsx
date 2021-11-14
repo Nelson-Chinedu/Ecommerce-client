@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import Box from '@material-ui/core/Box';
+import { ProfileProvider } from 'src/components/context/userProfile-context';
 
 const Checkout = dynamic(() => import('src/components/MainLayout/Checkout'), {
   loading: () => (
@@ -19,7 +20,7 @@ const Checkout = dynamic(() => import('src/components/MainLayout/Checkout'), {
       </Box>
     </Box>
   ),
-  ssr: false,
+  // ssr: false,
 });
 
 const CheckoutPage = () => {
@@ -28,7 +29,9 @@ const CheckoutPage = () => {
       <Head>
         <title>Multibuy | Checkout</title>
       </Head>
-      <Checkout />
+      <ProfileProvider>
+        <Checkout />
+      </ProfileProvider>
     </>
   );
 };

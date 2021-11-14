@@ -19,7 +19,7 @@ const FAQ = dynamic(() => import('src/components/MainLayout/FAQ'), {
       </Box>
     </Box>
   ),
-  ssr: false,
+  // ssr: false,
 });
 
 const FAQPage = () => {
