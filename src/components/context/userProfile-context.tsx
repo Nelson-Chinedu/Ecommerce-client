@@ -33,8 +33,6 @@ export const ProfileProvider = ({ children }: any) => {
     },
   } = data;
 
-  console.log(data, 'POP');
-
   return (
     <>
       <ProfileContext.Provider

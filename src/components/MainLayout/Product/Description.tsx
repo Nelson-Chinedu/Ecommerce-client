@@ -22,6 +22,7 @@ import { ProductPreviewContext } from 'src/components/context/productPreview-con
 
 interface IContext {
   data: {
+    productId: string;
     name: string;
     number: number;
     description: string;
@@ -31,6 +32,7 @@ interface IContext {
     category: string;
     colors: string[];
     sizes: string[];
+    account: { id: string };
   };
   loading: boolean;
 }
@@ -44,8 +46,8 @@ const Description: FunctionComponent<{}> = () => {
   const [isSelectedQty, setIsSelectedQty] = useState<string>('');
 
   if (loading) return <Typography>loading...</Typography>;
-
   const {
+    productId,
     name,
     number,
     description,
@@ -55,6 +57,7 @@ const Description: FunctionComponent<{}> = () => {
     category,
     colors,
     sizes,
+    account: { id },
   } = data;
 
   const cartItems = toJS(uiStore.cartItems).flat();
@@ -82,13 +85,15 @@ const Description: FunctionComponent<{}> = () => {
       uiStore.showSnackbar = true;
     } else {
       const product = {
-        itemId: number,
+        itemId: productId,
+        itemNumber: number,
         itemName: name,
         itemPrice: newPrice,
         itemImage: imageUrl,
         itemQty: isSelectedQty,
         itemSize: isSelectedSize,
         itemColor: isSelectedColor,
+        mId: id,
       };
       uiStore.addToCart(product);
       uiStore.serverMessage = 'Product added to cart';

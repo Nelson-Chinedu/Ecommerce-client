@@ -16,7 +16,8 @@ type ProductLists = typeof productLists[number];
 type OrderLists = typeof orderList[number];
 
 interface IProduct {
-  itemId: number;
+  itemId: string;
+  itemNumber: number;
   itemName: string;
   itemPrice: string | number;
   itemImage: string;

@@ -7,6 +7,11 @@ export const useStyles = makeStyles({
         color: 'white',
       },
     },
+    '& .MuiCircularProgress-svg': {
+      '& > *': {
+        color: 'white',
+      },
+    },
   },
   edit: {
     marginRight: '.4em',

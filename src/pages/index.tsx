@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import Box from '@material-ui/core/Box';
+// import { ProductListProvider } from 'src/components/context/userProductList-context';
 
 const Landing = dynamic(() => import('src/components/MainLayout/Landing'), {
   loading: () => (
@@ -27,7 +28,9 @@ const Index = () => {
       <Head>
         <title>Multibuy | Home</title>
       </Head>
+      {/* <ProductListProvider> */}
       <Landing />
+      {/* </ProductListProvider> */}
     </>
   );
 };
