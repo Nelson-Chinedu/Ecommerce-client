@@ -206,6 +206,7 @@ export const GET_PRODUCT_USER = gql`
   query ($id: String!) {
     public {
       getProduct(id: $id) {
+        productId
         number
         name
         description
@@ -217,6 +218,27 @@ export const GET_PRODUCT_USER = gql`
         oldPrice
         newPrice
         imageUrl
+        account {
+          id
+        }
+      }
+    }
+  }
+`;
+
+export const CHECKOUT_PAYMENT = gql`
+  mutation (
+    $checkoutPayment: Int
+    $checkoutProductItems: [String]
+    $checkoutMerchantId: [String]
+  ) {
+    client {
+      checkoutPayment(
+        price: $checkoutPayment
+        productItems: $checkoutProductItems
+        merchantId: $checkoutMerchantId
+      ) {
+        token
       }
     }
   }
