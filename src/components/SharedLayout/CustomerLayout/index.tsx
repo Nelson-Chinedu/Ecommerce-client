@@ -89,6 +89,7 @@ const CustomerLayout = ({ children }: CustomerProps) => {
               <ul>
                 {customerAccountMenu.map((menuList: Props) => (
                   <li
+                    key={menuList.name}
                     className={
                       router.pathname === `${menuList.path}` ? 'active' : ''
                     }

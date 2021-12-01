@@ -243,3 +243,43 @@ export const CHECKOUT_PAYMENT = gql`
     }
   }
 `;
+
+export const GET_CUSTOMER_ORDER = gql`
+  query {
+    client {
+      getCustomerOrders {
+        orders {
+          orderId
+          status
+          createdAt
+          product {
+            name
+            description
+            imageUrl
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_PREVIEW_ORDER = gql`
+  query ($productId: String!) {
+    client {
+      previewOrder(productId: $productId) {
+        status
+        orderId
+        createdAt
+        product {
+          name
+          number
+          productId
+          description
+          newPrice
+          oldPrice
+          imageUrl
+        }
+      }
+    }
+  }
+`;
