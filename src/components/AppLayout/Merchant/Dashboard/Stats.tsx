@@ -6,8 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
-// import { stat } from 'src/components/constant/chartData';
-import { GET_MERCHANT_ORDER, GET_PRODUCT } from 'src/queries';
+import { GET_MERCHANT_ORDER } from 'src/queries';
 
 const colors = ['#26CCB7', '#FFD422', '#FF5967'];
 
