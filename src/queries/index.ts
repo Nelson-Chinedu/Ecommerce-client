@@ -283,3 +283,85 @@ export const GET_PREVIEW_ORDER = gql`
     }
   }
 `;
+
+export const GET_MERCHANT_ORDER = gql`
+  query {
+    client {
+      getMerchantOrders {
+        orders {
+          merchantId
+          orderId
+          customerId
+          status
+          createdAt
+          product {
+            name
+            newPrice
+            number
+          }
+          account {
+            email
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_MERCHANT_RECENT_ORDER = gql`
+  query ($take: Int!, $skip: Int!) {
+    client {
+      getRecentOrders(take: $take, skip: $skip) {
+        orders {
+          merchantId
+          orderId
+          createdAt
+          status
+          product {
+            name
+            number
+            newPrice
+          }
+          account {
+            email
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_MERCHANT_RECENT_PRODUCT = gql`
+  query ($take: Int!, $skip: Int!) {
+    client {
+      getRecentProducts(take: $take, skip: $skip) {
+        products {
+          id
+          name
+          category
+          newPrice
+        }
+      }
+    }
+  }
+`;
+
+export const GET_MERCHANT_PRODUCT_COUNT = gql`
+  query {
+    client {
+      getTotalMerchantProduct {
+        count
+      }
+    }
+  }
+`;
+
+export const GET_MERCHANT_ORDER_COUNT = gql`
+  query {
+    client {
+      getTotalMerchantOrder {
+        count
+      }
+    }
+  }
+`;

@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactNode, useContext } from 'react';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
@@ -21,6 +21,7 @@ type Props = {
 
 const Layout: FunctionComponent<Props> = ({ children }) => {
   const classes = useStyles();
+  const router = useRouter();
   const { firstname, lastname } = useContext(SettingContext);
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
@@ -36,6 +37,13 @@ const Layout: FunctionComponent<Props> = ({ children }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleLogout = () => {
+    localStorage.removeItem('__clu');
+    localStorage.removeItem('__cnt');
+    router.push('/');
+  };
+
   return (
     <Box className={classes.root}>
       <Box>
@@ -79,7 +87,11 @@ const Layout: FunctionComponent<Props> = ({ children }) => {
                     />
                   </Grid>
                   <Grid item className={classes.user}>
-                    <Typography variant="subtitle1">{`${firstname} ${lastname}`}</Typography>
+                    <Typography variant="subtitle1">
+                      {firstname || lastname
+                        ? `${firstname} ${lastname}`
+                        : 'Welcome'}
+                    </Typography>
                     <Typography variant="subtitle2">
                       Merchant Account
                     </Typography>
@@ -111,8 +123,12 @@ const Layout: FunctionComponent<Props> = ({ children }) => {
         }}
         classes={{ root: classes.popoverContainer }}
       >
-        <Typography variant="subtitle2" className={classes.popoverLink}>
-          <Link href="/">Logout</Link>
+        <Typography
+          variant="subtitle2"
+          className={classes.popoverLink}
+          onClick={handleLogout}
+        >
+          Logout
         </Typography>
       </Popover>
     </Box>

@@ -183,10 +183,22 @@ const Preview: FunctionComponent<{}> = () => {
                   <Box className={classes.descWrapper}>
                     <Typography variant="subtitle2">Payment Details</Typography>
                     <Typography variant="body2">
-                      Items total: ₦ 3,400
+                      Items total: ₦{' '}
+                      <NumberFormat
+                        value={`${newPrice}`}
+                        thousandSeparator={true}
+                        displayType="text"
+                      />
                     </Typography>
                     <Typography variant="body2">Shipping Fees: Free</Typography>
-                    <Typography variant="body2">Total: ₦ 3,400</Typography>
+                    <Typography variant="body2">
+                      Total: ₦{' '}
+                      <NumberFormat
+                        value={`${newPrice}`}
+                        thousandSeparator={true}
+                        displayType="text"
+                      />
+                    </Typography>
                   </Box>
                 </Information>
               </Grid>

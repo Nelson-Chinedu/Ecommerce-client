@@ -4,6 +4,22 @@ import Typography from '@material-ui/core/Typography';
 
 import { GET_PRODUCT } from 'src/queries';
 
+export interface IProps {
+  name: string;
+  number: string | number;
+  stock: 'In-stock' | 'Out-of-stock';
+  category: string;
+  newPrice: string | number;
+}
+
+interface IData {
+  client: {
+    getProduct: {
+      products: IProps[];
+    };
+  };
+}
+
 export const MerchantProductContext = createContext({
   data: null,
   loading: false,
@@ -23,7 +39,7 @@ export const MerchantProductProvider = ({ children }: any) => {
     client: {
       getProduct: { products },
     },
-  } = data;
+  }: IData = data;
 
   return (
     <>

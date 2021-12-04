@@ -33,8 +33,7 @@ export const useStyles = makeStyles({
     width: '80%',
     marginLeft: '20%',
     padding: '2em',
-    height: '100vh',
-    overflow: 'hidden',
+    minHeight: '100vh',
   },
   notification: {
     marginRight: '1em',

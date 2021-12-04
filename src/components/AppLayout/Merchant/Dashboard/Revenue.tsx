@@ -13,11 +13,8 @@ import Paper from '@material-ui/core/Paper';
 
 import { revenue } from 'src/components/constant/revenues';
 import Typography from '@material-ui/core/Typography';
-import MenuItem from '@material-ui/core/MenuItem';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
-
-import TextInput from 'src/components/SharedLayout/TextInput';
 
 const useStyles = makeStyles({
   root: {
@@ -63,31 +60,19 @@ const Revenue: FunctionComponent<{}> = () => {
               </Grid>
               <Grid item>
                 <Box className={classes.thisYearContainer}>
-                  <Typography variant="body1">
+                  <Typography variant="body2">
                     <span className={classes.thisYear} /> This Year
                   </Typography>
                 </Box>
               </Grid>
               <Grid item>
                 <Box className={classes.lastYearContainer}>
-                  <Typography variant="body1">
+                  <Typography variant="body2">
                     <span className={classes.lastYear} /> Last Year
                   </Typography>
                 </Box>
               </Grid>
             </Grid>
-          </Grid>
-          <Grid item sm={2}>
-            <TextInput
-              select
-              variant="outlined"
-              fullWidth
-              size="small"
-              color="secondary"
-              defaultValue="default"
-            >
-              <MenuItem value="default">Year</MenuItem>
-            </TextInput>
           </Grid>
         </Grid>
         <ResponsiveContainer width="100%" height="90%">
