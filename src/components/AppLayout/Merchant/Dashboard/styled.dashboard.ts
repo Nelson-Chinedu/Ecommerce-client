@@ -52,4 +52,30 @@ export const useStyles = makeStyles({
     height: '10px',
     display: 'inline-block',
   },
+  deliveredEmpty: {
+    background: '#999b9a',
+    padding: '.2em',
+    width: '10px',
+    height: '10px',
+    display: 'inline-block',
+  },
+  pendingEmpty: {
+    background: '#999b9a',
+    padding: '.2em',
+    width: '10px',
+    height: '10px',
+    display: 'inline-block',
+  },
+  canceledEmpty: {
+    background: '#999b9a',
+    padding: '.2em',
+    width: '10px',
+    height: '10px',
+    display: 'inline-block',
+  },
+  emptyState: {
+    width: '50%',
+    margin: '2em auto',
+    textAlign: 'center',
+  },
 });

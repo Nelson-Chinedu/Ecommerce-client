@@ -1,4 +1,5 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useContext } from 'react';
+import Image from 'next/image';
 import { observer } from 'mobx-react-lite';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
@@ -16,10 +17,16 @@ import Button from 'src/components/SharedLayout/Button';
 import TextInput from 'src/components/SharedLayout/TextInput';
 import AddProduct from 'src/components/SharedLayout/AddProduct';
 import { useStyles } from 'src/components/AppLayout/Merchant/Order/styled.order';
+import { MerchantOrderContext } from 'src/components/context/merchantOrder-context';
 
 const Order: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const { uiStore } = useStore();
+  const { loading, data } = useContext(MerchantOrderContext);
+
+  if (loading) {
+    return <Typography>Loading...</Typography>;
+  }
 
   const handleOpen = () => {
     uiStore.toggleModalVisibility();
@@ -96,12 +103,26 @@ const Order: FunctionComponent<{}> = () => {
           </Grid>
         </Paper>
         <Paper style={{ padding: '1em' }}>
-          <Grid container style={{ padding: '1em 0px' }}>
-            <Grid item sm={12}>
-              <Typography variant="subtitle1">All Orders</Typography>
-            </Grid>
-          </Grid>
-          <OrderTable />
+          {data && data.length === 0 ? (
+            <Box className={classes.emptyState}>
+              <Image
+                src="/image/emptyOrder.svg"
+                width={100}
+                height={100}
+                alt=""
+              />
+              <Typography>Hang on tight, No order yet !!!</Typography>
+            </Box>
+          ) : (
+            <>
+              <Grid container style={{ padding: '1em 0px' }}>
+                <Grid item sm={12}>
+                  <Typography variant="subtitle1">All Orders</Typography>
+                </Grid>
+              </Grid>
+              <OrderTable />
+            </>
+          )}
         </Paper>
       </Box>
       <AddProduct />

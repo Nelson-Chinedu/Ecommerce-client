@@ -50,17 +50,9 @@ export const data: Array<Props> = [
   },
 ];
 
-export const stat = [
+export const emptyStat = [
   {
     name: 'Group A',
-    value: 400,
-  },
-  {
-    name: 'Group B',
-    value: 300,
-  },
-  {
-    name: 'Group C',
-    value: 300,
+    value: 200,
   },
 ];
