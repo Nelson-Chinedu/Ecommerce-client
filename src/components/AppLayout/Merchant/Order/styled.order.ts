@@ -54,4 +54,9 @@ export const useStyles = makeStyles({
   filter: {
     padding: '.4em 2em',
   },
+  emptyState: {
+    width: '50%',
+    margin: '2em auto',
+    textAlign: 'center',
+  },
 });

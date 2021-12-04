@@ -4,42 +4,21 @@ import { useQuery } from '@apollo/client';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+
+import { emptyStat } from 'src/components/constant/chartData';
+
+import { useStyles } from 'src/components/AppLayout/Merchant/Dashboard/styled.dashboard';
 
 import { GET_MERCHANT_ORDER } from 'src/queries';
 
 const colors = ['#26CCB7', '#FFD422', '#FF5967'];
-
-const useStyles = makeStyles({
-  delivered: {
-    background: '#26CCB7',
-    padding: '.2em',
-    width: '10px',
-    height: '10px',
-    display: 'inline-block',
-  },
-  pending: {
-    background: '#FFD422',
-    padding: '.2em',
-    width: '10px',
-    height: '10px',
-    display: 'inline-block',
-  },
-  canceled: {
-    background: '#FF5967',
-    padding: '.2em',
-    width: '10px',
-    height: '10px',
-    display: 'inline-block',
-  },
-});
 
 const Stats: FunctionComponent<{}> = () => {
   const classes = useStyles();
 
   const { loading, data } = useQuery(GET_MERCHANT_ORDER);
   if (loading) {
-    return <p>loading</p>;
+    return <p>Loading...</p>;
   }
 
   const {
@@ -74,6 +53,55 @@ const Stats: FunctionComponent<{}> = () => {
       value: CancelledOrder.length,
     },
   ];
+
+  if (
+    NewOrder.length === 0 &&
+    CancelledOrder.length === 0 &&
+    DeliveredOrder.length === 0
+  ) {
+    return (
+      <Paper style={{ height: '350px', padding: '3em 0px' }}>
+        <ResponsiveContainer>
+          <PieChart width={320} height={100} margin={{ top: 0, bottom: 0 }}>
+            <Pie
+              data={emptyStat}
+              dataKey="value"
+              nameKey="name"
+              cx="50%"
+              cy="40%"
+              innerRadius={60}
+              outerRadius={100}
+              fill="#82ca9d"
+            >
+              <Cell fill="#999b9a" />
+            </Pie>
+          </PieChart>
+        </ResponsiveContainer>
+        <Grid
+          container
+          alignItems="center"
+          justify="space-between"
+          style={{ textAlign: 'center' }}
+        >
+          <Grid item sm={4}>
+            <Typography variant="body2">
+              <span className={classes.pendingEmpty} /> New Order
+            </Typography>
+          </Grid>
+          <Grid item sm={4}>
+            <Typography variant="body2">
+              <span className={classes.deliveredEmpty} /> Delivered
+            </Typography>
+          </Grid>
+          <Grid item sm={4}>
+            <Typography variant="body2">
+              <span className={classes.canceledEmpty} /> Canceled
+            </Typography>
+          </Grid>
+        </Grid>
+      </Paper>
+    );
+  }
 
   return (
     <Paper style={{ height: '350px', padding: '3em 0px' }}>

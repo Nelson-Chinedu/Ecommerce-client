@@ -5,6 +5,7 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 
 import { SettingProvider } from 'src/components/context/merchantSetting-context';
+import { MerchantRecentOrderProvider } from 'src/components/context/merchantRecentOrder-context';
 
 const Dashboard = dynamic(
   () => import('src/components/AppLayout/Merchant/Dashboard'),
@@ -34,7 +35,9 @@ const DashboardPage = () => {
         <title>Multibuy | Home</title>
       </Head>
       <SettingProvider>
-        <Dashboard />
+        <MerchantRecentOrderProvider>
+          <Dashboard />
+        </MerchantRecentOrderProvider>
       </SettingProvider>
     </>
   );
