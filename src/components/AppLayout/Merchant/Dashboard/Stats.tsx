@@ -1,11 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { useQuery } from '@apollo/client';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { stat } from 'src/components/constant/chartData';
+// import { stat } from 'src/components/constant/chartData';
+import { GET_MERCHANT_ORDER, GET_PRODUCT } from 'src/queries';
 
 const colors = ['#26CCB7', '#FFD422', '#FF5967'];
 
@@ -35,6 +37,45 @@ const useStyles = makeStyles({
 
 const Stats: FunctionComponent<{}> = () => {
   const classes = useStyles();
+
+  const { loading, data } = useQuery(GET_MERCHANT_ORDER);
+  if (loading) {
+    return <p>loading</p>;
+  }
+
+  const {
+    client: {
+      getMerchantOrders: { orders },
+    },
+  } = data;
+
+  const AllOrders = orders;
+
+  const NewOrder = AllOrders.filter(
+    (order: { status: string }) => order.status === 'processing'
+  );
+  const CancelledOrder = AllOrders.filter(
+    (order: { status: string }) => order.status === 'cancelled'
+  );
+  const DeliveredOrder = AllOrders.filter(
+    (order: { status: string }) => order.status === 'delivered'
+  );
+
+  const stat = [
+    {
+      name: 'Delivered',
+      value: DeliveredOrder.length,
+    },
+    {
+      name: 'New Order',
+      value: NewOrder.length,
+    },
+    {
+      name: 'Cancelled Order',
+      value: CancelledOrder.length,
+    },
+  ];
+
   return (
     <Paper style={{ height: '350px', padding: '3em 0px' }}>
       <ResponsiveContainer>
@@ -63,12 +104,12 @@ const Stats: FunctionComponent<{}> = () => {
       >
         <Grid item sm={4}>
           <Typography variant="body2">
-            <span className={classes.delivered} /> Delivered
+            <span className={classes.pending} /> New Order
           </Typography>
         </Grid>
         <Grid item sm={4}>
           <Typography variant="body2">
-            <span className={classes.pending} /> Pending
+            <span className={classes.delivered} /> Delivered
           </Typography>
         </Grid>
         <Grid item sm={4}>

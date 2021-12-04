@@ -72,6 +72,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 const CustomerLayout = ({ children }: CustomerProps) => {
   const classes = useStyles();
   const router = useRouter();
+
+  const handleLogout = () => {
+    localStorage.removeItem('__clu');
+    localStorage.removeItem('__cnt');
+    router.push('/');
+  };
+
   return (
     <>
       <Box className={classes.root}>
@@ -104,6 +111,7 @@ const CustomerLayout = ({ children }: CustomerProps) => {
                 color="default"
                 fullWidth
                 disableElevation
+                onClick={handleLogout}
               >
                 Logout
               </Button>

@@ -3,7 +3,7 @@ export type Props = {
   uv: number;
   pv: number;
   amt: number;
-}
+};
 
 export const data: Array<Props> = [
   {
@@ -63,4 +63,4 @@ export const stat = [
     name: 'Group C',
     value: 300,
   },
-]
+];

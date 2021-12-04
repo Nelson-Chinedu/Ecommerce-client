@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import NumberFormat from 'react-number-format';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import TableContainer from '@material-ui/core/TableContainer';
@@ -13,7 +14,10 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
 import { useStyles } from 'src/components/AppLayout/Merchant/Product/styled.product';
-import { MerchantProductContext } from 'src/components/context/merchantProduct-context';
+import {
+  MerchantProductContext,
+  IProps,
+} from 'src/components/context/merchantProduct-context';
 
 const ProductTable = () => {
   const classes = useStyles();
@@ -36,6 +40,9 @@ const ProductTable = () => {
         <Table>
           <TableHead>
             <TableRow>
+              <TableCell>
+                <Typography variant="body2">#Product ID</Typography>
+              </TableCell>
               <TableCell>
                 <Typography variant="body2">Product Name</Typography>
               </TableCell>
@@ -61,9 +68,12 @@ const ProductTable = () => {
           </TableHead>
           <TableBody>
             {data &&
-              data.map((product: any, index: number) => (
-                <React.Fragment key={index}>
+              data.map((product: IProps) => (
+                <React.Fragment key={product.number}>
                   <TableRow>
+                    <TableCell>
+                      <Typography variant="body2">{product.number}</Typography>
+                    </TableCell>
                     <TableCell>
                       <Typography variant="body2">{product.name}</Typography>
                     </TableCell>
@@ -74,7 +84,15 @@ const ProductTable = () => {
                     </TableCell>
                     <TableCell>
                       <Typography variant="body2">
-                        -N-{product.newPrice}
+                        ₦
+                        <NumberFormat
+                          value={`${product.newPrice}`}
+                          thousandSeparator={true}
+                          decimalSeparator="."
+                          decimalScale={2}
+                          fixedDecimalScale={true}
+                          displayType="text"
+                        />
                       </Typography>
                     </TableCell>
                     <TableCell>

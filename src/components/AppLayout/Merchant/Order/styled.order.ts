@@ -28,24 +28,27 @@ export const useStyles = makeStyles({
     },
     '& .pending': {
       background: '#FFF1E0',
-      color: '#FEB54B',
+      color: '#d9860d',
       padding: '.5em .8em',
       borderRadius: '5px',
       textAlign: 'center',
+      textTransform: 'capitalize',
     },
     '& .delivered': {
       background: '#E5F8F7',
-      color: '#74DDD0',
+      color: '#07a38f',
       padding: '.5em .8em',
       borderRadius: '5px',
       textAlign: 'center',
+      textTransform: 'capitalize',
     },
-    '& .canceled': {
+    '& .cancelled': {
       background: '#FFECEC',
       color: '#FF8791',
       padding: '.5em .8em',
       borderRadius: '5px',
       textAlign: 'center',
+      textTransform: 'capitalize',
     },
   },
   filter: {
