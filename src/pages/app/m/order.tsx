@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 
 import { SettingProvider } from 'src/components/context/merchantSetting-context';
 import { MerchantOrderProvider } from 'src/components/context/merchantOrder-context';
+import { ModalProvider } from 'src/components/context/modalContext';
 
 const Order = dynamic(() => import('src/components/AppLayout/Merchant/Order'), {
   loading: () => (
@@ -33,7 +34,9 @@ const OrderPage = () => {
       </Head>
       <SettingProvider>
         <MerchantOrderProvider>
-          <Order />
+          <ModalProvider>
+            <Order />
+          </ModalProvider>
         </MerchantOrderProvider>
       </SettingProvider>
     </>

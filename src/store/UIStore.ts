@@ -38,7 +38,7 @@ export class UIStore {
   collapseShipping: boolean = true;
   collapsePayment: boolean = true;
   passwordVisibilty: boolean = false;
-  modalVisibility: boolean = false;
+  // modalVisibility: boolean = false;
   privacyButton: boolean = false;
   isLoggedIn: boolean = false;
   loggedMessage: string = '';
@@ -110,11 +110,11 @@ export class UIStore {
     return this.passwordVisibilty;
   }
 
-  @action
-  toggleModalVisibility() {
-    this.modalVisibility = !this.modalVisibility;
-    return this.modalVisibility;
-  }
+  // @action
+  // toggleModalVisibility() {
+  //   this.modalVisibility = !this.modalVisibility;
+  //   return this.modalVisibility;
+  // }
 
   @action
   togglePrivacyButton() {

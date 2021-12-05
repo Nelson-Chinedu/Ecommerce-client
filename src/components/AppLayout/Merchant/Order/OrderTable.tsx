@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, FunctionComponent } from 'react';
 import NumberFormat from 'react-number-format';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -14,12 +14,13 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { useStyles } from 'src/components/AppLayout/Merchant/Order/styled.order';
 
 import { showDate } from 'src/components/SharedLayout/Date';
+
 import {
   MerchantOrderContext,
   IProps,
 } from 'src/components/context/merchantOrder-context';
 
-const OrderTable = () => {
+const OrderTable: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const { loading, data } = useContext(MerchantOrderContext);
 

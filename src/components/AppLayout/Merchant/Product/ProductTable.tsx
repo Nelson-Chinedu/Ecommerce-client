@@ -14,15 +14,19 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
 import { useStyles } from 'src/components/AppLayout/Merchant/Product/styled.product';
+
 import {
   MerchantProductContext,
   IProps,
 } from 'src/components/context/merchantProduct-context';
 
+import useModalControl from 'src/components/hooks/useModalControl';
+
 const ProductTable = () => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const { data, loading } = useContext(MerchantProductContext);
+  const [state, setState] = useModalControl();
 
   if (loading) return <Typography>Loading...</Typography>;
 
@@ -31,6 +35,15 @@ const ProductTable = () => {
   };
 
   const handleClosePopover = () => {
+    setAnchorEl(null);
+  };
+
+  const handleEditProduct = (id: string | number) => {
+    setState({ ...state, modal: 'editProductModal', id });
+    setAnchorEl(null);
+  };
+  const handleOpenDeleteModal = (id: string | number) => {
+    setState({ ...state, modal: 'deleteProductModal', id });
     setAnchorEl(null);
   };
 
@@ -116,8 +129,14 @@ const ProductTable = () => {
                     open={Boolean(anchorEl)}
                     onClose={handleClosePopover}
                   >
-                    <MenuItem>Edit</MenuItem>
-                    <MenuItem>Delete</MenuItem>
+                    <MenuItem onClick={() => handleEditProduct(product.number)}>
+                      Edit
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() => handleOpenDeleteModal(product.number)}
+                    >
+                      Delete
+                    </MenuItem>
                   </Menu>
                 </React.Fragment>
               ))}

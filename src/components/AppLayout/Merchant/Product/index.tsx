@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { observer } from 'mobx-react-lite';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -7,24 +6,25 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 
-import { useStore } from 'src/store';
-
 import ProductTable from 'src/components/AppLayout/Merchant/Product/ProductTable';
 import { useStyles } from 'src/components/AppLayout/Merchant/Product/styled.product';
 
 import Layout from 'src/components/SharedLayout/Layout';
 import TextInput from 'src/components/SharedLayout/TextInput';
 import Button from 'src/components/SharedLayout/Button';
-import AddProduct from 'src/components/SharedLayout/AddProduct';
+import AddProduct from 'src/components/AppLayout/Merchant/Product/AddProduct';
+import EditProduct from 'src/components/AppLayout/Merchant/Product/EditProduct';
+import DeleteProduct from 'src/components/AppLayout/Merchant/Product/DeleteProduct';
 import { MerchantProductContext } from 'src/components/context/merchantProduct-context';
+import useModalControl from 'src/components/hooks/useModalControl';
 
 const Product = () => {
   const classes = useStyles();
-  const { uiStore } = useStore();
   const { data } = useContext(MerchantProductContext);
+  const [state, setState] = useModalControl();
 
   const handleOpen = () => {
-    uiStore.toggleModalVisibility();
+    setState({ ...state, modal: 'addProductModal' });
   };
 
   return (
@@ -129,8 +129,10 @@ const Product = () => {
         )}
       </Box>
       <AddProduct />
+      <EditProduct />
+      <DeleteProduct />
     </Layout>
   );
 };
 
-export default observer(Product);
+export default Product;

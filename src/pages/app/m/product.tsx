@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 
 import { SettingProvider } from 'src/components/context/merchantSetting-context';
 import { MerchantProductProvider } from 'src/components/context/merchantProduct-context';
+import { ModalProvider } from 'src/components/context/modalContext';
 
 const Product = dynamic(
   () => import('src/components/AppLayout/Merchant/Product'),
@@ -36,7 +37,9 @@ const ProductPage = () => {
       </Head>
       <SettingProvider>
         <MerchantProductProvider>
-          <Product />
+          <ModalProvider>
+            <Product />
+          </ModalProvider>
         </MerchantProductProvider>
       </SettingProvider>
     </>

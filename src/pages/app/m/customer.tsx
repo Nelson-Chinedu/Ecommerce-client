@@ -5,6 +5,7 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 
 import { SettingProvider } from 'src/components/context/merchantSetting-context';
+import { ModalProvider } from 'src/components/context/modalContext';
 
 const Customer = dynamic(
   () => import('src/components/AppLayout/Merchant/Customer'),
@@ -34,7 +35,9 @@ const CustomerPage = () => {
         <title>Multibuy | Customer</title>
       </Head>
       <SettingProvider>
-        <Customer />
+        <ModalProvider>
+          <Customer />
+        </ModalProvider>
       </SettingProvider>
     </>
   );
