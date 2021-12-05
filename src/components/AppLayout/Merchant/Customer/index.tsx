@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { observer } from 'mobx-react-lite';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
@@ -6,53 +6,29 @@ import Grid from '@material-ui/core/Grid';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
-import { makeStyles } from '@material-ui/core/styles';
-
-import { useStore } from 'src/store';
 
 import CustomerTable from 'src/components/AppLayout/Merchant/Customer/CustomerTable';
+import { useStyles } from 'src/components/AppLayout/Merchant/Customer/styled.customer';
 
 import TextInput from 'src/components/SharedLayout/TextInput';
 import Button from 'src/components/SharedLayout/Button';
-import AddProduct from 'src/components/SharedLayout/AddProduct';
 import Layout from 'src/components/SharedLayout/Layout';
+import AddProduct from 'src/components/AppLayout/Merchant/Product/AddProduct';
 
-const useStyles = makeStyles({
-  root: {
-    '& .MuiPaper-root': {
-      margin: '2em 0px',
-      boxShadow:
-        '0px 2px 1px -1px rgb(0 0 0 / 0%), 0px 1px 1px 0px rgb(0 0 0 / 0%), 0px 1px 3px 0px rgb(0 0 0 / 4%)',
-    },
-    '& .MuiButton-contained': {
-      '& .MuiButton-label': {
-        color: '#FFF',
-      },
-      '& .MuiSvgIcon-root': {
-        marginRight: '.3em',
-        '& > *': {
-          color: '#FFF',
-        },
-      },
-    },
-  },
-  filter: {
-    padding: '.4em 2em',
-  },
-});
+import useModalControl from 'src/components/hooks/useModalControl';
 
-const Customer = () => {
+const Customer: FunctionComponent<{}> = () => {
   const classes = useStyles();
-  const { uiStore } = useStore();
+  const [state, setState] = useModalControl();
 
   const handleOpen = () => {
-    uiStore.toggleModalVisibility();
+    setState({ ...state, modal: 'addProductModal' });
   };
 
   return (
     <Layout>
       <Box className={classes.root}>
-      <Paper className={classes.filter}>
+        <Paper className={classes.filter}>
           <Grid container justify="space-between" alignItems="center">
             <Grid item sm={7}>
               <Grid container spacing={2}>
@@ -130,7 +106,7 @@ const Customer = () => {
       </Box>
       <AddProduct />
     </Layout>
-  )
+  );
 };
 
 export default observer(Customer);

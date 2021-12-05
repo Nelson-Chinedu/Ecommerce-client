@@ -18,14 +18,16 @@ import Grid from '@material-ui/core/Grid';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 
 import { useStore } from 'src/store';
+
 import { ADD_PRODUCT, FILE_UPLOAD } from 'src/queries';
 
 import Snackbar from 'src/components/SharedLayout/Snackbar';
-import Modal from 'src/components/SharedLayout/Modal';
+import Modal from 'src/components/AppLayout/Merchant/Product/Modal/AddProductModal';
 import TextInput from 'src/components/SharedLayout/TextInput';
 import Button from 'src/components/SharedLayout/Button';
 import LinearProgress from 'src/components/SharedLayout/LinearProgress';
-import { useStyles } from 'src/components/SharedLayout/AddProduct/styled.addProduct';
+import { useStyles } from 'src/components/AppLayout/Merchant/Product/styled.product';
+import useModalControl from 'src/components/hooks/useModalControl';
 
 import {
   PPRODUCT_SIZES,
@@ -72,6 +74,7 @@ function NumberFormatCustom(props: any) {
 const AddProduct: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const { uiStore } = useStore();
+  const [state, setState] = useModalControl();
   const [selectedProduct, setSelectedProduct] = useState<{
     value: string;
     label: string;
@@ -118,7 +121,7 @@ const AddProduct: FunctionComponent<{}> = () => {
   });
 
   const handleCloseModal = () => {
-    uiStore.toggleModalVisibility();
+    setState({ ...state, modal: '' });
   };
 
   const handleClose = (_event: unknown, reason: string) => {
@@ -233,11 +236,11 @@ const AddProduct: FunctionComponent<{}> = () => {
   return (
     <React.Fragment>
       <Modal>
-        <Box className={classes.root}>
+        <Box className={classes.wrapper}>
           <Grid
             container
             justify="space-between"
-            alignItems="flex-start"
+            alignItems="center"
             style={{ marginBottom: '.8em' }}
           >
             <Grid item>
