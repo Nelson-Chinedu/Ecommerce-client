@@ -416,7 +416,7 @@ const EditProduct: FunctionComponent<{}> = () => {
                       InputProps={{
                         inputComponent: NumberFormatCustom,
                         startAdornment: (
-                          <InputAdornment position="start">-N-</InputAdornment>
+                          <InputAdornment position="start">₦</InputAdornment>
                         ),
                       }}
                       helperText={touched.oldPrice && errors.oldPrice}
@@ -437,7 +437,7 @@ const EditProduct: FunctionComponent<{}> = () => {
                       InputProps={{
                         inputComponent: NumberFormatCustom,
                         startAdornment: (
-                          <InputAdornment position="start">-N-</InputAdornment>
+                          <InputAdornment position="start">₦</InputAdornment>
                         ),
                       }}
                       helperText={touched.newPrice && errors.newPrice}

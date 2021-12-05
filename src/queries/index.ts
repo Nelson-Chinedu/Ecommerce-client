@@ -365,3 +365,13 @@ export const GET_MERCHANT_ORDER_COUNT = gql`
     }
   }
 `;
+
+export const DELETE_MERCHANT_PRODUCT = gql`
+  mutation ($productNumber: String!) {
+    client {
+      deleteProduct(productNumber: $productNumber) {
+        message
+      }
+    }
+  }
+`;
