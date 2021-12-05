@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, FunctionComponent } from 'react';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -8,17 +8,19 @@ import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOut
 
 import ProductTable from 'src/components/AppLayout/Merchant/Product/ProductTable';
 import { useStyles } from 'src/components/AppLayout/Merchant/Product/styled.product';
+import AddProduct from 'src/components/AppLayout/Merchant/Product/AddProduct';
+import EditProduct from 'src/components/AppLayout/Merchant/Product/EditProduct';
+import DeleteProduct from 'src/components/AppLayout/Merchant/Product/DeleteProduct';
 
 import Layout from 'src/components/SharedLayout/Layout';
 import TextInput from 'src/components/SharedLayout/TextInput';
 import Button from 'src/components/SharedLayout/Button';
-import AddProduct from 'src/components/AppLayout/Merchant/Product/AddProduct';
-import EditProduct from 'src/components/AppLayout/Merchant/Product/EditProduct';
-import DeleteProduct from 'src/components/AppLayout/Merchant/Product/DeleteProduct';
+
 import { MerchantProductContext } from 'src/components/context/merchantProduct-context';
+
 import useModalControl from 'src/components/hooks/useModalControl';
 
-const Product = () => {
+const Product: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const { data } = useContext(MerchantProductContext);
   const [state, setState] = useModalControl();

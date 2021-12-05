@@ -169,7 +169,11 @@ export const useStyles = makeStyles((theme: Theme) => ({
       marginTop: '1em',
     },
     '& .MuiButton-contained': {
+      height: '100%',
       '& .MuiButton-label': {
+        color: '#FFF',
+      },
+      '& .MuiCircularProgress-circle': {
         color: '#FFF',
       },
     },

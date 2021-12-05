@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, FunctionComponent } from 'react';
 import NumberFormat from 'react-number-format';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -10,8 +10,9 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import Menu, { MenuProps } from '@material-ui/core/Menu';
+import ListItemText from '@material-ui/core/ListItemText';
+import { withStyles } from '@material-ui/core/styles';
 
 import { useStyles } from 'src/components/AppLayout/Merchant/Product/styled.product';
 
@@ -22,29 +23,78 @@ import {
 
 import useModalControl from 'src/components/hooks/useModalControl';
 
-const ProductTable = () => {
+const StyledMenu = withStyles({
+  paper: {
+    border: '1px solid #d3d4d5',
+    borderRadius: '5px',
+    padding: '5px 15px',
+    width: '150px',
+    '& .edit': {
+      borderTop: '1px solid #FAFAFA',
+      paddingTop: '10px',
+      fontSize: '12.64px',
+      lineHeight: '14px',
+      color: '#737373',
+      cursor: 'pointer',
+    },
+    '& .delete': {
+      paddingTop: '10px',
+      fontSize: '12.64px',
+      lineHeight: '14px',
+      cursor: 'pointer',
+      '& .MuiListItemText-primary': {
+        color: 'red',
+      },
+    },
+  },
+})((props: MenuProps) => (
+  <Menu
+    elevation={0}
+    getContentAnchorEl={null}
+    anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'left',
+    }}
+    transformOrigin={{
+      vertical: 'top',
+      horizontal: 'left',
+    }}
+    {...props}
+  />
+));
+
+const ProductTable: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const { data, loading } = useContext(MerchantProductContext);
   const [state, setState] = useModalControl();
+  const [isSelectedProduct, setIsSelectedProduct] = useState(null);
 
   if (loading) return <Typography>Loading...</Typography>;
 
-  const handleOpenPopover = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleOpenDeleteModal = () => {
+    setAnchorEl(null);
+    setState({ ...state, modal: 'deleteProductModal', id: isSelectedProduct });
+  };
+
+  const handleEditProduct = () => {
+    setState({ ...state, modal: 'editProductModal' });
+    setAnchorEl(null);
+  };
+
+  const handleProductClick = (id: string | number) => {
+    setIsSelectedProduct(id);
+  };
+
+  const handlePopeverOpen = (event: any, id: string | number) => {
+    event.stopPropagation();
+    setIsSelectedProduct(id);
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClosePopover = () => {
+  const handlePopeverClose = () => {
     setAnchorEl(null);
-  };
-
-  const handleEditProduct = (id: string | number) => {
-    setState({ ...state, modal: 'editProductModal', id });
-    setAnchorEl(null);
-  };
-  const handleOpenDeleteModal = (id: string | number) => {
-    setState({ ...state, modal: 'deleteProductModal', id });
-    setAnchorEl(null);
+    setIsSelectedProduct(null);
   };
 
   return (
@@ -118,26 +168,41 @@ const ProductTable = () => {
                       <Typography variant="body2">N/A</Typography>
                     </TableCell>
                     <TableCell>
-                      <IconButton onClick={handleOpenPopover}>
-                        <MoreVertIcon />
+                      <IconButton
+                        aria-label="more"
+                        aria-controls="long-menu"
+                        aria-haspopup="true"
+                        onClick={() => handleProductClick(product.number)}
+                      >
+                        <MoreVertIcon
+                          fontSize="small"
+                          style={{ cursor: 'pointer' }}
+                          aria-controls="customized-menu"
+                          aria-haspopup="true"
+                          onClick={(event) =>
+                            handlePopeverOpen(event, product.number)
+                          }
+                        />
+                        <StyledMenu
+                          anchorEl={anchorEl}
+                          keepMounted
+                          open={Boolean(anchorEl)}
+                          onClose={handlePopeverClose}
+                        >
+                          <ListItemText
+                            primary="Edit"
+                            className="edit"
+                            onClick={handleEditProduct}
+                          />
+                          <ListItemText
+                            primary="Delete"
+                            className="delete"
+                            onClick={handleOpenDeleteModal}
+                          />
+                        </StyledMenu>
                       </IconButton>
                     </TableCell>
                   </TableRow>
-                  <Menu
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={Boolean(anchorEl)}
-                    onClose={handleClosePopover}
-                  >
-                    <MenuItem onClick={() => handleEditProduct(product.number)}>
-                      Edit
-                    </MenuItem>
-                    <MenuItem
-                      onClick={() => handleOpenDeleteModal(product.number)}
-                    >
-                      Delete
-                    </MenuItem>
-                  </Menu>
                 </React.Fragment>
               ))}
           </TableBody>

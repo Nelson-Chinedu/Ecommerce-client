@@ -21,7 +21,6 @@ import { useStore } from 'src/store';
 
 import { ADD_PRODUCT, FILE_UPLOAD } from 'src/queries';
 
-import Snackbar from 'src/components/SharedLayout/Snackbar';
 import Modal from 'src/components/AppLayout/Merchant/Product/Modal/AddProductModal';
 import TextInput from 'src/components/SharedLayout/TextInput';
 import Button from 'src/components/SharedLayout/Button';
@@ -122,14 +121,6 @@ const AddProduct: FunctionComponent<{}> = () => {
 
   const handleCloseModal = () => {
     setState({ ...state, modal: '' });
-  };
-
-  const handleClose = (_event: unknown, reason: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    uiStore.serverMessage = '';
-    uiStore.showSnackbar = false;
   };
 
   const _handleBlur = (param: string) => {
@@ -234,324 +225,314 @@ const AddProduct: FunctionComponent<{}> = () => {
   };
 
   return (
-    <React.Fragment>
-      <Modal>
-        <Box className={classes.wrapper}>
-          <Grid
-            container
-            justify="space-between"
-            alignItems="center"
-            style={{ marginBottom: '.8em' }}
-          >
-            <Grid item>
-              <Typography variant="subtitle2">Add Product</Typography>
-            </Grid>
-            <Grid item>
-              <IconButton
-                size="medium"
-                aria-label="Go back"
-                onClick={handleCloseModal}
-              >
-                <CloseIcon />
-              </IconButton>
-            </Grid>
+    <Modal>
+      <Box className={classes.wrapper}>
+        <Grid
+          container
+          justify="space-between"
+          alignItems="center"
+          style={{ marginBottom: '.8em' }}
+        >
+          <Grid item>
+            <Typography variant="subtitle2">Add Product</Typography>
           </Grid>
-          <Grid container spacing={4}>
-            <Grid item sm={6}>
-              <Box style={{ border: '1px solid #e5e5ea', padding: '1em' }}>
-                <Typography variant="body2">Add Images</Typography>
-                <label className={classes.fileUpload}>
-                  <Image
-                    src="/image/empt.png"
-                    width={100}
-                    objectFit="cover"
-                    height={100}
-                    alt="file upload"
-                  />
-                  <Typography>Drop your files or Browse</Typography>
-                  <input
-                    type="file"
-                    accept="image/jpg, image/jpeg, image/png"
-                    onChange={handleFileUpload}
-                  />
-                </label>
-                {isImage ? (
-                  <>
-                    <Typography variant="subtitle2">
-                      uploading image...
-                    </Typography>
-                    <LinearProgress />
-                  </>
-                ) : isImage === false && imageUrl === '' ? (
-                  <Typography variant="body2">No image Uploaded</Typography>
-                ) : (
-                  <Grid
-                    className={classes.filePreview}
-                    container
-                    justify="space-between"
-                    alignItems="flex-start"
-                  >
-                    <Grid item sm={10}>
-                      <Grid container spacing={1}>
-                        <Grid item>
-                          <Image
-                            src={`${
-                              imageUrl
-                                ? imageUrl
-                                : 'https://via.placeholder.com/40x50'
-                            }`}
-                            width={40}
-                            height={50}
-                            quality={100}
-                            loading="eager"
-                            alt="product preview"
-                          />
-                        </Grid>
-                        <Grid item>
-                          <Typography>
-                            {imageName.length > 20
-                              ? imageName.substring(0, 15) + '...'
-                              : imageName}
-                          </Typography>
-                          <Typography>{imageSize}</Typography>
-                        </Grid>
+          <Grid item>
+            <IconButton
+              size="medium"
+              aria-label="Go back"
+              onClick={handleCloseModal}
+            >
+              <CloseIcon />
+            </IconButton>
+          </Grid>
+        </Grid>
+        <Grid container spacing={4}>
+          <Grid item sm={6}>
+            <Box style={{ border: '1px solid #e5e5ea', padding: '1em' }}>
+              <Typography variant="body2">Add Images</Typography>
+              <label className={classes.fileUpload}>
+                <Image
+                  src="/image/empt.png"
+                  width={100}
+                  objectFit="cover"
+                  height={100}
+                  alt="file upload"
+                />
+                <Typography>Drop your files or Browse</Typography>
+                <input
+                  type="file"
+                  accept="image/jpg, image/jpeg, image/png"
+                  onChange={handleFileUpload}
+                />
+              </label>
+              {isImage ? (
+                <>
+                  <Typography variant="subtitle2">
+                    uploading image...
+                  </Typography>
+                  <LinearProgress />
+                </>
+              ) : isImage === false && imageUrl === '' ? (
+                <Typography variant="body2">No image Uploaded</Typography>
+              ) : (
+                <Grid
+                  className={classes.filePreview}
+                  container
+                  justify="space-between"
+                  alignItems="flex-start"
+                >
+                  <Grid item sm={10}>
+                    <Grid container spacing={1}>
+                      <Grid item>
+                        <Image
+                          src={`${
+                            imageUrl
+                              ? imageUrl
+                              : 'https://via.placeholder.com/40x50'
+                          }`}
+                          width={40}
+                          height={50}
+                          quality={100}
+                          loading="eager"
+                          alt="product preview"
+                        />
+                      </Grid>
+                      <Grid item>
+                        <Typography>
+                          {imageName.length > 20
+                            ? imageName.substring(0, 15) + '...'
+                            : imageName}
+                        </Typography>
+                        <Typography>{imageSize}</Typography>
                       </Grid>
                     </Grid>
-                    <Grid item sm={2} style={{ textAlign: 'right' }}>
-                      <DeleteOutlinedIcon fontSize="small" />
-                    </Grid>
                   </Grid>
-                )}
-              </Box>
-            </Grid>
-            <Grid item sm={6}>
-              <Box style={{ border: '1px solid #e5e5ea', padding: '1em' }}>
-                <Grid container spacing={2}>
-                  <Grid item sm={12}>
-                    <TextInput
-                      label="Product Name"
-                      variant="outlined"
-                      fullWidth
-                      size="small"
-                      color="secondary"
-                      name="productName"
-                      value={productName}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      helperText={touched.productName && errors.productName}
-                      error={touched.productName && Boolean(errors.productName)}
-                    />
-                  </Grid>
-                  <Grid item sm={12}>
-                    <Select
-                      options={PRODUCT_CATEGORY}
-                      closeMenuOnSelect={true}
-                      components={animatedComponents}
-                      classNamePrefix={'my-custom-react-select1'}
-                      placeholder="Product Category"
-                      name="productCategory"
-                      value={selectedProduct}
-                      onChange={(e: any) => {
-                        setSelectedProduct({
-                          label: e.label,
-                          value: e.value,
-                        });
-                        setIsError({ ...isError, productError: false });
-                      }}
-                      onBlur={() => _handleBlur('product')}
-                    />
-                    <Typography className={classes.error}>
-                      {!selectedProduct.value && 'Required'}
-                    </Typography>
-                  </Grid>
-                  <Grid item sm={12}>
-                    <Select
-                      closeMenuOnSelect={false}
-                      components={animatedComponents}
-                      isMulti
-                      options={PPRODUCT_SIZES}
-                      classNamePrefix={'my-custom-react-select2'}
-                      placeholder="Available Size"
-                      value={selectedSize}
-                      onChange={(e: any) => {
-                        setSelectedSize([...e]);
-                        setIsError({ ...isError, sizeError: false });
-                      }}
-                      onBlur={() => _handleBlur('size')}
-                    />
-                    <Typography className={classes.error}>
-                      {!selectedSize.length && 'Required'}
-                    </Typography>
-                  </Grid>
-                  <Grid item sm={12}>
-                    <Select
-                      closeMenuOnSelect={false}
-                      components={animatedComponents}
-                      isMulti
-                      options={COLORS}
-                      classNamePrefix={'my-custom-react-select3'}
-                      placeholder="Available Colors"
-                      value={selectedColor}
-                      onChange={(e: Array<string>) => {
-                        setSelectedColor([...e]);
-                        setIsError({ ...isError, colorError: false });
-                      }}
-                      onBlur={() => _handleBlur('color')}
-                    />
-                    <Typography className={classes.error}>
-                      {!selectedColor.length && 'Required'}
-                    </Typography>
-                  </Grid>
-                  <Grid item sm={6}>
-                    <TextInput
-                      label="Old Price"
-                      variant="outlined"
-                      fullWidth
-                      size="small"
-                      color="secondary"
-                      name="oldPrice"
-                      value={oldPrice}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      InputProps={{
-                        inputComponent: NumberFormatCustom,
-                        startAdornment: (
-                          <InputAdornment position="start">-N-</InputAdornment>
-                        ),
-                      }}
-                      helperText={touched.oldPrice && errors.oldPrice}
-                      error={touched.oldPrice && Boolean(errors.oldPrice)}
-                    />
-                  </Grid>
-                  <Grid item sm={6}>
-                    <TextInput
-                      label="New Price"
-                      variant="outlined"
-                      fullWidth
-                      size="small"
-                      color="secondary"
-                      name="newPrice"
-                      value={newPrice}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      InputProps={{
-                        inputComponent: NumberFormatCustom,
-                        startAdornment: (
-                          <InputAdornment position="start">-N-</InputAdornment>
-                        ),
-                      }}
-                      helperText={touched.newPrice && errors.newPrice}
-                      error={touched.newPrice && Boolean(errors.newPrice)}
-                    />
-                  </Grid>
-                  <Grid item sm={12}>
-                    <Select
-                      closeMenuOnSelect={false}
-                      components={animatedComponents}
-                      isMulti
-                      options={PRODUCT_TAGS}
-                      classNamePrefix={'my-custom-react-select4'}
-                      placeholder="Select Tags"
-                      value={selectedTag}
-                      onChange={(e: Array<string>) => {
-                        setSelectedTag([...e]);
-                        setIsError({ ...isError, tagError: false });
-                      }}
-                      onBlur={() => _handleBlur('tag')}
-                    />
-                    <Typography className={classes.error}>
-                      {!selectedTag.length && 'Required'}
-                    </Typography>
-                  </Grid>
-                  <Grid item sm={12}>
-                    <Select
-                      closeMenuOnSelect={true}
-                      components={animatedComponents}
-                      options={PRODUCT_STOCK}
-                      placeholder="Stock"
-                      value={selectedStock}
-                      classNamePrefix={'my-custom-react-select5'}
-                      onChange={(e: any) => {
-                        setSelectedStock({ label: e.label, value: e.value });
-                        setIsError({ ...isError, stockError: false });
-                      }}
-                      onBlur={() => _handleBlur('stock')}
-                    />
-                    <Typography className={classes.error}>
-                      {!selectedStock.value && 'Required'}
-                    </Typography>
-                  </Grid>
-                  <Grid item sm={12}>
-                    <TextInput
-                      multiline
-                      rows={5}
-                      label="Description"
-                      variant="outlined"
-                      fullWidth
-                      size="small"
-                      color="secondary"
-                      name="productDescription"
-                      value={productDescription}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      helperText={
-                        touched.productDescription && errors.productDescription
-                      }
-                      error={
-                        touched.productDescription &&
-                        Boolean(errors.productDescription)
-                      }
-                    />
+                  <Grid item sm={2} style={{ textAlign: 'right' }}>
+                    <DeleteOutlinedIcon fontSize="small" />
                   </Grid>
                 </Grid>
-              </Box>
-            </Grid>
+              )}
+            </Box>
           </Grid>
-          <Grid
-            container
-            spacing={2}
-            alignItems="center"
-            justify="flex-end"
-            className={classes.btnAction}
-          >
-            <Grid item sm={2}>
-              <Button
-                variant="outlined"
-                color="secondary"
-                fullWidth
-                disableElevation
-                onClick={handleCloseModal}
-              >
-                Cancel
-              </Button>
-            </Grid>
-            <Grid item sm={2}>
-              <Button
-                variant="contained"
-                color="secondary"
-                fullWidth
-                disableElevation
-                onClick={handleSubmit}
-              >
-                {isSubmitting && loading ? (
-                  <CircularProgress size={25} />
-                ) : (
-                  'Add Product'
-                )}
-              </Button>
-            </Grid>
+          <Grid item sm={6}>
+            <Box style={{ border: '1px solid #e5e5ea', padding: '1em' }}>
+              <Grid container spacing={2}>
+                <Grid item sm={12}>
+                  <TextInput
+                    label="Product Name"
+                    variant="outlined"
+                    fullWidth
+                    size="small"
+                    color="secondary"
+                    name="productName"
+                    value={productName}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    helperText={touched.productName && errors.productName}
+                    error={touched.productName && Boolean(errors.productName)}
+                  />
+                </Grid>
+                <Grid item sm={12}>
+                  <Select
+                    options={PRODUCT_CATEGORY}
+                    closeMenuOnSelect={true}
+                    components={animatedComponents}
+                    classNamePrefix={'my-custom-react-select1'}
+                    placeholder="Product Category"
+                    name="productCategory"
+                    value={selectedProduct}
+                    onChange={(e: any) => {
+                      setSelectedProduct({
+                        label: e.label,
+                        value: e.value,
+                      });
+                      setIsError({ ...isError, productError: false });
+                    }}
+                    onBlur={() => _handleBlur('product')}
+                  />
+                  <Typography className={classes.error}>
+                    {!selectedProduct.value && 'Required'}
+                  </Typography>
+                </Grid>
+                <Grid item sm={12}>
+                  <Select
+                    closeMenuOnSelect={false}
+                    components={animatedComponents}
+                    isMulti
+                    options={PPRODUCT_SIZES}
+                    classNamePrefix={'my-custom-react-select2'}
+                    placeholder="Available Size"
+                    value={selectedSize}
+                    onChange={(e: any) => {
+                      setSelectedSize([...e]);
+                      setIsError({ ...isError, sizeError: false });
+                    }}
+                    onBlur={() => _handleBlur('size')}
+                  />
+                  <Typography className={classes.error}>
+                    {!selectedSize.length && 'Required'}
+                  </Typography>
+                </Grid>
+                <Grid item sm={12}>
+                  <Select
+                    closeMenuOnSelect={false}
+                    components={animatedComponents}
+                    isMulti
+                    options={COLORS}
+                    classNamePrefix={'my-custom-react-select3'}
+                    placeholder="Available Colors"
+                    value={selectedColor}
+                    onChange={(e: Array<string>) => {
+                      setSelectedColor([...e]);
+                      setIsError({ ...isError, colorError: false });
+                    }}
+                    onBlur={() => _handleBlur('color')}
+                  />
+                  <Typography className={classes.error}>
+                    {!selectedColor.length && 'Required'}
+                  </Typography>
+                </Grid>
+                <Grid item sm={6}>
+                  <TextInput
+                    label="Old Price"
+                    variant="outlined"
+                    fullWidth
+                    size="small"
+                    color="secondary"
+                    name="oldPrice"
+                    value={oldPrice}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    InputProps={{
+                      inputComponent: NumberFormatCustom,
+                      startAdornment: (
+                        <InputAdornment position="start">₦</InputAdornment>
+                      ),
+                    }}
+                    helperText={touched.oldPrice && errors.oldPrice}
+                    error={touched.oldPrice && Boolean(errors.oldPrice)}
+                  />
+                </Grid>
+                <Grid item sm={6}>
+                  <TextInput
+                    label="New Price"
+                    variant="outlined"
+                    fullWidth
+                    size="small"
+                    color="secondary"
+                    name="newPrice"
+                    value={newPrice}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    InputProps={{
+                      inputComponent: NumberFormatCustom,
+                      startAdornment: (
+                        <InputAdornment position="start">₦</InputAdornment>
+                      ),
+                    }}
+                    helperText={touched.newPrice && errors.newPrice}
+                    error={touched.newPrice && Boolean(errors.newPrice)}
+                  />
+                </Grid>
+                <Grid item sm={12}>
+                  <Select
+                    closeMenuOnSelect={false}
+                    components={animatedComponents}
+                    isMulti
+                    options={PRODUCT_TAGS}
+                    classNamePrefix={'my-custom-react-select4'}
+                    placeholder="Select Tags"
+                    value={selectedTag}
+                    onChange={(e: Array<string>) => {
+                      setSelectedTag([...e]);
+                      setIsError({ ...isError, tagError: false });
+                    }}
+                    onBlur={() => _handleBlur('tag')}
+                  />
+                  <Typography className={classes.error}>
+                    {!selectedTag.length && 'Required'}
+                  </Typography>
+                </Grid>
+                <Grid item sm={12}>
+                  <Select
+                    closeMenuOnSelect={true}
+                    components={animatedComponents}
+                    options={PRODUCT_STOCK}
+                    placeholder="Stock"
+                    value={selectedStock}
+                    classNamePrefix={'my-custom-react-select5'}
+                    onChange={(e: any) => {
+                      setSelectedStock({ label: e.label, value: e.value });
+                      setIsError({ ...isError, stockError: false });
+                    }}
+                    onBlur={() => _handleBlur('stock')}
+                  />
+                  <Typography className={classes.error}>
+                    {!selectedStock.value && 'Required'}
+                  </Typography>
+                </Grid>
+                <Grid item sm={12}>
+                  <TextInput
+                    multiline
+                    rows={5}
+                    label="Description"
+                    variant="outlined"
+                    fullWidth
+                    size="small"
+                    color="secondary"
+                    name="productDescription"
+                    value={productDescription}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    helperText={
+                      touched.productDescription && errors.productDescription
+                    }
+                    error={
+                      touched.productDescription &&
+                      Boolean(errors.productDescription)
+                    }
+                  />
+                </Grid>
+              </Grid>
+            </Box>
           </Grid>
-        </Box>
-      </Modal>
-      {uiStore.serverMessage.length > 1 && (
-        <Snackbar
-          open={uiStore.serverMessage.length > 1 ? true : false}
-          handleClose={handleClose}
-          message={uiStore.serverMessage}
-          severity="success"
-        />
-      )}
-    </React.Fragment>
+        </Grid>
+        <Grid
+          container
+          spacing={2}
+          alignItems="center"
+          justify="flex-end"
+          className={classes.btnAction}
+        >
+          <Grid item sm={2}>
+            <Button
+              variant="outlined"
+              color="secondary"
+              fullWidth
+              disableElevation
+              onClick={handleCloseModal}
+            >
+              Cancel
+            </Button>
+          </Grid>
+          <Grid item sm={2}>
+            <Button
+              variant="contained"
+              color="secondary"
+              fullWidth
+              disableElevation
+              onClick={handleSubmit}
+            >
+              {isSubmitting && loading ? (
+                <CircularProgress size={25} />
+              ) : (
+                'Add Product'
+              )}
+            </Button>
+          </Grid>
+        </Grid>
+      </Box>
+    </Modal>
   );
 };
 
