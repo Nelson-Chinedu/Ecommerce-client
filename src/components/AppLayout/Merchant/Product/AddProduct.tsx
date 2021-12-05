@@ -21,7 +21,6 @@ import { useStore } from 'src/store';
 
 import { ADD_PRODUCT, FILE_UPLOAD } from 'src/queries';
 
-import Snackbar from 'src/components/SharedLayout/Snackbar';
 import Modal from 'src/components/AppLayout/Merchant/Product/Modal/AddProductModal';
 import TextInput from 'src/components/SharedLayout/TextInput';
 import Button from 'src/components/SharedLayout/Button';
