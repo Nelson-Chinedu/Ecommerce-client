@@ -123,14 +123,6 @@ const AddProduct: FunctionComponent<{}> = () => {
     setState({ ...state, modal: '' });
   };
 
-  const handleClose = (_event: unknown, reason: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    uiStore.serverMessage = '';
-    uiStore.showSnackbar = false;
-  };
-
   const _handleBlur = (param: string) => {
     if (param === 'product' && selectedProduct.value === '') {
       setIsError({ ...isError, productError: true });
