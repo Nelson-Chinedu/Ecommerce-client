@@ -10,10 +10,13 @@ import {
   concat,
   InMemoryCache,
 } from '@apollo/client';
+import { Detector } from 'react-detect-offline';
 import { createUploadLink } from 'apollo-upload-client';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import store from 'store';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 
 import theme from 'src/components/Theme';
@@ -68,6 +71,16 @@ function MyApp({ Component, pageProps }: AppProps) {
     uiStore.serverMessage = '';
   };
 
+  if (process.env.NODE_ENV === 'production') {
+    return (
+      <Box style={{ width: '50%', margin: '4em auto', textAlign: 'center' }}>
+        <Typography variant="subtitle1">
+          Site under construction &lt; &#47; &gt;
+        </Typography>
+        <Typography variant="subtitle2">Check back later</Typography>
+      </Box>
+    );
+  }
   return (
     <>
       <Head>
@@ -77,6 +90,15 @@ function MyApp({ Component, pageProps }: AppProps) {
           key="viewport"
         />
       </Head>
+      <Detector
+        render={({ online }) =>
+          !online && (
+            <Box className="offlineWrapper">
+              <Typography>You are currently offline</Typography>
+            </Box>
+          )
+        }
+      />
       <MuiThemeProvider theme={theme}>
         <UserContext.Provider value={{ isLoggedIn }}>
           <ApolloProvider client={client}>

@@ -1,4 +1,4 @@
-import React, { useContext, FunctionComponent } from 'react';
+import React, { useContext, FunctionComponent, useState } from 'react';
 import NumberFormat from 'react-number-format';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -10,19 +10,50 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import ListItemText from '@material-ui/core/ListItemText';
 
 import { useStyles } from 'src/components/AppLayout/Merchant/Order/styled.order';
 
 import { showDate } from 'src/components/SharedLayout/Date';
+import { StyledMenu } from 'src/components/SharedLayout/PopoverMenu';
 
 import {
   MerchantOrderContext,
   IProps,
 } from 'src/components/context/merchantOrder-context';
 
+import useModalControl from 'src/components/hooks/useModalControl';
+
 const OrderTable: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const { loading, data } = useContext(MerchantOrderContext);
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const [state, setState] = useModalControl();
+  const [isSelectedOrder, setIsSelectedOrder] = useState(null);
+
+  const handlePopeverOpen = (event: any, id: string | number) => {
+    event.stopPropagation();
+    setIsSelectedOrder(id);
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handlePopeverClose = () => {
+    setAnchorEl(null);
+    setIsSelectedOrder(null);
+  };
+
+  const handleUpdateStatus = () => {
+    setState({
+      ...state,
+      modal: 'updateOrderStatusModal',
+      id: isSelectedOrder,
+    });
+    setAnchorEl(null);
+  };
+
+  const handleProductClick = (id: string | number) => {
+    setIsSelectedOrder(id);
+  };
 
   if (loading) return <p>loading...</p>;
 
@@ -99,6 +130,8 @@ const OrderTable: FunctionComponent<{}> = () => {
                           ? 'pending'
                           : order.status === 'delivered'
                           ? 'delivered'
+                          : order.status === 'Enroute'
+                          ? 'enroute'
                           : 'cancelled'
                       }
                     >
@@ -108,8 +141,33 @@ const OrderTable: FunctionComponent<{}> = () => {
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    <IconButton>
-                      <MoreVertIcon />
+                    <IconButton
+                      aria-label="more"
+                      aria-controls="long-menu"
+                      aria-haspopup="true"
+                      onClick={() => handleProductClick(order.orderId)}
+                    >
+                      <MoreVertIcon
+                        fontSize="small"
+                        style={{ cursor: 'pointer' }}
+                        aria-controls="customized-menu"
+                        aria-haspopup="true"
+                        onClick={(event) =>
+                          handlePopeverOpen(event, order.orderId)
+                        }
+                      />
+                      <StyledMenu
+                        anchorEl={anchorEl}
+                        keepMounted
+                        open={Boolean(anchorEl)}
+                        onClose={handlePopeverClose}
+                      >
+                        <ListItemText
+                          primary="Update Status"
+                          className="edit"
+                          onClick={handleUpdateStatus}
+                        />
+                      </StyledMenu>
                     </IconButton>
                   </TableCell>
                 </TableRow>

@@ -1343,6 +1343,13 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
   integrity sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==
 
+"@types/react-detect-offline@^2.4.1":
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/@types/react-detect-offline/-/react-detect-offline-2.4.1.tgz#5a71625d3614a56a6c3dacc53c5e9baed0610de0"
+  integrity sha512-ympSl07fvDbu7+EsnhrKwDWkdOqHp22lukhJYIHxnTfSIzOh1T/K9NGmpwKUtgJaNCfllwLvMSXBlyC6nHEObw==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-dom@^17.0.1":
   version "17.0.6"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.6.tgz#c158325cf91b196270bc0f4af73463f149e7eafe"
@@ -4900,6 +4907,11 @@ raw-body@2.4.1:
     http-errors "1.7.3"
     iconv-lite "0.4.24"
     unpipe "1.0.0"
+
+react-detect-offline@^2.4.5:
+  version "2.4.5"
+  resolved "https://registry.yarnpkg.com/react-detect-offline/-/react-detect-offline-2.4.5.tgz#3c242516c37b6789cf89102881031f87e70b80e6"
+  integrity sha512-sI13NPEKl3uQp95FT5CwrYzH3DnXCwNP6TnY6NRF5gFDM4NU9KDlbtA6HG2dwhDVS0RYQGXwZW/mHbdf8fCnaw==
 
 react-dom@^17.0.1:
   version "17.0.2"
