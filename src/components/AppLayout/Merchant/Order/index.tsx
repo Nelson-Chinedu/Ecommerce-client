@@ -9,6 +9,7 @@ import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOut
 
 import OrderTable from 'src/components/AppLayout/Merchant/Order/OrderTable';
 import AddProduct from 'src/components/AppLayout/Merchant/Product/AddProduct';
+import UpdateOrder from 'src/components/AppLayout/Merchant/Order/UpdateOrder';
 import { useStyles } from 'src/components/AppLayout/Merchant/Order/styled.order';
 
 import Layout from 'src/components/SharedLayout/Layout';
@@ -126,6 +127,7 @@ const Order: FunctionComponent<{}> = () => {
         </Paper>
       </Box>
       <AddProduct />
+      <UpdateOrder />
     </Layout>
   );
 };

@@ -7,7 +7,7 @@ import { GET_MERCHANT_ORDER } from 'src/queries';
 export interface IProps {
   orderId: string;
   createdAt: string;
-  status: 'processing' | 'delivered' | 'cancelled';
+  status: 'processing' | 'delivered' | 'cancelled' | 'Enroute';
   product: { newPrice: number; number: 'string' };
   account: { email: string };
 }

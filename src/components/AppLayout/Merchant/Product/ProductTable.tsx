@@ -10,11 +10,11 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Menu, { MenuProps } from '@material-ui/core/Menu';
 import ListItemText from '@material-ui/core/ListItemText';
-import { withStyles } from '@material-ui/core/styles';
 
 import { useStyles } from 'src/components/AppLayout/Merchant/Product/styled.product';
+
+import { StyledMenu } from 'src/components/SharedLayout/PopoverMenu';
 
 import {
   MerchantProductContext,
@@ -22,46 +22,6 @@ import {
 } from 'src/components/context/merchantProduct-context';
 
 import useModalControl from 'src/components/hooks/useModalControl';
-
-const StyledMenu = withStyles({
-  paper: {
-    border: '1px solid #d3d4d5',
-    borderRadius: '5px',
-    padding: '5px 15px',
-    width: '150px',
-    '& .edit': {
-      borderTop: '1px solid #FAFAFA',
-      paddingTop: '10px',
-      fontSize: '12.64px',
-      lineHeight: '14px',
-      color: '#737373',
-      cursor: 'pointer',
-    },
-    '& .delete': {
-      paddingTop: '10px',
-      fontSize: '12.64px',
-      lineHeight: '14px',
-      cursor: 'pointer',
-      '& .MuiListItemText-primary': {
-        color: 'red',
-      },
-    },
-  },
-})((props: MenuProps) => (
-  <Menu
-    elevation={0}
-    getContentAnchorEl={null}
-    anchorOrigin={{
-      vertical: 'bottom',
-      horizontal: 'left',
-    }}
-    transformOrigin={{
-      vertical: 'top',
-      horizontal: 'left',
-    }}
-    {...props}
-  />
-));
 
 const ProductTable: FunctionComponent<{}> = () => {
   const classes = useStyles();

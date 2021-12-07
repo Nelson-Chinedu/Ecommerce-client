@@ -50,6 +50,45 @@ export const useStyles = makeStyles({
       textAlign: 'center',
       textTransform: 'capitalize',
     },
+    '& .enroute': {
+      background: '#fdecff',
+      color: '#d157df',
+      padding: '.5em .8em',
+      borderRadius: '5px',
+      textAlign: 'center',
+      textTransform: 'capitalize',
+    },
+  },
+  wrapper: {
+    background: 'white',
+    height: '270px',
+    maxWidth: '500px',
+    padding: '2em 2em 3em',
+    transform: 'translate(-50%, -50%)',
+    top: '50%',
+    left: '50%',
+    position: 'relative',
+    maxHeight: '300px',
+    // height: 'auto',
+    overflowY: 'scroll',
+    '& .MuiButton-contained': {
+      '& .MuiButton-label': {
+        color: '#FFF',
+      },
+    },
+    '& .MuiPaper-root': {
+      boxShadow: '0px !important',
+    },
+    '& .MuiTypography-subtitle2': {
+      marginBottom: '.6em',
+      fontWeight: 600,
+    },
+    '& .MuiTypography-body2': {
+      marginBottom: '.6em',
+    },
+    '& .MuiCircularProgress-circle': {
+      color: '#FFF',
+    },
   },
   filter: {
     padding: '.4em 2em',

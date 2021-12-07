@@ -430,3 +430,13 @@ export const EDIT_MERCHANT_PRODUCT = gql`
     }
   }
 `;
+
+export const MERCHANT_UPDATE_STATUS_ORDER = gql`
+  mutation ($orderNumber: String!, $status: String!) {
+    client {
+      updateOrderStatus(orderNumber: $orderNumber, status: $status) {
+        message
+      }
+    }
+  }
+`;
