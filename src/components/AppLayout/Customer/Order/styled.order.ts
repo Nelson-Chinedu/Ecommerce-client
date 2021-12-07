@@ -91,4 +91,20 @@ export const useStyles = makeStyles((theme: Theme) => ({
     margin: '10em 0px',
     textAlign: 'center',
   },
+  lost: {
+    width: '50%',
+    margin: '4em auto',
+    textAlign: 'center',
+    '& .MuiTypography-subtitle1': {
+      fontSize: '14px',
+      margin: '1em 0px',
+    },
+    '& .MuiGrid-container': {
+      '& .MuiButton-contained': {
+        '& .MuiButton-label': {
+          color: 'white',
+        },
+      },
+    },
+  },
 }));

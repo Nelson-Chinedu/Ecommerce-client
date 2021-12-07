@@ -105,7 +105,10 @@ const RecentOrders: FunctionComponent<{}> = () => {
                         </Typography>
                       </TableCell>
                       <TableCell>
-                        <Typography variant="body2">
+                        <Typography
+                          variant="body2"
+                          style={{ textTransform: 'capitalize' }}
+                        >
                           {order.status === 'processing'
                             ? 'New Order'
                             : order.status}
