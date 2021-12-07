@@ -1,9 +1,7 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import { useRouter } from 'next/router';
 import { useMutation } from '@apollo/client';
 import { observer } from 'mobx-react-lite';
-import Select from 'react-select';
-import makeAnimated from 'react-select/animated';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
