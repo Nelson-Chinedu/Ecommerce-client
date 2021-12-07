@@ -1,6 +1,6 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useState, useEffect } from 'react';
 import NumberFormat from 'react-number-format';
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import fileSize from 'filesize';
@@ -18,9 +18,12 @@ import Grid from '@material-ui/core/Grid';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 
 import { useStore } from 'src/store';
-import { ADD_PRODUCT, FILE_UPLOAD } from 'src/queries';
+import {
+  EDIT_MERCHANT_PRODUCT,
+  FILE_UPLOAD,
+  GET_MERCHANT_SINGLE_PRODUCT,
+} from 'src/queries';
 
-import Snackbar from 'src/components/SharedLayout/Snackbar';
 import Modal from 'src/components/AppLayout/Merchant/Product/Modal/EditProductModal';
 import TextInput from 'src/components/SharedLayout/TextInput';
 import Button from 'src/components/SharedLayout/Button';
@@ -70,20 +73,29 @@ function NumberFormatCustom(props: any) {
   );
 }
 
+type Props = {
+  value: string;
+  label: string;
+};
+
 const EditProduct: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const { uiStore } = useStore();
   const [state, setState] = useModalControl();
+  const { data: productData } = useQuery(GET_MERCHANT_SINGLE_PRODUCT, {
+    variables: { productNumber: state.id },
+  });
+
   const [selectedProduct, setSelectedProduct] = useState<{
     value: string;
     label: string;
   }>({
-    value: '',
-    label: '',
+    value: productData ? productData.client.getSingleProduct.name : '',
+    label: productData ? productData.client.getSingleProduct.name : '',
   });
-  const [selectedSize, setSelectedSize] = useState([]);
-  const [selectedColor, setSelectedColor] = useState([]);
-  const [selectedTag, setSelectedTag] = useState([]);
+  const [selectedSize, setSelectedSize] = useState<Array<Props>>([]);
+  const [selectedColor, setSelectedColor] = useState<Array<Props>>([]);
+  const [selectedTag, setSelectedTag] = useState<Array<Props>>([]);
   const [imageUrl, setImageUrl] = useState<string>('');
   const [imageName, setImageName] = useState<string>('');
   const [imageSize, setImageSize] = useState<string>('');
@@ -106,7 +118,7 @@ const EditProduct: FunctionComponent<{}> = () => {
     stockError: false,
   });
 
-  const [addProduct, { loading }] = useMutation(ADD_PRODUCT);
+  const [editProduct, { loading }] = useMutation(EDIT_MERCHANT_PRODUCT);
   const [fileUpload] = useMutation(FILE_UPLOAD, {
     onCompleted: (data) => {
       if (data) {
@@ -119,17 +131,44 @@ const EditProduct: FunctionComponent<{}> = () => {
     },
   });
 
-  const handleCloseModal = () => {
-    // uiStore.toggleModalVisibility();
-    setState({ ...state, modal: '' });
-  };
+  useEffect(() => {
+    const foo = async () => {
+      if (productData) {
+        setImageUrl(productData.client.getSingleProduct.imageUrl);
+        setSelectedStock({
+          label: productData.client.getSingleProduct.stock,
+          value: productData.client.getSingleProduct.stock,
+        });
 
-  const handleClose = (_event: unknown, reason: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    uiStore.serverMessage = '';
-    uiStore.showSnackbar = false;
+        setSelectedTag([
+          {
+            label: productData.client.getSingleProduct.tags[0],
+            value: productData.client.getSingleProduct.tags[0],
+          },
+        ]);
+        setSelectedColor([
+          {
+            label: productData.client.getSingleProduct.colors[0],
+            value: productData.client.getSingleProduct.colors[0],
+          },
+        ]);
+        setSelectedSize([
+          {
+            label: productData.client.getSingleProduct.sizes[0],
+            value: productData.client.getSingleProduct.sizes[0],
+          },
+        ]);
+        setSelectedProduct({
+          label: productData.client.getSingleProduct.category,
+          value: productData.client.getSingleProduct.category,
+        });
+      }
+    };
+    foo();
+  }, [state.id, productData]);
+
+  const handleCloseModal = () => {
+    setState({ ...state, modal: '' });
   };
 
   const _handleBlur = (param: string) => {
@@ -157,6 +196,7 @@ const EditProduct: FunctionComponent<{}> = () => {
         colors,
         tags,
         imageUrl,
+        productNumber: state.id,
         sizes: productSizes,
         name: formik.values.productName,
         description: formik.values.productDescription,
@@ -165,7 +205,7 @@ const EditProduct: FunctionComponent<{}> = () => {
         category: selectedProduct.value,
         stock: selectedStock.value,
       };
-      const newProduct = await addProduct({
+      const newProduct = await editProduct({
         variables: {
           ...payload,
         },
@@ -175,7 +215,7 @@ const EditProduct: FunctionComponent<{}> = () => {
         const {
           data: {
             client: {
-              addProduct: { message },
+              editProduct: { message },
             },
           },
         } = newProduct;
@@ -196,15 +236,23 @@ const EditProduct: FunctionComponent<{}> = () => {
     }
   };
 
-  const formik = useFormik({
+  const formik = useFormik<{
+    productName: string;
+    productDescription: string;
+    oldPrice: string;
+    newPrice: string;
+  }>({
     initialValues: {
-      productName: '',
-      productDescription: '',
-      oldPrice: '',
-      newPrice: '',
+      productName: productData ? productData.client.getSingleProduct.name : '',
+      productDescription: productData
+        ? productData.client.getSingleProduct.description
+        : '',
+      oldPrice: productData ? productData.client.getSingleProduct.oldPrice : '',
+      newPrice: productData ? productData.client.getSingleProduct.newPrice : '',
     },
     onSubmit: _handleForm,
     validationSchema,
+    enableReinitialize: true,
   });
   const {
     handleSubmit,
@@ -268,7 +316,7 @@ const EditProduct: FunctionComponent<{}> = () => {
                     height={100}
                     alt="file upload"
                   />
-                  <Typography>Drop your files or Browse</Typography>
+                  <Typography>Click to browse for image</Typography>
                   <input
                     type="file"
                     accept="image/jpg, image/jpeg, image/png"
@@ -392,7 +440,7 @@ const EditProduct: FunctionComponent<{}> = () => {
                       classNamePrefix={'my-custom-react-select3'}
                       placeholder="Available Colors"
                       value={selectedColor}
-                      onChange={(e: Array<string>) => {
+                      onChange={(e: any) => {
                         setSelectedColor([...e]);
                         setIsError({ ...isError, colorError: false });
                       }}
@@ -453,7 +501,7 @@ const EditProduct: FunctionComponent<{}> = () => {
                       classNamePrefix={'my-custom-react-select4'}
                       placeholder="Select Tags"
                       value={selectedTag}
-                      onChange={(e: Array<string>) => {
+                      onChange={(e: any) => {
                         setSelectedTag([...e]);
                         setIsError({ ...isError, tagError: false });
                       }}
@@ -536,21 +584,13 @@ const EditProduct: FunctionComponent<{}> = () => {
                 {isSubmitting && loading ? (
                   <CircularProgress size={25} />
                 ) : (
-                  'Add Product'
+                  'Save'
                 )}
               </Button>
             </Grid>
           </Grid>
         </Box>
       </Modal>
-      {uiStore.serverMessage.length > 1 && (
-        <Snackbar
-          open={uiStore.serverMessage.length > 1 ? true : false}
-          handleClose={handleClose}
-          message={uiStore.serverMessage}
-          severity="success"
-        />
-      )}
     </React.Fragment>
   );
 };

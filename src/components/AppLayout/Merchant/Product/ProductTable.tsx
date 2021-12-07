@@ -78,7 +78,7 @@ const ProductTable: FunctionComponent<{}> = () => {
   };
 
   const handleEditProduct = () => {
-    setState({ ...state, modal: 'editProductModal' });
+    setState({ ...state, modal: 'editProductModal', id: isSelectedProduct });
     setAnchorEl(null);
   };
 

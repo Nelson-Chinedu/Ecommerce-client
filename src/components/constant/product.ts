@@ -1,7 +1,7 @@
 interface Product {
   readonly value: string;
   readonly label: string;
-  readonly color: string;
+  readonly color?: string;
 }
 
 export const PPRODUCT_SIZES: Product[] = [
@@ -19,16 +19,16 @@ export const COLORS: Product[] = [
 ];
 
 export const PRODUCT_TAGS: Product[] = [
-  { value: 'Sneakers', label: 'Sneakers', color: '#00B8D9' },
-  { value: 'Shoe', label: 'Shoe', color: '#0052CC' },
-  { value: 'Stylish', label: 'Stylish', color: '#5243AA' },
-  { value: 'Footwear', label: 'Footwear', color: '#FF5630' },
-  { value: 'Women', label: 'Women', color: '#FF5630' },
+  { value: 'Sneakers', label: 'Sneakers' },
+  { value: 'Shoe', label: 'Shoe' },
+  { value: 'Stylish', label: 'Stylish' },
+  { value: 'Footwear', label: 'Footwear' },
+  { value: 'Women', label: 'Women' },
 ];
 
 export const PRODUCT_STOCK: Product[] = [
   { value: 'In-stock', label: 'In-Stock', color: '#00B8D9' },
-  { value: 'Out-of-Stock', label: 'Out-of-Stock', color: '#0052CC' },
+  { value: 'Out-of-stock', label: 'Out-of-Stock', color: '#0052CC' },
 ];
 
 export const PRODUCT_CATEGORY: Product[] = [
