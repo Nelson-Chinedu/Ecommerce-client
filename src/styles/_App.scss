@@ -6,6 +6,9 @@
 }
 .offlineWrapper {
   background-color: #f9d3f4;
+  position: sticky;
+  top: 0;
+  z-index: 9999999;
   padding: 1em;
   text-align: center;
 }

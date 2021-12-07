@@ -94,7 +94,13 @@ const Order: FunctionComponent<{}> = () => {
         ))
       ) : (
         <Box className={classes.emptyOrder}>
-          <Typography>No order found</Typography>
+          <Image
+            src="/image/orderNotFound.svg"
+            width={150}
+            height={150}
+            alt="lost in planet"
+          />
+          <Typography>Hang on tight, No order found!!!</Typography>
         </Box>
       )}
     </>

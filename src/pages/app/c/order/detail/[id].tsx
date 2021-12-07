@@ -4,6 +4,8 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import Box from '@material-ui/core/Box';
 
+import { ModalProvider } from 'src/components/context/modalContext';
+
 const Preview = dynamic(
   () => import('src/components/AppLayout/Customer/Order/Preview'),
   {
@@ -36,7 +38,9 @@ const OrderPreviewPage = () => {
       <Head>
         <title>Multibuy | Product-detail</title>
       </Head>
-      <Preview />
+      <ModalProvider>
+        <Preview />
+      </ModalProvider>
     </>
   );
 };

@@ -440,3 +440,13 @@ export const MERCHANT_UPDATE_STATUS_ORDER = gql`
     }
   }
 `;
+
+export const CUSTOMER_CANCEL_ORDER = gql`
+  mutation ($orderNumber: String!) {
+    client {
+      cancelOrder(orderNumber: $orderNumber) {
+        message
+      }
+    }
+  }
+`;

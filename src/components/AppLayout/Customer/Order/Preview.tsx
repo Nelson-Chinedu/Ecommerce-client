@@ -14,6 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 
 import Information from 'src/components/AppLayout/Customer/Order/Information';
+import CancelOrderModal from 'src/components/AppLayout/Customer/Order/CancelOrder';
 import { useStyles } from 'src/components/AppLayout/Customer/Order/styled.order';
 
 import CustomerLayout from 'src/components/SharedLayout/CustomerLayout';
@@ -22,12 +23,15 @@ import { showDate } from 'src/components/SharedLayout/Date';
 
 import { GET_PREVIEW_ORDER } from 'src/queries';
 
+import useModalControl from 'src/components/hooks/useModalControl';
+
 const Preview: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const {
     query: { id },
   }: any = useRouter();
   const router = useRouter();
+  const [state, setState] = useModalControl();
 
   const [isOrderId, setIsOrderId] = useState<string>('');
 
@@ -46,7 +50,45 @@ const Preview: FunctionComponent<{}> = () => {
     router.back();
   };
 
+  const handleCancelOrder = (id: string | number) => {
+    console.log(id);
+    setState({ ...state, modal: 'clientCancelOrderModal', id: orderId });
+  };
+
+  const handleBackHome = () => {
+    router.push('/app/c');
+  };
+
   if (loading) return <Typography>Loading...</Typography>;
+
+  if (data.client.previewOrder === null) {
+    return (
+      <Box className={classes.lost}>
+        <Image
+          src="/image/lost.svg"
+          width={150}
+          height={150}
+          alt="lost in planet"
+        />
+        <Typography variant="subtitle1">
+          Ooppss, you seem to be lost!!
+        </Typography>
+        <Grid container alignItems="center" justify="center">
+          <Grid item sm={3}>
+            <Button
+              variant="contained"
+              fullWidth
+              disableElevation
+              color="secondary"
+              onClick={handleBackHome}
+            >
+              Go back home
+            </Button>
+          </Grid>
+        </Grid>
+      </Box>
+    );
+  }
 
   const {
     client: {
@@ -157,16 +199,19 @@ const Preview: FunctionComponent<{}> = () => {
                     </Grid>
                   </Grid>
                 </Grid>
-                <Grid item className={classes.statusHistory}>
-                  <Button
-                    variant="contained"
-                    fullWidth
-                    disableElevation={true}
-                    color="default"
-                  >
-                    See Status History
-                  </Button>
-                </Grid>
+                {status && status === 'processing' && (
+                  <Grid item className={classes.statusHistory}>
+                    <Button
+                      variant="contained"
+                      fullWidth
+                      disableElevation={true}
+                      color="default"
+                      onClick={() => handleCancelOrder(orderId)}
+                    >
+                      Cancel Order
+                    </Button>
+                  </Grid>
+                )}
               </Grid>
             </Box>
             <Grid container spacing={5}>
@@ -237,6 +282,7 @@ const Preview: FunctionComponent<{}> = () => {
           </Box>
         )}
       </Paper>
+      <CancelOrderModal />
     </CustomerLayout>
   );
 };
