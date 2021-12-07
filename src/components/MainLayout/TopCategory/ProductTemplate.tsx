@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useContext } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import NumberFormat from 'react-number-format';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -59,10 +60,10 @@ const ProductTemplate: FunctionComponent<Props> = ({ category }) => {
                   <Image
                     src={`${
                       product.imageUrl === null
-                        ? 'https://via.placeholder.com/40x50'
+                        ? 'https://via.placeholder.com/50x60.svg'
                         : product.imageUrl
                         ? product.imageUrl
-                        : 'https://via.placeholder.com/40x50'
+                        : 'https://via.placeholder.com/50x60.svg'
                     }`}
                     objectFit="cover"
                     loading="eager"
@@ -80,7 +81,17 @@ const ProductTemplate: FunctionComponent<Props> = ({ category }) => {
                     <Typography variant="body2" className={classes.productName}>
                       {product.name}
                     </Typography>
-                    <Typography variant="body2">${product.newPrice}</Typography>
+                    <Typography variant="body2">
+                      ₦
+                      <NumberFormat
+                        value={`${product.newPrice}`}
+                        thousandSeparator={true}
+                        decimalSeparator="."
+                        decimalScale={2}
+                        fixedDecimalScale={true}
+                        displayType="text"
+                      />
+                    </Typography>
                   </Grid>
                   <Grid item>
                     <FavouriteIconOutlined

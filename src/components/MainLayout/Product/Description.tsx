@@ -2,6 +2,7 @@ import React, { FunctionComponent, useContext, useState } from 'react';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import Image from 'next/image';
+import NumberFormat from 'react-number-format';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -155,7 +156,15 @@ const Description: FunctionComponent<{}> = () => {
               color="primary"
               className={classes.oldPrice}
             >
-              {`$ ${oldPrice}`}
+              ₦
+              <NumberFormat
+                value={`${oldPrice}`}
+                thousandSeparator={true}
+                decimalSeparator="."
+                decimalScale={2}
+                fixedDecimalScale={true}
+                displayType="text"
+              />
             </Typography>
             <Typography
               variant="subtitle1"
@@ -163,7 +172,15 @@ const Description: FunctionComponent<{}> = () => {
               color="secondary"
               className={classes.newPrice}
             >
-              {`$ ${newPrice}`}
+              ₦
+              <NumberFormat
+                value={`${newPrice}`}
+                thousandSeparator={true}
+                decimalSeparator="."
+                decimalScale={2}
+                fixedDecimalScale={true}
+                displayType="text"
+              />
             </Typography>
           </Grid>
         </Grid>
@@ -252,7 +269,15 @@ const Description: FunctionComponent<{}> = () => {
               Subtotal:
             </Typography>
             <Typography component="span" color="secondary" variant="body2">
-              {`$ ${newPrice}`}
+              ₦
+              <NumberFormat
+                value={`${newPrice}`}
+                thousandSeparator={true}
+                decimalSeparator="."
+                decimalScale={2}
+                fixedDecimalScale={true}
+                displayType="text"
+              />
             </Typography>
           </Grid>
         </Grid>

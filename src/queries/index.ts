@@ -375,3 +375,58 @@ export const DELETE_MERCHANT_PRODUCT = gql`
     }
   }
 `;
+
+export const GET_MERCHANT_SINGLE_PRODUCT = gql`
+  query ($productNumber: String!) {
+    client {
+      getSingleProduct(productNumber: $productNumber) {
+        productId
+        number
+        name
+        description
+        sizes
+        colors
+        category
+        stock
+        tags
+        oldPrice
+        newPrice
+        imageUrl
+      }
+    }
+  }
+`;
+
+export const EDIT_MERCHANT_PRODUCT = gql`
+  mutation (
+    $productNumber: String!
+    $name: String!
+    $description: String!
+    $sizes: [String!]!
+    $colors: [String!]!
+    $category: String!
+    $stock: String!
+    $tags: [String!]!
+    $oldPrice: String!
+    $newPrice: String!
+    $imageUrl: String
+  ) {
+    client {
+      editProduct(
+        productNumber: $productNumber
+        name: $name
+        description: $description
+        sizes: $sizes
+        colors: $colors
+        category: $category
+        stock: $stock
+        tags: $tags
+        oldPrice: $oldPrice
+        newPrice: $newPrice
+        imageUrl: $imageUrl
+      ) {
+        message
+      }
+    }
+  }
+`;

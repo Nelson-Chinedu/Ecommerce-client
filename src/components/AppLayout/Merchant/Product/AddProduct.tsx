@@ -70,6 +70,11 @@ function NumberFormatCustom(props: any) {
   );
 }
 
+type Props = {
+  value: string;
+  label: string;
+};
+
 const AddProduct: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const { uiStore } = useStore();
@@ -81,9 +86,9 @@ const AddProduct: FunctionComponent<{}> = () => {
     value: '',
     label: '',
   });
-  const [selectedSize, setSelectedSize] = useState([]);
-  const [selectedColor, setSelectedColor] = useState([]);
-  const [selectedTag, setSelectedTag] = useState([]);
+  const [selectedSize, setSelectedSize] = useState<Array<Props>>([]);
+  const [selectedColor, setSelectedColor] = useState<Array<Props>>([]);
+  const [selectedTag, setSelectedTag] = useState<Array<Props>>([]);
   const [imageUrl, setImageUrl] = useState<string>('');
   const [imageName, setImageName] = useState<string>('');
   const [imageSize, setImageSize] = useState<string>('');
@@ -187,7 +192,12 @@ const AddProduct: FunctionComponent<{}> = () => {
     }
   };
 
-  const formik = useFormik({
+  const formik = useFormik<{
+    productName: string;
+    productDescription: string;
+    oldPrice: string;
+    newPrice: string;
+  }>({
     initialValues: {
       productName: '',
       productDescription: '',
@@ -258,7 +268,7 @@ const AddProduct: FunctionComponent<{}> = () => {
                   height={100}
                   alt="file upload"
                 />
-                <Typography>Drop your files or Browse</Typography>
+                <Typography>Click to browse for image</Typography>
                 <input
                   type="file"
                   accept="image/jpg, image/jpeg, image/png"
@@ -382,7 +392,7 @@ const AddProduct: FunctionComponent<{}> = () => {
                     classNamePrefix={'my-custom-react-select3'}
                     placeholder="Available Colors"
                     value={selectedColor}
-                    onChange={(e: Array<string>) => {
+                    onChange={(e: any) => {
                       setSelectedColor([...e]);
                       setIsError({ ...isError, colorError: false });
                     }}
@@ -443,7 +453,7 @@ const AddProduct: FunctionComponent<{}> = () => {
                     classNamePrefix={'my-custom-react-select4'}
                     placeholder="Select Tags"
                     value={selectedTag}
-                    onChange={(e: Array<string>) => {
+                    onChange={(e: any) => {
                       setSelectedTag([...e]);
                       setIsError({ ...isError, tagError: false });
                     }}
