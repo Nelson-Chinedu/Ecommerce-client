@@ -8,8 +8,10 @@ import {
   ApolloProvider,
   ApolloLink,
   concat,
+  from,
   InMemoryCache,
 } from '@apollo/client';
+import { onError } from '@apollo/client/link/error';
 import { Detector } from 'react-detect-offline';
 import { createUploadLink } from 'apollo-upload-client';
 import NProgress from 'nprogress';
@@ -51,6 +53,23 @@ function MyApp({ Component, pageProps }: AppProps) {
     return forward(operation);
   });
 
+  const errorLink = onError(({ graphQLErrors, networkError }) => {
+    if (graphQLErrors) {
+      graphQLErrors.forEach(({ message }) => {
+        if (message === 'Context creation failed: jwt expired') {
+          store.remove('__cnt');
+          store.remove('__clu');
+          window.location.href = '/auth/login';
+          uiStore.serverMessage = 'Session expired, Login to continue';
+          uiStore.snackbarSeverity = 'success';
+          uiStore.showSnackbar = true;
+        }
+      });
+    }
+
+    if (networkError) console.log(`[Network error]: ${networkError}`);
+  });
+
   //@ts-ignore
   const CreateUploadLink = new createUploadLink({
     uri: `${process.env.NEXT_PUBLIC_BASE_URI}/graphql`,
@@ -59,7 +78,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   const client = new ApolloClient({
     uri: `${process.env.NEXT_PUBLIC_BASE_URI}/graphql`,
     cache: new InMemoryCache(),
-    link: concat(authMiddleware, CreateUploadLink),
+    // link: concat(authMiddleware, CreateUploadLink),
+    link: from([errorLink, authMiddleware, CreateUploadLink]),
     credentials: 'include',
   });
 
@@ -90,15 +110,17 @@ function MyApp({ Component, pageProps }: AppProps) {
           key="viewport"
         />
       </Head>
-      <Detector
-        render={({ online }) =>
-          !online && (
-            <Box className="offlineWrapper">
-              <Typography>You are currently offline</Typography>
-            </Box>
-          )
-        }
-      />
+      {process.env.NODE_ENV !== 'development' && (
+        <Detector
+          render={({ online }) =>
+            !online && (
+              <Box className="offlineWrapper">
+                <Typography>You are currently offline</Typography>
+              </Box>
+            )
+          }
+        />
+      )}
       <MuiThemeProvider theme={theme}>
         <UserContext.Provider value={{ isLoggedIn }}>
           <ApolloProvider client={client}>

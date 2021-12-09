@@ -190,7 +190,7 @@ const SignupForm: FunctionComponent<{}> = () => {
         disableElevation={true}
         fullWidth={true}
         disabled={!uiStore.privacyButton}
-        type="button"
+        type="submit"
         onClick={handleSubmit}
       >
         {isSubmitting && loading ? <CircularProgress size={20} /> : 'Sign Up'}

@@ -51,7 +51,6 @@ const Preview: FunctionComponent<{}> = () => {
   };
 
   const handleCancelOrder = (id: string | number) => {
-    console.log(id);
     setState({ ...state, modal: 'clientCancelOrderModal', id: orderId });
   };
 

@@ -151,9 +151,9 @@ const LoginForm: FunctionComponent<{}> = () => {
                       size="small"
                     >
                       {uiStore.passwordVisibilty ? (
-                        <Visibility />
+                        <Visibility fontSize="small" />
                       ) : (
-                        <VisibilityOff />
+                        <VisibilityOff fontSize="small" />
                       )}
                     </IconButton>
                   </InputAdornment>
@@ -198,7 +198,7 @@ const LoginForm: FunctionComponent<{}> = () => {
           className={classes.btnLogin}
           disableElevation={true}
           fullWidth={true}
-          type="button"
+          type="submit"
           onClick={handleSubmit}
         >
           {isSubmitting && loading ? <CircularProgress size={20} /> : 'Login'}

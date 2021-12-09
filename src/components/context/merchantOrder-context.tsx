@@ -30,6 +30,8 @@ export const MerchantOrderProvider = ({ children }: any) => {
 
   if (loading) return <Typography>Loading...</Typography>;
 
+  if (!data) return null;
+
   const {
     client: {
       getMerchantOrders: { orders },
