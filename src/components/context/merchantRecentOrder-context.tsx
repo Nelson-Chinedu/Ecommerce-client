@@ -32,6 +32,8 @@ export const MerchantRecentOrderProvider = ({ children }: any) => {
 
   if (loading) return <Typography>Loading...</Typography>;
 
+  if (!data) return null;
+
   const {
     client: {
       getRecentOrders: { orders },

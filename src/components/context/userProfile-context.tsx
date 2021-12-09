@@ -20,6 +20,8 @@ export const ProfileProvider = ({ children }: any) => {
 
   if (loading) return <Typography>Loading...</Typography>;
 
+  if (!data) return null;
+
   const {
     client: {
       getProfile: {

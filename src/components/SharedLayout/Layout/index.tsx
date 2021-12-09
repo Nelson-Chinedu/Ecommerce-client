@@ -1,5 +1,6 @@
 import React, { FunctionComponent, ReactNode, useContext } from 'react';
 import { useRouter } from 'next/router';
+import { observer } from 'mobx-react-lite';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
@@ -9,6 +10,8 @@ import Badge from '@material-ui/core/Badge';
 import Popover from '@material-ui/core/Popover';
 import NotificationsOutlinedIcon from '@material-ui/icons/NotificationsOutlined';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+
+import { useStore } from 'src/store';
 
 import DashboardSidenav from 'src/components/SharedLayout/Sidenav/DashboardSidenav';
 import TextInput from 'src/components/SharedLayout/TextInput';
@@ -22,6 +25,7 @@ type Props = {
 const Layout: FunctionComponent<Props> = ({ children }) => {
   const classes = useStyles();
   const router = useRouter();
+  const { uiStore } = useStore();
   const { firstname, lastname } = useContext(SettingContext);
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
@@ -41,7 +45,10 @@ const Layout: FunctionComponent<Props> = ({ children }) => {
   const handleLogout = () => {
     localStorage.removeItem('__clu');
     localStorage.removeItem('__cnt');
-    router.push('/');
+    router.push('/auth/login');
+    uiStore.serverMessage = 'Logged out successfully';
+    uiStore.snackbarSeverity = 'success';
+    uiStore.showSnackbar = true;
   };
 
   return (
@@ -135,4 +142,4 @@ const Layout: FunctionComponent<Props> = ({ children }) => {
   );
 };
 
-export default Layout;
+export default observer(Layout);

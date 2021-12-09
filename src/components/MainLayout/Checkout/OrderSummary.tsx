@@ -95,7 +95,6 @@ const OrderSummary: FunctionComponent<{}> = () => {
 
         if (result.error) {
           setLoading(false);
-          console.log(result.error.message, ':Error');
         }
       }
     }

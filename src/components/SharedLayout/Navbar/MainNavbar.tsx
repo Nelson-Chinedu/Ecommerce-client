@@ -84,7 +84,10 @@ const Index: FunctionComponent<{}> = () => {
   const handleLogout = () => {
     localStorage.removeItem('__clu');
     localStorage.removeItem('__cnt');
-    router.push('/');
+    router.push('/auth/login');
+    uiStore.serverMessage = 'Logged out successfully';
+    uiStore.snackbarSeverity = 'success';
+    uiStore.showSnackbar = true;
   };
 
   return (

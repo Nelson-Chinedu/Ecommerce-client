@@ -18,6 +18,8 @@ export const ProductListProvider = ({ children }: any) => {
 
   if (loading) return <Typography>Loading...</Typography>;
 
+  if (!data) return null;
+
   const {
     public: {
       getProducts: { products },

@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { observer } from 'mobx-react-lite';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
@@ -11,6 +12,8 @@ import {
   customerAccountMenu,
   Props,
 } from 'src/components/constant/customerAccountMenu';
+
+import { useStore } from 'src/store';
 
 import Navigation from 'src/components/SharedLayout/Navbar/MainNavbar';
 import Button from 'src/components/SharedLayout/Button';
@@ -72,11 +75,15 @@ const useStyles = makeStyles((theme: Theme) => ({
 const CustomerLayout = ({ children }: CustomerProps) => {
   const classes = useStyles();
   const router = useRouter();
+  const { uiStore } = useStore();
 
   const handleLogout = () => {
     localStorage.removeItem('__clu');
     localStorage.removeItem('__cnt');
-    router.push('/');
+    router.push('/auth/login');
+    uiStore.serverMessage = 'Logged out successfully';
+    uiStore.snackbarSeverity = 'success';
+    uiStore.showSnackbar = true;
   };
 
   return (
@@ -127,4 +134,4 @@ const CustomerLayout = ({ children }: CustomerProps) => {
   );
 };
 
-export default CustomerLayout;
+export default observer(CustomerLayout);
