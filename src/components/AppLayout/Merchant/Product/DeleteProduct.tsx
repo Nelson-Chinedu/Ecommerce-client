@@ -50,7 +50,6 @@ const DeleteProduct: FunctionComponent<{}> = () => {
         uiStore.snackbarSeverity = 'success';
       }
     } catch (error: any) {
-      console.log(error.message);
       if (error.message === 'Permission denied') {
         router.push('/auth/login');
         uiStore.showSnackbar = true;
