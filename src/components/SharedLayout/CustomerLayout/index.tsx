@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { observer } from 'mobx-react-lite';
+import store from 'store';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
@@ -58,6 +59,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderBottom: '1px solid #e0e0e0',
     marginBottom: '1.5em',
   },
+  sidenavWrapper: {
+    position: 'sticky',
+    top: 0,
+  },
   sidenav: {
     marginLeft: '2em',
     '& a': {
@@ -78,8 +83,9 @@ const CustomerLayout = ({ children }: CustomerProps) => {
   const { uiStore } = useStore();
 
   const handleLogout = () => {
-    localStorage.removeItem('__clu');
-    localStorage.removeItem('__cnt');
+    store.remove('__clu');
+    store.remove('__cnt');
+    store.remove('__cat');
     router.push('/auth/login');
     uiStore.serverMessage = 'Logged out successfully';
     uiStore.snackbarSeverity = 'success';
@@ -98,7 +104,7 @@ const CustomerLayout = ({ children }: CustomerProps) => {
           alignItems="flex-start"
           justify="space-between"
         >
-          <Grid item sm={3}>
+          <Grid item sm={3} className={classes.sidenavWrapper}>
             <Paper className={classes.sidenav}>
               <ul>
                 {customerAccountMenu.map((menuList: Props) => (

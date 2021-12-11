@@ -16,6 +16,7 @@ import TableRow from '@material-ui/core/TableRow';
 import { showDate } from 'src/components/SharedLayout/Date';
 
 import { useStyles } from 'src/components/AppLayout/Merchant/Dashboard/styled.dashboard';
+
 import {
   MerchantRecentOrderContext,
   IProps,
@@ -33,8 +34,15 @@ const RecentOrders: FunctionComponent<{}> = () => {
     <Paper style={{ height: '350px' }}>
       {data && data.length === 0 ? (
         <Box className={classes.emptyState}>
-          <Image src="/image/emptyOrder.svg" width={100} height={100} alt="" />
-          <Typography>Hang on tight, No recent order yet !!!</Typography>
+          <Image
+            src="/image/emptyOrder.svg"
+            width={100}
+            height={100}
+            alt="order illustration"
+          />
+          <Typography variant="subtitle2">
+            Hang on tight, No recent order yet !!!
+          </Typography>
         </Box>
       ) : (
         <>

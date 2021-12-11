@@ -93,9 +93,15 @@ export const useStyles = makeStyles({
   filter: {
     padding: '.4em 2em',
   },
-  emptyState: {
+  emptyOrder: {
     width: '50%',
-    margin: '2em auto',
+    margin: '5em auto',
     textAlign: 'center',
+    '& .MuiTypography-subtitle2': {
+      fontSize: '18px',
+    },
+    '& .MuiGrid-container': {
+      marginTop: '.8em',
+    },
   },
 });

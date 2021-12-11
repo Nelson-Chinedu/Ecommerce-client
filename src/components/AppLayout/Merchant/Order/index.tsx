@@ -36,95 +36,111 @@ const Order: FunctionComponent<{}> = () => {
   return (
     <Layout>
       <Box className={classes.root}>
-        <Paper className={classes.filter}>
-          <Grid container justify="space-between" alignItems="center">
-            <Grid item sm={7}>
-              <Grid container spacing={2}>
-                <Grid item sm={3}>
-                  <TextInput
-                    select
-                    size="small"
-                    variant="outlined"
-                    fullWidth
-                    color="secondary"
-                    label="Category"
-                  >
-                    <MenuItem value="Category">Category</MenuItem>
-                  </TextInput>
-                </Grid>
-                <Grid item sm={3}>
-                  <TextInput
-                    select
-                    size="small"
-                    variant="outlined"
-                    fullWidth
-                    color="secondary"
-                    label="Status"
-                  >
-                    <MenuItem value="Status">Status</MenuItem>
-                  </TextInput>
-                </Grid>
-                <Grid item sm={3}>
-                  <TextInput
-                    select
-                    size="small"
-                    variant="outlined"
-                    fullWidth
-                    color="secondary"
-                    label="Price"
-                  >
-                    <MenuItem value="Price">Price</MenuItem>
-                  </TextInput>
-                </Grid>
-                <Grid item sm={3}>
-                  <TextInput
-                    select
-                    size="small"
-                    variant="outlined"
-                    fullWidth
-                    color="secondary"
-                    label="Date"
-                  >
-                    <MenuItem value="Date">Date</MenuItem>
-                  </TextInput>
-                </Grid>
+        {data && data.length === 0 ? (
+          <Box className={classes.emptyOrder}>
+            <Image
+              src="/image/emptyOrder.svg"
+              width={150}
+              height={150}
+              alt="product illustration"
+            />
+            <Typography variant="subtitle2">
+              Hang on tight, No order yet !!!
+            </Typography>
+            <Grid container alignItems="center" justify="center">
+              <Grid item sm={3}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  fullWidth
+                  disableElevation={true}
+                  onClick={handleOpen}
+                >
+                  <AddCircleOutlineOutlinedIcon fontSize="small" /> Add Product
+                </Button>
               </Grid>
             </Grid>
-            <Grid item sm={2}>
-              <Button
-                variant="contained"
-                color="secondary"
-                fullWidth
-                disableElevation={true}
-                onClick={handleOpen}
-              >
-                <AddCircleOutlineOutlinedIcon fontSize="small" /> Add Product
-              </Button>
-            </Grid>
-          </Grid>
-        </Paper>
-        <Paper style={{ padding: '1em' }}>
-          {data && data.length === 0 ? (
-            <Box className={classes.emptyState}>
-              <Image
-                src="/image/emptyOrder.svg"
-                width={100}
-                height={100}
-                alt=""
-              />
-              <Typography>Hang on tight, No order yet !!!</Typography>
-            </Box>
-          ) : (
-            <>
+          </Box>
+        ) : (
+          <>
+            <Paper className={classes.filter}>
+              <Grid container justify="space-between" alignItems="center">
+                <Grid item sm={7}>
+                  <Grid container spacing={2}>
+                    <Grid item sm={3}>
+                      <TextInput
+                        select
+                        size="small"
+                        variant="outlined"
+                        fullWidth
+                        color="secondary"
+                        label="Category"
+                      >
+                        <MenuItem value="Category">Category</MenuItem>
+                      </TextInput>
+                    </Grid>
+                    <Grid item sm={3}>
+                      <TextInput
+                        select
+                        size="small"
+                        variant="outlined"
+                        fullWidth
+                        color="secondary"
+                        label="Status"
+                      >
+                        <MenuItem value="Status">Status</MenuItem>
+                      </TextInput>
+                    </Grid>
+                    <Grid item sm={3}>
+                      <TextInput
+                        select
+                        size="small"
+                        variant="outlined"
+                        fullWidth
+                        color="secondary"
+                        label="Price"
+                      >
+                        <MenuItem value="Price">Price</MenuItem>
+                      </TextInput>
+                    </Grid>
+                    <Grid item sm={3}>
+                      <TextInput
+                        select
+                        size="small"
+                        variant="outlined"
+                        fullWidth
+                        color="secondary"
+                        label="Date"
+                      >
+                        <MenuItem value="Date">Date</MenuItem>
+                      </TextInput>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid item sm={2}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    fullWidth
+                    disableElevation={true}
+                    onClick={handleOpen}
+                  >
+                    <AddCircleOutlineOutlinedIcon fontSize="small" /> Add
+                    Product
+                  </Button>
+                </Grid>
+              </Grid>
+            </Paper>
+            <Paper style={{ padding: '1em' }}>
               <Grid container style={{ padding: '1em 0px' }}>
                 <Grid item sm={12}>
                   <Typography variant="subtitle1">All Orders</Typography>
                 </Grid>
               </Grid>
               <OrderTable />
-            </>
-          )}
-        </Paper>
+            </Paper>
+          </>
+        )}
       </Box>
       <AddProduct />
       <UpdateOrder />

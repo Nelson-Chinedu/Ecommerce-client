@@ -22,6 +22,7 @@ import TextInput from 'src/components/SharedLayout/TextInput';
 import Button from 'src/components/SharedLayout/Button';
 
 import { useStyles } from 'src/components/AuthLayout/Login/styled.login';
+
 import { SIGNIN } from 'src/queries';
 
 const validationSchema = yup.object().shape({
@@ -67,6 +68,7 @@ const LoginForm: FunctionComponent<{}> = () => {
             : '/';
         store.set('__cnt', token);
         store.set('__clu', isLoggedin);
+        store.set('__cat', accountType);
         router.push(path);
       }
     } catch (error: any) {
@@ -173,7 +175,7 @@ const LoginForm: FunctionComponent<{}> = () => {
           <Grid item sm={6}>
             <Grid container alignItems="center">
               <Grid item>
-                <Checkbox id="remember" />
+                <Checkbox id="remember" size="small" />
               </Grid>
               <Grid item>
                 <Typography

@@ -1,6 +1,8 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import store from 'store';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 
@@ -28,6 +30,12 @@ const AccountEdit = dynamic(
 );
 
 const AccountEditPage = () => {
+  const router = useRouter();
+  const isLoggedIn = store.get('__clu');
+
+  if (!isLoggedIn) {
+    router.push('/auth/login');
+  }
   return (
     <>
       <Head>

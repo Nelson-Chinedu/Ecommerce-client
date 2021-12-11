@@ -46,6 +46,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
   },
   productContainer: {
     overflow: 'hidden',
+    boxShadow: '0px 2px 10px 0px rgb(0, 0, 0, .1)',
     '& .MuiBox-root': {
       overflow: 'hidden',
       transition: 'transform .4s',
@@ -54,6 +55,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
       cursor: 'pointer',
       border: `1px solid ${theme.palette.secondary.main}`,
       boxShadow: '0px 2px 4px rgba(0,0,0,0.2)',
+      '& .MuiButton-outlined': {
+        display: 'block',
+      },
     },
     '& img': {
       border: '4px solid green',
@@ -62,6 +66,20 @@ export const useStyles = makeStyles((theme: Theme) => ({
       overflow: 'hidden',
       transform: 'scale(1.1)',
     },
+    '& .MuiButton-outlined': {
+      // display: 'none',
+      marginTop: '1em',
+      '&:hover': {
+        background: theme.palette.secondary.main,
+        '& .MuiButton-label': {
+          color: 'white',
+        },
+      },
+    },
+  },
+  oldPrice: {
+    color: '#75757A',
+    fontSize: '13px',
   },
   productName: {
     textTransform: 'capitalize',
@@ -78,5 +96,13 @@ export const useStyles = makeStyles((theme: Theme) => ({
         color: 'white',
       },
     },
+  },
+  storeName: {
+    fontSize: '12px',
+    color: '#9B9B9B',
+  },
+  divider: {
+    margin: '.3em 0px',
+    padding: '.2em 0px',
   },
 }));

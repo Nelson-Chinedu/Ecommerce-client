@@ -1,4 +1,5 @@
 import React, { useContext, FunctionComponent } from 'react';
+import Image from 'next/image';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -34,6 +35,12 @@ const Product: FunctionComponent<{}> = () => {
       <Box className={classes.root}>
         {data.length === 0 ? (
           <Box className={classes.emptyProduct}>
+            <Image
+              src="/image/emptyProduct.svg"
+              width={200}
+              height={200}
+              alt="product illustration"
+            />
             <Typography variant="subtitle2">No product added yet</Typography>
             <Grid container alignItems="center" justify="center">
               <Grid item sm={3}>

@@ -1,6 +1,7 @@
 import React, { FunctionComponent, ReactNode, useContext } from 'react';
 import { useRouter } from 'next/router';
 import { observer } from 'mobx-react-lite';
+import store from 'store';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
@@ -14,8 +15,9 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import { useStore } from 'src/store';
 
 import DashboardSidenav from 'src/components/SharedLayout/Sidenav/DashboardSidenav';
-import TextInput from 'src/components/SharedLayout/TextInput';
+// import TextInput from 'src/components/SharedLayout/TextInput';
 import { useStyles } from 'src/components/SharedLayout/Layout/styled.layout';
+
 import { SettingContext } from 'src/components/context/merchantSetting-context';
 
 type Props = {
@@ -43,8 +45,11 @@ const Layout: FunctionComponent<Props> = ({ children }) => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('__clu');
-    localStorage.removeItem('__cnt');
+    // localStorage.removeItem('__clu');
+    // localStorage.removeItem('__cnt');
+    store.remove('__clu');
+    store.remove('__cnt');
+    store.remove('__cat');
     router.push('/auth/login');
     uiStore.serverMessage = 'Logged out successfully';
     uiStore.snackbarSeverity = 'success';
@@ -57,8 +62,8 @@ const Layout: FunctionComponent<Props> = ({ children }) => {
         <DashboardSidenav />
       </Box>
       <Box className={classes.mainWrapper}>
-        <Grid container alignItems="flex-start" justify="space-between">
-          <Grid item sm={5}>
+        <Grid container alignItems="flex-end" justify="flex-end">
+          {/* <Grid item sm={5}>
             <TextInput
               variant="outlined"
               label="Search"
@@ -67,7 +72,7 @@ const Layout: FunctionComponent<Props> = ({ children }) => {
               size="small"
               type="text"
             />
-          </Grid>
+          </Grid> */}
           <Grid item sm={4}>
             <Grid container spacing={1} alignItems="center" justify="flex-end">
               <Grid

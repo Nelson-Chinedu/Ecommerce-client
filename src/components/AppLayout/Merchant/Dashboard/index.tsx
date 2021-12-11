@@ -7,6 +7,7 @@ import TopStat from 'src/components/AppLayout/Merchant/Dashboard/TopStat';
 import MiniProduct from 'src/components/AppLayout/Merchant/Dashboard/MiniProduct';
 import Stats from 'src/components/AppLayout/Merchant/Dashboard/Stats';
 import RecentOrders from 'src/components/AppLayout/Merchant/Dashboard/RecentOrders';
+import AddProduct from 'src/components/AppLayout/Merchant/Product/AddProduct';
 import { useStyles } from 'src/components/AppLayout/Merchant/Dashboard/styled.dashboard';
 
 import Layout from 'src/components/SharedLayout/Layout';
@@ -36,6 +37,7 @@ const Dashboard: FunctionComponent<{}> = () => {
           </Grid>
         </Grid>
       </Box>
+      <AddProduct />
     </Layout>
   );
 };

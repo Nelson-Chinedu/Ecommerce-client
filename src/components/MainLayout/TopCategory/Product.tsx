@@ -1,11 +1,12 @@
-import { FunctionComponent, useState, ChangeEvent } from 'react';
+import { FunctionComponent, useState, ChangeEvent, useContext } from 'react';
 import { observer } from 'mobx-react-lite';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 
 import Navbar from 'src/components/MainLayout/TopCategory/Navbar';
-
 import ProductTemplate from 'src/components/MainLayout/TopCategory/ProductTemplate';
+
+import { ProductListContext } from 'src/components/context/userProductList-context';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -34,7 +35,9 @@ function TabPanel(props: TabPanelProps) {
 }
 
 const Product: FunctionComponent<{}> = () => {
-  const [value, setValue] = useState<number>(0);
+  const { menSubProducts, womenSubProducts, selected } =
+    useContext(ProductListContext);
+  const [value, setValue] = useState<number>(selected);
 
   const handleChange = (_event: ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
@@ -44,10 +47,10 @@ const Product: FunctionComponent<{}> = () => {
     <>
       <Navbar handleChange={handleChange} value={value} />
       <TabPanel value={value} index={0}>
-        <ProductTemplate category="men" />
+        <ProductTemplate category="men" data={menSubProducts} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <ProductTemplate category="women" />
+        <ProductTemplate category="women" data={womenSubProducts} />
       </TabPanel>
       <TabPanel value={value} index={2}>
         <ProductTemplate category="makeup" />

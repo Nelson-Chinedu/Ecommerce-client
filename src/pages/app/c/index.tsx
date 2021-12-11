@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import store from 'store';
 import Box from '@material-ui/core/Box';
 
 const Landing = dynamic(
@@ -30,6 +32,12 @@ const Landing = dynamic(
 );
 
 const Index = () => {
+  const router = useRouter();
+  const isLoggedIn = store.get('__clu');
+
+  if (!isLoggedIn) {
+    router.push('/auth/login');
+  }
   return (
     <>
       <Head>
