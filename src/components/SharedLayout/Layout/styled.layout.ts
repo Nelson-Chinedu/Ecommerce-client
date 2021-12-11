@@ -22,6 +22,7 @@ export const useStyles = makeStyles({
     },
   },
   popoverLink: {
+    cursor: 'pointer',
     '& a': {
       textDecoration: 'none',
       '&:hover': {

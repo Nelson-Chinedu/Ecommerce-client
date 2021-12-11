@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useState } from 'react';
 import { toJS } from 'mobx';
+import store from 'store';
 import { loadStripe } from '@stripe/stripe-js';
 import { useMutation } from '@apollo/client';
 import NumberFormat from 'react-number-format';
@@ -85,6 +86,7 @@ const OrderSummary: FunctionComponent<{}> = () => {
         },
       } = data;
       if (!token) return;
+      store.remove('cart');
 
       const stripe = await stripePromise;
 
@@ -92,7 +94,6 @@ const OrderSummary: FunctionComponent<{}> = () => {
         const result = await stripe.redirectToCheckout({
           sessionId: token,
         });
-
         if (result.error) {
           setLoading(false);
         }

@@ -12,7 +12,7 @@ type Props = {
   fullWidth: boolean;
   href?: string;
   type?: 'button' | 'submit';
-  onClick?: () => void;
+  onClick?: (e?: any) => void;
   onSubmit?: () => void;
 };
 

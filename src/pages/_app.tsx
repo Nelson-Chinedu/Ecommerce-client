@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { AppProps } from 'next/app';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import Head from 'next/head';
 import { observer } from 'mobx-react-lite';
 import {
@@ -16,6 +16,7 @@ import { Detector } from 'react-detect-offline';
 import { createUploadLink } from 'apollo-upload-client';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
+import 'react-loading-skeleton/dist/skeleton.css';
 import store from 'store';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -38,9 +39,28 @@ Router.events.on('routeChangeError', () => NProgress.done());
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { uiStore } = useStore();
+  const router = useRouter();
+
+  console.log(router.pathname);
 
   const token = store.get('__cnt');
   const isLoggedIn: boolean = store.get('__clu');
+  const accountType: string = store.get('__cat');
+
+  useEffect(() => {
+    if (router.pathname.includes('/app/m/') && accountType === 'c') {
+      router.push('/app/c');
+    }
+    if (router.pathname.includes('/auth') && accountType === 'c') {
+      router.push('/app/c');
+    }
+    if (router.pathname.includes('/app/c') && accountType === 'm') {
+      router.push('/app/m/dashboard');
+    }
+    if (router.pathname.includes('/auth') && accountType === 'm') {
+      router.push('/app/m/dashboard');
+    }
+  }, [router, token]);
 
   const authMiddleware = new ApolloLink((operation, forward) => {
     operation.setContext(({ headers = {} }) => ({
@@ -59,6 +79,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         if (message === 'Context creation failed: jwt expired') {
           store.remove('__cnt');
           store.remove('__clu');
+          store.remove('__cat');
           window.location.href = '/auth/login';
           uiStore.serverMessage = 'Session expired, Login to continue';
           uiStore.snackbarSeverity = 'success';

@@ -1,5 +1,7 @@
 import { FunctionComponent } from 'react';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+import store from 'store';
 import Image from 'next/image';
 import Head from 'next/head';
 import Box from '@material-ui/core/Box';
@@ -31,6 +33,12 @@ const Account = dynamic(
 );
 
 const AccountPage: FunctionComponent<{}> = () => {
+  const router = useRouter();
+  const isLoggedIn = store.get('__clu');
+
+  if (!isLoggedIn) {
+    router.push('/auth/login');
+  }
   return (
     <>
       <Head>

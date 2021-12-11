@@ -1,4 +1,5 @@
 import { createContext } from 'react';
+import store from 'store';
 import { useQuery } from '@apollo/client';
 import Typography from '@material-ui/core/Typography';
 
@@ -18,11 +19,14 @@ export const SettingContext = createContext({
 });
 
 export const SettingProvider = ({ children }: any) => {
-  const { loading, data } = useQuery(GET_PROFILE);
+  const { loading, data, error } = useQuery(GET_PROFILE);
+  const accountType = store.get('__cat');
 
   if (loading) return <Typography>Loading...</Typography>;
 
-  if (!data) return null;
+  if (error) return null;
+
+  if (!data || data === undefined || accountType === 'c') return null;
 
   const {
     client: {

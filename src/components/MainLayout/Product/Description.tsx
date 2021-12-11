@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Divider from '@material-ui/core/Divider';
 import MenuItem from '@material-ui/core/MenuItem';
-import FavouriteIconOutlined from '@material-ui/icons/FavoriteBorderOutlined';
+// import FavouriteIconOutlined from '@material-ui/icons/FavoriteBorderOutlined';
 
 import { useStore } from 'src/store';
 
@@ -296,9 +296,9 @@ const Description: FunctionComponent<{}> = () => {
               {filteredItem.length ? 'Remove from cart' : 'Add to cart'}
             </Button>
           </Grid>
-          <Grid item>
+          {/* <Grid item>
             <FavouriteIconOutlined fontSize="default" />
-          </Grid>
+          </Grid> */}
         </Grid>
       </Grid>
     </Grid>

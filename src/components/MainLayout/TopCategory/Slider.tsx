@@ -14,12 +14,6 @@ type Props = {
   title: string;
 }
 
-// const useStyles = makeStyles({
-//   root: {
-    
-//   },
-// });
-
 const Slider: FunctionComponent<{}> = () => {
   const classes = useStyles();
   return (

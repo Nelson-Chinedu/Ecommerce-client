@@ -74,8 +74,15 @@ export const useStyles = makeStyles({
     display: 'inline-block',
   },
   emptyState: {
-    width: '50%',
+    width: '60%',
     margin: '2em auto',
     textAlign: 'center',
+    '& .MuiButton-contained': {
+      margin: '.4em auto 0px',
+      width: '80%',
+      '& .MuiButton-label': {
+        color: '#FFF',
+      },
+    },
   },
 });

@@ -1,5 +1,7 @@
-import React, { FunctionComponent, useContext } from 'react';
+import React, { FunctionComponent } from 'react';
+import Image from 'next/image';
 import classnames from 'classnames';
+import store from 'store';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -12,15 +14,17 @@ import Divider from 'src/components/SharedLayout/Divider';
 import LoginForm from 'src/components/AuthLayout/Login/LoginForm';
 import Socials from 'src/components/AuthLayout/Login/Socials';
 import { useStyles } from 'src/components/AuthLayout/Login/styled.login';
-import { UserContext } from 'src/components/context/userContext';
 
 const Login: FunctionComponent<{}> = () => {
   const classes = useStyles();
-  const { isLoggedIn } = useContext(UserContext);
+  const isLoggedIn = store.get('__clu');
 
   if (isLoggedIn) {
-    // TODO: route user if logged in is true
-    // router.push('/app/c');
+    return (
+      <Box style={{ width: '50%', margin: '10em auto', textAlign: 'center' }}>
+        <Image src="/image/loading.svg" alt="loading" width={50} height={50} />
+      </Box>
+    );
   }
 
   return (

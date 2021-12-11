@@ -2,6 +2,8 @@ import React from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+import store from 'store';
 import Box from '@material-ui/core/Box';
 
 import { ModalProvider } from 'src/components/context/modalContext';
@@ -33,6 +35,12 @@ const Preview = dynamic(
 );
 
 const OrderPreviewPage = () => {
+  const router = useRouter();
+  const isLoggedIn = store.get('__clu');
+
+  if (!isLoggedIn) {
+    router.push('/auth/login');
+  }
   return (
     <>
       <Head>

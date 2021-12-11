@@ -30,6 +30,8 @@ const Order: FunctionComponent<{}> = () => {
 
   if (loading) return <Typography>Loading...</Typography>;
 
+  if (!data) return null;
+
   const {
     client: {
       getCustomerOrders: { orders },

@@ -2,6 +2,7 @@ import { useState, FunctionComponent, useContext } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { observer } from 'mobx-react-lite';
+import store from 'store';
 import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -82,8 +83,11 @@ const Index: FunctionComponent<{}> = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('__clu');
-    localStorage.removeItem('__cnt');
+    // localStorage.removeItem('__clu');
+    // localStorage.removeItem('__cnt');
+    store.remove('__clu');
+    store.remove('__cnt');
+    store.remove('__cat');
     router.push('/auth/login');
     uiStore.serverMessage = 'Logged out successfully';
     uiStore.snackbarSeverity = 'success';

@@ -1,4 +1,6 @@
 import { FunctionComponent } from 'react';
+import { useRouter } from 'next/router';
+import store from 'store';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Head from 'next/head';
@@ -28,6 +30,12 @@ const Order = dynamic(() => import('src/components/AppLayout/Customer/Order'), {
 });
 
 const OrderPage: FunctionComponent<{}> = () => {
+  const router = useRouter();
+  const isLoggedIn = store.get('__clu');
+
+  if (!isLoggedIn) {
+    router.push('/auth/login');
+  }
   return (
     <>
       <Head>

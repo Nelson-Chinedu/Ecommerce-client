@@ -202,6 +202,75 @@ export const GET_ALL_PRODUCTS = gql`
   }
 `;
 
+export const GET_MEN_SUB_PRODUCTS = gql`
+  query ($take: Int, $skip: Int, $category: String!) {
+    public {
+      getMenProducts(take: $take, skip: $skip, category: $category) {
+        products {
+          id
+          name
+          number
+          imageUrl
+          description
+          sizes
+          oldPrice
+          newPrice
+          colors
+          category
+          stock
+          tags
+        }
+      }
+    }
+  }
+`;
+
+export const GET_WOMEN_SUB_PRODUCTS = gql`
+  query ($take: Int, $skip: Int, $category: String!) {
+    public {
+      getWomenProducts(take: $take, skip: $skip, category: $category) {
+        products {
+          id
+          name
+          number
+          imageUrl
+          description
+          sizes
+          oldPrice
+          newPrice
+          colors
+          category
+          stock
+          tags
+        }
+      }
+    }
+  }
+`;
+
+export const GET_ALL_PRODUCT_CATEGORY = gql`
+  query ($take: Int, $skip: Int, $category: String!) {
+    public {
+      getAllProducts(take: $take, skip: $skip, category: $category) {
+        products {
+          id
+          name
+          number
+          imageUrl
+          description
+          sizes
+          oldPrice
+          newPrice
+          colors
+          category
+          stock
+          tags
+        }
+      }
+    }
+  }
+`;
+
 export const GET_PRODUCT_USER = gql`
   query ($id: String!) {
     public {
