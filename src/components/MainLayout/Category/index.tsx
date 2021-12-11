@@ -23,6 +23,9 @@ interface IProduct {
   imageUrl: string;
   newPrice: string | number;
   oldPrice: string | number;
+  store: {
+    name: string;
+  };
 }
 
 const Category: FunctionComponent<{}> = () => {
@@ -189,7 +192,7 @@ const Category: FunctionComponent<{}> = () => {
                             variant="subtitle1"
                             className={classes.storeName}
                           >
-                            Sold by <span>Jake store</span>
+                            Sold by <span>{product.store?.name}</span>
                           </Typography>
                         </Grid>
                       </Grid>

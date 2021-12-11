@@ -242,6 +242,9 @@ export const GET_WOMEN_SUB_PRODUCTS = gql`
           category
           stock
           tags
+          store {
+            name
+          }
         }
       }
     }
@@ -265,6 +268,9 @@ export const GET_ALL_PRODUCT_CATEGORY = gql`
           category
           stock
           tags
+          store {
+            name
+          }
         }
       }
     }
