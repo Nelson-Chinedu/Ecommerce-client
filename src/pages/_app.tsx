@@ -41,8 +41,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   const { uiStore } = useStore();
   const router = useRouter();
 
-  console.log(router.pathname);
-
   const token = store.get('__cnt');
   const isLoggedIn: boolean = store.get('__clu');
   const accountType: string = store.get('__cat');
