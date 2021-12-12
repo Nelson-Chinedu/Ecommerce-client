@@ -1,6 +1,6 @@
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme: Theme) => ({
+export const useStyles = makeStyles({
   root: {
     alignItems: 'flex-start',
     justifyContent: 'space-between',
@@ -71,4 +71,4 @@ export const useStyles = makeStyles((theme: Theme) => ({
     top: 0,
     zIndex: 9999999,
   },
-}));
+});
