@@ -21,9 +21,9 @@ const Customer: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const [state, setState] = useModalControl();
 
-  const handleOpen = () => {
-    setState({ ...state, modal: 'addProductModal' });
-  };
+  // const handleOpen = () => {
+  //   setState({ ...state, modal: 'addProductModal' });
+  // };
 
   return (
     <Layout>
