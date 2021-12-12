@@ -160,7 +160,11 @@ const SignupForm: FunctionComponent<{}> = () => {
         <Grid item sm={12}>
           <Grid container alignItems="center" spacing={1}>
             <Grid item>
-              <Checkbox id="remember" onChange={handlePrivacyTerm} />
+              <Checkbox
+                id="remember"
+                onChange={handlePrivacyTerm}
+                size="small"
+              />
             </Grid>
             <Grid item>
               <Typography

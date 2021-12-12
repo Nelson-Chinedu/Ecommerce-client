@@ -33,8 +33,11 @@ export const useStyles = makeStyles({
   mainWrapper: {
     width: '80%',
     marginLeft: '20%',
-    padding: '2em',
+    padding: '0px 2em',
     minHeight: '100vh',
+  },
+  container: {
+    padding: '2em 0px',
   },
   notification: {
     marginRight: '1em',
@@ -59,5 +62,13 @@ export const useStyles = makeStyles({
       fontSize: '12px',
       color: '#666767',
     },
+  },
+  setup: {
+    background: '#c0ede6',
+    padding: '1em',
+    textAlign: 'center',
+    position: 'sticky',
+    top: 0,
+    zIndex: 9999999,
   },
 });

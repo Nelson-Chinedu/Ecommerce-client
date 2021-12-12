@@ -1,5 +1,6 @@
 import React, { FunctionComponent, ReactNode, useContext } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { observer } from 'mobx-react-lite';
 import store from 'store';
 import Box from '@material-ui/core/Box';
@@ -28,7 +29,8 @@ const Layout: FunctionComponent<Props> = ({ children }) => {
   const classes = useStyles();
   const router = useRouter();
   const { uiStore } = useStore();
-  const { firstname, lastname } = useContext(SettingContext);
+  const { firstname, lastname, phoneNumber, storeName } =
+    useContext(SettingContext);
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );
@@ -55,14 +57,27 @@ const Layout: FunctionComponent<Props> = ({ children }) => {
     uiStore.snackbarSeverity = 'success';
     uiStore.showSnackbar = true;
   };
-
+  console.log(firstname, lastname, phoneNumber, storeName, '***');
   return (
     <Box className={classes.root}>
       <Box>
         <DashboardSidenav />
       </Box>
       <Box className={classes.mainWrapper}>
-        <Grid container alignItems="flex-end" justify="flex-end">
+        {!firstname || !lastname || !phoneNumber || !storeName ? (
+          <Box className={classes.setup}>
+            <Typography variant="subtitle2">
+              Click <Link href="/app/m/setting">Here</Link> to setup profile and
+              store to continue
+            </Typography>
+          </Box>
+        ) : null}
+        <Grid
+          container
+          alignItems="flex-end"
+          justify="flex-end"
+          className={classes.container}
+        >
           {/* <Grid item sm={5}>
             <TextInput
               variant="outlined"
