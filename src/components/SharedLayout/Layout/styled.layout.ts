@@ -1,6 +1,6 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles({
+export const useStyles = makeStyles((theme: Theme) => ({
   root: {
     alignItems: 'flex-start',
     justifyContent: 'space-between',
@@ -33,8 +33,11 @@ export const useStyles = makeStyles({
   mainWrapper: {
     width: '80%',
     marginLeft: '20%',
-    padding: '2em',
+    padding: '0px 2em',
     minHeight: '100vh',
+  },
+  container: {
+    padding: '2em 0px',
   },
   notification: {
     marginRight: '1em',
@@ -60,4 +63,12 @@ export const useStyles = makeStyles({
       color: '#666767',
     },
   },
-});
+  setup: {
+    background: '#c0ede6',
+    padding: '1em',
+    textAlign: 'center',
+    position: 'sticky',
+    top: 0,
+    zIndex: 9999999,
+  },
+}));

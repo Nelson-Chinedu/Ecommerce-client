@@ -82,7 +82,7 @@ const Customer: FunctionComponent<{}> = () => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item sm={2}>
+            {/* <Grid item sm={2}>
               <Button
                 variant="contained"
                 color="secondary"
@@ -92,7 +92,7 @@ const Customer: FunctionComponent<{}> = () => {
               >
                 <AddCircleOutlineOutlinedIcon fontSize="small" /> Add Product
               </Button>
-            </Grid>
+            </Grid> */}
           </Grid>
         </Paper>
         <Paper style={{ padding: '1em' }}>

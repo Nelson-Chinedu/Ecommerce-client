@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useContext } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import NumberFormat from 'react-number-format';
@@ -15,6 +15,8 @@ import { useStyles } from 'src/components/AppLayout/Merchant/Dashboard/styled.da
 import Button from 'src/components/SharedLayout/Button';
 
 import useModalControl from 'src/components/hooks/useModalControl';
+
+import { SettingContext } from 'src/components/context/merchantSetting-context';
 
 interface IProps {
   imageUrl: string;
@@ -35,6 +37,8 @@ interface IData {
 const MiniProduct: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const [state, setState] = useModalControl();
+  const { firstname, lastname, phoneNumber, storeName } =
+    useContext(SettingContext);
 
   const { loading, data } = useQuery(GET_MERCHANT_RECENT_PRODUCT, {
     variables: { take: 4, skip: 0 },
@@ -65,15 +69,17 @@ const MiniProduct: FunctionComponent<{}> = () => {
             alt="product illustration"
           />
           <Typography variant="subtitle2">No product added yet</Typography>
-          <Button
-            variant="contained"
-            fullWidth
-            disableElevation
-            color="secondary"
-            onClick={handleOpen}
-          >
-            Add product
-          </Button>
+          {!firstname || !lastname || !phoneNumber || !storeName ? null : (
+            <Button
+              variant="contained"
+              fullWidth
+              disableElevation
+              color="secondary"
+              onClick={handleOpen}
+            >
+              Add product
+            </Button>
+          )}
         </Box>
       ) : (
         <>

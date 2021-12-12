@@ -90,7 +90,7 @@ const Store: FunctionComponent<{}> = () => {
   const formik = useFormik({
     initialValues: {
       storeName: userStoreName ? userStoreName : '',
-      currency: userCurrency ? userCurrency : '',
+      currency: userCurrency ? userCurrency : 'Naira',
     },
     validationSchema,
     onSubmit: _handleUpdateStore,
@@ -158,7 +158,8 @@ const Store: FunctionComponent<{}> = () => {
               color="secondary"
               type="text"
               name="currency"
-              value={currency}
+              // value={currency}
+              value="Naira"
               disabled
               onChange={handleChange}
               onBlur={handleBlur}

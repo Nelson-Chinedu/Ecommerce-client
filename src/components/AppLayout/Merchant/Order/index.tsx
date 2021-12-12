@@ -17,12 +17,15 @@ import Button from 'src/components/SharedLayout/Button';
 import TextInput from 'src/components/SharedLayout/TextInput';
 
 import { MerchantOrderContext } from 'src/components/context/merchantOrder-context';
+import { SettingContext } from 'src/components/context/merchantSetting-context';
 
 import useModalControl from 'src/components/hooks/useModalControl';
 
 const Order: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const [state, setState] = useModalControl();
+  const { firstname, lastname, phoneNumber, storeName } =
+    useContext(SettingContext);
   const { loading, data } = useContext(MerchantOrderContext);
 
   if (loading) {
@@ -47,19 +50,22 @@ const Order: FunctionComponent<{}> = () => {
             <Typography variant="subtitle2">
               Hang on tight, No order yet !!!
             </Typography>
-            <Grid container alignItems="center" justify="center">
-              <Grid item sm={3}>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  fullWidth
-                  disableElevation={true}
-                  onClick={handleOpen}
-                >
-                  <AddCircleOutlineOutlinedIcon fontSize="small" /> Add Product
-                </Button>
+            {!firstname || !lastname || !phoneNumber || !storeName ? null : (
+              <Grid container alignItems="center" justify="center">
+                <Grid item sm={3}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    fullWidth
+                    disableElevation={true}
+                    onClick={handleOpen}
+                  >
+                    <AddCircleOutlineOutlinedIcon fontSize="small" /> Add
+                    Product
+                  </Button>
+                </Grid>
               </Grid>
-            </Grid>
+            )}
           </Box>
         ) : (
           <>

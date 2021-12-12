@@ -18,12 +18,15 @@ import TextInput from 'src/components/SharedLayout/TextInput';
 import Button from 'src/components/SharedLayout/Button';
 
 import { MerchantProductContext } from 'src/components/context/merchantProduct-context';
+import { SettingContext } from 'src/components/context/merchantSetting-context';
 
 import useModalControl from 'src/components/hooks/useModalControl';
 
 const Product: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const { data } = useContext(MerchantProductContext);
+  const { firstname, lastname, phoneNumber, storeName } =
+    useContext(SettingContext);
   const [state, setState] = useModalControl();
 
   const handleOpen = () => {
@@ -42,19 +45,22 @@ const Product: FunctionComponent<{}> = () => {
               alt="product illustration"
             />
             <Typography variant="subtitle2">No product added yet</Typography>
-            <Grid container alignItems="center" justify="center">
-              <Grid item sm={3}>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  fullWidth
-                  disableElevation={true}
-                  onClick={handleOpen}
-                >
-                  <AddCircleOutlineOutlinedIcon fontSize="small" /> Add Product
-                </Button>
+            {!firstname || !lastname || !phoneNumber || !storeName ? null : (
+              <Grid container alignItems="center" justify="center">
+                <Grid item sm={3}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    fullWidth
+                    disableElevation={true}
+                    onClick={handleOpen}
+                  >
+                    <AddCircleOutlineOutlinedIcon fontSize="small" /> Add
+                    Product
+                  </Button>
+                </Grid>
               </Grid>
-            </Grid>
+            )}
           </Box>
         ) : (
           <>
