@@ -15,11 +15,11 @@ import TextInput from 'src/components/SharedLayout/TextInput';
 import Layout from 'src/components/SharedLayout/Layout';
 import AddProduct from 'src/components/AppLayout/Merchant/Product/AddProduct';
 
-import useModalControl from 'src/components/hooks/useModalControl';
+// import useModalControl from 'src/components/hooks/useModalControl';
 
 const Customer: FunctionComponent<{}> = () => {
   const classes = useStyles();
-  const [state, setState] = useModalControl();
+  // const [state, setState] = useModalControl();
 
   // const handleOpen = () => {
   //   setState({ ...state, modal: 'addProductModal' });
