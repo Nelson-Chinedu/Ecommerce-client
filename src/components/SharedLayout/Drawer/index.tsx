@@ -29,6 +29,7 @@ const SideDrawer: FunctionComponent<Props> = ({ children, anchorPosition }) => {
     <StyledDrawer
       anchor={anchorPosition}
       open={uiStore.sidenav}
+      onClose={_handleCloseSideNav}
       style={{ zIndex: 9999999 }}
     >
       <Grid

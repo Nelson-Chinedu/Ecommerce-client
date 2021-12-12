@@ -24,7 +24,7 @@ import {
 } from 'src/components/MainLayout/FAQ/Tab';
 
 import { faqs, Props as faqProp } from 'src/components/constant/faqs';
-import { faqTabs, Props as faqTabProp} from 'src/components/constant/faqTabs';
+import { faqTabs, Props as faqTabProp } from 'src/components/constant/faqTabs';
 
 const FAQ: FunctionComponent<{}> = () => {
   const classes = useStyles();
@@ -99,13 +99,94 @@ const FAQ: FunctionComponent<{}> = () => {
             ))}
           </Tabs>
           <TabPanel value={value} index={0}>
-            <Typography variant="h5">Get Started page</Typography>
+            <Typography variant="h5">Get Started</Typography>
+            <Typography
+              variant="body2"
+              style={{ textAlign: 'left', marginTop: '1em' }}
+            >
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type and scrambled it to make a type specimen book. It has
+              survived not only five centuries, but also the leap into
+              electronic typesetting, remaining essentially unchanged. It was
+              popularised in the 1960s with the release of Letraset sheets
+              containing Lorem Ipsum passages, and more recently with desktop
+              publishing software like Aldus PageMaker including versions of
+              Lorem Ipsum.
+            </Typography>
+            <Typography variant="body2" style={{ textAlign: 'left' }}>
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type and scrambled it to make a type specimen book. It has
+              survived not only five centuries, but also the leap into
+              electronic typesetting, remaining essentially unchanged. It was
+              popularised in the 1960s with the release of Letraset sheets
+              containing Lorem Ipsum passages, and more recently with desktop
+              publishing software like Aldus PageMaker including versions of
+              Lorem Ipsum.
+            </Typography>
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <Typography variant="h5">Shopping Info page</Typography>
+            <Typography variant="h5">Shopping Info</Typography>
+            <Typography
+              variant="body2"
+              style={{ textAlign: 'left', marginTop: '1em' }}
+            >
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type and scrambled it to make a type specimen book. It has
+              survived not only five centuries, but also the leap into
+              electronic typesetting, remaining essentially unchanged. It was
+              popularised in the 1960s with the release of Letraset sheets
+              containing Lorem Ipsum passages, and more recently with desktop
+              publishing software like Aldus PageMaker including versions of
+              Lorem Ipsum.
+            </Typography>
+            <Typography variant="body2" style={{ textAlign: 'left' }}>
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type and scrambled it to make a type specimen book. It has
+              survived not only five centuries, but also the leap into
+              electronic typesetting, remaining essentially unchanged. It was
+              popularised in the 1960s with the release of Letraset sheets
+              containing Lorem Ipsum passages, and more recently with desktop
+              publishing software like Aldus PageMaker including versions of
+              Lorem Ipsum.
+            </Typography>
           </TabPanel>
           <TabPanel value={value} index={2}>
-            <Typography variant="h5">Payment page</Typography>
+            <Typography variant="h5">Payment</Typography>
+            <Typography
+              variant="body2"
+              style={{ textAlign: 'left', marginTop: '1em' }}
+            >
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type and scrambled it to make a type specimen book. It has
+              survived not only five centuries, but also the leap into
+              electronic typesetting, remaining essentially unchanged. It was
+              popularised in the 1960s with the release of Letraset sheets
+              containing Lorem Ipsum passages, and more recently with desktop
+              publishing software like Aldus PageMaker including versions of
+              Lorem Ipsum.
+            </Typography>
+            <Typography variant="body2" style={{ textAlign: 'left' }}>
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type and scrambled it to make a type specimen book. It has
+              survived not only five centuries, but also the leap into
+              electronic typesetting, remaining essentially unchanged. It was
+              popularised in the 1960s with the release of Letraset sheets
+              containing Lorem Ipsum passages, and more recently with desktop
+              publishing software like Aldus PageMaker including versions of
+              Lorem Ipsum.
+            </Typography>
           </TabPanel>
           <TabPanel value={value} index={3}>
             {faqs.map((faq: faqProp, index: number) => (
@@ -131,7 +212,34 @@ const FAQ: FunctionComponent<{}> = () => {
             ))}
           </TabPanel>
           <TabPanel value={value} index={4}>
-            <Typography variant="h5">User Guide Page</Typography>
+            <Typography variant="h5">User Guide</Typography>
+            <Typography
+              variant="body2"
+              style={{ textAlign: 'left', marginTop: '1em' }}
+            >
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type and scrambled it to make a type specimen book. It has
+              survived not only five centuries, but also the leap into
+              electronic typesetting, remaining essentially unchanged. It was
+              popularised in the 1960s with the release of Letraset sheets
+              containing Lorem Ipsum passages, and more recently with desktop
+              publishing software like Aldus PageMaker including versions of
+              Lorem Ipsum.
+            </Typography>
+            <Typography variant="body2" style={{ textAlign: 'left' }}>
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type and scrambled it to make a type specimen book. It has
+              survived not only five centuries, but also the leap into
+              electronic typesetting, remaining essentially unchanged. It was
+              popularised in the 1960s with the release of Letraset sheets
+              containing Lorem Ipsum passages, and more recently with desktop
+              publishing software like Aldus PageMaker including versions of
+              Lorem Ipsum.
+            </Typography>
           </TabPanel>
           <Newsletter />
         </Box>
