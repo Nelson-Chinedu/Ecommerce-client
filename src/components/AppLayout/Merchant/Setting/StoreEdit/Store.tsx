@@ -104,7 +104,7 @@ const Store: FunctionComponent<{}> = () => {
     errors,
     touched,
     isSubmitting,
-    values: { storeName, currency },
+    values: { storeName },
   } = formik;
 
   return (
