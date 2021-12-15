@@ -525,3 +525,13 @@ export const CUSTOMER_CANCEL_ORDER = gql`
     }
   }
 `;
+
+export const EMAIL_VERIFICATION = gql`
+  mutation ($token: String!) {
+    public {
+      verifyEmail(token: $token) {
+        message
+      }
+    }
+  }
+`;
