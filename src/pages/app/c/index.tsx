@@ -42,6 +42,7 @@ const Index = () => {
     <>
       <Head>
         <title>Multibuy | Home</title>
+        {/* <meta name="viewport" content="width=device-width, initial-scale=0.1" /> */}
       </Head>
       <Landing />
     </>

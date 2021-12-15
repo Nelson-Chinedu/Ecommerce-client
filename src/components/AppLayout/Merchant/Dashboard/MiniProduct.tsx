@@ -69,17 +69,16 @@ const MiniProduct: FunctionComponent<{}> = () => {
             alt="product illustration"
           />
           <Typography variant="subtitle2">No product added yet</Typography>
-          {!firstname || !lastname || !phoneNumber || !storeName ? null : (
-            <Button
-              variant="contained"
-              fullWidth
-              disableElevation
-              color="secondary"
-              onClick={handleOpen}
-            >
-              Add product
-            </Button>
-          )}
+          <Button
+            variant="contained"
+            fullWidth
+            disableElevation
+            color="secondary"
+            disabled={!firstname || !lastname || !phoneNumber || !storeName}
+            onClick={handleOpen}
+          >
+            Add product
+          </Button>
         </Box>
       ) : (
         <>

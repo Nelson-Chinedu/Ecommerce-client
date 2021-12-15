@@ -6,9 +6,7 @@ import { observer } from 'mobx-react-lite';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import Checkbox from '@material-ui/core/Checkbox';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
@@ -37,10 +35,6 @@ const SignupForm: FunctionComponent<{}> = () => {
   const { uiStore } = useStore();
   const handleTogglePassword = () => {
     uiStore.togglePasswordVisibilty();
-  };
-
-  const handlePrivacyTerm = () => {
-    uiStore.togglePrivacyButton();
   };
 
   const _handleFormSubmit = async () => {
@@ -106,7 +100,6 @@ const SignupForm: FunctionComponent<{}> = () => {
             fullWidth
             size="small"
             type="email"
-            autoFocus={true}
             name="email"
             value={values.email}
             onChange={handleChange}
@@ -151,49 +144,13 @@ const SignupForm: FunctionComponent<{}> = () => {
           />
         </Grid>
       </Grid>
-      <Grid
-        container
-        alignItems="center"
-        justify="space-between"
-        style={{ margin: '.8em 0px' }}
-      >
-        <Grid item sm={12}>
-          <Grid container alignItems="center" spacing={1}>
-            <Grid item>
-              <Checkbox
-                id="remember"
-                onChange={handlePrivacyTerm}
-                size="small"
-              />
-            </Grid>
-            <Grid item>
-              <Typography
-                component="label"
-                htmlFor="remember"
-                variant="subtitle2"
-              >
-                Agree with our privacy policy and{' '}
-                <span
-                  style={{
-                    color: 'red',
-                    textDecoration: 'underline',
-                    cursor: 'pointer',
-                  }}
-                >
-                  terms &amp; conditions
-                </span>
-              </Typography>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
       <Button
         variant="contained"
         color="secondary"
         className={classes.btnLogin}
         disableElevation={true}
         fullWidth={true}
-        disabled={!uiStore.privacyButton}
+        disabled={isSubmitting}
         type="submit"
         onClick={handleSubmit}
       >

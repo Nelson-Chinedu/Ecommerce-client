@@ -37,7 +37,9 @@ export const PRODUCT_CATEGORY: Product[] = [
   { value: 'Makeup', label: 'Makeup', color: '#5243AA' },
   { value: 'Hair Care', label: 'Hair Care', color: '#FF5630' },
   { value: 'Skin Care', label: 'Skin Care', color: '#FF5630' },
-  { value: 'Brand Shop', label: 'Brand Shop', color: '#FF5630' },
-  { value: 'Baby', label: 'Baby', color: '#FF5630' },
+  { value: 'Bags', label: 'Bags', color: '#FF5630' },
   { value: 'Watches', label: 'Watches', color: '#FF5630' },
+  { value: 'Sneakers', label: 'Sneakers', color: '#FF5630' },
+  { value: 'Sunglasses', label: 'Sunglasses', color: '#FF5630' },
+  { value: 'Baby', label: 'Baby', color: '#FF5630' },
 ];

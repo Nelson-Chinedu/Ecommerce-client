@@ -11,7 +11,6 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
-import Checkbox from '@material-ui/core/Checkbox';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -115,7 +114,6 @@ const LoginForm: FunctionComponent<{}> = () => {
               fullWidth
               size="small"
               type="email"
-              autoFocus={true}
               name="email"
               value={email}
               onChange={(e: { target: { value: string } }) => {
@@ -168,29 +166,15 @@ const LoginForm: FunctionComponent<{}> = () => {
         </Grid>
         <Grid
           container
-          alignItems="center"
-          justify="space-between"
-          style={{ margin: '.8em 0px' }}
+          alignItems="flex-end"
+          justify="flex-end"
+          className={classes.forgetPassword}
         >
-          <Grid item sm={6}>
-            <Grid container alignItems="center">
-              <Grid item>
-                <Checkbox id="remember" size="small" />
-              </Grid>
-              <Grid item>
-                <Typography
-                  component="label"
-                  htmlFor="remember"
-                  variant="subtitle2"
-                >
-                  Remember Me
-                </Typography>
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item sm={6}>
+          <Grid item sm={12}>
             <Link href="/">
-              <Typography variant="subtitle2">Forgot your password?</Typography>
+              <Typography variant="subtitle2" component="span">
+                Forgot your password?
+              </Typography>
             </Link>
           </Grid>
         </Grid>

@@ -5,6 +5,8 @@ import store from 'store';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
+import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Navigation from 'src/components/SharedLayout/Navbar/MainNavbar';
 import Footer from 'src/components/SharedLayout/Footer';
@@ -17,6 +19,8 @@ import { useStyles } from 'src/components/AuthLayout/Login/styled.login';
 
 const Login: FunctionComponent<{}> = () => {
   const classes = useStyles();
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down('sm'));
   const isLoggedIn = store.get('__clu');
 
   if (isLoggedIn) {
@@ -31,7 +35,7 @@ const Login: FunctionComponent<{}> = () => {
     <>
       <Navigation />
       <Box className={classnames('banner-wrapper', classes.root)}>
-        <Box className="bannerLg" />
+        {!isMatch && <Box className="bannerLg" />}
         <Box className="banner-quick-action-login">
           <Typography variant="h5" className={classes.caption}>
             Login <span className={classes.inActive}>/ Signup</span>

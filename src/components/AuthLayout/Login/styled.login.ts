@@ -1,6 +1,6 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles({
+export const useStyles = makeStyles((theme: Theme) => ({
   root: {
     '& .MuiCheckbox-root': {
       padding: '0px',
@@ -14,6 +14,12 @@ export const useStyles = makeStyles({
     '& .MuiCircularProgress-svg': {
       '& > *': {
         color: 'white',
+      },
+    },
+    [theme.breakpoints.down('sm')]: {
+      '& .MuiGrid-container': {
+        display: 'unset',
+        margin: '1em',
       },
     },
   },
@@ -47,4 +53,38 @@ export const useStyles = makeStyles({
       margin: '.8em 0px 1.5em',
     },
   },
-});
+  forgetPassword: {
+    textAlign: 'right',
+    marginTop: '.4em',
+    marginBottom: '.6em',
+    '& .MuiTypography-subtitle2': {
+      fontSize: '12px',
+      textDecoration: 'underline',
+      cursor: 'pointer',
+      '&:hover': {
+        textDecoration: 'none',
+      },
+    },
+    [theme.breakpoints.down('sm')]: {
+      position: 'relative',
+      top: -10,
+      '& .MuiTypography-subtitle2': {
+        fontSize: '12px',
+      },
+    },
+  },
+  signup: {
+    '& .MuiTypography-subtitle2': {
+      '& a': {
+        '&:hover': {
+          textDecoration: 'none',
+        },
+      },
+    },
+    [theme.breakpoints.down('sm')]: {
+      '& .MuiTypography-subtitle2': {
+        fontSize: '12px',
+      },
+    },
+  },
+}));

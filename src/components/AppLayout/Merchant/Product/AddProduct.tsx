@@ -39,13 +39,23 @@ import {
 const validationSchema = yup.object().shape({
   productName: yup.string().required('Required'),
   productDescription: yup.string().required('Required'),
-  // productSizes: yup.string().required('Required'),
-  // productCategory: yup.string().required('Required'),
-  // colors: yup.string().required('Required'),
-  // stock: yup.string().required('Required'),
+  productSize: yup
+    .object()
+    .shape({ label: yup.string().required(), value: yup.string().required() }),
+  productCategory: yup
+    .object()
+    .shape({ label: yup.string().required(), value: yup.string().required() }),
+  colors: yup
+    .object()
+    .shape({ label: yup.string().required(), value: yup.string().required() }),
+  tags: yup
+    .object()
+    .shape({ label: yup.string().required(), value: yup.string().required() }),
+  stock: yup
+    .object()
+    .shape({ label: yup.string().required(), value: yup.string().required() }),
   oldPrice: yup.number().required('Required'),
   newPrice: yup.number().required('Required'),
-  // tags: yup.string().required('Required'),
 });
 
 const animatedComponents = makeAnimated();
@@ -128,20 +138,6 @@ const AddProduct: FunctionComponent<{}> = () => {
     setState({ ...state, modal: '' });
   };
 
-  const _handleBlur = (param: string) => {
-    if (param === 'product' && selectedProduct.value === '') {
-      setIsError({ ...isError, productError: true });
-    } else if (param === 'size' && selectedSize.length === 0) {
-      setIsError({ ...isError, sizeError: true });
-    } else if (param === 'color' && selectedColor.length === 0) {
-      setIsError({ ...isError, colorError: true });
-    } else if (param === 'tag' && selectedTag.length === 0) {
-      setIsError({ ...isError, tagError: true });
-    } else if (param === 'stock' && selectedStock.value === '') {
-      setIsError({ ...isError, stockError: true });
-    }
-  };
-
   const _handleForm = async () => {
     const colors = selectedColor.map((color: { value: string }) => color.value);
     const productSizes = selectedSize.map(
@@ -197,12 +193,22 @@ const AddProduct: FunctionComponent<{}> = () => {
     productDescription: string;
     oldPrice: string;
     newPrice: string;
+    productCategory: { label: ''; value: '' };
+    productSize: { label: ''; value: '' };
+    colors: { label: ''; value: '' };
+    tags: { label: ''; value: '' };
+    stock: { label: ''; value: '' };
   }>({
     initialValues: {
       productName: '',
       productDescription: '',
       oldPrice: '',
       newPrice: '',
+      productCategory: { label: '', value: '' },
+      productSize: { label: '', value: '' },
+      colors: { label: '', value: '' },
+      tags: { label: '', value: '' },
+      stock: { label: '', value: '' },
     },
     onSubmit: _handleForm,
     validationSchema,
@@ -338,9 +344,12 @@ const AddProduct: FunctionComponent<{}> = () => {
                     value={productName}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    helperText={touched.productName && errors.productName}
-                    error={touched.productName && Boolean(errors.productName)}
                   />
+                  <Typography className={classes.error}>
+                    {touched.productName &&
+                      Boolean(errors.productName) &&
+                      'Required'}
+                  </Typography>
                 </Grid>
                 <Grid item sm={12}>
                   <Select
@@ -350,18 +359,20 @@ const AddProduct: FunctionComponent<{}> = () => {
                     classNamePrefix={'my-custom-react-select1'}
                     placeholder="Product Category"
                     name="productCategory"
-                    value={selectedProduct}
                     onChange={(e: any) => {
+                      formik.setFieldValue('productCategory', e);
                       setSelectedProduct({
                         label: e.label,
                         value: e.value,
                       });
                       setIsError({ ...isError, productError: false });
                     }}
-                    onBlur={() => _handleBlur('product')}
+                    onBlur={handleBlur}
                   />
                   <Typography className={classes.error}>
-                    {!selectedProduct.value && 'Required'}
+                    {touched.productCategory &&
+                      Boolean(errors.productCategory?.label) &&
+                      'Required'}
                   </Typography>
                 </Grid>
                 <Grid item sm={12}>
@@ -372,15 +383,21 @@ const AddProduct: FunctionComponent<{}> = () => {
                     options={PPRODUCT_SIZES}
                     classNamePrefix={'my-custom-react-select2'}
                     placeholder="Available Size"
-                    value={selectedSize}
+                    // value={selectedSize}
+                    name="productSize"
                     onChange={(e: any) => {
+                      formik.setFieldValue('productSize', e);
                       setSelectedSize([...e]);
                       setIsError({ ...isError, sizeError: false });
                     }}
-                    onBlur={() => _handleBlur('size')}
+                    // onBlur={() => _handleBlur('size')}
+                    onBlur={handleBlur}
                   />
                   <Typography className={classes.error}>
-                    {!selectedSize.length && 'Required'}
+                    {/* {!selectedSize.length && 'Required'} */}
+                    {touched.productSize &&
+                      Boolean(errors.productSize?.label) &&
+                      'Required'}
                   </Typography>
                 </Grid>
                 <Grid item sm={12}>
@@ -389,17 +406,23 @@ const AddProduct: FunctionComponent<{}> = () => {
                     components={animatedComponents}
                     isMulti
                     options={COLORS}
+                    name="colors"
                     classNamePrefix={'my-custom-react-select3'}
                     placeholder="Available Colors"
                     value={selectedColor}
                     onChange={(e: any) => {
+                      formik.setFieldValue('colors', e);
                       setSelectedColor([...e]);
                       setIsError({ ...isError, colorError: false });
                     }}
-                    onBlur={() => _handleBlur('color')}
+                    // onBlur={() => _handleBlur('color')}
+                    onBlur={handleBlur}
                   />
                   <Typography className={classes.error}>
-                    {!selectedColor.length && 'Required'}
+                    {/* {!selectedColor.length && 'Required'} */}
+                    {touched.colors &&
+                      Boolean(errors.colors?.label) &&
+                      'Required'}
                   </Typography>
                 </Grid>
                 <Grid item sm={6}>
@@ -419,9 +442,12 @@ const AddProduct: FunctionComponent<{}> = () => {
                         <InputAdornment position="start">₦</InputAdornment>
                       ),
                     }}
-                    helperText={touched.oldPrice && errors.oldPrice}
-                    error={touched.oldPrice && Boolean(errors.oldPrice)}
+                    // helperText={touched.oldPrice && errors.oldPrice}
+                    // error={touched.oldPrice && Boolean(errors.oldPrice)}
                   />
+                  <Typography className={classes.error}>
+                    {touched.oldPrice && Boolean(errors.oldPrice) && 'Required'}
+                  </Typography>
                 </Grid>
                 <Grid item sm={6}>
                   <TextInput
@@ -440,9 +466,12 @@ const AddProduct: FunctionComponent<{}> = () => {
                         <InputAdornment position="start">₦</InputAdornment>
                       ),
                     }}
-                    helperText={touched.newPrice && errors.newPrice}
-                    error={touched.newPrice && Boolean(errors.newPrice)}
+                    // helperText={touched.newPrice && errors.newPrice}
+                    // error={touched.newPrice && Boolean(errors.newPrice)}
                   />
+                  <Typography className={classes.error}>
+                    {touched.newPrice && Boolean(errors.newPrice) && 'Required'}
+                  </Typography>
                 </Grid>
                 <Grid item sm={12}>
                   <Select
@@ -452,15 +481,19 @@ const AddProduct: FunctionComponent<{}> = () => {
                     options={PRODUCT_TAGS}
                     classNamePrefix={'my-custom-react-select4'}
                     placeholder="Select Tags"
+                    name="tags"
                     value={selectedTag}
                     onChange={(e: any) => {
+                      formik.setFieldValue('tags', e);
                       setSelectedTag([...e]);
                       setIsError({ ...isError, tagError: false });
                     }}
-                    onBlur={() => _handleBlur('tag')}
+                    // onBlur={() => _handleBlur('tag')}
+                    onBlur={handleBlur}
                   />
                   <Typography className={classes.error}>
-                    {!selectedTag.length && 'Required'}
+                    {/* {!selectedTag.length && 'Required'} */}
+                    {touched.tags && Boolean(errors.tags?.label) && 'Required'}
                   </Typography>
                 </Grid>
                 <Grid item sm={12}>
@@ -469,16 +502,22 @@ const AddProduct: FunctionComponent<{}> = () => {
                     components={animatedComponents}
                     options={PRODUCT_STOCK}
                     placeholder="Stock"
-                    value={selectedStock}
+                    // value={selectedStock}
+                    name="stock"
                     classNamePrefix={'my-custom-react-select5'}
                     onChange={(e: any) => {
+                      formik.setFieldValue('stock', e);
                       setSelectedStock({ label: e.label, value: e.value });
                       setIsError({ ...isError, stockError: false });
                     }}
-                    onBlur={() => _handleBlur('stock')}
+                    // onBlur={() => _handleBlur('stock')}
+                    onBlur={handleBlur}
                   />
                   <Typography className={classes.error}>
-                    {!selectedStock.value && 'Required'}
+                    {/* {!selectedStock.value && 'Required'} */}
+                    {touched.stock &&
+                      Boolean(errors.stock?.label) &&
+                      'Required'}
                   </Typography>
                 </Grid>
                 <Grid item sm={12}>
@@ -494,14 +533,19 @@ const AddProduct: FunctionComponent<{}> = () => {
                     value={productDescription}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    helperText={
-                      touched.productDescription && errors.productDescription
-                    }
-                    error={
-                      touched.productDescription &&
-                      Boolean(errors.productDescription)
-                    }
+                    // helperText={
+                    //   touched.productDescription && errors.productDescription
+                    // }
+                    // error={
+                    //   touched.productDescription &&
+                    //   Boolean(errors.productDescription)
+                    // }
                   />
+                  <Typography className={classes.error}>
+                    {touched.productDescription &&
+                      Boolean(errors.productDescription) &&
+                      'Required'}
+                  </Typography>
                 </Grid>
               </Grid>
             </Box>

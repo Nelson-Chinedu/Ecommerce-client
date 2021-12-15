@@ -42,6 +42,7 @@ const ProductPage = () => {
     <>
       <Head>
         <title>Multibuy | Product</title>
+        <meta name="viewport" content="width=device-width, initial-scale=0.1" />
       </Head>
       <SettingProvider>
         <MerchantProductProvider>

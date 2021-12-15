@@ -48,7 +48,7 @@ const AvailableTrend: FunctionComponent<{}> = () => {
               fullWidth={true}
               className={classes.btnForHer}
             >
-              <KeyboardBackspaceIcon /> {' '} FOR HER
+              <KeyboardBackspaceIcon /> FOR HER
             </Button>
           </Grid>
           <Grid item>
@@ -59,7 +59,7 @@ const AvailableTrend: FunctionComponent<{}> = () => {
               disableElevation={true}
               fullWidth={true}
             >
-              FOR HIM {' '} <ArrowRightAltIcon />
+              FOR HIM <ArrowRightAltIcon />
             </Button>
           </Grid>
         </Grid>

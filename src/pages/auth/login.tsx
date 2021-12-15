@@ -25,6 +25,7 @@ const LoginPage = () => {
     <>
       <Head>
         <title>Multibuy | Login</title>
+        {/* <meta name="viewport" content="width=1024" /> */}
       </Head>
       <Login />
     </>

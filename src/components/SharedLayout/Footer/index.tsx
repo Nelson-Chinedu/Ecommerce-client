@@ -19,7 +19,7 @@ const Footer: FunctionComponent<{}> = () => {
       <Box className={classes.root}>
         <Container>
           <Grid container alignItems="flex-start" justify="space-between">
-            <Grid item>
+            <Grid item sm={2}>
               <Typography variant="h6">Social</Typography>
               <Box>
                 <Grid container spacing={1}>
@@ -56,7 +56,7 @@ const Footer: FunctionComponent<{}> = () => {
                 </Grid>
               </Box>
             </Grid>
-            <Grid item>
+            <Grid item sm={2}>
               <Typography variant="h6">Contact</Typography>
               <Box>
                 <Typography variant="body2">Contact Us</Typography>
@@ -65,7 +65,7 @@ const Footer: FunctionComponent<{}> = () => {
                 <Typography variant="body2">Call us: +958 444 2301</Typography>
               </Box>
             </Grid>
-            <Grid item>
+            <Grid item sm={2}>
               <Typography variant="h6">About</Typography>
               <Box>
                 <Typography variant="body2">Support Center</Typography>
@@ -74,7 +74,7 @@ const Footer: FunctionComponent<{}> = () => {
                 <Typography variant="body2">Copyright</Typography>
               </Box>
             </Grid>
-            <Grid item>
+            <Grid item sm={2}>
               <Typography variant="h6">Customer Care</Typography>
               <Box>
                 <Typography variant="body2">FAQ &amp; Helps</Typography>
@@ -82,7 +82,7 @@ const Footer: FunctionComponent<{}> = () => {
                 <Typography variant="body2">Return &amp; Exchanges</Typography>
               </Box>
             </Grid>
-            <Grid item>
+            <Grid item sm={2}>
               <Typography variant="h6">Our Information</Typography>
               <Box>
                 <Typography variant="body2">Privacy policy update</Typography>
@@ -91,7 +91,7 @@ const Footer: FunctionComponent<{}> = () => {
                 <Typography variant="body2">Site Map</Typography>
               </Box>
             </Grid>
-            <Grid item>
+            <Grid item sm={2}>
               <Typography variant="h6">Make Money With Multibuy</Typography>
               <Box>
                 <Typography variant="body2">

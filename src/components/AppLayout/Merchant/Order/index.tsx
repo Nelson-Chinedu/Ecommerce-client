@@ -50,22 +50,22 @@ const Order: FunctionComponent<{}> = () => {
             <Typography variant="subtitle2">
               Hang on tight, No order yet !!!
             </Typography>
-            {!firstname || !lastname || !phoneNumber || !storeName ? null : (
-              <Grid container alignItems="center" justify="center">
-                <Grid item sm={3}>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    fullWidth
-                    disableElevation={true}
-                    onClick={handleOpen}
-                  >
-                    <AddCircleOutlineOutlinedIcon fontSize="small" /> Add
-                    Product
-                  </Button>
-                </Grid>
+            <Grid container alignItems="center" justify="center">
+              <Grid item sm={3}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  fullWidth
+                  disableElevation={true}
+                  onClick={handleOpen}
+                  disabled={
+                    !firstname || !lastname || !phoneNumber || !storeName
+                  }
+                >
+                  <AddCircleOutlineOutlinedIcon fontSize="small" /> Add Product
+                </Button>
               </Grid>
-            )}
+            </Grid>
           </Box>
         ) : (
           <>

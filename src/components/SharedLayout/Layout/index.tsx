@@ -57,7 +57,7 @@ const Layout: FunctionComponent<Props> = ({ children }) => {
     uiStore.snackbarSeverity = 'success';
     uiStore.showSnackbar = true;
   };
-  console.log(firstname, lastname, phoneNumber, storeName, '***');
+
   return (
     <Box className={classes.root}>
       <Box>
@@ -67,8 +67,8 @@ const Layout: FunctionComponent<Props> = ({ children }) => {
         {!firstname || !lastname || !phoneNumber || !storeName ? (
           <Box className={classes.setup}>
             <Typography variant="subtitle2">
-              Click <Link href="/app/m/setting">Here</Link> to setup profile and
-              store to continue
+              Click <Link href="/app/m/setting">Here</Link> to setup your
+              profile and store to add product
             </Typography>
           </Box>
         ) : null}

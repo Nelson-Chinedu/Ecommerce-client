@@ -43,6 +43,7 @@ const AccountPage: FunctionComponent<{}> = () => {
     <>
       <Head>
         <title>Multibuy | Account</title>
+        <meta name="viewport" content="width=device-width, initial-scale=0.1" />
       </Head>
       <Account />
     </>

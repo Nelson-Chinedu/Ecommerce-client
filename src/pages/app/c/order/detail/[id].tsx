@@ -45,6 +45,7 @@ const OrderPreviewPage = () => {
     <>
       <Head>
         <title>Multibuy | Product-detail</title>
+        <meta name="viewport" content="width=device-width, initial-scale=0.1" />
       </Head>
       <ModalProvider>
         <Preview />
