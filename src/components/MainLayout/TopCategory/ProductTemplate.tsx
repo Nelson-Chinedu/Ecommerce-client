@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import { observer } from 'mobx-react-lite';
 import NumberFormat from 'react-number-format';
 import Box from '@material-ui/core/Box';
@@ -21,10 +20,9 @@ type Props = {
   data?: any;
 };
 
-const ProductTemplate: FunctionComponent<Props> = ({ data, category }) => {
+const ProductTemplate: FunctionComponent<Props> = ({ data }) => {
   const classes = useStyles();
   const { uiStore } = useStore();
-  const router = useRouter();
 
   const handleAddFavourite = (e: any, index: number) => {
     e.stopPropagation();
