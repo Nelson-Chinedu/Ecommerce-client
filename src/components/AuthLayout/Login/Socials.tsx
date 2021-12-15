@@ -5,12 +5,14 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
 import Button from 'src/components/SharedLayout/Button';
+import { useStyles } from 'src/components/AuthLayout/Login/styled.login';
 
 const Socials: FunctionComponent<{}> = () => {
+  const classes = useStyles();
   return (
     <>
       <Grid container spacing={3} alignItems="center" justify="space-between">
-        <Grid item sm={6}>
+        <Grid item sm={12} md={12}>
           <Button
             variant="outlined"
             color="secondary"
@@ -21,7 +23,7 @@ const Socials: FunctionComponent<{}> = () => {
             <span style={{ paddingLeft: '1em' }}>Sign in with Google</span>
           </Button>
         </Grid>
-        <Grid item sm={6}>
+        <Grid item sm={12} md={12}>
           <Button
             variant="outlined"
             color="secondary"
@@ -32,9 +34,9 @@ const Socials: FunctionComponent<{}> = () => {
             <span style={{ paddingLeft: '1em' }}>Sign in with Facebook</span>
           </Button>
         </Grid>
-        <Grid container>
+        <Grid container className={classes.signup}>
           <Grid item sm={12}>
-            <Typography>
+            <Typography variant="subtitle2">
               Don't have an account?{' '}
               <Link href="/auth/signup?t=c">Sign up</Link>
             </Typography>

@@ -16,15 +16,17 @@ import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutline
 import ShoppingBasketOutlinedIcon from '@material-ui/icons/ShoppingBasketOutlined';
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles, useTheme, Theme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Sidenav from 'src/components/SharedLayout/Sidenav';
 
 import { useStore } from 'src/store';
-import { Typography } from '@material-ui/core';
+
 import { UserContext } from 'src/components/context/userContext';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
   root: {},
   popoverContainer: {
     '& .MuiPaper-root': {
@@ -47,10 +49,29 @@ const useStyles = makeStyles({
   },
   user: {
     marginLeft: '1em',
+    '& .MuiSvgIcon-root': {
+      '& > *': {
+        color: '#56515185',
+      },
+    },
   },
-});
+  userSmall: {
+    marginLeft: '1em',
+    '& .MuiSvgIcon-root': {
+      '& > *': {
+        color: '#56515185',
+      },
+    },
+  },
+  small: {
+    width: theme.spacing(4),
+    height: theme.spacing(4),
+  },
+}));
 
 const Index: FunctionComponent<{}> = () => {
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down('sm'));
   const { uiStore } = useStore();
   const { isLoggedIn } = useContext<any>(UserContext);
   const router = useRouter();
@@ -101,7 +122,7 @@ const Index: FunctionComponent<{}> = () => {
         container
         justify="space-between"
         alignItems="center"
-        style={{ padding: '10px 20px' }}
+        style={{ padding: isMatch ? '10px 0px' : '10px 20px' }}
       >
         <Grid item style={{ cursor: 'pointer', zIndex: 999999 }}>
           <IconButton onClick={() => _handleOpenSideNav('left')}>
@@ -109,62 +130,137 @@ const Index: FunctionComponent<{}> = () => {
           </IconButton>
         </Grid>
         <Grid item style={{ zIndex: 999999 }}>
-          <Grid container alignItems="center">
-            <Grid item>
+          {isMatch ? (
+            <Grid container alignItems="center">
+              {/* <Grid item>
               <IconButton aria-label="home" onClick={handleHome}>
                 <HomeOutlinedIcon fontSize="small" />
               </IconButton>
-            </Grid>
-            <Grid item>
+            </Grid> */}
+              {/* <Grid item>
               <IconButton aria-label="search">
                 <SearchIcon fontSize="small" />
               </IconButton>
-            </Grid>
-            <Grid item>
-              <IconButton aria-label="search">
-                <Badge badgeContent={uiStore.favouriteCount} color="primary">
-                  <FavoriteBorderOutlinedIcon fontSize="small" />
-                </Badge>
-              </IconButton>
-            </Grid>
-            <Grid item>
-              <IconButton
-                aria-label="search"
-                onClick={() => _handleOpenSideNav('right')}
-              >
-                <Badge badgeContent={uiStore.cartItems.length} color="primary">
-                  <ShoppingBasketOutlinedIcon fontSize="small" />
-                </Badge>
-              </IconButton>
-            </Grid>
-            <Grid item>
-              <Grid container alignItems="center" justify="center" spacing={0}>
-                {!isLoggedIn ? (
-                  <Grid item>
-                    <IconButton onClick={handleAuthLogin}>
-                      <PersonOutlinedIcon fontSize="small" />
-                    </IconButton>
-                  </Grid>
-                ) : (
-                  <>
-                    <Box
-                      onClick={handleOpen}
-                      style={{ display: 'flex', cursor: 'pointer' }}
-                    >
-                      <Grid item className={classes.user}>
-                        <Avatar src="/image/man6.jpg" />
-                      </Grid>
-                      <Grid item>
-                        <IconButton disableRipple size="small">
-                          <ExpandMoreIcon />
-                        </IconButton>
-                      </Grid>
-                    </Box>
-                  </>
-                )}
+            </Grid> */}
+              <Grid item>
+                <IconButton aria-label="search">
+                  <Badge badgeContent={uiStore.favouriteCount} color="primary">
+                    <FavoriteBorderOutlinedIcon fontSize="small" />
+                  </Badge>
+                </IconButton>
+              </Grid>
+              <Grid item>
+                <IconButton
+                  aria-label="search"
+                  onClick={() => _handleOpenSideNav('right')}
+                >
+                  <Badge
+                    badgeContent={uiStore.cartItems.length}
+                    color="primary"
+                  >
+                    <ShoppingBasketOutlinedIcon fontSize="small" />
+                  </Badge>
+                </IconButton>
+              </Grid>
+              <Grid item>
+                <Grid
+                  container
+                  alignItems="center"
+                  justify="center"
+                  spacing={0}
+                >
+                  {!isLoggedIn ? (
+                    <Grid item>
+                      <IconButton onClick={handleAuthLogin}>
+                        <PersonOutlinedIcon fontSize="small" />
+                      </IconButton>
+                    </Grid>
+                  ) : (
+                    <>
+                      <Box
+                        onClick={handleOpen}
+                        style={{ display: 'flex', cursor: 'pointer' }}
+                      >
+                        <Grid item className={classes.userSmall}>
+                          <Avatar className={classes.small}></Avatar>
+                        </Grid>
+                        <Grid item>
+                          <IconButton disableRipple size="small">
+                            <ExpandMoreIcon />
+                          </IconButton>
+                        </Grid>
+                      </Box>
+                    </>
+                  )}
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
+          ) : (
+            <Grid container alignItems="center">
+              <Grid item>
+                <IconButton aria-label="home" onClick={handleHome}>
+                  <HomeOutlinedIcon fontSize="small" />
+                </IconButton>
+              </Grid>
+              <Grid item>
+                <IconButton aria-label="search">
+                  <SearchIcon fontSize="small" />
+                </IconButton>
+              </Grid>
+              <Grid item>
+                <IconButton aria-label="search">
+                  <Badge badgeContent={uiStore.favouriteCount} color="primary">
+                    <FavoriteBorderOutlinedIcon fontSize="small" />
+                  </Badge>
+                </IconButton>
+              </Grid>
+              <Grid item>
+                <IconButton
+                  aria-label="search"
+                  onClick={() => _handleOpenSideNav('right')}
+                >
+                  <Badge
+                    badgeContent={uiStore.cartItems.length}
+                    color="primary"
+                  >
+                    <ShoppingBasketOutlinedIcon fontSize="small" />
+                  </Badge>
+                </IconButton>
+              </Grid>
+              <Grid item>
+                <Grid
+                  container
+                  alignItems="center"
+                  justify="center"
+                  spacing={0}
+                >
+                  {!isLoggedIn ? (
+                    <Grid item>
+                      <IconButton onClick={handleAuthLogin}>
+                        <PersonOutlinedIcon fontSize="small" />
+                      </IconButton>
+                    </Grid>
+                  ) : (
+                    <>
+                      <Box
+                        onClick={handleOpen}
+                        style={{ display: 'flex', cursor: 'pointer' }}
+                      >
+                        <Grid item className={classes.user}>
+                          <Avatar></Avatar>
+                        </Grid>
+                        <Grid item>
+                          <IconButton disableRipple size="small">
+                            <ExpandMoreIcon />
+                          </IconButton>
+                        </Grid>
+                      </Box>
+                    </>
+                  )}
+                </Grid>
+              </Grid>
+            </Grid>
+          )}
         </Grid>
       </Grid>
       <Popover

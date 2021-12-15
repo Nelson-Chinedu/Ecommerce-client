@@ -45,22 +45,24 @@ const Product: FunctionComponent<{}> = () => {
               alt="product illustration"
             />
             <Typography variant="subtitle2">No product added yet</Typography>
-            {!firstname || !lastname || !phoneNumber || !storeName ? null : (
-              <Grid container alignItems="center" justify="center">
-                <Grid item sm={3}>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    fullWidth
-                    disableElevation={true}
-                    onClick={handleOpen}
-                  >
-                    <AddCircleOutlineOutlinedIcon fontSize="small" /> Add
-                    Product
-                  </Button>
-                </Grid>
+            {/* {!firstname || !lastname || !phoneNumber || !storeName ? null : ( */}
+            <Grid container alignItems="center" justify="center">
+              <Grid item sm={3}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  fullWidth
+                  disableElevation={true}
+                  disabled={
+                    !firstname || !lastname || !phoneNumber || !storeName
+                  }
+                  onClick={handleOpen}
+                >
+                  <AddCircleOutlineOutlinedIcon fontSize="small" /> Add Product
+                </Button>
               </Grid>
-            )}
+            </Grid>
+            {/* // )} */}
           </Box>
         ) : (
           <>

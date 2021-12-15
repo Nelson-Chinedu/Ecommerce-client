@@ -65,6 +65,14 @@
     z-index: 999999;
     padding: 2em;
     // width: 800px
+    @media screen and (max-width: 650px) {
+      // display: none;
+      position: unset;
+      width: 90%;
+      top: unset;
+      padding: 2em 1em;
+      margin-top: 6em;
+    }
   }
   .banner-quick-action-signup {
     position: relative;
@@ -77,6 +85,14 @@
     z-index: 999999;
     padding: 2em;
     // width: 800px
+    @media screen and (max-width: 650px) {
+      // display: none;
+      position: unset;
+      width: 90%;
+      top: unset;
+      padding: 2em 1em;
+      margin-top: 6em;
+    }
   }
   .banner-checkout-desc {
     position: relative;

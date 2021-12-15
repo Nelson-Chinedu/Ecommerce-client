@@ -1,6 +1,6 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles({
+export const useStyles = makeStyles((theme: Theme) => ({
   root: {
     '& .MuiCheckbox-root': {
       padding: '0px',
@@ -16,6 +16,12 @@ export const useStyles = makeStyles({
         color: 'white',
       },
     },
+    [theme.breakpoints.down('sm')]: {
+      '& .MuiGrid-container': {
+        display: 'unset',
+        margin: '1em',
+      },
+    },
   },
   inActive: {
     color: '#3e3e3e8c',
@@ -27,7 +33,7 @@ export const useStyles = makeStyles({
     marginTop: '1em',
   },
   btnLogin: {
-    margin: '.5em 0px',
+    margin: '1em 0px',
     '& > *': {
       color: '#FFF',
     },
@@ -37,4 +43,22 @@ export const useStyles = makeStyles({
       },
     },
   },
-});
+  signin: {
+    '& .MuiTypography-subtitle2': {
+      '& a': {
+        '&:hover': {
+          textDecoration: 'none',
+        },
+      },
+    },
+    [theme.breakpoints.down('sm')]: {
+      '& .MuiTypography-subtitle2': {
+        fontSize: '12px',
+      },
+    },
+  },
+  agree: {
+    border: '1px solid red',
+    display: 'flex',
+  },
+}));

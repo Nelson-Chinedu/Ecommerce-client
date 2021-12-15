@@ -1,39 +1,26 @@
-import { FunctionComponent, ChangeEvent } from 'react';
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
+import React, { ChangeEvent, FunctionComponent } from 'react';
 import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 
 import useElementOnScreen from 'src/components/hooks/useElementOnScreen';
-interface LinkTabProps {
-  label?: string;
-  href?: string;
-}
+
+import { useStyles } from 'src/components/MainLayout/TopCategory/styled.topCategory';
 
 type Props = {
-  handleChange: (_event: ChangeEvent<{}>, value: number) => void;
+  handleChange: (_event: ChangeEvent<{}>, newValue: number) => void;
   value: number;
 };
 
-function LinkTab(props: LinkTabProps) {
-  return (
-    <Tab
-      component="a"
-      onClick={(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-        event.preventDefault();
-      }}
-      {...props}
-    />
-  );
-}
-
 function a11yProps(index: any) {
   return {
-    id: `nav-tab-${index}`,
-    'aria-controls': `nav-tabpanel-${index}`,
+    id: `scrollable-auto-tab-${index}`,
+    'aria-controls': `scrollable-auto-tabpanel-${index}`,
   };
 }
 
 const Navbar: FunctionComponent<Props> = ({ handleChange, value }) => {
+  const classes = useStyles();
   const [containerRef, isVisble]: (boolean | any)[] = useElementOnScreen({
     root: null,
     rootMargin: '0px',
@@ -41,44 +28,54 @@ const Navbar: FunctionComponent<Props> = ({ handleChange, value }) => {
   });
 
   return (
-    <>
+    <div className={classes.navbar}>
       {!isVisble ? (
-        <AppBar position="sticky" style={{ background: 'white' }}>
+        <AppBar position="fixed" style={{ background: 'white' }}>
           <Tabs
-            variant="fullWidth"
             value={value}
             onChange={handleChange}
-            aria-label="nav tab"
+            indicatorColor="primary"
+            textColor="primary"
+            variant="scrollable"
+            scrollButtons="auto"
+            aria-label="scrollable auto tabs example"
           >
-            <LinkTab label="Men" {...a11yProps(1)} />
-            <LinkTab label="Women" {...a11yProps(2)} />
-            <LinkTab label="Makeup" {...a11yProps(3)} />
-            <LinkTab label="Hair Care" {...a11yProps(4)} />
-            <LinkTab label="Skin care" {...a11yProps(5)} />
-            <LinkTab label="Bags" {...a11yProps(6)} />
-            <LinkTab label="Baby" {...a11yProps(7)} />
-            <LinkTab label="Watches" {...a11yProps(8)} />
+            <Tab label="Men" {...a11yProps(0)} />
+            <Tab label="Women" {...a11yProps(1)} />
+            <Tab label="Kids" {...a11yProps(2)} />
+            <Tab label="Shoes" {...a11yProps(3)} />
+            <Tab label="Watches" {...a11yProps(4)} />
+            <Tab label="Shirts" {...a11yProps(5)} />
+            <Tab label="Hoodie" {...a11yProps(6)} />
+            <Tab label="Sneakers" {...a11yProps(7)} />
+            {/* <Tab label="Sunglasses" {...a11yProps(8)} /> */}
+            {/* <Tab label="Baby" {...a11yProps(9)} /> */}
           </Tabs>
         </AppBar>
       ) : (
         <Tabs
-          variant="fullWidth"
           value={value}
           onChange={handleChange}
-          aria-label="nav tab"
+          indicatorColor="primary"
+          textColor="primary"
+          variant="scrollable"
+          scrollButtons="auto"
+          aria-label="scrollable auto tabs example"
         >
-          <LinkTab label="Men" {...a11yProps(1)} />
-          <LinkTab label="Women" {...a11yProps(2)} />
-          <LinkTab label="Makeup" {...a11yProps(3)} />
-          <LinkTab label="Hair Care" {...a11yProps(4)} />
-          <LinkTab label="Skin care" {...a11yProps(5)} />
-          <LinkTab label="Bags" {...a11yProps(6)} />
-          <LinkTab label="Baby" {...a11yProps(7)} />
-          <LinkTab label="Watches" {...a11yProps(8)} />
+          <Tab label="Men" {...a11yProps(0)} />
+          <Tab label="Women" {...a11yProps(1)} />
+          <Tab label="Kids" {...a11yProps(2)} />
+          <Tab label="Shoes" {...a11yProps(3)} />
+          <Tab label="Watches" {...a11yProps(4)} />
+          <Tab label="Shirts" {...a11yProps(5)} />
+          <Tab label="Hoodie" {...a11yProps(6)} />
+          <Tab label="Sneakers" {...a11yProps(7)} />
+          {/* <Tab label="Sunglasses" {...a11yProps(8)} /> */}
+          {/* <Tab label="Baby" {...a11yProps(9)} /> */}
         </Tabs>
       )}
       <div ref={containerRef} />
-    </>
+    </div>
   );
 };
 

@@ -40,6 +40,7 @@ const OrderPage = () => {
     <>
       <Head>
         <title>Multibuy | Message</title>
+        <meta name="viewport" content="width=device-width, initial-scale=0.1" />
       </Head>
       <SettingProvider>
         <Message />

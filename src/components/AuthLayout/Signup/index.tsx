@@ -3,6 +3,8 @@ import classnames from 'classnames';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
+import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Navigation from 'src/components/SharedLayout/Navbar/MainNavbar';
 import Footer from 'src/components/SharedLayout/Footer';
@@ -15,12 +17,14 @@ import Socials from 'src/components/AuthLayout/Signup/Socials';
 
 const Signup: FunctionComponent<{}> = () => {
   const classes = useStyles();
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <>
       <Navigation />
       <Box className={classnames('banner-wrapper', classes.root)}>
-        <Box className="bannerSignup" />
+        {!isMatch && <Box className="bannerSignup" />}
         <Box className="banner-quick-action-signup">
           <Typography variant="h5" className={classes.inActive}>
             Login <span className={classes.caption}>/ Signup</span>

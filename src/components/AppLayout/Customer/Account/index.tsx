@@ -145,11 +145,7 @@ const Account: FunctionComponent<{}> = () => {
               margin: 'auto',
             }}
           >
-            <Avatar
-              src="/image/man6.jpg"
-              alt="profile picture"
-              className={classes.large}
-            />
+            <Avatar alt="profile picture" className={classes.large}></Avatar>
             <Box className={classes.upload}>
               <input
                 accept="image/*"

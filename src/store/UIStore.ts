@@ -39,7 +39,7 @@ export class UIStore {
   collapsePayment: boolean = true;
   passwordVisibilty: boolean = false;
   // modalVisibility: boolean = false;
-  privacyButton: boolean = false;
+  privacyButton: boolean = true;
   isLoggedIn: boolean = false;
   loggedMessage: string = '';
   notification: boolean = false;

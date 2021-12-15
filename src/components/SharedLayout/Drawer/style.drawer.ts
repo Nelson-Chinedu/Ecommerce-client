@@ -13,5 +13,8 @@ export const StyledDrawer = styled(Drawer)`
   width: 25%;
   & .MuiDrawer-paper {
     width: 20%;
+    @media (max-width: 600px) {
+      width: 100%;
+    }
   }
 `;

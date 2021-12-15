@@ -30,6 +30,7 @@ type Props = {
   className?: string;
   helperText?: string;
   error?: boolean;
+  endAdornment?: any;
 };
 
 const TextInput: FunctionComponent<Props> = ({
