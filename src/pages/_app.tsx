@@ -110,16 +110,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     uiStore.serverMessage = '';
   };
 
-  if (process.env.NODE_ENV === 'production') {
-    return (
-      <Box style={{ width: '50%', margin: '4em auto', textAlign: 'center' }}>
-        <Typography variant="subtitle1">
-          Site under construction &lt; &#47; &gt;
-        </Typography>
-        <Typography variant="subtitle2">Check back later</Typography>
-      </Box>
-    );
-  }
   return (
     <>
       <Head>
