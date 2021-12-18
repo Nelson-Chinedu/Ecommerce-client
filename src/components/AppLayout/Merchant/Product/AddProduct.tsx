@@ -97,24 +97,24 @@ const AddProduct: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const { uiStore } = useStore();
   const [state, setState] = useModalControl();
-  const [selectedProduct, setSelectedProduct] = useState<{
-    value: string;
-    label: string;
-  }>({
-    value: '',
-    label: '',
-  });
-  const [selectedSize, setSelectedSize] = useState<Array<Props>>([]);
+  // const [selectedProduct, setSelectedProduct] = useState<{
+  //   value: string;
+  //   label: string;
+  // }>({
+  //   value: '',
+  //   label: '',
+  // });
+  // const [selectedSize, setSelectedSize] = useState<Array<Props>>([]);
   const [selectedColor, setSelectedColor] = useState<Array<Props>>([]);
   const [selectedTag, setSelectedTag] = useState<Array<Props>>([]);
   const [imageUrl, setImageUrl] = useState<string>('');
   const [imageName, setImageName] = useState<string>('');
   const [imageSize, setImageSize] = useState<string>('');
   const [isImage, setIsImage] = useState<boolean>(false);
-  const [selectedStock, setSelectedStock] = useState<{
-    value: string;
-    label: string;
-  }>({ value: '', label: '' });
+  // const [selectedStock, setSelectedStock] = useState<{
+  //   value: string;
+  //   label: string;
+  // }>({ value: '', label: '' });
   const [isError, setIsError] = useState<{
     productError: boolean;
     sizeError: boolean;
@@ -398,7 +398,7 @@ const AddProduct: FunctionComponent<{}> = () => {
               <Grid container spacing={2}>
                 <Grid item sm={12}>
                   <TextInput
-                    label="Product Name"
+                    placeholder="Product Name"
                     variant="outlined"
                     fullWidth
                     size="small"
@@ -424,13 +424,20 @@ const AddProduct: FunctionComponent<{}> = () => {
                     name="productCategory"
                     onChange={(e: any) => {
                       formik.setFieldValue('productCategory', e);
-                      setSelectedProduct({
-                        label: e.label,
-                        value: e.value,
-                      });
+                      // setSelectedProduct({
+                      //   label: e.label,
+                      //   value: e.value,
+                      // });
                       setIsError({ ...isError, productError: false });
                     }}
                     onBlur={handleBlur}
+                    theme={(theme) => ({
+                      ...theme,
+                      colors: {
+                        ...theme.colors,
+                        neutral50: '#a5a5a5',
+                      },
+                    })}
                   />
                   <Typography className={classes.error}>
                     {touched.productCategory &&
@@ -450,11 +457,18 @@ const AddProduct: FunctionComponent<{}> = () => {
                     name="productSize"
                     onChange={(e: any) => {
                       formik.setFieldValue('productSize', e);
-                      setSelectedSize([...e]);
+                      // setSelectedSize([...e]);
                       setIsError({ ...isError, sizeError: false });
                     }}
                     // onBlur={() => _handleBlur('size')}
                     onBlur={handleBlur}
+                    theme={(theme) => ({
+                      ...theme,
+                      colors: {
+                        ...theme.colors,
+                        neutral50: '#a5a5a5',
+                      },
+                    })}
                   />
                   <Typography className={classes.error}>
                     {/* {!selectedSize.length && 'Required'} */}
@@ -480,6 +494,13 @@ const AddProduct: FunctionComponent<{}> = () => {
                     }}
                     // onBlur={() => _handleBlur('color')}
                     onBlur={handleBlur}
+                    theme={(theme) => ({
+                      ...theme,
+                      colors: {
+                        ...theme.colors,
+                        neutral50: '#a5a5a5',
+                      },
+                    })}
                   />
                   <Typography className={classes.error}>
                     {/* {!selectedColor.length && 'Required'} */}
@@ -490,7 +511,7 @@ const AddProduct: FunctionComponent<{}> = () => {
                 </Grid>
                 <Grid item sm={6}>
                   <TextInput
-                    label="Old Price"
+                    placeholder="Old Price"
                     variant="outlined"
                     fullWidth
                     size="small"
@@ -514,7 +535,7 @@ const AddProduct: FunctionComponent<{}> = () => {
                 </Grid>
                 <Grid item sm={6}>
                   <TextInput
-                    label="New Price"
+                    placeholder="New Price"
                     variant="outlined"
                     fullWidth
                     size="small"
@@ -553,6 +574,13 @@ const AddProduct: FunctionComponent<{}> = () => {
                     }}
                     // onBlur={() => _handleBlur('tag')}
                     onBlur={handleBlur}
+                    theme={(theme) => ({
+                      ...theme,
+                      colors: {
+                        ...theme.colors,
+                        neutral50: '#a5a5a5',
+                      },
+                    })}
                   />
                   <Typography className={classes.error}>
                     {/* {!selectedTag.length && 'Required'} */}
@@ -570,11 +598,18 @@ const AddProduct: FunctionComponent<{}> = () => {
                     classNamePrefix={'my-custom-react-select5'}
                     onChange={(e: any) => {
                       formik.setFieldValue('stock', e);
-                      setSelectedStock({ label: e.label, value: e.value });
+                      // setSelectedStock({ label: e.label, value: e.value });
                       setIsError({ ...isError, stockError: false });
                     }}
                     // onBlur={() => _handleBlur('stock')}
                     onBlur={handleBlur}
+                    theme={(theme) => ({
+                      ...theme,
+                      colors: {
+                        ...theme.colors,
+                        neutral50: '#a5a5a5',
+                      },
+                    })}
                   />
                   <Typography className={classes.error}>
                     {/* {!selectedStock.value && 'Required'} */}
@@ -587,7 +622,7 @@ const AddProduct: FunctionComponent<{}> = () => {
                   <TextInput
                     multiline
                     rows={5}
-                    label="Descriptionkkkk"
+                    placeholder="Description"
                     variant="outlined"
                     fullWidth
                     size="small"
@@ -596,14 +631,19 @@ const AddProduct: FunctionComponent<{}> = () => {
                     value={productDescription}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    helperText={
-                      touched.productDescription && errors.productDescription
-                    }
-                    error={
-                      touched.productDescription &&
-                      Boolean(errors.productDescription)
-                    }
+                    // helperText={
+                    //   touched.productDescription && errors.productDescription
+                    // }
+                    // error={
+                    //   touched.productDescription &&
+                    //   Boolean(errors.productDescription)
+                    // }
                   />
+                  <Typography className={classes.error}>
+                    {touched.productDescription &&
+                      Boolean(errors.productDescription) &&
+                      'Required'}
+                  </Typography>
                   {/* <Typography className={classes.error}>
                     {touched.productDescription &&
                       Boolean(errors.productDescription) &&
