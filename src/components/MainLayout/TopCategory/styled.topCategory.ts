@@ -178,8 +178,4 @@ export const useStyles = makeStyles((theme: Theme) => ({
       },
     },
   },
-  appBar: {
-    background: 'white',
-    position: (props: any) => (props.isVisble ? 'unset' : 'fixed'),
-  },
 }));

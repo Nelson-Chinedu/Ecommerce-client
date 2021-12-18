@@ -5,7 +5,7 @@ import Tab from '@material-ui/core/Tab';
 
 import useElementOnScreen from 'src/components/hooks/useElementOnScreen';
 
-import { useStyles } from 'src/components/MainLayout/TopCategory/styled.topCategory';
+import { useStyles } from 'src/components/MainLayout/TopCategory/styled.navbar';
 
 type Props = {
   handleChange: (_event: ChangeEvent<{}>, newValue: number) => void;
