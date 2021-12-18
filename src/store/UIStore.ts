@@ -147,7 +147,9 @@ export class UIStore {
   handleRemoveFromCart(id: number) {
     this.cartItems = this.cartItems;
     const carts = toJS(this.cartItems).flat();
-    const cart = carts.filter((cart: { itemId: number }) => cart.itemId !== id);
+    const cart = carts.filter(
+      (cart: { itemNumber: number }) => cart.itemNumber !== id
+    );
     store.set('cart', cart);
     this.cartItems = cart;
   }

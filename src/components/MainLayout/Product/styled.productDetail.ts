@@ -25,6 +25,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
     textDecoration: 'line-through',
   },
   preference: {
+    marginTop: '.7em',
     '& .MuiTypography-body1': {
       fontWeight: 500,
       marginBottom: '.5em',

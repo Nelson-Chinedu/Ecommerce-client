@@ -37,23 +37,31 @@ import {
 } from 'src/components/constant/product';
 
 const validationSchema = yup.object().shape({
-  productName: yup.string().required('Required'),
-  productDescription: yup.string().required('Required'),
+  productName: yup.string().required('Requiredk'),
+  productDescription: yup
+    .string()
+    .min(250, 'Minimum characters of 250 words')
+    .required('Requiredkl'),
   productSize: yup
     .object()
-    .shape({ label: yup.string().required(), value: yup.string().required() }),
+    .shape({ label: yup.string().required(), value: yup.string().required() })
+    .nullable(),
   productCategory: yup
     .object()
-    .shape({ label: yup.string().required(), value: yup.string().required() }),
+    .shape({ label: yup.string().required(), value: yup.string().required() })
+    .nullable(),
   colors: yup
     .object()
-    .shape({ label: yup.string().required(), value: yup.string().required() }),
+    .shape({ label: yup.string().required(), value: yup.string().required() })
+    .nullable(),
   tags: yup
     .object()
-    .shape({ label: yup.string().required(), value: yup.string().required() }),
+    .shape({ label: yup.string().required(), value: yup.string().required() })
+    .nullable(),
   stock: yup
     .object()
-    .shape({ label: yup.string().required(), value: yup.string().required() }),
+    .shape({ label: yup.string().required(), value: yup.string().required() })
+    .nullable(),
   oldPrice: yup.number().required('Required'),
   newPrice: yup.number().required('Required'),
 });
@@ -89,24 +97,24 @@ const AddProduct: FunctionComponent<{}> = () => {
   const classes = useStyles();
   const { uiStore } = useStore();
   const [state, setState] = useModalControl();
-  const [selectedProduct, setSelectedProduct] = useState<{
-    value: string;
-    label: string;
-  }>({
-    value: '',
-    label: '',
-  });
-  const [selectedSize, setSelectedSize] = useState<Array<Props>>([]);
+  // const [selectedProduct, setSelectedProduct] = useState<{
+  //   value: string;
+  //   label: string;
+  // }>({
+  //   value: '',
+  //   label: '',
+  // });
+  // const [selectedSize, setSelectedSize] = useState<Array<Props>>([]);
   const [selectedColor, setSelectedColor] = useState<Array<Props>>([]);
   const [selectedTag, setSelectedTag] = useState<Array<Props>>([]);
   const [imageUrl, setImageUrl] = useState<string>('');
   const [imageName, setImageName] = useState<string>('');
   const [imageSize, setImageSize] = useState<string>('');
   const [isImage, setIsImage] = useState<boolean>(false);
-  const [selectedStock, setSelectedStock] = useState<{
-    value: string;
-    label: string;
-  }>({ value: '', label: '' });
+  // const [selectedStock, setSelectedStock] = useState<{
+  //   value: string;
+  //   label: string;
+  // }>({ value: '', label: '' });
   const [isError, setIsError] = useState<{
     productError: boolean;
     sizeError: boolean;
@@ -139,30 +147,33 @@ const AddProduct: FunctionComponent<{}> = () => {
   };
 
   const _handleForm = async () => {
-    const colors = selectedColor.map((color: { value: string }) => color.value);
-    const productSizes = selectedSize.map(
-      (size: { value: string }) => size.value
-    );
-    const tags = selectedTag.map((tag: { value: string }) => tag.value);
+    const productSizes = Object.values(formik.values.productSize);
+    const productSize = productSizes.map(({ value }: any) => value);
+
+    const productColors = Object.values(formik.values.colors);
+    const colors = productColors.map(({ value }: any) => value);
+
+    const productTags = Object.values(formik.values.tags);
+    const tags = productTags.map(({ value }: any) => value);
+
+    const payload = {
+      colors,
+      tags,
+      imageUrl,
+      sizes: productSize,
+      description: formik.values.productDescription,
+      name: formik.values.productName,
+      category: formik.values.productCategory.value,
+      stock: formik.values.stock.value,
+      oldPrice: formik.values.oldPrice,
+      newPrice: formik.values.newPrice,
+    };
     try {
-      const payload = {
-        colors,
-        tags,
-        imageUrl,
-        sizes: productSizes,
-        name: formik.values.productName,
-        description: formik.values.productDescription,
-        oldPrice: formik.values.oldPrice,
-        newPrice: formik.values.newPrice,
-        category: selectedProduct.value,
-        stock: selectedStock.value,
-      };
       const newProduct = await addProduct({
         variables: {
           ...payload,
         },
       });
-
       if (newProduct) {
         const {
           data: {
@@ -174,11 +185,11 @@ const AddProduct: FunctionComponent<{}> = () => {
         uiStore.serverMessage = message;
         uiStore.snackbarSeverity = 'success';
         uiStore.showSnackbar = true;
-        setSelectedSize([]);
-        setSelectedTag([]);
-        setSelectedColor([]);
-        setSelectedProduct({ value: '', label: '' });
-        setSelectedStock({ value: '', label: '' });
+        // setSelectedSize([]);
+        // setSelectedTag([]);
+        // setSelectedColor([]);
+        // setSelectedProduct({ value: '', label: '' });
+        // setSelectedStock({ value: '', label: '' });
         resetForm();
       }
     } catch (error) {
@@ -186,6 +197,55 @@ const AddProduct: FunctionComponent<{}> = () => {
       uiStore.snackbarSeverity = 'error';
       uiStore.showSnackbar = true;
     }
+    // const colors = selectedColor.map((color: { value: string }) => color.value);
+    // const productSizes = selectedSize.map(
+    //   (size: { value: string }) => size.value
+    // );
+    // const tags = selectedTag.map((tag: { value: string }) => tag.value);
+    // try {
+    //   const payload = {
+    //     colors,
+    //     tags,
+    //     imageUrl,
+    //     sizes: productSizes,
+    //     name: formik.values.productName,
+    //     description: formik.values.productDescription,
+    //     oldPrice: formik.values.oldPrice,
+    //     newPrice: formik.values.newPrice,
+    //     category: selectedProduct.value,
+    //     stock: selectedStock.value,
+    //   };
+
+    //   console.log(payload, '??????');
+    //   const newProduct = await addProduct({
+    //     variables: {
+    //       ...payload,
+    //     },
+    //   });
+
+    //   if (newProduct) {
+    //     const {
+    //       data: {
+    //         client: {
+    //           addProduct: { message },
+    //         },
+    //       },
+    //     } = newProduct;
+    //     uiStore.serverMessage = message;
+    //     uiStore.snackbarSeverity = 'success';
+    //     uiStore.showSnackbar = true;
+    //     setSelectedSize([]);
+    //     setSelectedTag([]);
+    //     setSelectedColor([]);
+    //     setSelectedProduct({ value: '', label: '' });
+    //     setSelectedStock({ value: '', label: '' });
+    //     resetForm();
+    //   }
+    // } catch (error) {
+    //   uiStore.serverMessage = 'An error occured';
+    //   uiStore.snackbarSeverity = 'error';
+    //   uiStore.showSnackbar = true;
+    // }
   };
 
   const formik = useFormik<{
@@ -223,6 +283,9 @@ const AddProduct: FunctionComponent<{}> = () => {
     resetForm,
     values: { productName, productDescription, oldPrice, newPrice },
   } = formik;
+
+  console.log(formik.errors);
+  // console.log(formik.values);
 
   function removeImageExtension(filename: string) {
     let lastDotPosition = filename.lastIndexOf('.');
@@ -335,7 +398,7 @@ const AddProduct: FunctionComponent<{}> = () => {
               <Grid container spacing={2}>
                 <Grid item sm={12}>
                   <TextInput
-                    label="Product Name"
+                    placeholder="Product Name"
                     variant="outlined"
                     fullWidth
                     size="small"
@@ -361,13 +424,20 @@ const AddProduct: FunctionComponent<{}> = () => {
                     name="productCategory"
                     onChange={(e: any) => {
                       formik.setFieldValue('productCategory', e);
-                      setSelectedProduct({
-                        label: e.label,
-                        value: e.value,
-                      });
+                      // setSelectedProduct({
+                      //   label: e.label,
+                      //   value: e.value,
+                      // });
                       setIsError({ ...isError, productError: false });
                     }}
                     onBlur={handleBlur}
+                    theme={(theme) => ({
+                      ...theme,
+                      colors: {
+                        ...theme.colors,
+                        neutral50: '#a5a5a5',
+                      },
+                    })}
                   />
                   <Typography className={classes.error}>
                     {touched.productCategory &&
@@ -387,11 +457,18 @@ const AddProduct: FunctionComponent<{}> = () => {
                     name="productSize"
                     onChange={(e: any) => {
                       formik.setFieldValue('productSize', e);
-                      setSelectedSize([...e]);
+                      // setSelectedSize([...e]);
                       setIsError({ ...isError, sizeError: false });
                     }}
                     // onBlur={() => _handleBlur('size')}
                     onBlur={handleBlur}
+                    theme={(theme) => ({
+                      ...theme,
+                      colors: {
+                        ...theme.colors,
+                        neutral50: '#a5a5a5',
+                      },
+                    })}
                   />
                   <Typography className={classes.error}>
                     {/* {!selectedSize.length && 'Required'} */}
@@ -417,6 +494,13 @@ const AddProduct: FunctionComponent<{}> = () => {
                     }}
                     // onBlur={() => _handleBlur('color')}
                     onBlur={handleBlur}
+                    theme={(theme) => ({
+                      ...theme,
+                      colors: {
+                        ...theme.colors,
+                        neutral50: '#a5a5a5',
+                      },
+                    })}
                   />
                   <Typography className={classes.error}>
                     {/* {!selectedColor.length && 'Required'} */}
@@ -427,7 +511,7 @@ const AddProduct: FunctionComponent<{}> = () => {
                 </Grid>
                 <Grid item sm={6}>
                   <TextInput
-                    label="Old Price"
+                    placeholder="Old Price"
                     variant="outlined"
                     fullWidth
                     size="small"
@@ -451,7 +535,7 @@ const AddProduct: FunctionComponent<{}> = () => {
                 </Grid>
                 <Grid item sm={6}>
                   <TextInput
-                    label="New Price"
+                    placeholder="New Price"
                     variant="outlined"
                     fullWidth
                     size="small"
@@ -490,6 +574,13 @@ const AddProduct: FunctionComponent<{}> = () => {
                     }}
                     // onBlur={() => _handleBlur('tag')}
                     onBlur={handleBlur}
+                    theme={(theme) => ({
+                      ...theme,
+                      colors: {
+                        ...theme.colors,
+                        neutral50: '#a5a5a5',
+                      },
+                    })}
                   />
                   <Typography className={classes.error}>
                     {/* {!selectedTag.length && 'Required'} */}
@@ -507,11 +598,18 @@ const AddProduct: FunctionComponent<{}> = () => {
                     classNamePrefix={'my-custom-react-select5'}
                     onChange={(e: any) => {
                       formik.setFieldValue('stock', e);
-                      setSelectedStock({ label: e.label, value: e.value });
+                      // setSelectedStock({ label: e.label, value: e.value });
                       setIsError({ ...isError, stockError: false });
                     }}
                     // onBlur={() => _handleBlur('stock')}
                     onBlur={handleBlur}
+                    theme={(theme) => ({
+                      ...theme,
+                      colors: {
+                        ...theme.colors,
+                        neutral50: '#a5a5a5',
+                      },
+                    })}
                   />
                   <Typography className={classes.error}>
                     {/* {!selectedStock.value && 'Required'} */}
@@ -524,7 +622,7 @@ const AddProduct: FunctionComponent<{}> = () => {
                   <TextInput
                     multiline
                     rows={5}
-                    label="Description"
+                    placeholder="Description"
                     variant="outlined"
                     fullWidth
                     size="small"
@@ -546,6 +644,11 @@ const AddProduct: FunctionComponent<{}> = () => {
                       Boolean(errors.productDescription) &&
                       'Required'}
                   </Typography>
+                  {/* <Typography className={classes.error}>
+                    {touched.productDescription &&
+                      Boolean(errors.productDescription) &&
+                      'Required'}
+                  </Typography> */}
                 </Grid>
               </Grid>
             </Box>

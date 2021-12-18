@@ -11,7 +11,7 @@ import { ProductListContext } from 'src/components/context/userProductList-conte
 interface TabPanelProps {
   children?: React.ReactNode;
   index: any;
-  value: any;
+  value?: any;
 }
 
 function TabPanel(props: TabPanelProps) {
@@ -35,9 +35,17 @@ function TabPanel(props: TabPanelProps) {
 }
 
 const Product: FunctionComponent<{}> = () => {
-  const { menSubProducts, womenSubProducts, selected } =
-    useContext(ProductListContext);
-  const [value, setValue] = useState<number>(selected);
+  const {
+    menSubProducts,
+    womenSubProducts,
+    kidSubProducts,
+    shoeSubProducts,
+    watchSubProducts,
+    shirtSubProducts,
+    hoodieSubProducts,
+    sneakerSubProducts,
+  } = useContext(ProductListContext);
+  const [value, setValue] = useState<number>(0);
 
   const handleChange = (_event: ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
@@ -53,22 +61,22 @@ const Product: FunctionComponent<{}> = () => {
         <ProductTemplate category="women" data={womenSubProducts} />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <ProductTemplate category="makeup" />
+        <ProductTemplate category="kids" data={kidSubProducts} />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <ProductTemplate category="hair-care" />
+        <ProductTemplate category="shoes" data={shoeSubProducts} />
       </TabPanel>
       <TabPanel value={value} index={4}>
-        <ProductTemplate category="skin-care" />
+        <ProductTemplate category="watches" data={watchSubProducts} />
       </TabPanel>
       <TabPanel value={value} index={5}>
-        <ProductTemplate category="bags" />
+        <ProductTemplate category="shirts" data={shirtSubProducts} />
       </TabPanel>
       <TabPanel value={value} index={6}>
-        <ProductTemplate category="baby" />
+        <ProductTemplate category="hoodie" data={hoodieSubProducts} />
       </TabPanel>
       <TabPanel value={value} index={7}>
-        <ProductTemplate category="watches" />
+        <ProductTemplate category="sneakers" data={sneakerSubProducts} />
       </TabPanel>
     </>
   );

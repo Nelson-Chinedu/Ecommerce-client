@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useContext } from 'react';
 import { useRouter } from 'next/router';
+import { observer } from 'mobx-react-lite';
 import NumberFormat from 'react-number-format';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -102,4 +103,4 @@ const CartPayment: FunctionComponent<{}> = () => {
   );
 };
 
-export default CartPayment;
+export default observer(CartPayment);

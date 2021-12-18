@@ -132,7 +132,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
       color: 'red',
     },
   },
-  btnLoadMore: {
+  btnSeeAll: {
     margin: '2em 0px',
     '& .MuiButton-contained': {
       '& .MuiButton-label': {

@@ -56,15 +56,20 @@ const LoginForm: FunctionComponent<{}> = () => {
             },
           },
         } = user;
+        if (status == 401) {
+          setServerError(message);
+          return;
+        }
         uiStore.serverMessage = message;
         uiStore.snackbarSeverity = 'success';
         uiStore.showSnackbar = true;
+        setServerError(message);
         const path =
           accountType === 'c' && status === '200'
             ? '/app/c'
             : accountType === 'm' && status === '200'
             ? '/app/m/dashboard'
-            : '/';
+            : status === 401 && '/auth/login';
         store.set('__cnt', token);
         store.set('__clu', isLoggedin);
         store.set('__cat', accountType);

@@ -13,7 +13,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import { useStore } from 'src/store';
 
-import Rating from 'src/components/SharedLayout/Rating';
 import Button from 'src/components/SharedLayout/Button';
 import TextInput from 'src/components/SharedLayout/TextInput';
 
@@ -33,6 +32,7 @@ interface IContext {
     category: string;
     colors: string[];
     sizes: string[];
+    stock: string;
     account: { id: string };
   };
   loading: boolean;
@@ -58,12 +58,13 @@ const Description: FunctionComponent<{}> = () => {
     category,
     colors,
     sizes,
+    stock,
     account: { id },
   } = data;
 
   const cartItems = toJS(uiStore.cartItems).flat();
   const filteredItem = cartItems.filter(
-    (item: { itemId: number }) => item.itemId === number
+    (item: { itemNumber: number }) => item.itemNumber === number
   );
 
   const handleSize = (size: string) => {
@@ -109,14 +110,13 @@ const Description: FunctionComponent<{}> = () => {
     uiStore.snackbarSeverity = 'success';
     uiStore.showSnackbar = true;
   };
-
   return (
     <Grid container direction="row" spacing={2} className={classes.root}>
       <Grid item sm={6}>
         <Image
           src={imageUrl ? imageUrl : '/image/img.jpeg'}
           width="550px"
-          height="550px"
+          height="650px"
           quality={100}
           loading="eager"
           objectFit="cover"
@@ -134,26 +134,27 @@ const Description: FunctionComponent<{}> = () => {
             <Grid container spacing={1} alignItems="center" justify="center">
               <Grid item>
                 <Typography variant="subtitle1">
-                  <strong>3623</strong>
+                  <strong>{stock}</strong>
                 </Typography>
-              </Grid>
-              <Grid item>
-                <Rating />
               </Grid>
             </Grid>
           </Grid>
         </Grid>
         <Grid container>
           <Grid item sm={12}>
-            <Typography variant="body2">{description}</Typography>
+            <Typography
+              variant="body2"
+              style={{ lineHeight: '1.6em', margin: '.4em 0px' }}
+            >
+              {description}
+            </Typography>
           </Grid>
         </Grid>
-        <Grid container>
+        <Grid container style={{ margin: '.1em 0px' }}>
           <Grid item sm={12}>
             <Typography
               variant="subtitle1"
               component="span"
-              color="primary"
               className={classes.oldPrice}
             >
               ₦
@@ -169,7 +170,7 @@ const Description: FunctionComponent<{}> = () => {
             <Typography
               variant="subtitle1"
               component="span"
-              color="secondary"
+              // color="secondary"
               className={classes.newPrice}
             >
               ₦
@@ -180,6 +181,7 @@ const Description: FunctionComponent<{}> = () => {
                 decimalScale={2}
                 fixedDecimalScale={true}
                 displayType="text"
+                className={classes.newPrice}
               />
             </Typography>
           </Grid>
@@ -289,6 +291,7 @@ const Description: FunctionComponent<{}> = () => {
               disableElevation={true}
               className={classes.btnAdd}
               fullWidth={true}
+              disabled={stock === 'Out-of-stock' ? true : false}
               onClick={
                 filteredItem.length ? handleRemoveFromCart : handleAddToCart
               }
@@ -296,6 +299,13 @@ const Description: FunctionComponent<{}> = () => {
               {filteredItem.length ? 'Remove from cart' : 'Add to cart'}
             </Button>
           </Grid>
+          {stock === 'Out-of-stock' && (
+            <Grid item>
+              <Typography variant="body2">
+                Product is {stock}, check back later :)
+              </Typography>
+            </Grid>
+          )}
           {/* <Grid item>
             <FavouriteIconOutlined fontSize="default" />
           </Grid> */}

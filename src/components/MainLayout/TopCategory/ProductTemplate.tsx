@@ -1,8 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { observer } from 'mobx-react-lite';
 import NumberFormat from 'react-number-format';
+import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
@@ -13,15 +15,16 @@ import { useStyles } from 'src/components/MainLayout/TopCategory/styled.topCateg
 
 import { useStore } from 'src/store';
 
-// import Button from 'src/components/SharedLayout/Button';
+import Button from 'src/components/SharedLayout/Button';
 
 type Props = {
   category: string;
   data?: any;
 };
 
-const ProductTemplate: FunctionComponent<Props> = ({ data }) => {
+const ProductTemplate: FunctionComponent<Props> = ({ data, category }) => {
   const classes = useStyles();
+  const router = useRouter();
   const { uiStore } = useStore();
 
   const handleAddFavourite = (e: any, index: number) => {
@@ -29,124 +32,134 @@ const ProductTemplate: FunctionComponent<Props> = ({ data }) => {
     uiStore.toggleFavouriteProduct(index);
   };
 
+  const handleSeeMore = () => {
+    router.push({
+      pathname: '/product/category/[index]',
+      query: { index: category },
+    });
+  };
+
   // const handleAddToCart = (e: any) => {
   //   e.preventDefault();
   // };
 
   return (
-    <Box className={classes.productWrapper}>
-      {data &&
-        data.map((product: any, index: any) => (
-          <Link
-            href={`/product/${product.name
-              .toLowerCase()
-              .split(' ')
-              .join('-')}-${product.number}`}
-            key={index}
-          >
-            <Box className={classes.productContainer}>
-              <Box className="imageContainer">
-                <Image
-                  src={`${
-                    product.imageUrl === null
-                      ? 'https://via.placeholder.com/50x60.svg'
-                      : product.imageUrl
-                      ? product.imageUrl
-                      : 'https://via.placeholder.com/50x60.svg'
-                  }`}
-                  objectFit="cover"
-                  loading="eager"
-                  width={300}
-                  height={250}
-                />
-              </Box>
-              <Box className="top">
-                <Box>
-                  <Typography variant="body2" className={classes.productName}>
-                    {product.name}
-                  </Typography>
-                </Box>
-                <Box>
-                  <FavouriteIconOutlined
-                    onClick={(e) => handleAddFavourite(e, index)}
+    <>
+      <Box className={classes.productWrapper}>
+        {data &&
+          data.map((product: any, index: any) => (
+            <Link
+              href={`/product/${product.name
+                .toLowerCase()
+                .split(' ')
+                .join('-')}-${product.number}`}
+              key={index}
+            >
+              <Box className={classes.productContainer}>
+                <Box className="imageContainer">
+                  <Image
+                    src={`${
+                      product.imageUrl === null
+                        ? 'https://via.placeholder.com/50x60.svg'
+                        : product.imageUrl
+                        ? product.imageUrl
+                        : 'https://via.placeholder.com/50x60.svg'
+                    }`}
+                    objectFit="cover"
+                    loading="eager"
+                    width={300}
+                    height={250}
                   />
                 </Box>
-              </Box>
-              <Box className="divider">
-                <Divider />
-              </Box>
-              <Box className="middle">
-                <Box>
-                  <Typography variant="subtitle2">
-                    ₦
-                    <NumberFormat
-                      value={`${product.newPrice}`}
-                      thousandSeparator={true}
-                      decimalSeparator="."
-                      decimalScale={2}
-                      fixedDecimalScale={true}
-                      displayType="text"
+                <Box className="top">
+                  <Box>
+                    <Typography variant="body2" className={classes.productName}>
+                      {product.name}
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <FavouriteIconOutlined
+                      onClick={(e) => handleAddFavourite(e, index)}
                     />
-                  </Typography>
+                  </Box>
                 </Box>
-                <Box>
-                  <del>
-                    <Typography variant="body2" className={classes.oldPrice}>
+                <Box className="divider">
+                  <Divider />
+                </Box>
+                <Box className="middle">
+                  <Box>
+                    <Typography variant="subtitle2">
                       ₦
                       <NumberFormat
-                        value={`${product.oldPrice}`}
+                        value={`${product.newPrice}`}
                         thousandSeparator={true}
                         decimalSeparator="."
                         decimalScale={2}
                         fixedDecimalScale={true}
                         displayType="text"
-                        className={classes.oldPrice}
                       />
                     </Typography>
-                  </del>
+                  </Box>
+                  <Box>
+                    <del>
+                      <Typography variant="body2" className={classes.oldPrice}>
+                        ₦
+                        <NumberFormat
+                          value={`${product.oldPrice}`}
+                          thousandSeparator={true}
+                          decimalSeparator="."
+                          decimalScale={2}
+                          fixedDecimalScale={true}
+                          displayType="text"
+                          className={classes.oldPrice}
+                        />
+                      </Typography>
+                    </del>
+                  </Box>
+                </Box>
+                <Box className="divider">
+                  <Divider />
+                </Box>
+                <Box className="bottom">
+                  <Typography variant="subtitle1" className={classes.storeName}>
+                    Sold by <span>{product.store?.name}</span>
+                  </Typography>
                 </Box>
               </Box>
-              <Box className="divider">
-                <Divider />
-              </Box>
-              <Box className="bottom">
-                <Typography variant="subtitle1" className={classes.storeName}>
-                  Sold by <span>{product.store?.name}</span>
-                </Typography>
-              </Box>
-            </Box>
-          </Link>
-        ))}
-    </Box>
+            </Link>
+          ))}
+      </Box>
 
-    // <Button
-    //   variant="outlined"
-    //   disableElevation
-    //   fullWidth
-    //   color="secondary"
-    //   onClick={(e) => handleAddToCart(e)}
-    // >
-    //   Add to Cart
-    // </Button>
-
-    //   <Grid
-    //     container
-    //     alignItems="center"
-    //     justify="center"
-    //     className={classes.btnLoadMore}
-    //   >
-    //     <Grid item sm={4}>
-    //       <Button
-    //         variant="contained"
-    //         color="secondary"
-    //         disableElevation
-    //         fullWidth
-    //         onClick={handleSeeMore}
-    //       >
-    //         See all
-    //       </Button>
-    //     </Grid>
-    //   </Grid>
+      {/* <Button
+        variant="outlined"
+        disableElevation
+        fullWidth
+        color="secondary"
+        onClick={(e) => handleAddToCart(e)}
+      >
+        Add to Cart
+      </Button> */}
+      {data.length > 8 && (
+        <Grid
+          container
+          alignItems="center"
+          justify="center"
+          className={classes.btnSeeAll}
+        >
+          <Grid item sm={4}>
+            <Button
+              variant="contained"
+              color="secondary"
+              disableElevation
+              fullWidth
+              onClick={handleSeeMore}
+            >
+              See all
+            </Button>
+          </Grid>
+        </Grid>
+      )}
+    </>
   );
 };
 

@@ -251,6 +251,162 @@ export const GET_WOMEN_SUB_PRODUCTS = gql`
   }
 `;
 
+export const GET_KID_SUB_PRODUCTS = gql`
+  query ($take: Int, $skip: Int, $category: String!) {
+    public {
+      getKidProducts(take: $take, skip: $skip, category: $category) {
+        products {
+          id
+          name
+          number
+          imageUrl
+          description
+          sizes
+          oldPrice
+          newPrice
+          colors
+          category
+          stock
+          tags
+          store {
+            name
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_SHOE_SUB_PRODUCTS = gql`
+  query ($take: Int, $skip: Int, $category: String!) {
+    public {
+      getShoeProducts(take: $take, skip: $skip, category: $category) {
+        products {
+          id
+          name
+          number
+          imageUrl
+          description
+          sizes
+          oldPrice
+          newPrice
+          colors
+          category
+          stock
+          tags
+          store {
+            name
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_WATCH_SUB_PRODUCTS = gql`
+  query ($take: Int, $skip: Int, $category: String!) {
+    public {
+      getWatchProducts(take: $take, skip: $skip, category: $category) {
+        products {
+          id
+          name
+          number
+          imageUrl
+          description
+          sizes
+          oldPrice
+          newPrice
+          colors
+          category
+          stock
+          tags
+          store {
+            name
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_SHIRT_SUB_PRODUCTS = gql`
+  query ($take: Int, $skip: Int, $category: String!) {
+    public {
+      getShirtProducts(take: $take, skip: $skip, category: $category) {
+        products {
+          id
+          name
+          number
+          imageUrl
+          description
+          sizes
+          oldPrice
+          newPrice
+          colors
+          category
+          stock
+          tags
+          store {
+            name
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_HOODIE_SUB_PRODUCTS = gql`
+  query ($take: Int, $skip: Int, $category: String!) {
+    public {
+      getHoodieProducts(take: $take, skip: $skip, category: $category) {
+        products {
+          id
+          name
+          number
+          imageUrl
+          description
+          sizes
+          oldPrice
+          newPrice
+          colors
+          category
+          stock
+          tags
+          store {
+            name
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_SNEAKER_SUB_PRODUCTS = gql`
+  query ($take: Int, $skip: Int, $category: String!) {
+    public {
+      getSneakerProducts(take: $take, skip: $skip, category: $category) {
+        products {
+          id
+          name
+          number
+          imageUrl
+          description
+          sizes
+          oldPrice
+          newPrice
+          colors
+          category
+          stock
+          tags
+          store {
+            name
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const GET_ALL_PRODUCT_CATEGORY = gql`
   query ($take: Int, $skip: Int, $category: String!) {
     public {
@@ -415,6 +571,7 @@ export const GET_MERCHANT_RECENT_PRODUCT = gql`
           name
           category
           newPrice
+          imageUrl
         }
       }
     }
