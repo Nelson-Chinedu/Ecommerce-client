@@ -13,7 +13,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import { useStore } from 'src/store';
 
-import Rating from 'src/components/SharedLayout/Rating';
 import Button from 'src/components/SharedLayout/Button';
 import TextInput from 'src/components/SharedLayout/TextInput';
 
