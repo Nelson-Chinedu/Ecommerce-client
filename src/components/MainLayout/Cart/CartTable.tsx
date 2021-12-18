@@ -18,6 +18,7 @@ const Titles = ['#', 'Products', 'Price', 'Quantity', 'Subtotal', 'Action'];
 interface IProps {
   number: string;
   itemId: number;
+  itemNumber: number;
   itemQty: string;
   itemName: string;
   itemPrice: string;
@@ -48,7 +49,7 @@ const CartTable: FunctionComponent<{}> = () => {
         <TableBody>
           {cartItems.map((item: IProps) => (
             <TableRow key={item.itemId}>
-              <TableCell>{item.itemId}</TableCell>
+              <TableCell>{item.itemNumber}</TableCell>
               <TableCell>{item.itemName}</TableCell>
               <TableCell>{item.itemPrice}</TableCell>
               <TableCell>

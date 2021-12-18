@@ -37,23 +37,31 @@ import {
 } from 'src/components/constant/product';
 
 const validationSchema = yup.object().shape({
-  productName: yup.string().required('Required'),
-  productDescription: yup.string().required('Required'),
+  productName: yup.string().required('Requiredk'),
+  productDescription: yup
+    .string()
+    .min(250, 'Minimum characters of 250 words')
+    .required('Requiredkl'),
   productSize: yup
     .object()
-    .shape({ label: yup.string().required(), value: yup.string().required() }),
+    .shape({ label: yup.string().required(), value: yup.string().required() })
+    .nullable(),
   productCategory: yup
     .object()
-    .shape({ label: yup.string().required(), value: yup.string().required() }),
+    .shape({ label: yup.string().required(), value: yup.string().required() })
+    .nullable(),
   colors: yup
     .object()
-    .shape({ label: yup.string().required(), value: yup.string().required() }),
+    .shape({ label: yup.string().required(), value: yup.string().required() })
+    .nullable(),
   tags: yup
     .object()
-    .shape({ label: yup.string().required(), value: yup.string().required() }),
+    .shape({ label: yup.string().required(), value: yup.string().required() })
+    .nullable(),
   stock: yup
     .object()
-    .shape({ label: yup.string().required(), value: yup.string().required() }),
+    .shape({ label: yup.string().required(), value: yup.string().required() })
+    .nullable(),
   oldPrice: yup.number().required('Required'),
   newPrice: yup.number().required('Required'),
 });
@@ -139,30 +147,33 @@ const AddProduct: FunctionComponent<{}> = () => {
   };
 
   const _handleForm = async () => {
-    const colors = selectedColor.map((color: { value: string }) => color.value);
-    const productSizes = selectedSize.map(
-      (size: { value: string }) => size.value
-    );
-    const tags = selectedTag.map((tag: { value: string }) => tag.value);
+    const productSizes = Object.values(formik.values.productSize);
+    const productSize = productSizes.map(({ value }: any) => value);
+
+    const productColors = Object.values(formik.values.colors);
+    const colors = productColors.map(({ value }: any) => value);
+
+    const productTags = Object.values(formik.values.tags);
+    const tags = productTags.map(({ value }: any) => value);
+
+    const payload = {
+      colors,
+      tags,
+      imageUrl,
+      sizes: productSize,
+      description: formik.values.productDescription,
+      name: formik.values.productName,
+      category: formik.values.productCategory.value,
+      stock: formik.values.stock.value,
+      oldPrice: formik.values.oldPrice,
+      newPrice: formik.values.newPrice,
+    };
     try {
-      const payload = {
-        colors,
-        tags,
-        imageUrl,
-        sizes: productSizes,
-        name: formik.values.productName,
-        description: formik.values.productDescription,
-        oldPrice: formik.values.oldPrice,
-        newPrice: formik.values.newPrice,
-        category: selectedProduct.value,
-        stock: selectedStock.value,
-      };
       const newProduct = await addProduct({
         variables: {
           ...payload,
         },
       });
-
       if (newProduct) {
         const {
           data: {
@@ -174,11 +185,11 @@ const AddProduct: FunctionComponent<{}> = () => {
         uiStore.serverMessage = message;
         uiStore.snackbarSeverity = 'success';
         uiStore.showSnackbar = true;
-        setSelectedSize([]);
-        setSelectedTag([]);
-        setSelectedColor([]);
-        setSelectedProduct({ value: '', label: '' });
-        setSelectedStock({ value: '', label: '' });
+        // setSelectedSize([]);
+        // setSelectedTag([]);
+        // setSelectedColor([]);
+        // setSelectedProduct({ value: '', label: '' });
+        // setSelectedStock({ value: '', label: '' });
         resetForm();
       }
     } catch (error) {
@@ -186,6 +197,55 @@ const AddProduct: FunctionComponent<{}> = () => {
       uiStore.snackbarSeverity = 'error';
       uiStore.showSnackbar = true;
     }
+    // const colors = selectedColor.map((color: { value: string }) => color.value);
+    // const productSizes = selectedSize.map(
+    //   (size: { value: string }) => size.value
+    // );
+    // const tags = selectedTag.map((tag: { value: string }) => tag.value);
+    // try {
+    //   const payload = {
+    //     colors,
+    //     tags,
+    //     imageUrl,
+    //     sizes: productSizes,
+    //     name: formik.values.productName,
+    //     description: formik.values.productDescription,
+    //     oldPrice: formik.values.oldPrice,
+    //     newPrice: formik.values.newPrice,
+    //     category: selectedProduct.value,
+    //     stock: selectedStock.value,
+    //   };
+
+    //   console.log(payload, '??????');
+    //   const newProduct = await addProduct({
+    //     variables: {
+    //       ...payload,
+    //     },
+    //   });
+
+    //   if (newProduct) {
+    //     const {
+    //       data: {
+    //         client: {
+    //           addProduct: { message },
+    //         },
+    //       },
+    //     } = newProduct;
+    //     uiStore.serverMessage = message;
+    //     uiStore.snackbarSeverity = 'success';
+    //     uiStore.showSnackbar = true;
+    //     setSelectedSize([]);
+    //     setSelectedTag([]);
+    //     setSelectedColor([]);
+    //     setSelectedProduct({ value: '', label: '' });
+    //     setSelectedStock({ value: '', label: '' });
+    //     resetForm();
+    //   }
+    // } catch (error) {
+    //   uiStore.serverMessage = 'An error occured';
+    //   uiStore.snackbarSeverity = 'error';
+    //   uiStore.showSnackbar = true;
+    // }
   };
 
   const formik = useFormik<{
@@ -223,6 +283,9 @@ const AddProduct: FunctionComponent<{}> = () => {
     resetForm,
     values: { productName, productDescription, oldPrice, newPrice },
   } = formik;
+
+  console.log(formik.errors);
+  // console.log(formik.values);
 
   function removeImageExtension(filename: string) {
     let lastDotPosition = filename.lastIndexOf('.');
@@ -524,7 +587,7 @@ const AddProduct: FunctionComponent<{}> = () => {
                   <TextInput
                     multiline
                     rows={5}
-                    label="Description"
+                    label="Descriptionkkkk"
                     variant="outlined"
                     fullWidth
                     size="small"
@@ -533,19 +596,19 @@ const AddProduct: FunctionComponent<{}> = () => {
                     value={productDescription}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    // helperText={
-                    //   touched.productDescription && errors.productDescription
-                    // }
-                    // error={
-                    //   touched.productDescription &&
-                    //   Boolean(errors.productDescription)
-                    // }
+                    helperText={
+                      touched.productDescription && errors.productDescription
+                    }
+                    error={
+                      touched.productDescription &&
+                      Boolean(errors.productDescription)
+                    }
                   />
-                  <Typography className={classes.error}>
+                  {/* <Typography className={classes.error}>
                     {touched.productDescription &&
                       Boolean(errors.productDescription) &&
                       'Required'}
-                  </Typography>
+                  </Typography> */}
                 </Grid>
               </Grid>
             </Box>

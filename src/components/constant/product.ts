@@ -16,6 +16,10 @@ export const COLORS: Product[] = [
   { value: 'Blue', label: 'Blue', color: '#0052CC' },
   { value: 'Gold', label: 'Gold', color: '#5243AA' },
   { value: 'Navy Blue', label: 'Navy Blue', color: '#FF5630' },
+  { value: 'Black', label: 'Black', color: '#5243AA' },
+  { value: 'Gray', label: 'Gray', color: '#5243AA' },
+  { value: 'Yellow', label: 'Yellow', color: '#5243AA' },
+  { value: 'White', label: 'White', color: '#5243AA' },
 ];
 
 export const PRODUCT_TAGS: Product[] = [
@@ -24,6 +28,8 @@ export const PRODUCT_TAGS: Product[] = [
   { value: 'Stylish', label: 'Stylish' },
   { value: 'Footwear', label: 'Footwear' },
   { value: 'Women', label: 'Women' },
+  { value: 'Kids', label: 'Kids' },
+  { value: 'Fashion', label: 'Fashion' },
 ];
 
 export const PRODUCT_STOCK: Product[] = [
@@ -34,12 +40,10 @@ export const PRODUCT_STOCK: Product[] = [
 export const PRODUCT_CATEGORY: Product[] = [
   { value: 'Men', label: 'Men', color: '#00B8D9' },
   { value: 'Women', label: 'Women', color: '#0052CC' },
-  { value: 'Makeup', label: 'Makeup', color: '#5243AA' },
-  { value: 'Hair Care', label: 'Hair Care', color: '#FF5630' },
-  { value: 'Skin Care', label: 'Skin Care', color: '#FF5630' },
-  { value: 'Bags', label: 'Bags', color: '#FF5630' },
+  { value: 'Kids', label: 'Kids', color: '#5243AA' },
+  { value: 'Shoes', label: 'Shoes', color: '#FF5630' },
   { value: 'Watches', label: 'Watches', color: '#FF5630' },
+  { value: 'Shirts', label: 'Shirts', color: '#FF5630' },
+  { value: 'Hoodie', label: 'Hoodie', color: '#FF5630' },
   { value: 'Sneakers', label: 'Sneakers', color: '#FF5630' },
-  { value: 'Sunglasses', label: 'Sunglasses', color: '#FF5630' },
-  { value: 'Baby', label: 'Baby', color: '#FF5630' },
 ];
