@@ -22,7 +22,6 @@ export const ProductListContext = createContext({
   shirtSubProducts: null,
   hoodieSubProducts: null,
   sneakerSubProducts: null,
-  handleLoadMore: null,
   selected: null,
 });
 
@@ -42,7 +41,7 @@ export const ProductListProvider = ({ children }: any) => {
     {
       variables: {
         category: 'Men',
-        take: isSubMenCategory,
+        take: 8,
         skip: 0,
       },
     }
@@ -53,7 +52,7 @@ export const ProductListProvider = ({ children }: any) => {
     {
       variables: {
         category: 'Women',
-        take: isSubWomenCategory,
+        take: 8,
         skip: 0,
       },
     }
@@ -64,7 +63,7 @@ export const ProductListProvider = ({ children }: any) => {
     {
       variables: {
         category: 'Kids',
-        take: isSubKidCategory,
+        take: 8,
         skip: 0,
       },
     }
@@ -75,7 +74,7 @@ export const ProductListProvider = ({ children }: any) => {
     {
       variables: {
         category: 'Shoes',
-        take: isSubShoeCategory,
+        take: 8,
         skip: 0,
       },
     }
@@ -86,7 +85,7 @@ export const ProductListProvider = ({ children }: any) => {
     {
       variables: {
         category: 'Watches',
-        take: isSubWatchCategory,
+        take: 8,
         skip: 0,
       },
     }
@@ -97,7 +96,7 @@ export const ProductListProvider = ({ children }: any) => {
     {
       variables: {
         category: 'Shirts',
-        take: isSubShirtCategory,
+        take: 8,
         skip: 0,
       },
     }
@@ -108,7 +107,7 @@ export const ProductListProvider = ({ children }: any) => {
     {
       variables: {
         category: 'Hoodie',
-        take: isSubHoodieCategory,
+        take: 8,
         skip: 0,
       },
     }
@@ -119,7 +118,7 @@ export const ProductListProvider = ({ children }: any) => {
     {
       variables: {
         category: 'Sneakers',
-        take: isSubSneakerCategory,
+        take: 8,
         skip: 0,
       },
     }
@@ -197,25 +196,25 @@ export const ProductListProvider = ({ children }: any) => {
     },
   } = sneakerSubData;
 
-  const handleLoadMore = (e: any, category: string) => {
-    e.preventDefault();
-    switch (category) {
-      case 'men':
-        setIsSubMenCategory(isSubMenCategory + 1);
-        setIsSelected(0);
-        break;
-      case 'women':
-        setIsSubWomenCategory(isSubWomenCategory + 1);
-        setIsSelected(1);
-        break;
-      case 'kids':
-        setIsSubKidCategory(isSubKidCategory + 1);
-        setIsSelected(1);
-        break;
-      default:
-        break;
-    }
-  };
+  // const handleLoadMore = (e: any, category: string) => {
+  //   e.preventDefault();
+  //   switch (category) {
+  //     case 'men':
+  //       setIsSubMenCategory(isSubMenCategory + 1);
+  //       setIsSelected(0);
+  //       break;
+  //     case 'women':
+  //       setIsSubWomenCategory(isSubWomenCategory + 1);
+  //       setIsSelected(1);
+  //       break;
+  //     case 'kids':
+  //       setIsSubKidCategory(isSubKidCategory + 1);
+  //       setIsSelected(1);
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // };
 
   return (
     <>
@@ -229,7 +228,6 @@ export const ProductListProvider = ({ children }: any) => {
           shirtSubProducts: shirtSubProducts,
           hoodieSubProducts: hoodieSubProducts,
           sneakerSubProducts: sneakerSubProducts,
-          handleLoadMore: handleLoadMore,
           selected: isSelected,
         }}
       >
