@@ -20,22 +20,17 @@ function a11yProps(index: any) {
 }
 
 const Navbar: FunctionComponent<Props> = ({ handleChange, value }) => {
-  const classes = useStyles();
   const [containerRef, isVisble]: (boolean | any)[] = useElementOnScreen({
     root: null,
     rootMargin: '0px',
     threshold: 1.0,
   });
+  const classes = useStyles(isVisble);
 
   return (
     <div className={classes.navbar}>
       {!isVisble ? (
-        <AppBar
-          style={{
-            background: 'white',
-            position: `${isVisble ? 'unset' : 'fixed'}`,
-          }}
-        >
+        <AppBar className={classes.appBar}>
           <Tabs
             value={value}
             onChange={handleChange}
