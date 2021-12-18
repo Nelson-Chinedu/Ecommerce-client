@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext } from 'react';
 import { useQuery } from '@apollo/client';
 import Typography from '@material-ui/core/Typography';
 
@@ -22,20 +22,9 @@ export const ProductListContext = createContext({
   shirtSubProducts: null,
   hoodieSubProducts: null,
   sneakerSubProducts: null,
-  selected: null,
 });
 
 export const ProductListProvider = ({ children }: any) => {
-  const [isSubMenCategory, setIsSubMenCategory] = useState(8);
-  const [isSubWomenCategory, setIsSubWomenCategory] = useState(8);
-  const [isSubKidCategory, setIsSubKidCategory] = useState(8);
-  const [isSubShoeCategory, setIsSubShoeCategory] = useState(8);
-  const [isSubWatchCategory, setIsSubWatchCategory] = useState(8);
-  const [isSubShirtCategory, setIsSubShirtCategory] = useState(8);
-  const [isSubHoodieCategory, setIsSubHoodieCategory] = useState(8);
-  const [isSubSneakerCategory, setIsSubSneakerCategory] = useState(8);
-  const [isSelected, setIsSelected] = useState(0);
-
   const { loading: loadingMen, data: menSubData } = useQuery(
     GET_MEN_SUB_PRODUCTS,
     {
@@ -196,26 +185,6 @@ export const ProductListProvider = ({ children }: any) => {
     },
   } = sneakerSubData;
 
-  // const handleLoadMore = (e: any, category: string) => {
-  //   e.preventDefault();
-  //   switch (category) {
-  //     case 'men':
-  //       setIsSubMenCategory(isSubMenCategory + 1);
-  //       setIsSelected(0);
-  //       break;
-  //     case 'women':
-  //       setIsSubWomenCategory(isSubWomenCategory + 1);
-  //       setIsSelected(1);
-  //       break;
-  //     case 'kids':
-  //       setIsSubKidCategory(isSubKidCategory + 1);
-  //       setIsSelected(1);
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // };
-
   return (
     <>
       <ProductListContext.Provider
@@ -228,7 +197,6 @@ export const ProductListProvider = ({ children }: any) => {
           shirtSubProducts: shirtSubProducts,
           hoodieSubProducts: hoodieSubProducts,
           sneakerSubProducts: sneakerSubProducts,
-          selected: isSelected,
         }}
       >
         {children}

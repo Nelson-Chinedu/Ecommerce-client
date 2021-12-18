@@ -11,7 +11,7 @@ import { ProductListContext } from 'src/components/context/userProductList-conte
 interface TabPanelProps {
   children?: React.ReactNode;
   index: any;
-  value: any;
+  value?: any;
 }
 
 function TabPanel(props: TabPanelProps) {
@@ -44,9 +44,8 @@ const Product: FunctionComponent<{}> = () => {
     shirtSubProducts,
     hoodieSubProducts,
     sneakerSubProducts,
-    selected,
   } = useContext(ProductListContext);
-  const [value, setValue] = useState<number>(selected);
+  const [value, setValue] = useState<number>(0);
 
   const handleChange = (_event: ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
