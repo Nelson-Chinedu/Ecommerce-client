@@ -27,6 +27,7 @@ import { UserContext } from 'src/components/context/userContext';
 interface IProps {
   itemImage: string;
   itemId: number;
+  itemNumber: number;
   itemQty: string;
   itemName: string;
   itemPrice: string;
@@ -40,8 +41,8 @@ const Sidenav: FunctionComponent<{}> = () => {
 
   const cartItems: Array<IProps> = toJS(uiStore.cartItems).flat();
 
-  const handleRemoveItem = (item: { itemId: number }) => {
-    uiStore.handleRemoveFromCart(item.itemId);
+  const handleRemoveItem = (item: { itemNumber: number }) => {
+    uiStore.handleRemoveFromCart(item.itemNumber);
     uiStore.serverMessage = 'Product removed from cart';
     uiStore.snackbarSeverity = 'success';
     uiStore.showSnackbar = true;

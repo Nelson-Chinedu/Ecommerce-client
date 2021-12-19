@@ -270,7 +270,7 @@ const Description: FunctionComponent<{}> = () => {
             <Typography component="span" variant="body1">
               Subtotal:
             </Typography>
-            <Typography component="span" color="secondary" variant="body2">
+            <Typography component="span" variant="body2">
               ₦
               <NumberFormat
                 value={`${newPrice}`}
