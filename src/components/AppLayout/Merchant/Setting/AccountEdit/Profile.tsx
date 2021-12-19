@@ -152,6 +152,13 @@ const Profile: FunctionComponent<{}> = () => {
     },
   } = formik;
 
+  const handleCheckInput = (e: { target: { value: string } }) => {
+    const regEx = /^[0-9\b]+$/;
+    if (e.target.value === '' || regEx.test(e.target.value)) {
+      formik.setFieldValue('phoneNumber', e.target.value);
+    }
+  };
+
   return (
     <>
       <Grid container alignItems="center" justify="flex-start">
@@ -237,7 +244,9 @@ const Profile: FunctionComponent<{}> = () => {
               type="text"
               name="phoneNumber"
               value={phoneNumber}
-              onChange={handleChange}
+              onChange={(event: { target: { value: string } }) => {
+                handleCheckInput(event);
+              }}
               onBlur={handleBlur}
               helperText={touched.phoneNumber && errors.phoneNumber}
               error={touched.phoneNumber && Boolean(errors.phoneNumber)}
