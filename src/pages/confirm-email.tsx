@@ -26,7 +26,7 @@ const ConfirmEmail = dynamic(
         </Box>
       </Box>
     ),
-    // ssr: false,
+    ssr: false,
   }
 );
 

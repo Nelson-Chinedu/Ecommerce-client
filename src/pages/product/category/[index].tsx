@@ -19,7 +19,7 @@ const Category = dynamic(() => import('src/components/MainLayout/Category'), {
       </Box>
     </Box>
   ),
-  // ssr: false,
+  ssr: false,
 });
 
 const CategoryPage = () => {

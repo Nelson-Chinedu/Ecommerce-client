@@ -25,7 +25,7 @@ const ChangePassword = dynamic(
         </Grid>
       </Grid>
     ),
-    // ssr: false,
+    ssr: false,
   }
 );
 

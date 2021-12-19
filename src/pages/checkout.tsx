@@ -20,7 +20,7 @@ const Checkout = dynamic(() => import('src/components/MainLayout/Checkout'), {
       </Box>
     </Box>
   ),
-  // ssr: false,
+  ssr: false,
 });
 
 const CheckoutPage = () => {

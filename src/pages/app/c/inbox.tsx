@@ -26,7 +26,7 @@ const Inbox = dynamic(() => import('src/components/AppLayout/Customer/Inbox'), {
       </Box>
     </Box>
   ),
-  // ssr: false,
+  ssr: false,
 });
 
 const InboxPage: FunctionComponent<{}> = () => {

@@ -31,6 +31,7 @@ type Props = {
   helperText?: string;
   error?: boolean;
   endAdornment?: any;
+  autoComplete?: string;
 };
 
 const TextInput: FunctionComponent<Props> = ({

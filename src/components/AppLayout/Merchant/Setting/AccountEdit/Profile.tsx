@@ -193,6 +193,7 @@ const Profile: FunctionComponent<{}> = () => {
               type="text"
               name="firstname"
               value={firstname}
+              autoComplete="given-name"
               onChange={handleChange}
               onBlur={handleBlur}
               helperText={touched.firstname && errors.firstname}
@@ -209,6 +210,7 @@ const Profile: FunctionComponent<{}> = () => {
               type="text"
               name="lastname"
               value={lastname}
+              autoComplete="family-name"
               onChange={handleChange}
               onBlur={handleBlur}
               helperText={touched.lastname && errors.lastname}
@@ -228,6 +230,7 @@ const Profile: FunctionComponent<{}> = () => {
               type="email"
               name="emailAddress"
               value={emailAddress}
+              autoComplete="new-password"
               onChange={handleChange}
               onBlur={handleBlur}
               helperText={touched.emailAddress && errors.emailAddress}
@@ -241,9 +244,10 @@ const Profile: FunctionComponent<{}> = () => {
               fullWidth
               size="small"
               color="secondary"
-              type="text"
+              type="tel"
               name="phoneNumber"
               value={phoneNumber}
+              autoComplete="new-password"
               onChange={(event: { target: { value: string } }) => {
                 handleCheckInput(event);
               }}
@@ -286,6 +290,7 @@ const Profile: FunctionComponent<{}> = () => {
               type="text"
               name="country"
               value={country}
+              autoComplete="new-password"
               onChange={handleChange}
               onBlur={handleBlur}
               helperText={touched.country && errors.country}
@@ -302,6 +307,7 @@ const Profile: FunctionComponent<{}> = () => {
               type="text"
               name="city"
               value={city}
+              autoComplete="new-password"
               onChange={handleChange}
               onBlur={handleBlur}
               helperText={touched.city && errors.city}
@@ -322,6 +328,7 @@ const Profile: FunctionComponent<{}> = () => {
               type="text"
               name="address"
               value={address}
+              autoComplete="new-password"
               onChange={handleChange}
               onBlur={handleBlur}
               helperText={touched.address && errors.address}

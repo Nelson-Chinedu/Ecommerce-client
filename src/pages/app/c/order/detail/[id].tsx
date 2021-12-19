@@ -30,7 +30,7 @@ const Preview = dynamic(
         </Box>
       </Box>
     ),
-    // ssr: false,
+    ssr: false,
   }
 );
 

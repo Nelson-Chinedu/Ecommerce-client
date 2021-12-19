@@ -17,7 +17,7 @@ const Signup = dynamic(() => import('src/components/AuthLayout/Signup'), {
       <Typography>page loading...</Typography>
     </Box>
   ),
-  // ssr: false,
+  ssr: false,
 });
 
 const SignupPage = () => {

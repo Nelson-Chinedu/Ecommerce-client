@@ -26,7 +26,7 @@ const Order = dynamic(() => import('src/components/AppLayout/Customer/Order'), {
       </Box>
     </Box>
   ),
-  // ssr: false,
+  ssr: false,
 });
 
 const OrderPage: FunctionComponent<{}> = () => {

@@ -26,7 +26,7 @@ const Failure = dynamic(
         </Box>
       </Box>
     ),
-    // ssr: false,
+    ssr: false,
   }
 );
 

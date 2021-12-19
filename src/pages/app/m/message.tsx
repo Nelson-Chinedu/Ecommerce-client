@@ -25,7 +25,7 @@ const Message = dynamic(
         </Grid>
       </Grid>
     ),
-    // ssr: false,
+    ssr: false,
   }
 );
 

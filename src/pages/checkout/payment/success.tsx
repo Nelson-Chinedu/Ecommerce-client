@@ -26,7 +26,7 @@ const Success = dynamic(
         </Box>
       </Box>
     ),
-    // ssr: false,
+    ssr: false,
   }
 );
 

@@ -21,7 +21,7 @@ const Product = dynamic(() => import('src/components/MainLayout/Product'), {
       </Box>
     </Box>
   ),
-  // ssr: false,
+  ssr: false,
 });
 
 const ProductPage = () => {

@@ -183,6 +183,7 @@ const Account: FunctionComponent<{}> = () => {
                   label="Firstname"
                   name="firstname"
                   value={firstname}
+                  autoComplete="given-name"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   helperText={touched.firstname && errors.firstname}
@@ -199,6 +200,7 @@ const Account: FunctionComponent<{}> = () => {
                   label="Lastname"
                   name="lastname"
                   value={lastname}
+                  autoComplete="family-name"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   helperText={touched.lastname && errors.lastname}
@@ -217,6 +219,7 @@ const Account: FunctionComponent<{}> = () => {
                   label="Email Address"
                   name="emailAddress"
                   value={emailAddress}
+                  autoComplete="new-password"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   helperText={touched.emailAddress && errors.emailAddress}
@@ -234,6 +237,7 @@ const Account: FunctionComponent<{}> = () => {
                   label="Phone Number"
                   name="phoneNumber"
                   value={phoneNumber}
+                  autoComplete="new-password"
                   onChange={(event: { target: { value: string } }) => {
                     handleCheckInput(event);
                   }}
@@ -274,6 +278,7 @@ const Account: FunctionComponent<{}> = () => {
                   label="Address"
                   name="address"
                   value={address}
+                  autoComplete="new-password"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   helperText={touched.address && errors.address}
@@ -286,12 +291,13 @@ const Account: FunctionComponent<{}> = () => {
                 <TextInput
                   variant="outlined"
                   fullWidth
-                  type="tel"
+                  type="text"
                   color="secondary"
                   size="small"
                   label="City"
                   name="city"
                   value={city}
+                  autoComplete="new-password"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   helperText={touched.city && errors.city}
@@ -302,12 +308,13 @@ const Account: FunctionComponent<{}> = () => {
                 <TextInput
                   variant="outlined"
                   fullWidth
-                  type="tel"
+                  type="text"
                   color="secondary"
                   size="small"
                   label="Country"
                   name="country"
                   value={country}
+                  autoComplete="country"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   helperText={touched.country && errors.country}

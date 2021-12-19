@@ -25,7 +25,7 @@ const AccountEdit = dynamic(
         </Grid>
       </Grid>
     ),
-    // ssr: false,
+    ssr: false,
   }
 );
 

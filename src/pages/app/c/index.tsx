@@ -27,7 +27,7 @@ const Landing = dynamic(
         </Box>
       </Box>
     ),
-    // ssr: false,
+    ssr: false,
   }
 );
 

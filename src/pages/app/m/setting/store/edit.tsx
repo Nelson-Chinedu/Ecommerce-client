@@ -25,7 +25,7 @@ const StoreEdit = dynamic(
         </Grid>
       </Grid>
     ),
-    // ssr: false,
+    ssr: false,
   }
 );
 

@@ -19,7 +19,7 @@ const VerifyEmail = dynamic(
         <Typography>page loading...</Typography>
       </Box>
     ),
-    // ssr: false,
+    ssr: false,
   }
 );
 

@@ -19,7 +19,7 @@ const Landing = dynamic(() => import('src/components/MainLayout/Landing'), {
       </Box>
     </Box>
   ),
-  // ssr: false,
+  ssr: false,
 });
 
 const Index = () => {
