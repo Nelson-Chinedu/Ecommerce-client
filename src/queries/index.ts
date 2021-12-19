@@ -219,6 +219,9 @@ export const GET_MEN_SUB_PRODUCTS = gql`
           category
           stock
           tags
+          store {
+            name
+          }
         }
       }
     }
