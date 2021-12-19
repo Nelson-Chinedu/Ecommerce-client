@@ -284,8 +284,6 @@ const AddProduct: FunctionComponent<{}> = () => {
     values: { productName, productDescription, oldPrice, newPrice },
   } = formik;
 
-  console.log(formik.errors);
-  // console.log(formik.values);
 
   function removeImageExtension(filename: string) {
     let lastDotPosition = filename.lastIndexOf('.');

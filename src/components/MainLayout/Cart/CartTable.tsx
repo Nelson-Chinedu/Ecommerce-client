@@ -59,7 +59,7 @@ const CartTable: FunctionComponent<{}> = () => {
               <TableCell>
                 <span
                   className={classes.action}
-                  onClick={() => handleRemoveItem(item.itemId)}
+                  onClick={() => handleRemoveItem(item.itemNumber)}
                 >
                   Remove item
                 </span>
